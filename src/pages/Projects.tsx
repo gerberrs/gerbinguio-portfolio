@@ -1,57 +1,69 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+const containerVariant = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.25, // delay between each card
+    },
+  },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, x: -100 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+};
+
 const Projects = () => {
+  const projects = [
+    {
+      title: "Internship Portfolio",
+      description: "My internship portfolio project showcasing front-end work.",
+      image: "/internPort.jfif",
+      tech: ["HTML", "CSS", "TypeScript", "Tailwind", "ShadCN", "React.js"],
+      link: "https://gerb-portfolio.vercel.app/",
+    },
+    {
+      title: "Helply Web",
+      description:
+        "Main internship project with reusable components and API integration.",
+      image: "/helply.jfif",
+      tech: ["HTML", "CSS", "TypeScript", "Tailwind", "ShadCN", "React.js"],
+      link: "#",
+    },
+    {
+      title: "Capstone Booking System",
+      description:
+        "Booking system project with dynamic calendar for convenient scheduling.",
+      image: "/snvhoa.jpg",
+      tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL", "Bootstrap"],
+      link: "#",
+    },
+  ];
+
   return (
-    <div className="flex flex-col items-center text-white p-6 sm:p-8">
-      <h1 className="text-3xl sm:text-5xl font-bold shimmer-text text-center mb-12 sm:mb-16">
+    <div className="flex flex-col items-center text-white pt-4 pb-8 sm:pt-6 sm:pb-10">
+      <h1 className="text-3xl sm:text-5xl font-bold shimmer-text text-center mb-8 sm:mb-12">
         PROJECTS
       </h1>
 
-      <div className="flex flex-col sm:flex-row flex-wrap gap-8 w-full justify-center">
-        {[
-          {
-            title: "Internship Portfolio",
-            description:
-              "My internship portfolio project showcasing front-end work.",
-            image: "/internPort.jfif",
-            tech: [
-              "HTML",
-              "CSS",
-              "TypeScript",
-              "Tailwind",
-              "ShadCN",
-              "React.js",
-            ],
-            link: "https://your-first-portfolio-link.com",
-          },
-          {
-            title: "Helply Web",
-            description:
-              "Main internship project with reusable components and API integration.",
-            image: "/helply.jfif",
-            tech: [
-              "HTML",
-              "CSS",
-              "TypeScript",
-              "Tailwind",
-              "ShadCN",
-              "React.js",
-            ],
-            link: "#",
-          },
-          {
-            title: "Capstone Booking System",
-            description:
-              "Booking system project with dynamic calendar for convenient scheduling.",
-            image: "/snvhoa.jpg",
-            tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL", "Bootstrap"],
-            link: "#",
-          },
-        ].map((project) => (
-          <a
+      <motion.div
+        className="flex flex-col sm:flex-row flex-wrap gap-8 w-full justify-center"
+        variants={containerVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {projects.map((project) => (
+          <motion.a
             key={project.title}
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-[48%] lg:w-[40%] max-w-[600px] h-[65vh] hover:scale-105 transform transition duration-300 cursor-pointer"
+            variants={cardVariant}
+            className="w-full sm:w-[48%] lg:w-[30%] max-w-[600px] h-[65vh] hover:scale-105 transform transition duration-300 cursor-pointer"
           >
             <div className="bg-zinc-950 text-white rounded-3xl shadow-2xl border-2 border-white h-full flex flex-col overflow-hidden">
               <img
@@ -77,17 +89,12 @@ const Projects = () => {
                       {tech}
                     </span>
                   ))}
-                  {project.link && (
-                    <span className="mt-2 text-white font-semibold w-full text-xs sm:text-sm">
-                      Deployed &nbsp;|&nbsp; Click to view
-                    </span>
-                  )}
                 </div>
               </div>
             </div>
-          </a>
+          </motion.a>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

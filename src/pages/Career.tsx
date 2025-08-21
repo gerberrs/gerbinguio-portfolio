@@ -1,5 +1,13 @@
+"use client";
+
+import { motion } from "framer-motion";
 import img1 from "/mcdo.jfif";
 import img2 from "/ojt.jfif";
+
+const rowVariant = {
+  hidden: { opacity: 0, x: 100 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7 } },
+};
 
 const Career = () => {
   return (
@@ -9,7 +17,13 @@ const Career = () => {
       </h1>
 
       {/* Row 1 */}
-      <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12 w-full">
+      <motion.div
+        className="flex flex-col md:flex-row items-center gap-6 md:gap-12 w-full"
+        variants={rowVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="w-full md:w-60 h-64 md:h-72 bg-white shadow-md rounded-xl overflow-hidden">
           <img
             src={img1}
@@ -17,6 +31,7 @@ const Career = () => {
             className="w-full h-full object-cover"
           />
         </div>
+
         <div className="flex-1 max-w-xl text-center md:text-left space-y-2">
           <h2 className="text-xl sm:text-2xl font-bold">Service Crew</h2>
           <h2 className="text-sm sm:text-base font-bold">McDonald's</h2>
@@ -46,10 +61,16 @@ const Career = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Row 2 */}
-      <div className="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-12 w-full">
+      <motion.div
+        className="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-12 w-full"
+        variants={rowVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="w-full md:w-60 h-64 md:h-72 bg-white shadow-md rounded-xl overflow-hidden">
           <img
             src={img2}
@@ -57,6 +78,7 @@ const Career = () => {
             className="w-full h-full object-cover"
           />
         </div>
+
         <div className="flex-1 max-w-xl text-center md:text-left space-y-2">
           <h2 className="text-xl sm:text-2xl font-bold">
             Front End Web Developer Intern
@@ -91,7 +113,7 @@ const Career = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

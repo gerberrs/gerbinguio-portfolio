@@ -1,19 +1,49 @@
-import { Mail, Facebook, Phone, MapPin } from "lucide-react"; // install lucide-react if not yet
+"use client";
+
+import { Mail, Facebook, Phone, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+};
+
+const slideLeft = {
+  hidden: { opacity: 0, x: -100 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7 } },
+};
+
+const slideRight = {
+  hidden: { opacity: 0, x: 100 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7 } },
+};
 
 const MyContact = () => {
   return (
-    <div className="h-screen flex flex-col justify-between text-white">
+    <div className="min-h-screen flex flex-col justify-between text-white">
       {/* Main Content */}
-      <div className="flex flex-col items-center justify-start p-4 sm:p-6 flex-grow">
+      <motion.div
+        className="flex flex-col items-center justify-start p-4 sm:p-6 flex-grow"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         {/* Title */}
         <h1 className="text-3xl sm:text-4xl font-bold shimmer-text text-center mb-8 sm:mb-12">
           CONTACT ME
         </h1>
 
-        {/* Two-column layout → stack on mobile */}
+        {/* Two-column layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full max-w-5xl">
           {/* Left box */}
-          <div className="border border-white p-4 sm:p-6 rounded-xl space-y-4">
+          <motion.div
+            className="border border-white p-4 sm:p-6 rounded-xl space-y-4"
+            variants={slideLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <h2 className="text-lg sm:text-xl font-bold mb-2">Contact Info</h2>
             <div className="flex items-center gap-3">
               <Mail className="w-5 h-5" />
@@ -31,10 +61,16 @@ const MyContact = () => {
               <MapPin className="w-5 h-5" />
               <span>San Pedro City, Laguna, Philippines</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right box */}
-          <div className="border border-white p-4 sm:p-6 rounded-xl space-y-4">
+          <motion.div
+            className="border border-white p-4 sm:p-6 rounded-xl space-y-4"
+            variants={slideRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <h2 className="text-lg sm:text-xl font-bold mb-2">
               Online Profiles
             </h2>
@@ -73,11 +109,17 @@ const MyContact = () => {
                 Download Resume
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Call to action */}
-        <div className="mt-8 sm:mt-12 text-center">
+        <motion.div
+          className="mt-8 sm:mt-12 text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <h2 className="text-xl sm:text-2xl font-semibold">
             Let’s Work Together 🚀
           </h2>
@@ -92,8 +134,8 @@ const MyContact = () => {
           >
             Send me an Email
           </a>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Footer */}
       <footer className="bg-black text-gray-400 py-4 text-center text-sm sm:text-base">

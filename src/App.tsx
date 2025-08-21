@@ -11,9 +11,13 @@ function App() {
       <Introduction />
       <AboutMe />
       <Skills />
-      <Projects />
+      <div id="projects">
+        <Projects />
+      </div>
       <Experience />
-      <MyContact />
+      <div id="contact">
+        <MyContact />
+      </div>
     </div>
   );
 }
