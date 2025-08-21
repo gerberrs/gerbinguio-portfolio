@@ -28,23 +28,22 @@ const Career = () => {
             abilities during busy shifts.
           </p>
         </div>
-        <div className="group w-full md:w-72 h-48 md:h-48 [perspective:1000px] mt-4 md:mt-0">
-          <div
-            className="relative w-full h-full 
-                  [transform-style:preserve-3d] 
-                  animate-flip 
-                  group-hover:[animation-play-state:paused]"
-          >
-            <img
-              src="/nameplate.png"
-              alt="McDo Career"
-              className="absolute inset-0 w-full h-full object-cover [backface-visibility:hidden]"
-            />
-            <img
-              src="/nameplate.png"
-              alt="McDo Career Back"
-              className="absolute inset-0 w-full h-full object-cover [transform:rotateY(180deg)] [backface-visibility:hidden]"
-            />
+
+        {/* Fixed Nameplate */}
+        <div className="group w-full md:w-72 mt-4 md:mt-0">
+          <div className="relative w-full aspect-[4/3] [perspective:1000px]">
+            <div className="relative w-full h-full [transform-style:preserve-3d] animate-flip group-hover:[animation-play-state:paused]">
+              <img
+                src="/nameplate.png"
+                alt="McDo Career"
+                className="absolute inset-0 w-full h-full object-cover rounded-xl [backface-visibility:hidden]"
+              />
+              <img
+                src="/nameplate.png"
+                alt="McDo Career Back"
+                className="absolute inset-0 w-full h-full object-cover rounded-xl [transform:rotateY(180deg)] [backface-visibility:hidden]"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -74,23 +73,22 @@ const Career = () => {
             professional experience in a team-oriented setting.
           </p>
         </div>
-        <div className="group w-full md:w-72 h-48 md:h-48 [perspective:1000px] mt-4 md:mt-0">
-          <div
-            className="relative w-full h-full 
-                  [transform-style:preserve-3d] 
-                  animate-flip 
-                  group-hover:[animation-play-state:paused]"
-          >
-            <img
-              src="/coc.jfif"
-              alt="Intern Career"
-              className="absolute inset-0 w-full h-full object-cover rounded-xl [backface-visibility:hidden]"
-            />
-            <img
-              src="/coc.jfif"
-              alt="Intern Career Back"
-              className="absolute inset-0 w-full h-full object-cover rounded-xl [transform:rotateY(180deg)] [backface-visibility:hidden]"
-            />
+
+        {/* Fixed Coc */}
+        <div className="group w-full md:w-72 mt-4 md:mt-0">
+          <div className="relative w-full aspect-[4/3] [perspective:1000px]">
+            <div className="relative w-full h-full [transform-style:preserve-3d] animate-flip group-hover:[animation-play-state:paused]">
+              <img
+                src="/coc.jfif"
+                alt="Intern Career"
+                className="absolute inset-0 w-full h-full object-cover rounded-xl [backface-visibility:hidden]"
+              />
+              <img
+                src="/coc.jfif"
+                alt="Intern Career Back"
+                className="absolute inset-0 w-full h-full object-cover rounded-xl [transform:rotateY(180deg)] [backface-visibility:hidden]"
+              />
+            </div>
           </div>
         </div>
       </div>
