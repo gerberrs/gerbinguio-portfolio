@@ -1,6 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 50 },
@@ -8,15 +10,27 @@ const fadeInUp = {
 };
 
 const AboutMe = () => {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    threshold: 0.2, // how much of the section needs to be visible
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    } else {
+      controls.start("hidden"); // 👈 animate back when out of view
+    }
+  }, [inView, controls]);
+
   return (
-    <div className="min-h-screen flex flex-col text-white px-6 py-12">
+    <div ref={ref} className="min-h-screen flex flex-col text-white px-6 py-12">
       {/* Title */}
       <motion.div
         className="flex flex-col items-center"
         variants={fadeInUp}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        animate={controls}
       >
         <h1 className="text-4xl sm:text-5xl font-bold shimmer-text">
           ABOUT ME
@@ -33,8 +47,7 @@ const AboutMe = () => {
           className="flex-shrink-0 flex flex-col items-center"
           variants={fadeInUp}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          animate={controls}
         >
           <img
             src="/devPicture.png"
@@ -53,8 +66,7 @@ const AboutMe = () => {
           className="flex flex-col max-w-xl text-center md:text-left space-y-6"
           variants={fadeInUp}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          animate={controls}
         >
           <p className="text-sm sm:text-base leading-relaxed">
             I am a fresh graduate from the class of 2025 with a degree in
@@ -84,8 +96,7 @@ const AboutMe = () => {
             className="flex flex-col sm:flex-row justify-center md:justify-start gap-6 mt-8"
             variants={fadeInUp}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            animate={controls}
           >
             <div className="flex flex-col items-center">
               <div className="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center rounded-full bg-zinc-700 text-white font-bold text-lg sm:text-xl shadow-md">
