@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import img1 from "/mcdo.jfif";
+import img1 from "/mcdo.png";
 import img2 from "/ojt.jfif";
 
 const rowVariant = {

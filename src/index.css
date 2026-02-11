@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root {
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -14,18 +22,21 @@ html, body, #root {
   0% {
     background-position: -500px 0;
   }
+
   100% {
     background-position: 500px 0;
   }
 }
 
 .shimmer-text {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.3) 0%,   /* brighter edges */
-    rgba(255, 255, 255, 1) 50%,     /* fully bright in the middle */
-    rgba(255, 255, 255, 0.3) 100%   /* brighter edges */
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      /* brighter edges */
+      rgba(255, 255, 255, 1) 50%,
+      /* fully bright in the middle */
+      rgba(255, 255, 255, 0.3) 100%
+      /* brighter edges */
+    );
   background-size: 1000px 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -33,9 +44,12 @@ html, body, #root {
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -45,20 +59,85 @@ html, body, #root {
   animation: float 3s ease-in-out infinite;
 }
 
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
-.delay-600 { animation-delay: 0.6s; }
-.delay-700 { animation-delay: 0.7s; }
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+.delay-600 {
+  animation-delay: 0.6s;
+}
+
+.delay-700 {
+  animation-delay: 0.7s;
+}
 
 @keyframes flip {
-  0%   { transform: rotateY(0deg); }
-  50%  { transform: rotateY(180deg); }
-  100% { transform: rotateY(360deg); }
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  50% {
+    transform: rotateY(180deg);
+  }
+
+  100% {
+    transform: rotateY(360deg);
+  }
 }
 
 .animate-flip {
   animation: flip 4s linear infinite;
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
