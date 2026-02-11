@@ -15,7 +15,7 @@ const contentVariant = {
 
 const Skills = () => {
   return (
-    <div className="min-h-screen p-6 overflow-hidden text-white">
+    <div className="p-4 sm:p-6 overflow-hidden text-white">
       <motion.h1
         className="text-4xl sm:text-5xl font-bold shimmer-text text-center"
         variants={boxVariant}
@@ -35,7 +35,7 @@ const Skills = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <Card className="w-full md:w-80 h-40 shadow-lg rounded-2xl">
+          <Card className="w-full md:w-80 h-auto min-h-[8rem] shadow-lg rounded-2xl">
             <CardHeader>
               <motion.div variants={contentVariant}>
                 <CardTitle>Programming</CardTitle>
@@ -56,7 +56,7 @@ const Skills = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <Card className="w-full md:w-80 h-40 shadow-lg rounded-2xl">
+          <Card className="w-full md:w-80 h-auto min-h-[8rem] shadow-lg rounded-2xl">
             <CardHeader>
               <motion.div variants={contentVariant}>
                 <CardTitle>Frameworks</CardTitle>
@@ -77,7 +77,7 @@ const Skills = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <Card className="w-full md:w-80 h-40 shadow-lg rounded-2xl">
+          <Card className="w-full md:w-80 h-auto min-h-[8rem] shadow-lg rounded-2xl">
             <CardHeader>
               <motion.div variants={contentVariant}>
                 <CardTitle>Tools & Technology</CardTitle>
@@ -99,7 +99,7 @@ const Skills = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <Card className="w-full md:w-80 h-40 shadow-lg rounded-2xl">
+          <Card className="w-full md:w-80 h-auto min-h-[8rem] shadow-lg rounded-2xl">
             <CardHeader>
               <motion.div variants={contentVariant}>
                 <CardTitle>Database</CardTitle>

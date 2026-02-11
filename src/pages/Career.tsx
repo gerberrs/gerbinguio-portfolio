@@ -24,7 +24,7 @@ const Career = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <div className="w-full md:w-60 h-64 md:h-72 bg-white shadow-md rounded-xl overflow-hidden">
+        <div className="w-64 mx-auto md:w-60 h-64 md:h-72 bg-white shadow-md rounded-xl overflow-hidden">
           <img
             src={img1}
             alt="Career 1"
@@ -35,7 +35,7 @@ const Career = () => {
         <div className="flex-1 max-w-xl text-center md:text-left space-y-2">
           <h2 className="text-xl sm:text-2xl font-bold">Service Crew</h2>
           <h2 className="text-sm sm:text-base font-bold">McDonald's</h2>
-          <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
             I worked at McDonald's for 2 years while studying. This helped me
             develop strong time management and discipline. I gained customer
             service skills and became more organized, flexible, and efficient at
@@ -45,7 +45,7 @@ const Career = () => {
         </div>
 
         {/* Fixed Nameplate */}
-        <div className="group w-full md:w-72 mt-4 md:mt-0">
+        <div className="group w-64 mx-auto md:w-72 mt-4 md:mt-0">
           <div className="relative w-full aspect-[4/3] [perspective:1000px]">
             <div className="relative w-full h-full [transform-style:preserve-3d] animate-flip group-hover:[animation-play-state:paused]">
               <img
@@ -71,7 +71,7 @@ const Career = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <div className="w-full md:w-60 h-64 md:h-72 bg-white shadow-md rounded-xl overflow-hidden">
+        <div className="w-64 mx-auto md:w-60 h-64 md:h-72 bg-white shadow-md rounded-xl overflow-hidden">
           <img
             src={img2}
             alt="Career 2"
@@ -86,7 +86,7 @@ const Career = () => {
           <h2 className="text-sm sm:text-base font-bold">
             Monad Solutions Inc.
           </h2>
-          <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
             During my internship, I gained hands-on experience building
             real-world applications. I turned Figma designs into responsive UIs
             using HTML, CSS, TypeScript, React, and Tailwind CSS. We
@@ -97,7 +97,7 @@ const Career = () => {
         </div>
 
         {/* Fixed Coc */}
-        <div className="group w-full md:w-72 mt-4 md:mt-0">
+        <div className="group w-64 mx-auto md:w-72 mt-4 md:mt-0">
           <div className="relative w-full aspect-[4/3] [perspective:1000px]">
             <div className="relative w-full h-full [transform-style:preserve-3d] animate-flip group-hover:[animation-play-state:paused]">
               <img

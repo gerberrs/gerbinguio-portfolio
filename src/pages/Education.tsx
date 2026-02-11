@@ -54,7 +54,7 @@ const Education = () => {
   }, [inView, controls]);
 
   return (
-    <div ref={ref} className="min-h-screen flex flex-col items-center justify-center px-6 py-16 sm:px-12">
+    <div ref={ref} className="min-h-screen flex flex-col items-center justify-center px-4 py-10 sm:px-12 sm:py-16">
       <motion.h1 
         className="text-4xl sm:text-5xl font-bold shimmer-text mb-16 text-center"
         variants={fadeInUp}
@@ -64,7 +64,7 @@ const Education = () => {
         EDUCATION & SKILLS
       </motion.h1>
 
-      <div className="flex flex-col xl:flex-row gap-16 w-full max-w-7xl">
+      <div className="flex flex-col xl:flex-row gap-10 xl:gap-16 w-full max-w-7xl">
         {/* Left Column: Education Timeline */}
         <motion.div 
           className="flex-1 space-y-12"
@@ -85,7 +85,7 @@ const Education = () => {
             {/* Block 1 - Degree */}
             <motion.div className="border-l-4 border-white pl-6 space-y-2 relative" variants={fadeInUpItem}>
               <div className="absolute -left-[11px] top-0 w-4 h-4 rounded-full bg-white" />
-              <h2 className="text-2xl font-bold">
+              <h2 className="text-xl sm:text-2xl font-bold">
                 Bachelor of Science in Information Technology
               </h2>
               <p className="text-gray-400 text-sm">
@@ -97,7 +97,7 @@ const Education = () => {
             {/* Block 2 - OJT */}
             <motion.div className="border-l-4 border-white pl-6 space-y-2 relative" variants={fadeInUpItem}>
               <div className="absolute -left-[11px] top-0 w-4 h-4 rounded-full bg-white" />
-              <h2 className="text-2xl font-bold">On-the-Job Training</h2>
+              <h2 className="text-xl sm:text-2xl font-bold">On-the-Job Training</h2>
               <p className="text-gray-400 text-sm">Helply Web Internship • 2023</p>
               <p className="text-sm sm:text-base leading-relaxed">
                 Gained practical experience building reusable components,
@@ -109,7 +109,7 @@ const Education = () => {
             {/* Block 3 - Capstone */}
             <motion.div className="border-l-4 border-white pl-6 space-y-2 relative" variants={fadeInUpItem}>
               <div className="absolute -left-[11px] top-0 w-4 h-4 rounded-full bg-white" />
-              <h2 className="text-2xl font-bold">Capstone Project</h2>
+              <h2 className="text-xl sm:text-2xl font-bold">Capstone Project</h2>
               <p className="text-gray-400 text-sm">Booking System • 2024</p>
               <p className="text-sm sm:text-base leading-relaxed">
                 Designed and developed a booking system with dynamic calendar

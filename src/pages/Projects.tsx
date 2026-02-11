@@ -88,7 +88,7 @@ const Projects = () => {
           className="w-full py-12"
         >
           {projects.map((project) => (
-            <SwiperSlide key={project.title} className="!w-[300px] sm:!w-[350px] lg:!w-[400px]">
+            <SwiperSlide key={project.title} className="!w-[280px] sm:!w-[350px] lg:!w-[400px]">
               <motion.a
                 href={project.link}
                 target="_blank"
@@ -103,7 +103,7 @@ const Projects = () => {
                   stiffness: 300, 
                   damping: 20 
                 }}
-                className="block h-[450px] cursor-pointer"
+                className="block h-[400px] sm:h-[450px] cursor-pointer"
               >
                 <motion.div 
                   className="bg-zinc-950 text-white rounded-3xl shadow-2xl border-2 border-white h-full flex flex-col overflow-hidden"

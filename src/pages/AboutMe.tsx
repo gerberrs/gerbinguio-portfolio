@@ -79,7 +79,7 @@ const AboutMe = () => {
 
       {/* Content */}
       <motion.div 
-        className="w-full flex flex-col md:flex-row items-center justify-center mt-12 gap-12 max-w-6xl mx-auto"
+        className="w-full flex flex-col md:flex-row items-center justify-center mt-8 md:mt-12 gap-6 md:gap-12 max-w-6xl mx-auto"
         variants={staggerContainer}
         initial="hidden"
         animate={controls}

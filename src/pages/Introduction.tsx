@@ -20,8 +20,8 @@ const Introduction = () => {
   return (
     <>
       {/* Fixed intro — always behind everything */}
-      <div className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center px-6 py-12 z-0 overflow-hidden">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-6xl w-full">
+      <div className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-12 z-0 overflow-hidden">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-8 md:gap-12 max-w-6xl w-full">
           {/* Picture Section - Left Side */}
           <div
             className="w-full md:w-1/2 flex justify-center md:justify-end animate-[slideInLeft_1s_ease-out]"
@@ -48,7 +48,7 @@ const Introduction = () => {
           {/* Text Section - Right Side */}
           <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
             <h1
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white tracking-widest leading-tight animate-[fadeInUp_1s_ease-out_0.3s_backwards]"
+              className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-widest leading-tight animate-[fadeInUp_1s_ease-out_0.3s_backwards]"
               style={{
                 opacity: 1 - progress * 2,
                 transform: `translateX(${progress * 150}px)`,
@@ -58,7 +58,7 @@ const Introduction = () => {
             </h1>
 
             <p
-              className="text-lg sm:text-xl md:text-2xl max-w-xl leading-relaxed text-gray-300 mx-auto md:mx-0 font-light animate-[fadeInUp_1s_ease-out_0.5s_backwards]"
+              className="text-sm sm:text-lg md:text-2xl max-w-xl leading-relaxed text-gray-300 mx-auto md:mx-0 font-light animate-[fadeInUp_1s_ease-out_0.5s_backwards]"
               style={{
                 opacity: 1 - progress * 2.5,
                 transform: `translateX(${progress * 200}px)`,

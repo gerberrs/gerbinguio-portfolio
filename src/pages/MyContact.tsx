@@ -46,19 +46,19 @@ const MyContact = () => {
           >
             <h2 className="text-lg sm:text-xl font-bold mb-2">Contact Info</h2>
             <div className="flex items-center gap-3">
-              <Mail className="w-5 h-5" />
-              <span>gerbinguio@gmail.com</span>
+              <Mail className="w-5 h-5 flex-shrink-0" />
+              <span className="break-all">gerbinguio@gmail.com</span>
             </div>
             <div className="flex items-center gap-3">
-              <Facebook className="w-5 h-5" />
-              <span>facebook.com/gerbinguio.victorino.3</span>
+              <Facebook className="w-5 h-5 flex-shrink-0" />
+              <span className="break-all">facebook.com/gerbinguio.victorino.3</span>
             </div>
             <div className="flex items-center gap-3">
-              <Phone className="w-5 h-5" />
+              <Phone className="w-5 h-5 flex-shrink-0" />
               <span>+639566156741</span>
             </div>
             <div className="flex items-center gap-3">
-              <MapPin className="w-5 h-5" />
+              <MapPin className="w-5 h-5 flex-shrink-0" />
               <span>San Pedro City, Laguna, Philippines</span>
             </div>
           </motion.div>
@@ -77,25 +77,25 @@ const MyContact = () => {
             <div className="flex flex-wrap gap-2 sm:gap-3">
               <a
                 href="https://www.linkedin.com/in/gerb-victorino-41a183366/"
-                className="px-3 py-1 sm:px-4 sm:py-2 border border-white rounded-full hover:bg-white hover:text-black transition"
+                className="px-4 py-2 border border-white rounded-full hover:bg-white hover:text-black transition text-sm sm:text-base"
               >
                 LinkedIn
               </a>
               <a
                 href="https://github.com/gerberrs"
-                className="px-3 py-1 sm:px-4 sm:py-2 border border-white rounded-full hover:bg-white hover:text-black transition"
+                className="px-4 py-2 border border-white rounded-full hover:bg-white hover:text-black transition text-sm sm:text-base"
               >
                 GitHub
               </a>
               <a
                 href="https://www.onlinejobs.ph/jobseekers/info/4175877"
-                className="px-3 py-1 sm:px-4 sm:py-2 border border-white rounded-full hover:bg-white hover:text-black transition"
+                className="px-4 py-2 border border-white rounded-full hover:bg-white hover:text-black transition text-sm sm:text-base"
               >
                 OnlineJobs
               </a>
               <a
                 href="https://profile.indeed.com/?hl=en_PH&co=PH&from=gnav-homepage"
-                className="px-3 py-1 sm:px-4 sm:py-2 border border-white rounded-full hover:bg-white hover:text-black transition"
+                className="px-4 py-2 border border-white rounded-full hover:bg-white hover:text-black transition text-sm sm:text-base"
               >
                 Indeed
               </a>
