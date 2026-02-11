@@ -11,20 +11,20 @@ const rowVariant = {
 
 const Career = () => {
   return (
-    <div className="flex flex-col justify-start items-start min-h-screen gap-y-16 p-6 sm:px-12">
-      <h1 className="text-4xl sm:text-5xl font-bold shimmer-text text-center w-full">
+    <div className="flex flex-col justify-start items-start gap-y-6 sm:gap-y-16 p-4 sm:p-6 sm:px-12">
+      <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold shimmer-text text-center w-full">
         CAREER
       </h1>
 
       {/* Row 1 */}
       <motion.div
-        className="flex flex-col md:flex-row items-center gap-6 md:gap-12 w-full"
+        className="flex flex-col md:flex-row items-center gap-3 sm:gap-6 md:gap-12 w-full"
         variants={rowVariant}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <div className="w-64 mx-auto md:w-60 h-64 md:h-72 bg-white shadow-md rounded-xl overflow-hidden">
+        <div className="w-40 sm:w-64 mx-auto md:w-60 h-40 sm:h-64 md:h-72 bg-white shadow-md rounded-xl overflow-hidden">
           <img
             src={img1}
             alt="Career 1"
@@ -45,7 +45,7 @@ const Career = () => {
         </div>
 
         {/* Fixed Nameplate */}
-        <div className="group w-64 mx-auto md:w-72 mt-4 md:mt-0">
+        <div className="group w-40 sm:w-64 mx-auto md:w-72 mt-2 sm:mt-4 md:mt-0">
           <div className="relative w-full aspect-[4/3] [perspective:1000px]">
             <div className="relative w-full h-full [transform-style:preserve-3d] animate-flip group-hover:[animation-play-state:paused]">
               <img
@@ -65,13 +65,13 @@ const Career = () => {
 
       {/* Row 2 */}
       <motion.div
-        className="flex flex-col md:flex-row-reverse items-center gap-6 md:gap-12 w-full"
+        className="flex flex-col md:flex-row-reverse items-center gap-3 sm:gap-6 md:gap-12 w-full"
         variants={rowVariant}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <div className="w-64 mx-auto md:w-60 h-64 md:h-72 bg-white shadow-md rounded-xl overflow-hidden">
+        <div className="w-40 sm:w-64 mx-auto md:w-60 h-40 sm:h-64 md:h-72 bg-white shadow-md rounded-xl overflow-hidden">
           <img
             src={img2}
             alt="Career 2"
@@ -97,7 +97,7 @@ const Career = () => {
         </div>
 
         {/* Fixed Coc */}
-        <div className="group w-64 mx-auto md:w-72 mt-4 md:mt-0">
+        <div className="group w-40 sm:w-64 mx-auto md:w-72 mt-2 sm:mt-4 md:mt-0">
           <div className="relative w-full aspect-[4/3] [perspective:1000px]">
             <div className="relative w-full h-full [transform-style:preserve-3d] animate-flip group-hover:[animation-play-state:paused]">
               <img
