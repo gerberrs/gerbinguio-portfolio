@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AboutMe from "./pages/AboutMe";
 import Introduction from "./pages/Introduction";
 import MyContact from "./pages/MyContact";
@@ -6,6 +6,7 @@ import Education from "./pages/Education";
 import Navbar from "./components/Navbar";
 import HorizontalScrollSection from "./components/HorizontalScrollSection";
 import Experience from "./pages/Career";
+import LoadingScreen from "./components/LoadingScreen";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,7 +14,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
+    if (isLoading) return; // Don't init scroll until loading is done
+
     const lenis = new Lenis({
       lerp: 0.1,
       duration: 1.2,
@@ -33,26 +38,34 @@ function App() {
       lenis.destroy();
       gsap.ticker.remove(lenis.raf);
     };
-  }, []);
+  }, [isLoading]);
 
   return (
-    <div className="bg-gradient-to-br from-black via-gray-900 to-black text-white w-full min-h-screen" style={{ overflowX: 'clip' }}>
-      <Navbar />
-      <Introduction />
-      <div className="relative z-10 bg-gradient-to-br from-black via-gray-900 to-black">
-        <div id="about">
-          <AboutMe />
-        </div>
-        <Education />
-        <HorizontalScrollSection />
-        <div id="career">
-          <Experience />
-        </div>
-        <div id="contact">
-          <MyContact />
+    <>
+      {isLoading && (
+        <LoadingScreen onComplete={() => setIsLoading(false)} />
+      )}
+      <div
+        className="bg-gradient-to-br from-black via-gray-900 to-black text-white w-full min-h-screen"
+        style={{ overflowX: 'clip', visibility: isLoading ? 'hidden' : 'visible' }}
+      >
+        <Navbar />
+        <Introduction />
+        <div className="relative z-10 bg-gradient-to-br from-black via-gray-900 to-black">
+          <div id="about">
+            <AboutMe />
+          </div>
+          <Education />
+          <HorizontalScrollSection />
+          <div id="career">
+            <Experience />
+          </div>
+          <div id="contact">
+            <MyContact />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

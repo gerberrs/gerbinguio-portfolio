@@ -141,3 +141,103 @@ body,
   scrollbar-width: none;
   /* Firefox */
 }
+
+/* ========== Loading Screen ========== */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, #0f0a1a 0%, #000000 70%);
+  overflow: hidden;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  z-index: 2;
+}
+
+.loading-letters-container {
+  display: flex;
+  gap: 0.15em;
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  user-select: none;
+}
+
+.loading-letter {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+  transition: text-shadow 0.3s ease;
+}
+
+.loading-counter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: min(400px, 80vw);
+}
+
+.loading-progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.loading-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8b5cf6, #a78bfa, #c4b5fd);
+  border-radius: 999px;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
+}
+
+.loading-counter {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.3em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Floating particles */
+.loading-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.loading-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(139, 92, 246, 0.4);
+  border-radius: 50%;
+  animation: particleFloat 4s ease-in-out infinite;
+}
+
+@keyframes particleFloat {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-40px) scale(1);
+  }
+}

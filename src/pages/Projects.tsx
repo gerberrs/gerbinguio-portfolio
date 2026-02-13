@@ -56,6 +56,14 @@ const Projects = () => {
       tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL", "Bootstrap"],
       link: "#",
     },
+    {
+      title: "SKU Request System",
+      description:
+        "A vibecoded SKU request management system for streamlined product tracking.",
+      image: "/skuRequestSystem.jfif",
+      tech: ["HTML", "CSS", "React", "Tailwind", "ShadCN", "Node.js"],
+      link: "https://skusystem-wj8c.vercel.app/",
+    },
   ];
 
   return (
