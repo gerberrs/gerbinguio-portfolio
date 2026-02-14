@@ -96,7 +96,7 @@ const Education = () => {
       {/* LAYER 1: EDUCATION — Starts hidden (clipped), revealed by wipe */}
       <div 
         ref={educationPanelRef}
-        className="absolute inset-0 flex flex-col justify-center px-6 sm:px-12 lg:px-20"
+        className="absolute inset-0 flex flex-col justify-start pt-32 sm:pt-40 px-6 sm:px-12 lg:px-20"
         style={{ clipPath: "inset(0% 0% 0% 100%)" }} // Start fully clipped (hidden)
       >
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold shimmer-text text-center mb-10 sm:mb-14">
@@ -124,7 +124,7 @@ const Education = () => {
       {/* LAYER 2: SKILLS — Starts visible, hidden by wipe */}
       <div
         ref={skillsPanelRef}
-        className="absolute inset-0 flex flex-col justify-center px-6 sm:px-12 lg:px-20 bg-transparent"
+        className="absolute inset-0 flex flex-col justify-start pt-32 sm:pt-40 px-6 sm:px-12 lg:px-20 bg-transparent"
         style={{ clipPath: "inset(0% 0% 0% 0%)" }} // Start fully visible
       >
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold shimmer-text text-center mb-10 sm:mb-14">

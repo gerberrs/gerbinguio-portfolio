@@ -3,11 +3,10 @@
 import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { EffectCoverflow } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -121,8 +120,7 @@ const HorizontalScrollSection = () => {
               modifier: 1,
               slideShadows: true,
             }}
-            pagination={{ clickable: true }}
-            modules={[EffectCoverflow, Pagination]}
+            modules={[EffectCoverflow]}
             className="w-full py-12"
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
