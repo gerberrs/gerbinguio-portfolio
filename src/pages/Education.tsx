@@ -130,11 +130,11 @@ const Education = () => {
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold shimmer-text text-center mb-10 sm:mb-14">
           TECHNICAL SKILLS
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 max-w-5xl mx-auto w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto w-full">
           {skillCategories.map((cat, i) => (
             <div
               key={i}
-              className={`bg-zinc-950/80 backdrop-blur-sm border border-zinc-700 rounded-2xl p-5 sm:p-6 shadow-2xl ${
+              className={`bg-zinc-950/80 backdrop-blur-sm border border-zinc-700 rounded-2xl p-5 sm:p-6 shadow-2xl transition-all duration-300 hover:scale-105 hover:border-zinc-400 hover:bg-zinc-900 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] ${
                 i === 2 || i === 4 ? "sm:col-span-2 lg:col-span-1" : ""
               }`}
             >

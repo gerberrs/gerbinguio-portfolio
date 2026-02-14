@@ -61,7 +61,7 @@ const AboutMe = () => {
   }, [inView, controls]);
 
   return (
-    <div ref={ref} className="h-auto w-full flex flex-col text-white px-6 py-24 sm:py-32">
+    <div ref={ref} className="h-auto w-full flex flex-col text-white px-6 pt-32 sm:pt-40 pb-24">
       {/* Title */}
       <motion.div
         className="flex flex-col items-center"

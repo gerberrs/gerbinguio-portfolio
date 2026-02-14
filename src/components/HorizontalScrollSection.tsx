@@ -103,7 +103,7 @@ const HorizontalScrollSection = () => {
       style={{ height: "300vh" }}
     >
       {/* CSS sticky handles the pinning — works with overflow-x: clip */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center z-20">
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-start pt-32 sm:pt-40 z-20">
         <h1 className="text-3xl sm:text-5xl font-bold shimmer-text text-center mb-6 sm:mb-10">
           PROJECTS
         </h1>

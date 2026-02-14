@@ -101,7 +101,7 @@ const MyContact = () => {
   return (
     <div
       ref={sectionRef}
-      className="min-h-screen flex flex-col justify-between text-white relative z-20 bg-transparent py-20"
+      className="min-h-screen flex flex-col justify-between text-white relative z-20 bg-transparent pt-32 sm:pt-40 pb-20"
     >
       {/* Main Content */}
       <div className="flex flex-col items-center justify-start p-4 sm:p-6 flex-grow">
