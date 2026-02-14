@@ -1,141 +1,119 @@
-"use client";
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { motion } from "framer-motion";
+gsap.registerPlugin(ScrollTrigger);
 
-const boxVariant = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
-const contentVariant = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4, delay: 0.2 } },
-};
+const skillCategories = [
+  {
+    title: "Programming",
+    items: ["HTML", "CSS", "JavaScript", "TypeScript", "C++", "C#", "PHP"],
+  },
+  {
+    title: "Frameworks",
+    items: ["Tailwind", "React.js", "Bootstrap"],
+  },
+  {
+    title: "Tools & Technology",
+    items: [
+      "GitHub",
+      "Jira",
+      "Microsoft Suite",
+      "Word",
+      "PowerPoint",
+      "Excel",
+      "Canva",
+      "VSCode",
+    ],
+  },
+  {
+    title: "Database",
+    items: ["SQL"],
+  },
+  {
+    title: "Professional Skills",
+    items: [
+      "Communication",
+      "Teamwork",
+      "Problem-Solving",
+      "Adaptability",
+      "Leadership",
+    ],
+  },
+];
 
 const Skills = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return;
+
+    const getScrollAmount = () => track.scrollWidth - window.innerWidth;
+
+    const tween = gsap.to(track, {
+      x: () => -getScrollAmount(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: () => `+=${getScrollAmount()}`,
+        scrub: 0.6,
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
+  }, []);
+
   return (
-    <div className="p-4 sm:p-6 overflow-hidden text-white">
-      <motion.h1
-        className="text-4xl sm:text-5xl font-bold shimmer-text text-center"
-        variants={boxVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+    <div ref={sectionRef} className="overflow-hidden">
+      <div
+        ref={trackRef}
+        className="flex items-center h-screen pl-[5vw]"
+        style={{ width: "fit-content" }}
       >
-        TECHNICAL SKILLS
-      </motion.h1>
+        {/* Title card */}
+        <div className="flex-shrink-0 w-[90vw] sm:w-[50vw] lg:w-[40vw] flex items-center justify-center mr-8 sm:mr-16">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold shimmer-text">
+            SKILLS
+          </h1>
+        </div>
 
-      {/* Panels */}
-      <div className="mt-12 flex flex-col md:flex-row md:flex-wrap gap-4 justify-center items-start">
-        {/* Panel 1 */}
-        <motion.div
-          variants={boxVariant}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <Card className="w-full md:w-80 h-auto min-h-[8rem] shadow-lg rounded-2xl">
-            <CardHeader>
-              <motion.div variants={contentVariant}>
-                <CardTitle>Programming</CardTitle>
-              </motion.div>
-            </CardHeader>
-            <CardContent>
-              <motion.div variants={contentVariant}>
-                HTML, CSS, JavaScript, TypeScript, C++, C#, PHP
-              </motion.div>
-            </CardContent>
-          </Card>
-        </motion.div>
+        {/* Skill cards */}
+        {skillCategories.map((cat, index) => (
+          <div
+            key={index}
+            className="flex-shrink-0 w-[75vw] sm:w-[40vw] lg:w-[30vw] mr-8 sm:mr-12"
+          >
+            <div className="bg-zinc-900/80 backdrop-blur-sm border border-zinc-700 rounded-2xl p-6 sm:p-8 h-[280px] sm:h-[320px] flex flex-col">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 border-b border-zinc-600 pb-3">
+                {cat.title}
+              </h2>
+              <div className="flex flex-wrap gap-2 sm:gap-3">
+                {cat.items.map((item) => (
+                  <span
+                    key={item}
+                    className="border border-white/40 rounded-full px-3 py-1.5 text-sm sm:text-base text-gray-200 hover:bg-white/10 hover:border-white/70 transition-colors duration-300"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
 
-        {/* Panel 2 */}
-        <motion.div
-          variants={boxVariant}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <Card className="w-full md:w-80 h-auto min-h-[8rem] shadow-lg rounded-2xl">
-            <CardHeader>
-              <motion.div variants={contentVariant}>
-                <CardTitle>Frameworks</CardTitle>
-              </motion.div>
-            </CardHeader>
-            <CardContent>
-              <motion.div variants={contentVariant}>
-                Tailwind, React.js, Bootstrap
-              </motion.div>
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        {/* Panel 3 */}
-        <motion.div
-          variants={boxVariant}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <Card className="w-full md:w-80 h-auto min-h-[8rem] shadow-lg rounded-2xl">
-            <CardHeader>
-              <motion.div variants={contentVariant}>
-                <CardTitle>Tools & Technology</CardTitle>
-              </motion.div>
-            </CardHeader>
-            <CardContent>
-              <motion.div variants={contentVariant}>
-                GitHub, Jira, Microsoft Suite, Word, PowerPoint, Excel, Canva,
-                VSCode
-              </motion.div>
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        {/* Panel 4 */}
-        <motion.div
-          variants={boxVariant}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <Card className="w-full md:w-80 h-auto min-h-[8rem] shadow-lg rounded-2xl">
-            <CardHeader>
-              <motion.div variants={contentVariant}>
-                <CardTitle>Database</CardTitle>
-              </motion.div>
-            </CardHeader>
-            <CardContent>
-              <motion.div variants={contentVariant}>SQL</motion.div>
-            </CardContent>
-          </Card>
-        </motion.div>
+        {/* Right padding spacer */}
+        <div className="flex-shrink-0 w-[10vw]" />
       </div>
-
-      {/* Professional Skills */}
-      <motion.div
-        className="mt-10 flex justify-center"
-        variants={boxVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <Card className="w-full sm:w-[500px] md:w-[650px] shadow-lg rounded-2xl">
-          <CardHeader>
-            <motion.div variants={contentVariant}>
-              <CardTitle>Professional Skills</CardTitle>
-            </motion.div>
-          </CardHeader>
-          <CardContent>
-            <motion.div variants={contentVariant}>
-              I’m strong in communication, teamwork, problem-solving, and
-              adapting to new challenges. I stay professional in any situation
-              and enjoy contributing to projects that succeed while keeping
-              things organized and efficient.
-            </motion.div>
-          </CardContent>
-        </Card>
-      </motion.div>
     </div>
   );
 };

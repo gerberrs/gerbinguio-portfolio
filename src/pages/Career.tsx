@@ -1,28 +1,84 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import img1 from "/mcdo.png";
 import img2 from "/ojt.jfif";
 
-const rowVariant = {
-  hidden: { opacity: 0, x: 100 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.7 } },
-};
-
 const Career = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const row1Ref = useRef<HTMLDivElement>(null);
+  const row2Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Register GSAP plugin
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Use gsap.context for safe cleanup in React
+    const ctx = gsap.context(() => {
+      const section = sectionRef.current;
+      const row1 = row1Ref.current;
+      const row2 = row2Ref.current;
+
+      // Exit animation for the whole section
+      if (section) {
+        gsap.to(section, {
+          opacity: 0,
+          scale: 0.95,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+
+      // Entrance Row 1
+      if (row1) {
+        gsap.from(row1, {
+          opacity: 0,
+          x: -100,
+          duration: 0.7,
+          scrollTrigger: {
+            trigger: row1,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+
+      // Entrance Row 2
+      if (row2) {
+        gsap.from(row2, {
+          opacity: 0,
+          x: 100,
+          duration: 0.7,
+          scrollTrigger: {
+            trigger: row2,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+    }, sectionRef); // Scope to section
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="flex flex-col justify-start items-start gap-y-6 sm:gap-y-16 p-4 sm:p-6 sm:px-12">
-      <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold shimmer-text text-center w-full">
-        CAREER
-      </h1>
+    <div ref={sectionRef} className="relative min-h-screen bg-transparent flex flex-col justify-center items-center overflow-hidden">
+      <div className="flex flex-col justify-start items-start gap-y-6 sm:gap-y-16 p-4 sm:p-6 sm:px-12 w-full max-w-7xl">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold shimmer-text text-center w-full">
+          CAREER
+        </h1>
 
       {/* Row 1 */}
-      <motion.div
+      <div
+        ref={row1Ref}
         className="flex flex-col md:flex-row items-center gap-3 sm:gap-6 md:gap-12 w-full"
-        variants={rowVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
       >
         <div className="w-40 sm:w-64 mx-auto md:w-60 h-40 sm:h-64 md:h-72 bg-white shadow-md rounded-xl overflow-hidden">
           <img
@@ -61,15 +117,12 @@ const Career = () => {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Row 2 */}
-      <motion.div
+      <div
+        ref={row2Ref}
         className="flex flex-col md:flex-row-reverse items-center gap-3 sm:gap-6 md:gap-12 w-full"
-        variants={rowVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
       >
         <div className="w-40 sm:w-64 mx-auto md:w-60 h-40 sm:h-64 md:h-72 bg-white shadow-md rounded-xl overflow-hidden">
           <img
@@ -113,7 +166,8 @@ const Career = () => {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
+      </div>
     </div>
   );
 };

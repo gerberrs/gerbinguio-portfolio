@@ -1,205 +1,152 @@
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const fadeInUp = {
-  hidden: { 
-    opacity: 0, 
-    y: 50,
-    transition: { duration: 0.5 }
-  },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.7 }
-  }
-};
+gsap.registerPlugin(ScrollTrigger);
 
-const staggerContainer = {
-  hidden: { opacity: 1 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
+const skillCategories = [
+  {
+    title: "Programming",
+    items: "HTML, CSS, JavaScript, TypeScript, C++, C#, PHP",
   },
-};
+  {
+    title: "Frameworks",
+    items: "Tailwind, React.js, Bootstrap",
+  },
+  {
+    title: "Tools & Technology",
+    items: "GitHub, Jira, Microsoft Suite, Word, PowerPoint, Excel, Canva, VSCode",
+  },
+  {
+    title: "Database",
+    items: "SQL",
+  },
+  {
+    title: "Professional Skills",
+    items: "Communication, Teamwork, Problem-Solving, Adaptability, Leadership",
+  },
+];
 
-const fadeInUpItem = {
-  hidden: { 
-    opacity: 0, 
-    y: 30,
-    transition: { duration: 0.4 }
+const educationItems = [
+  {
+    title: "Bachelor of Science in Information Technology",
+    subtitle: "Pamantasan ng Lungsod ng Muntinlupa • 2021 – 2025",
+    detail: "GWA: 1.65 / 5.0",
   },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.6 }
-  }
-};
+  {
+    title: "On-the-Job Training",
+    subtitle: "Helply Web Internship • 2023",
+    detail:
+      "Gained practical experience building reusable components, integrating APIs, and collaborating with a team using GitHub and Jira.",
+  },
+  {
+    title: "Capstone Project",
+    subtitle: "Booking System • 2024",
+    detail:
+      "Designed and developed a booking system with dynamic calendar functionality for convenient scheduling and user management.",
+  },
+];
 
 const Education = () => {
-  const controls = useAnimation();
-  const [ref, inView] = useInView({
-    threshold: 0.1,
-  });
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const skillsPanelRef = useRef<HTMLDivElement>(null);
+  const educationPanelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    } else {
-      controls.start("hidden");
-    }
-  }, [inView, controls]);
+    // Use gsap.context for safe cleanup
+    const ctx = gsap.context(() => {
+      const section = sectionRef.current;
+      const skillsPanel = skillsPanelRef.current;
+      const educationPanel = educationPanelRef.current;
+      
+      if (!section || !skillsPanel || !educationPanel) return;
+
+      // Create a timeline to sync both clips perfectly
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=100%",
+          scrub: 0.6,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
+
+      // Synchronized Wipe:
+      // Skills clips to the left (hiding)
+      tl.to(skillsPanel, {
+        clipPath: "inset(0% 100% 0% 0%)",
+        ease: "none",
+      }, 0);
+
+      // Education clips in from the right (revealing)
+      tl.fromTo(educationPanel, 
+        { clipPath: "inset(0% 0% 0% 100%)" },
+        { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
+        0
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <div ref={ref} className="min-h-screen flex flex-col items-center justify-center px-4 py-10 sm:px-12 sm:py-16">
-      <motion.h1 
-        className="text-4xl sm:text-5xl font-bold shimmer-text mb-16 text-center"
-        variants={fadeInUp}
-        initial="hidden"
-        animate={controls}
+    <div ref={sectionRef} className="relative h-screen w-full overflow-hidden">
+      {/* LAYER 1: EDUCATION — Starts hidden (clipped), revealed by wipe */}
+      <div 
+        ref={educationPanelRef}
+        className="absolute inset-0 flex flex-col justify-center px-6 sm:px-12 lg:px-20"
+        style={{ clipPath: "inset(0% 0% 0% 100%)" }} // Start fully clipped (hidden)
       >
-        EDUCATION & SKILLS
-      </motion.h1>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold shimmer-text text-center mb-10 sm:mb-14">
+          EDUCATION
+        </h1>
+        <div className="max-w-3xl mx-auto w-full space-y-10 sm:space-y-12 pl-4">
+          {educationItems.map((item, i) => (
+            <div
+              key={i}
+              className="border-l-4 border-white pl-6 sm:pl-8 space-y-2 relative"
+            >
+              <div className="absolute -left-[11px] top-0 w-4 h-4 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]" />
+              <h2 className="text-xl sm:text-2xl font-bold">{item.title}</h2>
+              <p className="text-gray-400 text-sm sm:text-base">
+                {item.subtitle}
+              </p>
+              <p className="text-sm sm:text-base leading-relaxed text-gray-200">
+                {item.detail}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
 
-      <div className="flex flex-col xl:flex-row gap-10 xl:gap-16 w-full max-w-7xl">
-        {/* Left Column: Education Timeline */}
-        <motion.div 
-          className="flex-1 space-y-12"
-          variants={fadeInUp}
-          initial="hidden"
-          animate={controls}
-        >
-          <h2 className="text-3xl font-bold text-center xl:text-left mb-8 border-b border-gray-700 pb-4">
-            Education
-          </h2>
-          
-          <motion.div 
-            className="space-y-12 pl-4"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={controls}
-          >
-            {/* Block 1 - Degree */}
-            <motion.div className="border-l-4 border-white pl-6 space-y-2 relative" variants={fadeInUpItem}>
-              <div className="absolute -left-[11px] top-0 w-4 h-4 rounded-full bg-white" />
-              <h2 className="text-xl sm:text-2xl font-bold">
-                Bachelor of Science in Information Technology
+      {/* LAYER 2: SKILLS — Starts visible, hidden by wipe */}
+      <div
+        ref={skillsPanelRef}
+        className="absolute inset-0 flex flex-col justify-center px-6 sm:px-12 lg:px-20 bg-transparent"
+        style={{ clipPath: "inset(0% 0% 0% 0%)" }} // Start fully visible
+      >
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold shimmer-text text-center mb-10 sm:mb-14">
+          TECHNICAL SKILLS
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 max-w-5xl mx-auto w-full">
+          {skillCategories.map((cat, i) => (
+            <div
+              key={i}
+              className={`bg-zinc-950/80 backdrop-blur-sm border border-zinc-700 rounded-2xl p-5 sm:p-6 shadow-2xl ${
+                i === 2 || i === 4 ? "sm:col-span-2 lg:col-span-1" : ""
+              }`}
+            >
+              <h2 className="text-lg sm:text-xl font-bold mb-3 border-b border-zinc-600 pb-2">
+                {cat.title}
               </h2>
-              <p className="text-gray-400 text-sm">
-                Pamantasan ng Lungsod ng Muntinlupa • 2021 – 2025
+              <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+                {cat.items}
               </p>
-              <p className="text-sm sm:text-base">GWA: 1.65 / 5.0</p>
-            </motion.div>
-
-            {/* Block 2 - OJT */}
-            <motion.div className="border-l-4 border-white pl-6 space-y-2 relative" variants={fadeInUpItem}>
-              <div className="absolute -left-[11px] top-0 w-4 h-4 rounded-full bg-white" />
-              <h2 className="text-xl sm:text-2xl font-bold">On-the-Job Training</h2>
-              <p className="text-gray-400 text-sm">Helply Web Internship • 2023</p>
-              <p className="text-sm sm:text-base leading-relaxed">
-                Gained practical experience building reusable components,
-                integrating APIs, and collaborating with a team using GitHub and
-                Jira.
-              </p>
-            </motion.div>
-
-            {/* Block 3 - Capstone */}
-            <motion.div className="border-l-4 border-white pl-6 space-y-2 relative" variants={fadeInUpItem}>
-              <div className="absolute -left-[11px] top-0 w-4 h-4 rounded-full bg-white" />
-              <h2 className="text-xl sm:text-2xl font-bold">Capstone Project</h2>
-              <p className="text-gray-400 text-sm">Booking System • 2024</p>
-              <p className="text-sm sm:text-base leading-relaxed">
-                Designed and developed a booking system with dynamic calendar
-                functionality for convenient scheduling and user management.
-              </p>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-
-        {/* Right Column: Skills */}
-        <motion.div 
-          className="flex-1 space-y-8"
-          variants={fadeInUp}
-          initial="hidden"
-          animate={controls}
-          transition={{ delay: 0.2 }} // Stagger whole column
-        >
-          <h2 className="text-3xl font-bold text-center xl:text-left mb-8 border-b border-gray-700 pb-4">
-            Technical Skills
-          </h2>
-
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-4"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={controls}
-          >
-             {/* Programming */}
-            <motion.div variants={fadeInUpItem}>
-              <Card className="bg-zinc-900 border-zinc-700">
-                <CardHeader>
-                  <CardTitle className="text-white">Programming</CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-300">
-                  HTML, CSS, JavaScript, TypeScript, C++, C#, PHP
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Frameworks */}
-            <motion.div variants={fadeInUpItem}>
-              <Card className="bg-zinc-900 border-zinc-700">
-                <CardHeader>
-                  <CardTitle className="text-white">Frameworks</CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-300">
-                  Tailwind, React.js, Bootstrap
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Tools */}
-            <motion.div variants={fadeInUpItem} className="col-span-1 md:col-span-2">
-              <Card className="bg-zinc-900 border-zinc-700">
-                <CardHeader>
-                  <CardTitle className="text-white">Tools & Technology</CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-300">
-                  GitHub, Jira, Microsoft Suite, Word, PowerPoint, Excel, Canva,
-                  VSCode
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Database */}
-            <motion.div variants={fadeInUpItem}>
-              <Card className="bg-zinc-900 border-zinc-700">
-                <CardHeader>
-                  <CardTitle className="text-white">Database</CardTitle>
-                </CardHeader>
-                <CardContent className="text-gray-300">
-                  SQL
-                </CardContent>
-              </Card>
-            </motion.div>
-            
-            {/* Professional */}
-            <motion.div variants={fadeInUpItem} className="col-span-1 md:col-span-2">
-              <Card className="bg-zinc-900 border-zinc-700">
-               <CardHeader>
-                <CardTitle className="text-white">Professional Skills</CardTitle>
-              </CardHeader>
-              <CardContent className="text-gray-300">
-                Strong in communication, teamwork, problem-solving, and
-                adapting to new challenges.
-              </CardContent>
-            </Card>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

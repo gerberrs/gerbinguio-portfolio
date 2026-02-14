@@ -51,7 +51,8 @@ function App() {
       >
         <Navbar />
         <Introduction />
-        <div className="relative z-10 bg-gradient-to-br from-black via-gray-900 to-black">
+        <div className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-black -z-10" />
+        <div className="relative z-10">
           <div id="about">
             <AboutMe />
           </div>
