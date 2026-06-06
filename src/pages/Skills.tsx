@@ -6,39 +6,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 const skillCategories = [
   {
-    title: "Programming",
-    items: ["HTML", "CSS", "JavaScript", "TypeScript", "C++", "C#", "PHP"],
+    title: "CRM & Automation",
+    items: ["GoHighLevel", "Zapier", "n8n", "Workflow Automation", "Pipeline Management", "Email Sequences"],
   },
   {
-    title: "Frameworks",
-    items: ["Tailwind", "React.js", "Bootstrap"],
+    title: "AI Tools",
+    items: ["Claude AI", "ChatGPT", "Gemini AI"],
+  },
+  {
+    title: "Forms & Data",
+    items: ["Jotform", "Google Sheets", "Google Docs", "GHL Forms"],
+  },
+  {
+    title: "Development",
+    items: ["HTML", "CSS", "JavaScript", "TypeScript", "React.js", "Tailwind"],
   },
   {
     title: "Tools & Technology",
-    items: [
-      "GitHub",
-      "Jira",
-      "Microsoft Suite",
-      "Word",
-      "PowerPoint",
-      "Excel",
-      "Canva",
-      "VSCode",
-    ],
-  },
-  {
-    title: "Database",
-    items: ["SQL"],
+    items: ["GitHub", "Jira", "Canva", "VSCode", "Microsoft Suite"],
   },
   {
     title: "Professional Skills",
-    items: [
-      "Communication",
-      "Teamwork",
-      "Problem-Solving",
-      "Adaptability",
-      "Leadership",
-    ],
+    items: ["Communication", "Teamwork", "Problem-Solving", "Adaptability", "Leadership", "Attention to Detail"],
   },
 ];
 

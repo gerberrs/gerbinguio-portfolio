@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
@@ -13,7 +12,7 @@ const containerVariant = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.25, // delay between each card
+      staggerChildren: 0.25,
     },
   },
 };
@@ -26,43 +25,39 @@ const cardVariant = {
 const Projects = () => {
   const projects = [
     {
-      title: "Internship Portfolio",
-      description: "My internship portfolio project showcasing front-end work.",
-      image: "/internPort.jfif",
-      tech: ["HTML", "CSS", "TypeScript", "Tailwind", "ShadCN", "React.js"],
-      link: "https://gerb-portfolio.vercel.app/",
-    },
-    {
-      title: "Helply Web",
-      description:
-        "Main internship project with reusable components and API integration.",
-      image: "/helply.jfif",
-      tech: ["HTML", "CSS", "TypeScript", "Tailwind", "ShadCN", "React.js"],
+      title: "Brew Mania",
+      description: "Full CRM and booking automation system for a mock pop-up coffee bar. Includes lead capture, pipeline management, approval workflows, cancellation handling, Zapier feedback collection, and AI-powered monthly reporting.",
+      image: "/brewmania.png",
+      tech: ["GoHighLevel", "Zapier", "Jotform", "Gemini AI", "Google Sheets"],
       link: "#",
     },
     {
-      title: "Dangal Masonic Lodge No. 62",
-      description:
-        "A website portfolio of the masonry of Dangal Masonic Lodge 62.",
-      image: "/dangal_masonic_62.jfif",
-      tech: ["HTML", "CSS", "JavaScript", "TypeScript", "React.js", "Tailwind"],
-      link: "https://dangal-masonic-no-62.vercel.app/",
+      title: "Brewtomation — Brew Academy",
+      description: "Batch-based online barista coaching CRM. Features enrollment automation, payment verification, session tracking, no-show detection, graduation workflow, and alumni management.",
+      image: "/brewacademy.png",
+      tech: ["GoHighLevel", "Zapier", "Email Automation", "Pipeline Management"],
+      link: "#",
     },
     {
-      title: "Capstone Booking System",
-      description:
-        "Booking system project with dynamic calendar for convenient scheduling.",
-      image: "/snvhoa.jpg",
-      tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL", "Bootstrap"],
+      title: "Brewsmarinas — Coffee Rental",
+      description: "Equipment rental CRM system for coffee gear. Handles rental requests, booking confirmation, equipment tracking, return management, damage assessment, and re-engagement automation.",
+      image: "/brewsmarinas.png",
+      tech: ["GoHighLevel", "Service Calendar", "Pipeline Management", "Email Automation"],
       link: "#",
     },
     {
       title: "SKU Request System",
-      description:
-        "A vibecoded SKU request management system for streamlined product tracking.",
+      description: "A vibecoded SKU request management system for streamlined product tracking.",
       image: "/skuRequestSystem.jfif",
       tech: ["HTML", "CSS", "React", "Tailwind", "ShadCN", "Node.js"],
       link: "https://skusystem-wj8c.vercel.app/",
+    },
+    {
+      title: "Capstone Booking System",
+      description: "Booking system project with dynamic calendar for convenient scheduling.",
+      image: "/snvhoa.jpg",
+      tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL", "Bootstrap"],
+      link: "#",
     },
   ];
 
@@ -111,7 +106,7 @@ const Projects = () => {
                   stiffness: 300, 
                   damping: 20 
                 }}
-                className="block h-[400px] sm:h-[450px] cursor-pointer"
+                className="block h-[460px] sm:h-[500px] cursor-pointer"
               >
                 <motion.div 
                   className="bg-zinc-950 text-white rounded-3xl shadow-2xl border-2 border-white h-full flex flex-col overflow-hidden"
@@ -123,20 +118,20 @@ const Projects = () => {
                   <motion.img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-3/5 object-cover"
+                    className="w-full h-[45%] object-cover"
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.4 }}
                   />
-                  <div className="p-4 sm:p-6 h-2/5 flex flex-col justify-between">
+                  <div className="p-4 sm:p-5 h-[55%] flex flex-col justify-between">
                     <div>
-                      <h2 className="text-xl font-bold mb-1 sm:mb-2 truncate">
+                      <h2 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 truncate">
                         {project.title}
                       </h2>
-                      <p className="text-sm leading-relaxed line-clamp-3">
+                      <p className="text-xs sm:text-sm leading-relaxed line-clamp-5">
                         {project.description}
                       </p>
                     </div>
-                    <div className="mt-2 border-t border-white pt-2 flex flex-wrap gap-2 text-xs">
+                    <div className="mt-2 border-t border-white pt-2 flex flex-wrap gap-2 text-[10px] sm:text-xs">
                       {project.tech.slice(0, 4).map((tech) => (
                         <span
                           key={tech}

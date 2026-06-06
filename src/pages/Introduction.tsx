@@ -54,7 +54,7 @@ const Introduction = () => {
                 transform: `translateX(${progress * 150}px)`,
               }}
             >
-              FRONT END<br />WEB DEVELOPER
+              GHL &amp;<br />AUTOMATION<br />SPECIALIST
             </h1>
 
             <p
@@ -64,9 +64,7 @@ const Introduction = () => {
                 transform: `translateX(${progress * 200}px)`,
               }}
             >
-              I'm a recent graduate pursuing a Front End Web Developer career,
-              currently growing in my field and looking for opportunities where I
-              can use and expand my skills.
+             I design and build end-to-end CRM systems and automation workflows — specializing in GoHighLevel, Zapier, and exploring tools like n8n and make. From lead capture and pipeline management to multi-step workflows, email sequences, and AI-powered reporting — I turn manual processes into fully automated systems.
             </p>
 
             {/* Buttons */}

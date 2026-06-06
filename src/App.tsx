@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AboutMe from "./pages/AboutMe";
 import Introduction from "./pages/Introduction";
 import MyContact from "./pages/MyContact";
-import Education from "./pages/Education";
+
 import Navbar from "./components/Navbar";
 import HorizontalScrollSection from "./components/HorizontalScrollSection";
 import Experience from "./pages/Career";
@@ -56,7 +56,7 @@ function App() {
           <div id="about">
             <AboutMe />
           </div>
-          <Education />
+
           <HorizontalScrollSection />
           <div id="career">
             <Experience />

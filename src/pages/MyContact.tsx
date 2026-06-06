@@ -133,7 +133,7 @@ const MyContact = () => {
             </div>
             <div className="flex items-center gap-3">
               <Phone className="w-5 h-5 flex-shrink-0" />
-              <span>+639566156741</span>
+              <span>+639940401002</span>
             </div>
             <div className="flex items-center gap-3">
               <MapPin className="w-5 h-5 flex-shrink-0" />
@@ -190,7 +190,7 @@ const MyContact = () => {
         {/* Call to action */}
         <div ref={ctaRef} className="mt-8 sm:mt-12 text-center">
           <h2 className="text-xl sm:text-2xl font-semibold">
-            Let's Work Together 🚀
+            Let's Work Together
           </h2>
           <p className="text-gray-300 mt-2 text-sm sm:text-base">
             I'm open to freelance, collaborations, or full-time opportunities.
@@ -207,7 +207,7 @@ const MyContact = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-black text-gray-400 py-4 text-center text-sm sm:text-base w-full mt-auto">
+      <footer className=" text-gray-400 py-4 text-center text-sm sm:text-base w-full mt-auto">
         <p>
           © 2025 | Made with{" "}
           <span className="text-white font-semibold">TypeScript</span> &{" "}
