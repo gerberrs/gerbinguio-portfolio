@@ -367,25 +367,31 @@ const HorizontalScrollSection = () => {
     const section = sectionRef.current;
     if (!section) return;
 
-    const trigger = ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 0.5,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const targetSlide = Math.min(
-          Math.floor(progress * projects.length),
-          projects.length - 1
-        );
-        if (swiperRef.current && lastSlideIndex.current !== targetSlide) {
-          swiperRef.current.slideTo(targetSlide, 600);
-          lastSlideIndex.current = targetSlide;
-        }
-      },
+    let mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
+      const trigger = ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.5,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const targetSlide = Math.min(
+            Math.floor(progress * projects.length),
+            projects.length - 1
+          );
+          if (swiperRef.current && lastSlideIndex.current !== targetSlide) {
+            swiperRef.current.slideTo(targetSlide, 600);
+            lastSlideIndex.current = targetSlide;
+          }
+        },
+      });
+
+      return () => trigger.kill();
     });
 
-    return () => trigger.kill();
+    return () => mm.revert();
   }, []);
 
   return (
@@ -431,10 +437,9 @@ const HorizontalScrollSection = () => {
       <div
         ref={sectionRef}
         id="projects"
-        className="relative"
-        style={{ height: "300vh" }}
+        className="relative h-auto md:h-[300vh]"
       >
-        <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-start pt-32 sm:pt-40 z-20">
+        <div className="md:sticky md:top-0 h-auto md:h-screen overflow-hidden flex flex-col items-center justify-start pt-24 pb-12 md:pt-32 sm:pt-40 md:pb-0 z-20">
           <h1 className="text-3xl sm:text-5xl font-bold shimmer-text text-center mb-6 sm:mb-10">
             PROJECTS
           </h1>
@@ -474,18 +479,48 @@ const HorizontalScrollSection = () => {
                     className="block h-[580px] cursor-pointer"
                   >
                     <motion.div
-                      className="bg-zinc-950 text-white rounded-3xl shadow-2xl border-2 border-white h-full flex flex-col overflow-hidden"
+                      className="bg-zinc-950 text-white rounded-3xl shadow-2xl border-2 border-white h-full flex flex-col overflow-hidden relative"
                       whileHover={{ borderColor: "rgba(255, 255, 255, 0.8)" }}
                       transition={{ duration: 0.3 }}
                     >
-                      <motion.img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-[40%] object-cover cursor-zoom-in"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.4 }}
+                      {/* Dynamic Island pill */}
+                      {project.caseStudy && (
+                        <div className="absolute top-3 w-full flex justify-center z-10 pointer-events-none">
+                          <motion.button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveModal(project);
+                            }}
+                            className="pointer-events-auto bg-black/80 backdrop-blur-md border border-white/20 rounded-full px-4 py-1.5 text-[11px] font-semibold text-white/90 shadow-lg shadow-black/40 flex items-center gap-1.5 cursor-pointer"
+                            whileHover={{
+                              scale: 1.08,
+                              backgroundColor: "rgba(255,255,255,0.15)",
+                              borderColor: "rgba(255,255,255,0.5)",
+                              boxShadow: "0 0 20px rgba(255,255,255,0.15)",
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                          >
+                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                            View Case Study
+                          </motion.button>
+                        </div>
+                      )}
+                      <div
+                        className="relative w-full h-[40%] cursor-pointer group overflow-hidden shrink-0"
                         onClick={() => setLightboxImage(project.image)}
-                      />
+                      >
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none z-0">
+                          <span className="text-white text-xs sm:text-sm font-semibold tracking-wide bg-black/50 px-4 py-2 rounded-full backdrop-blur-md border border-white/20 shadow-lg">
+                            View Full Picture 🔍
+                          </span>
+                        </div>
+                      </div>
                       <div className="p-4 sm:p-5 flex-1 flex flex-col gap-3">
                         <div className="flex-1">
                           <h2 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 truncate">
@@ -505,14 +540,6 @@ const HorizontalScrollSection = () => {
                             </span>
                           ))}
                         </div>
-                        {project.caseStudy && (
-                          <button
-                            onClick={() => setActiveModal(project)}
-                            className="mt-1 w-full py-2 rounded-xl border border-white text-xs font-semibold hover:bg-white hover:text-black transition-all duration-200"
-                          >
-                            View Case Study →
-                          </button>
-                        )}
                       </div>
                     </motion.div>
                   </motion.div>
