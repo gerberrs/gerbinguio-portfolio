@@ -30,8 +30,8 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: "Brew Mania",
-    type: "GHL Sub-Account — CRM, Funnel & Automation",
+    title: "GHL Sub-Account — Brew Mania",
+    type: "CRM, Funnel, Website, Pipeline, & Automation",
     description:
       "Full CRM and booking automation system for a mock pop-up coffee bar. Includes lead capture, pipeline management, approval workflows, cancellation handling, Jotform feedback collection via Zapier, and AI-powered monthly reporting using Gemini AI and Google Docs.",
     image: "/brewmania.png",
@@ -100,8 +100,8 @@ const projects: Project[] = [
     ],
   },
   {
-    title: "Brewtomation — Brew Academy",
-    type: "GHL Sub-Account — CRM, Funnel & Automation",
+    title: "GHL Sub-Account — Brewtomation",
+    type: "CRM, Funnel, Pipeline, Custom Email Templates,& Automation",
     description:
       "Batch-based online barista coaching CRM with custom-coded HTML email templates for welcome, session schedule, and certificate emails. Features enrollment automation, payment verification, session tracking, no-show detection, graduation workflow, and alumni management. Includes custom JavaScript on funnel buttons.",
     image: "/brewacademy.png",
@@ -152,8 +152,8 @@ const projects: Project[] = [
     ],
   },
   {
-    title: "Brewsmarinas — Coffee Rental",
-    type: "GHL Sub-Account — CRM, Funnel & Automation",
+    title: "GHL Sub-Account — Brewsmarinas",
+    type: "CRM, Funnel, Pipeline & Automation",
     description:
       "Well-structured equipment rental CRM system for coffee gear sets. Handles rental requests, booking confirmation via service calendar, equipment out tracking, return management, damage assessment, re-engagement automation, and internal staff notifications throughout the rental lifecycle.",
     image: "/brewsmarinas.png",
