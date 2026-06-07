@@ -80,7 +80,7 @@ const Career = () => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="relative min-h-screen bg-transparent flex flex-col justify-start pt-24 sm:pt-32 items-center overflow-hidden">
+    <div ref={sectionRef} className="relative bg-transparent flex flex-col justify-start py-12 sm:py-20 items-center overflow-hidden">
       <div className="flex flex-col justify-start items-start gap-y-8 sm:gap-y-12 p-4 sm:p-6 sm:px-12 w-full max-w-5xl">
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold shimmer-text text-center w-full">
           CAREER

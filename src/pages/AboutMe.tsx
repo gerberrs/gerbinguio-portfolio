@@ -89,7 +89,7 @@ const AboutMe = () => {
   return (
     <div
       ref={ref}
-      className="w-full flex flex-col text-white px-6 sm:px-10 lg:px-16 pt-32 sm:pt-40 pb-24"
+      className="w-full flex flex-col text-white px-6 sm:px-10 lg:px-16 pt-16 sm:pt-24 pb-8 sm:pb-12"
     >
       {/* Section Title */}
       <motion.div
