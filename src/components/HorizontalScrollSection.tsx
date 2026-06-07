@@ -20,6 +20,7 @@ type CaseStudySlide = {
 
 type Project = {
   title: string;
+  type?: string;
   description: string;
   image: string;
   tech: string[];
@@ -30,6 +31,7 @@ type Project = {
 const projects: Project[] = [
   {
     title: "Brew Mania",
+    type: "GHL Sub-Account — CRM, Funnel & Automation",
     description:
       "Full CRM and booking automation system for a mock pop-up coffee bar. Includes lead capture, pipeline management, approval workflows, cancellation handling, Jotform feedback collection via Zapier, and AI-powered monthly reporting using Gemini AI and Google Docs.",
     image: "/brewmania.png",
@@ -99,6 +101,7 @@ const projects: Project[] = [
   },
   {
     title: "Brewtomation — Brew Academy",
+    type: "GHL Sub-Account — CRM, Funnel & Automation",
     description:
       "Batch-based online barista coaching CRM with custom-coded HTML email templates for welcome, session schedule, and certificate emails. Features enrollment automation, payment verification, session tracking, no-show detection, graduation workflow, and alumni management. Includes custom JavaScript on funnel buttons.",
     image: "/brewacademy.png",
@@ -150,6 +153,7 @@ const projects: Project[] = [
   },
   {
     title: "Brewsmarinas — Coffee Rental",
+    type: "GHL Sub-Account — CRM, Funnel & Automation",
     description:
       "Well-structured equipment rental CRM system for coffee gear sets. Handles rental requests, booking confirmation via service calendar, equipment out tracking, return management, damage assessment, re-engagement automation, and internal staff notifications throughout the rental lifecycle.",
     image: "/brewsmarinas.png",
@@ -201,6 +205,7 @@ const projects: Project[] = [
   },
   {
     title: "Enrollment Automation — Zapier",
+    type: "Zapier Automation",
     description:
       "Built an end-to-end enrollment automation that captures leads via Jotform, adds and enrolls them in ClickFunnels, tags them in ActiveCampaign, and triggers a personalized email via Gmail upon enrollment.",
     image: "/zapier-auto-enrollment-project.png",
@@ -209,6 +214,7 @@ const projects: Project[] = [
   },
   {
     title: "OJT Report Summarizer",
+    type: "Zapier + AI Automation",
     description:
       "Automated summarization of daily OJT Excel reports using Gemini AI. Every time a new row is added to Google Sheets, Gemini AI automatically summarizes the data and outputs a formatted report inside Google Docs.",
     image: "/ojt-summarizer.png",
@@ -217,6 +223,7 @@ const projects: Project[] = [
   },
   {
     title: "Capstone Booking System",
+    type: "Full-Stack Web Application",
     description:
       "A full-stack booking system built as a capstone project featuring a dynamic calendar for scheduling appointments. Users can view availability, select time slots, and manage bookings — backed by a PHP and SQL server with a clean Bootstrap frontend.",
     image: "/snvhoa.jpg",
@@ -225,8 +232,9 @@ const projects: Project[] = [
   },
   {
     title: "SKU Request System",
+    type: "AI-Assisted Web Application",
     description:
-  "A SKU request management system built using AI-assisted development. Frontend built with React, ShadCN, and Tailwind. Backend powered by Node.js with an SQL database.",
+      "A SKU request management system built using AI-assisted development. Frontend built with React, ShadCN, and Tailwind. Backend powered by Node.js with an SQL database.",
     image: "/skuRequestSystem.jfif",
     tech: ["HTML", "CSS", "React", "Tailwind", "ShadCN", "Node.js"],
     link: "https://skusystem-wj8c.vercel.app/",
@@ -266,9 +274,14 @@ const CaseStudyModal = ({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-white/10">
-          <h2 className="text-base sm:text-lg font-bold text-white">
-            {project.title} — Case Study
-          </h2>
+          <div>
+            <p className="text-[10px] uppercase tracking-widest text-white/30 font-semibold mb-1">
+              {project.type ?? "Project Breakdown"}
+            </p>
+            <h2 className="text-base sm:text-lg font-bold text-white">
+              {project.title}
+            </h2>
+          </div>
           <button
             onClick={onClose}
             className="text-white/60 hover:text-white text-2xl leading-none transition"
@@ -500,6 +513,12 @@ const HorizontalScrollSection = () => {
                       </div>
                       <div className="p-4 sm:p-5 flex-1 flex flex-col gap-3">
                         <div className="flex-1">
+                          {/* Type label above title */}
+                          {project.type && (
+                            <p className="text-[10px] uppercase tracking-widest text-white/40 font-semibold mb-1">
+                              {project.type}
+                            </p>
+                          )}
                           <h2 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 truncate">
                             {project.title}
                           </h2>
@@ -508,7 +527,7 @@ const HorizontalScrollSection = () => {
                           </p>
                         </div>
 
-                        {/* Case Study Pill — between description and tech stacks */}
+                        {/* Breakdown pill */}
                         {project.caseStudy && (
                           <div className="flex justify-center mt-auto mb-2">
                             <motion.button
@@ -526,7 +545,8 @@ const HorizontalScrollSection = () => {
                               whileTap={{ scale: 0.95 }}
                               transition={{ type: "spring", stiffness: 400, damping: 20 }}
                             >
-                              Click to view breakdown
+                              <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                              View Breakdown
                             </motion.button>
                           </div>
                         )}

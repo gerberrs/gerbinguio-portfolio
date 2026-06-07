@@ -177,7 +177,7 @@ const MyContact = () => {
             </div>
             <div className="mt-2">
               <a
-                href="/Gerbinguio_Victorino-CV.pdf"
+                href="/Victorino-2026-CV.pdf"
                 download
                 className="inline-block px-4 sm:px-6 py-1 sm:py-2 border border-white rounded-xl hover:bg-white hover:text-black transition"
               >
