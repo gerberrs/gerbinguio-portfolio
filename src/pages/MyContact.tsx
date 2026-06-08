@@ -169,7 +169,7 @@ const MyContact = () => {
                 OnlineJobs
               </a>
               <a
-                href="https://profile.indeed.com/?hl=en_PH&co=PH&from=gnav-homepage"
+                href="https://www.linkedin.com/in/gerbinguio-victorino-41a183366/"
                 className="px-4 py-2 border border-white rounded-full hover:bg-white hover:text-black transition text-sm sm:text-base"
               >
                 Indeed
