@@ -46,7 +46,7 @@ const skillCategories = [
   {
     title: "CRM & Automation",
     items:
-      "GoHighLevel, ActiveCampaign, Zapier, n8n, Workflow Automation, Pipeline Management, Email Sequences, Funnel Building, Website Building",
+      "GoHighLevel, Zoho CRM, Zoho Campaigns, Zoho Flow, ActiveCampaign, Zapier, n8n, Workflow Automation, Pipeline Management, Email Sequences, Funnel Building, Website Building",
   },
   {
     title: "AI Tools",
@@ -58,7 +58,8 @@ const skillCategories = [
   },
   {
     title: "Development",
-    items: "HTML, CSS, JavaScript, TypeScript, React.js, Tailwind",
+    items:
+      "HTML, CSS, JavaScript, TypeScript, React.js, Tailwind, WordPress, APIs & Webhooks",
   },
   {
     title: "Tools & Technology",
@@ -73,7 +74,7 @@ const skillCategories = [
 ];
 
 const stats = [
-  { value: "3", label: "CRM systems" },
+  { value: "4", label: "CRM systems" },
   { value: "20+", label: "workflows" },
   { value: "10+", label: "tools" },
 ];
@@ -105,7 +106,7 @@ const AboutMe = () => {
         animate={controls}
       >
         <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-ink-900">
-          ABOUT <span className="text-clay">ME</span>
+          ABOUT <span className="text-blue-deep">ME</span>
         </h1>
         <h2 className="text-sm sm:text-lg mt-3 text-center text-ink-500">
           Get to know more about me, and my automation journey
@@ -129,14 +130,14 @@ const AboutMe = () => {
             <motion.img
               src="/devPicture.png"
               alt="Profile"
-              className="w-32 h-32 sm:w-36 sm:h-36 object-cover rounded-full shadow-lg border-4 border-clay bg-cream-200 flex-shrink-0"
+              className="w-32 h-32 sm:w-36 sm:h-36 object-cover rounded-full shadow-lg border-4 border-blue bg-sand-200 flex-shrink-0"
               whileHover={{ scale: 1.05, rotate: 2 }}
               transition={{ type: "spring", stiffness: 300 }}
             />
             <div className="text-center sm:text-left space-y-1 pt-2">
               <p className="text-lg sm:text-xl font-bold">Gerbinguio, 23</p>
               <p className="text-sm text-ink-500">
-                GHL &amp; Automation Specialist
+                CRM &amp; Automation Specialist
               </p>
               <p className="text-sm text-ink-500">
                 San Pedro City, Laguna, Philippines
@@ -146,8 +147,8 @@ const AboutMe = () => {
                 {stats.map((stat) => (
                   <div key={stat.label} className="flex flex-col items-center">
                     <motion.div
-                      className="w-11 h-11 flex items-center justify-center rounded-full bg-ink-900 text-cream-50 font-bold text-sm shadow-md cursor-pointer"
-                      whileHover={{ scale: 1.2, backgroundColor: "#C96442" }}
+                      className="w-11 h-11 flex items-center justify-center rounded-full bg-ink-900 text-sand-50 font-bold text-sm shadow-md cursor-pointer"
+                      whileHover={{ scale: 1.2, backgroundColor: "#6FA8C6" }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       {stat.value}
@@ -180,10 +181,12 @@ const AboutMe = () => {
             <p className="text-sm leading-relaxed text-ink-700">
               I started my tech career as a Front-End Developer intern and later
               worked as a Junior Software Engineer. Over time, I found my passion
-              in automation. I now specialize in GoHighLevel (GHL), Zapier, and
-              tools like n8n — designing end-to-end CRM systems, multi-step
-              workflows, email sequences, pipeline management, and AI-powered
-              reporting.
+              in automation. I now specialize in CRM platforms like GoHighLevel
+              and Zoho, plus automation tools like Zapier and n8n — designing
+              end-to-end CRM systems, multi-step workflows, email campaigns,
+              pipeline management, and AI-powered reporting. I'm currently doing
+              freelance Zoho CRM work: lead imports, Zoho Campaigns emails, Zoho
+              Flow automations, and WordPress API &amp; webhook integrations.
             </p>
           </div>
         </motion.div>
@@ -194,16 +197,16 @@ const AboutMe = () => {
           variants={fadeInUpStagger}
         >
           <h3 className="font-display text-2xl sm:text-3xl mb-6 text-center lg:text-left text-ink-900">
-            TOOLS I'VE <span className="text-clay">USED</span>
+            TOOLS I'VE <span className="text-blue-deep">USED</span>
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {skillCategories.map((cat, i) => (
               <motion.div
                 key={i}
-                className="bg-cream-100 border border-cream-300 rounded-2xl p-4 sm:p-5 shadow-sm transition-all duration-300 hover:scale-[1.03] hover:border-clay hover:shadow-[0_8px_30px_rgba(201,100,66,0.15)]"
+                className="bg-sand-100 border border-sand-300 rounded-2xl p-4 sm:p-5 shadow-sm transition-all duration-300 hover:scale-[1.03] hover:border-blue hover:shadow-[0_8px_30px_rgba(111,168,198,0.15)]"
                 variants={fadeInUpStagger}
               >
-                <h4 className="text-sm sm:text-base font-bold mb-2 border-b border-cream-300 pb-2">
+                <h4 className="text-sm sm:text-base font-bold mb-2 border-b border-sand-300 pb-2">
                   {cat.title}
                 </h4>
                 <p className="text-ink-500 text-xs sm:text-sm leading-relaxed">

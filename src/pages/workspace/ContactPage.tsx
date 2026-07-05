@@ -62,7 +62,7 @@ const ContactPage = () => {
           Let's work together
         </p>
         <h1 className="font-display text-[clamp(2.75rem,9vw,7rem)] leading-none text-ink-900">
-          CONTACT<span className="text-clay">.</span>
+          CONTACT<span className="text-blue-deep">.</span>
         </h1>
         <p className="text-sm sm:text-base text-ink-500 mt-4 max-w-xl mx-auto">
           I'm open to freelance, collaborations, or full-time opportunities.
@@ -76,15 +76,15 @@ const ContactPage = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.55 }}
-          className="bg-cream-100 border border-cream-300 rounded-2xl p-6 space-y-4"
+          className="bg-sand-100 border border-sand-300 rounded-2xl p-6 space-y-4"
         >
           <h2 className="font-display text-lg text-ink-900 mb-2">
-            CONTACT <span className="text-clay">INFO</span>
+            CONTACT <span className="text-blue-deep">INFO</span>
           </h2>
           {contactInfo.map((item) => (
             <div key={item.label} className="flex items-center gap-3">
-              <span className="w-9 h-9 rounded-lg bg-clay-soft flex items-center justify-center flex-shrink-0">
-                <item.icon className="w-4 h-4 text-clay" />
+              <span className="w-9 h-9 rounded-lg bg-blue-soft flex items-center justify-center flex-shrink-0">
+                <item.icon className="w-4 h-4 text-blue-deep" />
               </span>
               <div className="min-w-0">
                 <p className="text-[10px] uppercase tracking-widest text-ink-500 font-semibold">
@@ -95,7 +95,7 @@ const ContactPage = () => {
                     href={item.href}
                     target={item.href.startsWith("http") ? "_blank" : undefined}
                     rel="noopener noreferrer"
-                    className="text-sm text-ink-900 font-medium break-all hover:text-clay transition-colors"
+                    className="text-sm text-ink-900 font-medium break-all hover:text-blue-deep transition-colors"
                   >
                     {item.value}
                   </a>
@@ -115,10 +115,10 @@ const ContactPage = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.55 }}
-          className="bg-cream-100 border border-cream-300 rounded-2xl p-6 flex flex-col"
+          className="bg-sand-100 border border-sand-300 rounded-2xl p-6 flex flex-col"
         >
           <h2 className="font-display text-lg text-ink-900 mb-4">
-            ONLINE <span className="text-clay">PROFILES</span>
+            ONLINE <span className="text-blue-deep">PROFILES</span>
           </h2>
           <div className="flex flex-wrap gap-2.5">
             {profiles.map((profile) => (
@@ -127,7 +127,7 @@ const ContactPage = () => {
                 href={profile.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 border border-cream-300 bg-cream-50 rounded-full text-sm font-medium text-ink-700 hover:border-clay hover:text-clay hover:bg-clay-soft/40 transition-all"
+                className="px-4 py-2 border border-sand-300 bg-sand-50 rounded-full text-sm font-medium text-ink-700 hover:border-blue hover:text-blue-deep hover:bg-blue-soft/40 transition-all"
               >
                 {profile.label}
               </a>
@@ -138,7 +138,7 @@ const ContactPage = () => {
             download
             className="mt-auto pt-6 inline-flex"
           >
-            <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-ink-900 text-cream-50 rounded-xl text-sm font-semibold hover:bg-clay transition-colors shadow-md">
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-ink-900 text-sand-50 rounded-xl text-sm font-semibold hover:bg-blue transition-colors shadow-md">
               <Download className="w-4 h-4" />
               Download Resume
             </span>
@@ -158,7 +158,7 @@ const ContactPage = () => {
           href="https://mail.google.com/mail/?view=cm&fs=1&to=gerbinguio@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="block bg-cream-50 border border-cream-300 rounded-3xl shadow-[0_12px_40px_rgba(38,34,27,0.08)] p-4 sm:p-5 hover:border-clay/60 hover:shadow-[0_16px_50px_rgba(201,100,66,0.15)] transition-all group"
+          className="block bg-sand-50 border border-sand-300 rounded-3xl shadow-[0_12px_40px_rgba(34,48,60,0.08)] p-4 sm:p-5 hover:border-blue/60 hover:shadow-[0_16px_50px_rgba(111,168,198,0.15)] transition-all group"
         >
           <div className="px-2 pt-2 pb-8 text-ink-500 text-base">
             Message Gerbinguio about a project…
@@ -167,8 +167,8 @@ const ContactPage = () => {
             <span className="text-xs text-ink-500 pl-2 hidden sm:block">
               Opens Gmail — replies fast ⚡
             </span>
-            <span className="ml-auto w-10 h-10 rounded-xl bg-clay group-hover:bg-clay-dark transition-colors flex items-center justify-center shadow-md">
-              <ArrowUp className="w-5 h-5 text-cream-50" />
+            <span className="ml-auto w-10 h-10 rounded-xl bg-blue group-hover:bg-blue-dark transition-colors flex items-center justify-center shadow-md">
+              <ArrowUp className="w-5 h-5 text-sand-50" />
             </span>
           </div>
         </a>

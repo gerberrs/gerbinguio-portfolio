@@ -4,6 +4,15 @@ import { motion } from "framer-motion";
 
 const roles = [
   {
+    title: "CRM Specialist — Zoho (Freelance)",
+    company: "Freelance Client · WordPress + Zoho stack",
+    period: "2026 — Present",
+    image: null,
+    description:
+      "Full Zoho CRM setup for a freelance client. Imported leads from spreadsheets into Zoho CRM, designed clean branded emails in Zoho Campaigns, and built automations using Zoho Flow together with CRM workflow rules. Connected the client's WordPress website to Zoho Flow through API calls and webhooks so form submissions create leads in the CRM automatically.",
+    tags: ["Zoho CRM", "Zoho Campaigns", "Zoho Flow", "API & Webhooks", "WordPress"],
+  },
+  {
     title: "GHL & Automation Specialist",
     company: "Freelance / Portfolio Projects",
     period: "2025 — Present",
@@ -50,7 +59,7 @@ const CareerPage = () => {
           The journey so far
         </p>
         <h1 className="font-display text-[clamp(2.75rem,9vw,7rem)] leading-none text-ink-900">
-          CAREER<span className="text-clay">.</span>
+          CAREER<span className="text-blue-deep">.</span>
         </h1>
         <p className="text-sm sm:text-base text-ink-500 mt-4 max-w-xl mx-auto">
           From the fry station to full automation systems — every step built the
@@ -61,7 +70,7 @@ const CareerPage = () => {
       {/* Timeline */}
       <div className="relative max-w-3xl mx-auto">
         {/* Vertical line */}
-        <div className="absolute left-4 sm:left-5 top-2 bottom-2 w-px bg-cream-300" />
+        <div className="absolute left-4 sm:left-5 top-2 bottom-2 w-px bg-sand-300" />
 
         <div className="space-y-10">
           {roles.map((role, i) => (
@@ -74,19 +83,19 @@ const CareerPage = () => {
               className="relative pl-12 sm:pl-16"
             >
               {/* Timeline dot */}
-              <span className="absolute left-4 sm:left-5 top-2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-clay ring-4 ring-clay-soft" />
+              <span className="absolute left-4 sm:left-5 top-2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-blue ring-4 ring-blue-soft" />
 
-              <div className="bg-cream-100 border border-cream-300 rounded-2xl p-5 sm:p-6 hover:border-clay hover:shadow-[0_8px_30px_rgba(201,100,66,0.12)] transition-all">
+              <div className="bg-sand-100 border border-sand-300 rounded-2xl p-5 sm:p-6 hover:border-blue hover:shadow-[0_8px_30px_rgba(111,168,198,0.12)] transition-all">
                 <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                   {role.image && (
                     <img
                       src={role.image}
                       alt={role.company}
-                      className="w-16 h-16 rounded-xl object-cover border border-cream-300 bg-cream-50 flex-shrink-0"
+                      className="w-16 h-16 rounded-xl object-cover border border-sand-300 bg-sand-50 flex-shrink-0"
                     />
                   )}
                   <div className="min-w-0 flex-1">
-                    <p className="text-[10px] uppercase tracking-widest text-clay font-semibold mb-1">
+                    <p className="text-[10px] uppercase tracking-widest text-blue-deep font-semibold mb-1">
                       {role.period}
                     </p>
                     <h2 className="text-lg sm:text-xl font-bold text-ink-900 leading-snug">
@@ -102,7 +111,7 @@ const CareerPage = () => {
                       {role.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-[10px] border border-cream-300 bg-cream-50 text-ink-500 rounded-full px-2.5 py-0.5"
+                          className="text-[10px] border border-sand-300 bg-sand-50 text-ink-500 rounded-full px-2.5 py-0.5"
                         >
                           {tag}
                         </span>
@@ -122,9 +131,9 @@ const CareerPage = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="max-w-3xl mx-auto mt-12 bg-clay-soft/50 border border-clay/30 rounded-2xl p-5 sm:p-6 text-center"
+        className="max-w-3xl mx-auto mt-12 bg-blue-soft/50 border border-blue/30 rounded-2xl p-5 sm:p-6 text-center"
       >
-        <p className="text-[10px] uppercase tracking-widest text-clay font-semibold mb-1">
+        <p className="text-[10px] uppercase tracking-widest text-blue-deep font-semibold mb-1">
           Education
         </p>
         <p className="text-ink-900 font-bold text-sm sm:text-base">

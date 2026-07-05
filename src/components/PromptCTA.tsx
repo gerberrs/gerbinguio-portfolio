@@ -43,7 +43,7 @@ const PromptCTA = () => {
             Want the full tour?
           </p>
           <h2 className="font-display text-3xl sm:text-5xl text-ink-900 leading-tight mb-4">
-            STEP INTO MY <span className="text-clay">WORKSPACE</span>
+            STEP INTO MY <span className="text-blue-deep">WORKSPACE</span>
           </h2>
           <p className="text-sm sm:text-base text-ink-700 max-w-xl mx-auto mb-10">
             Projects, career, and contact — organized in a workspace inspired by
@@ -60,21 +60,21 @@ const PromptCTA = () => {
           transition={{ duration: 0.6, delay: 0.15 }}
           whileHover={{ scale: 1.015 }}
           whileTap={{ scale: 0.99 }}
-          className="w-full bg-cream-50 border border-cream-300 rounded-3xl shadow-[0_12px_40px_rgba(38,34,27,0.1)] p-4 sm:p-5 text-left cursor-pointer hover:border-clay/60 hover:shadow-[0_16px_50px_rgba(201,100,66,0.15)] transition-all"
+          className="w-full bg-sand-50 border border-sand-300 rounded-3xl shadow-[0_12px_40px_rgba(34,48,60,0.1)] p-4 sm:p-5 text-left cursor-pointer hover:border-blue/60 hover:shadow-[0_16px_50px_rgba(111,168,198,0.15)] transition-all"
         >
           <div className="flex items-start gap-3 px-2 pt-2 pb-6 sm:pb-8">
-            <Sparkles className="w-5 h-5 text-clay flex-shrink-0 mt-0.5" />
+            <Sparkles className="w-5 h-5 text-blue-deep flex-shrink-0 mt-0.5" />
             <span className="text-base sm:text-lg text-ink-900 min-h-[1.5em]">
               {typed}
-              <span className="inline-block w-0.5 h-5 bg-clay ml-0.5 align-middle animate-pulse" />
+              <span className="inline-block w-0.5 h-5 bg-blue ml-0.5 align-middle animate-pulse" />
             </span>
           </div>
           <div className="flex items-center justify-between gap-3">
             <span className="text-xs text-ink-500 pl-2 hidden sm:block">
               Gerbinguio's Portfolio — Automation Specialist
             </span>
-            <span className="ml-auto w-10 h-10 rounded-xl bg-clay hover:bg-clay-dark transition-colors flex items-center justify-center shadow-md">
-              <ArrowUp className="w-5 h-5 text-cream-50" />
+            <span className="ml-auto w-10 h-10 rounded-xl bg-blue hover:bg-blue-dark transition-colors flex items-center justify-center shadow-md">
+              <ArrowUp className="w-5 h-5 text-sand-50" />
             </span>
           </div>
         </motion.button>
@@ -90,7 +90,7 @@ const PromptCTA = () => {
             <button
               key={chip.label}
               onClick={() => navigate(chip.to)}
-              className="flex items-center gap-2 px-4 py-2 rounded-full border border-cream-300 bg-cream-100 text-sm text-ink-700 hover:border-clay hover:text-clay hover:bg-clay-soft/50 transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-full border border-sand-300 bg-sand-100 text-sm text-ink-700 hover:border-blue hover:text-blue-deep hover:bg-blue-soft/50 transition-all"
             >
               <chip.icon className="w-4 h-4" />
               {chip.label}

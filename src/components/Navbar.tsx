@@ -12,13 +12,13 @@ const Navbar = () => {
   ];
 
   const linkClass =
-    "text-ink-700 hover:text-clay transition-colors text-sm font-medium";
+    "text-ink-700 hover:text-blue-deep transition-colors text-sm font-medium";
 
   return (
     <nav className="absolute top-0 left-0 w-full bg-transparent z-50">
       <div className="flex justify-between items-center px-4 sm:px-6 py-4">
         <Link to="/" className="font-display text-ink-900 text-sm sm:text-base tracking-wide">
-          GERB<span className="text-clay">.</span>
+          GERB<span className="text-blue-deep">.</span>
         </Link>
 
         {/* Desktop nav links */}
@@ -68,14 +68,14 @@ const Navbar = () => {
           isOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <ul className="flex flex-col items-center gap-4 py-4 bg-cream-50/95 backdrop-blur border-t border-cream-300">
+        <ul className="flex flex-col items-center gap-4 py-4 bg-sand-50/95 backdrop-blur border-t border-sand-300">
           {navItems.map((item) => (
             <li key={item.name}>
               {item.route ? (
                 <Link
                   to={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-ink-700 hover:text-clay transition-colors text-base font-medium"
+                  className="text-ink-700 hover:text-blue-deep transition-colors text-base font-medium"
                 >
                   {item.name}
                 </Link>
@@ -83,7 +83,7 @@ const Navbar = () => {
                 <a
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-ink-700 hover:text-clay transition-colors text-base font-medium"
+                  className="text-ink-700 hover:text-blue-deep transition-colors text-base font-medium"
                 >
                   {item.name}
                 </a>

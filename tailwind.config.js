@@ -9,22 +9,23 @@ export default {
 				display: ['"Archivo Black"', 'sans-serif'],
 			},
 			colors: {
-				cream: {
-					50: '#FAF7F0',
-					100: '#F3EEE3',
-					200: '#EAE2D1',
-					300: '#DDD2BC',
-					400: '#C9BC9F',
+				sand: {
+					50: '#F7F4EF',
+					100: '#EFE9E1',
+					200: '#E6DFD4',
+					300: '#D8CFC0',
+					400: '#C2B6A3',
 				},
 				ink: {
-					900: '#26221B',
-					700: '#4A4437',
-					500: '#77705E',
+					900: '#22303C',
+					700: '#3C4E5C',
+					500: '#5C7186',
 				},
-				clay: {
-					DEFAULT: '#C96442',
-					dark: '#A94F2F',
-					soft: '#F0DDD1',
+				blue: {
+					DEFAULT: '#6FA8C6',
+					dark: '#5590B2',
+					deep: '#3E7396',
+					soft: '#E1ECF4',
 				},
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',

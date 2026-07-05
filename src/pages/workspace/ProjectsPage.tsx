@@ -43,16 +43,16 @@ const CaseStudyModal = ({
       onClick={onClose}
     >
       <motion.div
-        className="relative w-full max-w-3xl bg-cream-50 border border-cream-300 rounded-3xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-3xl bg-sand-50 border border-sand-300 rounded-3xl overflow-hidden shadow-2xl"
         initial={{ scale: 0.9, opacity: 0, y: 40 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 40 }}
         transition={{ type: "spring", stiffness: 300, damping: 28 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-cream-300">
+        <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-sand-300">
           <div>
-            <p className="text-[10px] uppercase tracking-widest text-clay font-semibold mb-1">
+            <p className="text-[10px] uppercase tracking-widest text-blue-deep font-semibold mb-1">
               {project.type}
             </p>
             <h2 className="text-base sm:text-lg font-bold text-ink-900">
@@ -85,7 +85,7 @@ const CaseStudyModal = ({
               <div className="flex flex-col gap-4 px-6 pb-8 pt-2 min-h-[320px]">
                 {slide.images && slide.images.length === 1 && (
                   <div
-                    className="relative w-full h-64 rounded-xl overflow-hidden cursor-zoom-in group border border-cream-300"
+                    className="relative w-full h-64 rounded-xl overflow-hidden cursor-zoom-in group border border-sand-300"
                     onClick={() => setLightboxImage(slide.images![0])}
                   >
                     <img
@@ -94,7 +94,7 @@ const CaseStudyModal = ({
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-ink-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
-                      <span className="text-cream-50 text-sm font-semibold">
+                      <span className="text-sand-50 text-sm font-semibold">
                         Click to expand 🔍
                       </span>
                     </div>
@@ -105,7 +105,7 @@ const CaseStudyModal = ({
                     {slide.images.map((img, idx) => (
                       <div
                         key={idx}
-                        className="relative h-48 rounded-xl overflow-hidden cursor-zoom-in group border border-cream-300"
+                        className="relative h-48 rounded-xl overflow-hidden cursor-zoom-in group border border-sand-300"
                         onClick={() => setLightboxImage(img)}
                       >
                         <img
@@ -114,7 +114,7 @@ const CaseStudyModal = ({
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                         <div className="absolute inset-0 bg-ink-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
-                          <span className="text-cream-50 text-xs font-semibold">
+                          <span className="text-sand-50 text-xs font-semibold">
                             Expand 🔍
                           </span>
                         </div>
@@ -123,7 +123,7 @@ const CaseStudyModal = ({
                   </div>
                 )}
                 <div>
-                  <span className="text-[10px] uppercase tracking-widest text-clay font-semibold">
+                  <span className="text-[10px] uppercase tracking-widest text-blue-deep font-semibold">
                     {String(i + 1).padStart(2, "0")} /{" "}
                     {String(slides.length).padStart(2, "0")}
                   </span>
@@ -139,11 +139,11 @@ const CaseStudyModal = ({
           ))}
         </Swiper>
 
-        <div className="px-6 pb-5 flex flex-wrap items-center gap-2 border-t border-cream-300 pt-4">
+        <div className="px-6 pb-5 flex flex-wrap items-center gap-2 border-t border-sand-300 pt-4">
           {project.tech.map((t) => (
             <span
               key={t}
-              className="border border-cream-300 bg-cream-100 text-ink-700 rounded-full px-3 py-1 text-[10px]"
+              className="border border-sand-300 bg-sand-100 text-ink-700 rounded-full px-3 py-1 text-[10px]"
             >
               {t}
             </span>
@@ -153,7 +153,7 @@ const CaseStudyModal = ({
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-auto flex items-center gap-1.5 text-xs font-semibold text-clay hover:text-clay-dark transition"
+              className="ml-auto flex items-center gap-1.5 text-xs font-semibold text-blue-deep hover:text-blue-deep transition"
             >
               Visit live site <ExternalLink className="w-3.5 h-3.5" />
             </a>
@@ -202,7 +202,7 @@ const ProjectsPage = () => {
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
             />
             <button
-              className="absolute top-6 right-6 text-cream-50 text-3xl font-bold hover:text-cream-300"
+              className="absolute top-6 right-6 text-sand-50 text-3xl font-bold hover:text-sand-300"
               onClick={() => setLightboxImage(null)}
               aria-label="Close preview"
             >
@@ -229,7 +229,7 @@ const ProjectsPage = () => {
           The library
         </p>
         <h1 className="font-display text-[clamp(2.75rem,9vw,7rem)] leading-none text-ink-900">
-          PROJECTS<span className="text-clay">.</span>
+          PROJECTS<span className="text-blue-deep">.</span>
         </h1>
         <p className="text-sm sm:text-base text-ink-500 mt-4">
           {projects.length} systems built · hover to browse · click to open the
@@ -237,38 +237,63 @@ const ProjectsPage = () => {
         </p>
       </div>
 
-      {/* Foliom-style shelf */}
+      {/* Foliom-style vinyl shelf */}
       <div className="shelf-perspective overflow-x-auto overflow-y-hidden scrollbar-hide mt-4 sm:mt-2">
         <div
-          className="flex items-center w-max mx-auto pl-16 pr-32 pt-16 pb-14"
+          className="flex items-center w-max mx-auto pl-16 pr-36 pt-16 pb-14"
           style={{ transformStyle: "preserve-3d" }}
         >
           {projects.map((project, i) => (
             <button
               key={project.slug}
               onClick={() => openProject(project)}
-              className="shelf-card relative flex-shrink-0 w-44 sm:w-52 lg:w-60 h-64 sm:h-80 lg:h-[340px] rounded-xl overflow-hidden border border-cream-300 bg-cream-200 -ml-14 sm:-ml-16 first:ml-0 text-left focus:outline-none"
+              className="shelf-card relative flex-shrink-0 w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 -ml-16 sm:-ml-20 first:ml-0 text-left focus:outline-none"
               style={{
                 zIndex: projects.length - i,
                 animation: `fadeInUp 0.6s ease-out ${i * 0.08}s backwards`,
               }}
               aria-label={`Open ${project.title}`}
             >
-              <img
-                src={project.image}
-                alt={project.shelfTitle}
-                className="absolute inset-0 w-full h-full object-cover"
-                draggable={false}
-              />
-              <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-ink-900/95 via-ink-900/60 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-4">
-                <p className="text-[9px] uppercase tracking-widest text-cream-300 font-semibold mb-1 line-clamp-1">
-                  {project.type}
-                </p>
-                <p className="font-display text-cream-50 text-lg sm:text-xl leading-tight">
-                  {project.shelfTitle}
-                </p>
+              {/* Sleeve front */}
+              <div
+                className="absolute inset-0 overflow-hidden bg-sand-200"
+                style={{ backfaceVisibility: "hidden" }}
+              >
+                <img
+                  src={project.image}
+                  alt={project.shelfTitle}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  draggable={false}
+                />
+                <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-ink-900/95 via-ink-900/60 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-4">
+                  <p className="text-[9px] uppercase tracking-widest text-sand-300 font-semibold mb-1 line-clamp-1">
+                    {project.type}
+                  </p>
+                  <p className="font-display text-sand-50 text-lg sm:text-xl leading-tight">
+                    {project.shelfTitle}
+                  </p>
+                </div>
               </div>
+
+              {/* Sleeve edge (thickness) */}
+              <div
+                className="absolute top-0 h-full"
+                style={{
+                  left: "100%",
+                  width: "22px",
+                  transformOrigin: "left center",
+                  transform: "rotateY(90deg)",
+                  background:
+                    "linear-gradient(180deg, #2C3E4D 0%, #22303C 50%, #1A252E 100%)",
+                }}
+              />
+
+              {/* Sleeve back */}
+              <div
+                className="absolute inset-0"
+                style={{ transform: "translateZ(-22px)", background: "#22303C" }}
+              />
             </button>
           ))}
         </div>
@@ -280,7 +305,7 @@ const ProjectsPage = () => {
       {/* All projects list */}
       <div className="px-6 sm:px-10 pb-16 max-w-5xl mx-auto">
         <h2 className="font-display text-xl sm:text-2xl text-ink-900 mb-6">
-          ALL <span className="text-clay">PROJECTS</span>
+          ALL <span className="text-blue-deep">PROJECTS</span>
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {projects.map((project, i) => (
@@ -291,18 +316,18 @@ const ProjectsPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.45, delay: (i % 2) * 0.08 }}
-              className="flex gap-4 items-start p-4 rounded-2xl border border-cream-300 bg-cream-100 hover:border-clay hover:shadow-[0_8px_30px_rgba(201,100,66,0.15)] transition-all text-left group"
+              className="flex gap-4 items-start p-4 rounded-2xl border border-sand-300 bg-sand-100 hover:border-blue hover:shadow-[0_8px_30px_rgba(111,168,198,0.15)] transition-all text-left group"
             >
               <img
                 src={project.image}
                 alt=""
-                className="w-20 h-20 rounded-xl object-cover border border-cream-300 flex-shrink-0"
+                className="w-20 h-20 rounded-xl object-cover border border-sand-300 flex-shrink-0"
               />
               <div className="min-w-0">
-                <p className="text-[10px] uppercase tracking-widest text-clay font-semibold mb-0.5 line-clamp-1">
+                <p className="text-[10px] uppercase tracking-widest text-blue-deep font-semibold mb-0.5 line-clamp-1">
                   {project.type}
                 </p>
-                <h3 className="font-bold text-ink-900 text-sm sm:text-base leading-snug group-hover:text-clay transition-colors">
+                <h3 className="font-bold text-ink-900 text-sm sm:text-base leading-snug group-hover:text-blue-deep transition-colors">
                   {project.title}
                 </h3>
                 <p className="text-xs text-ink-500 mt-1 line-clamp-2">
@@ -312,13 +337,13 @@ const ProjectsPage = () => {
                   {project.tech.slice(0, 4).map((t) => (
                     <span
                       key={t}
-                      className="text-[9px] border border-cream-300 bg-cream-50 text-ink-500 rounded-full px-2 py-0.5"
+                      className="text-[9px] border border-sand-300 bg-sand-50 text-ink-500 rounded-full px-2 py-0.5"
                     >
                       {t}
                     </span>
                   ))}
                   {project.tech.length > 4 && (
-                    <span className="text-[9px] border border-cream-300 bg-cream-50 text-ink-500 rounded-full px-2 py-0.5">
+                    <span className="text-[9px] border border-sand-300 bg-sand-50 text-ink-500 rounded-full px-2 py-0.5">
                       +{project.tech.length - 4}
                     </span>
                   )}
@@ -332,7 +357,7 @@ const ProjectsPage = () => {
       <style>{`
         .case-study-swiper .swiper-button-next,
         .case-study-swiper .swiper-button-prev {
-          color: #C96442;
+          color: #6FA8C6;
         }
         .case-study-swiper .swiper-button-next::after,
         .case-study-swiper .swiper-button-prev::after {

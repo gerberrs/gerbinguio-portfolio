@@ -17,10 +17,10 @@ const Introduction = () => {
   return (
     <>
       {/* Fixed intro — always behind everything */}
-      <div className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-12 z-0 overflow-hidden bg-cream-100">
+      <div className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-12 z-0 overflow-hidden bg-sand-100">
         {/* Soft decorative blobs */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-clay-soft/60 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -right-24 w-[28rem] h-[28rem] rounded-full bg-cream-200 blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-soft/60 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -right-24 w-[28rem] h-[28rem] rounded-full bg-sand-200 blur-3xl pointer-events-none" />
 
         <div className="relative flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12 max-w-6xl w-full">
           {/* Picture Section - Left Side */}
@@ -40,7 +40,7 @@ const Introduction = () => {
                   : "/pixelated_gradpic.png"
               }
               alt="My Picture"
-              className="w-40 sm:w-72 md:w-96 lg:w-[450px] h-auto object-cover rounded-3xl transition-opacity duration-200 shadow-[10px_10px_0_0_#C96442] sm:shadow-[16px_16px_0_0_#C96442] border-4 border-ink-900"
+              className="w-40 sm:w-72 md:w-96 lg:w-[450px] h-auto object-cover rounded-3xl transition-opacity duration-200 shadow-[0_24px_60px_rgba(34,48,60,0.25)]"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             />
@@ -61,8 +61,8 @@ const Introduction = () => {
                 transform: `translateX(${progress * 150}px)`,
               }}
             >
-              GHL &<br />
-              <span className="text-clay">AUTOMATION</span>
+              CRM &<br />
+              <span className="text-blue-deep">AUTOMATION</span>
               <br />
               SPECIALIST
             </h1>
@@ -75,10 +75,10 @@ const Introduction = () => {
               }}
             >
               I design and build end-to-end CRM systems and automation workflows —
-              specializing in GoHighLevel, Zapier, and exploring tools like n8n and
-              Make. From lead capture and pipeline management to multi-step
-              workflows, email sequences, and AI-powered reporting — I turn manual
-              processes into fully automated systems.
+              specializing in GoHighLevel, Zoho, and Zapier, and exploring tools
+              like n8n and Make. From lead capture and pipeline management to
+              multi-step workflows, email campaigns, and AI-powered reporting — I
+              turn manual processes into fully automated systems.
             </p>
 
             {/* Buttons */}
@@ -91,13 +91,13 @@ const Introduction = () => {
             >
               <Link
                 to="/work/projects"
-                className="px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-ink-900 text-cream-50 hover:bg-clay rounded-xl font-semibold transition-all transform hover:scale-105 text-center shadow-lg"
+                className="px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-ink-900 text-sand-50 hover:bg-blue rounded-xl font-semibold transition-all transform hover:scale-105 text-center shadow-lg"
               >
                 View My Work
               </Link>
               <Link
                 to="/work/contact"
-                className="px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-cream-50 rounded-xl font-semibold transition-all transform hover:scale-105 text-center"
+                className="px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-sand-50 rounded-xl font-semibold transition-all transform hover:scale-105 text-center"
               >
                 Hire Me
               </Link>

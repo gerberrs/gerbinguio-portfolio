@@ -33,13 +33,13 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #F3EEE3;
-  color: #26221B;
+  background-color: #EFE9E1;
+  color: #22303C;
 }
 
 ::selection {
-  background: #C96442;
-  color: #FAF7F0;
+  background: #6FA8C6;
+  color: #F7F4EF;
 }
 
 @keyframes float {
@@ -105,12 +105,12 @@ body,
 }
 
 .workspace-scroll::-webkit-scrollbar-thumb {
-  background: #DDD2BC;
+  background: #D8CFC0;
   border-radius: 999px;
 }
 
 .workspace-scroll::-webkit-scrollbar-thumb:hover {
-  background: #C9BC9F;
+  background: #C2B6A3;
 }
 
 /* ========== Loading Screen ========== */
@@ -121,7 +121,7 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse at center, #FAF7F0 0%, #EAE2D1 75%);
+  background: radial-gradient(ellipse at center, #F7F4EF 0%, #E6DFD4 75%);
   overflow: hidden;
 }
 
@@ -159,24 +159,24 @@ body,
 .loading-progress-track {
   width: 100%;
   height: 3px;
-  background: rgba(38, 34, 27, 0.1);
+  background: rgba(34, 48, 60, 0.1);
   border-radius: 999px;
   overflow: hidden;
 }
 
 .loading-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #A94F2F, #C96442, #E08D66);
+  background: linear-gradient(90deg, #3E7396, #6FA8C6, #A8C8DC);
   border-radius: 999px;
   transition: width 0.1s linear;
-  box-shadow: 0 0 12px rgba(201, 100, 66, 0.5);
+  box-shadow: 0 0 12px rgba(111, 168, 198, 0.5);
 }
 
 .loading-counter {
   font-family: 'Outfit', sans-serif;
   font-size: 1.2rem;
   font-weight: 400;
-  color: rgba(38, 34, 27, 0.45);
+  color: rgba(34, 48, 60, 0.45);
   letter-spacing: 0.3em;
   font-variant-numeric: tabular-nums;
 }
@@ -193,7 +193,7 @@ body,
   position: absolute;
   width: 3px;
   height: 3px;
-  background: rgba(201, 100, 66, 0.45);
+  background: rgba(111, 168, 198, 0.45);
   border-radius: 50%;
   animation: particleFloat 4s ease-in-out infinite;
 }
@@ -221,12 +221,12 @@ body,
   transform: rotateY(-38deg);
   transform-style: preserve-3d;
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
-  box-shadow: 18px 24px 40px rgba(38, 34, 27, 0.22);
+  box-shadow: 18px 24px 40px rgba(34, 48, 60, 0.22);
 }
 
 .shelf-card:hover,
 .shelf-card:focus-visible {
   transform: rotateY(-22deg) translateY(-28px) scale(1.05);
-  box-shadow: 24px 40px 60px rgba(38, 34, 27, 0.3);
+  box-shadow: 24px 40px 60px rgba(34, 48, 60, 0.3);
   z-index: 40 !important;
 }
