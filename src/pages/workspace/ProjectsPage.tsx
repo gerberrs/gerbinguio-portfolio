@@ -226,14 +226,13 @@ const ProjectsPage = () => {
       {/* Header */}
       <div className="pt-12 sm:pt-16 px-6 text-center">
         <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-ink-500 font-semibold mb-3">
-          The library
+          Things I've built
         </p>
         <h1 className="font-display text-[clamp(2.75rem,9vw,7rem)] leading-none text-ink-900">
           PROJECTS<span className="text-blue-deep">.</span>
         </h1>
         <p className="text-sm sm:text-base text-ink-500 mt-4">
-          {projects.length} systems built · hover to browse · click to open the
-          breakdown
+          Hover a cover to pull it out. Click one to see how it works.
         </p>
       </div>
 
@@ -247,7 +246,7 @@ const ProjectsPage = () => {
             <button
               key={project.slug}
               onClick={() => openProject(project)}
-              className="shelf-card relative flex-shrink-0 w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 -ml-16 sm:-ml-20 first:ml-0 text-left focus:outline-none"
+              className="shelf-card relative flex-shrink-0 w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 -ml-24 sm:-ml-32 lg:-ml-40 first:ml-0 text-left focus:outline-none"
               style={{
                 zIndex: projects.length - i,
                 animation: `fadeInUp 0.6s ease-out ${i * 0.08}s backwards`,
@@ -281,7 +280,7 @@ const ProjectsPage = () => {
                 className="absolute top-0 h-full"
                 style={{
                   left: "100%",
-                  width: "22px",
+                  width: "8px",
                   transformOrigin: "left center",
                   transform: "rotateY(90deg)",
                   background:
@@ -292,7 +291,7 @@ const ProjectsPage = () => {
               {/* Sleeve back */}
               <div
                 className="absolute inset-0"
-                style={{ transform: "translateZ(-22px)", background: "#22303C" }}
+                style={{ transform: "translateZ(-8px)", background: "#22303C" }}
               />
             </button>
           ))}

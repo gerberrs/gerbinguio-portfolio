@@ -46,8 +46,8 @@ const PromptCTA = () => {
             STEP INTO MY <span className="text-blue-deep">WORKSPACE</span>
           </h2>
           <p className="text-sm sm:text-base text-ink-700 max-w-xl mx-auto mb-10">
-            Projects, career, and contact — organized in a workspace inspired by
-            the AI tools I use every day.
+            My projects, career, and contact info all live in here — laid out
+            like the AI tools I work with every day.
           </p>
         </motion.div>
 
@@ -71,7 +71,7 @@ const PromptCTA = () => {
           </div>
           <div className="flex items-center justify-between gap-3">
             <span className="text-xs text-ink-500 pl-2 hidden sm:block">
-              Gerbinguio's Portfolio — Automation Specialist
+              Gerbinguio's portfolio
             </span>
             <span className="ml-auto w-10 h-10 rounded-xl bg-blue hover:bg-blue-dark transition-colors flex items-center justify-center shadow-md">
               <ArrowUp className="w-5 h-5 text-sand-50" />

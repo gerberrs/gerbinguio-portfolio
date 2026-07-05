@@ -74,11 +74,10 @@ const Introduction = () => {
                 transform: `translateX(${progress * 200}px)`,
               }}
             >
-              I design and build end-to-end CRM systems and automation workflows —
-              specializing in GoHighLevel, Zoho, and Zapier, and exploring tools
-              like n8n and Make. From lead capture and pipeline management to
-              multi-step workflows, email campaigns, and AI-powered reporting — I
-              turn manual processes into fully automated systems.
+              I'm a CRM and Automation Specialist. I build systems in GoHighLevel
+              and Zoho, with Zapier tying everything together. Lead capture,
+              pipelines, email campaigns, AI reports — if a task keeps repeating
+              itself, I'd rather build something that does it automatically.
             </p>
 
             {/* Buttons */}

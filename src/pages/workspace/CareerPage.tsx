@@ -9,7 +9,7 @@ const roles = [
     period: "2026 — Present",
     image: null,
     description:
-      "Full Zoho CRM setup for a freelance client. Imported leads from spreadsheets into Zoho CRM, designed clean branded emails in Zoho Campaigns, and built automations using Zoho Flow together with CRM workflow rules. Connected the client's WordPress website to Zoho Flow through API calls and webhooks so form submissions create leads in the CRM automatically.",
+      "A real client project. I moved their leads out of spreadsheets and into Zoho CRM, built branded emails in Zoho Campaigns, and set up automations with Zoho Flow and workflow rules. I also connected their WordPress site to the CRM through webhooks and API calls, so every form submission turns into a lead on its own.",
     tags: ["Zoho CRM", "Zoho Campaigns", "Zoho Flow", "API & Webhooks", "WordPress"],
   },
   {
@@ -18,7 +18,7 @@ const roles = [
     period: "2025 — Present",
     image: null,
     description:
-      "Designing end-to-end CRM systems in GoHighLevel — pipelines, multi-step workflows, email sequences, service calendars — connected to Zapier, Jotform, Google Workspace, and AI tools like Gemini for automated reporting. Built three full sub-account systems (Brew Mania, Brewtomation, Brewsmarinas) covering booking, coaching, and rental business models.",
+      "This is where I found my lane. I built three complete GoHighLevel systems — Brew Mania, Brewtomation, and Brewsmarinas — covering bookings, a coaching program, and equipment rentals. Pipelines, workflows, email sequences, calendars, plus Zapier and Gemini AI for monthly reports that write themselves.",
     tags: ["GoHighLevel", "Zapier", "n8n", "AI Reporting"],
   },
   {
@@ -27,7 +27,7 @@ const roles = [
     period: "2025",
     image: "/barbizon.png",
     description:
-      "Built an internal SKU Request System used across two companies with a combined 20–25 templates. The system captures SKU item codes, looks them up against a database, and automatically populates the correct template based on the user's selection — streamlining what was previously a manual, error-prone process.",
+      "Built an internal SKU request system that two companies still use, covering around 20–25 templates. You type in an SKU code, it looks it up in the database, and fills out the right template for you. It used to be a slow, manual process where mistakes slipped in all the time.",
     tags: ["React", "Node.js", "SQL", "Tailwind"],
   },
   {
@@ -36,7 +36,7 @@ const roles = [
     period: "2025",
     image: "/ojt.jfif",
     description:
-      "Gained hands-on experience building real-world applications during my OJT. Converted Figma designs into responsive UIs using HTML, CSS, TypeScript, React, and Tailwind CSS. Collaborated with a team using GitHub and Jira in a professional development environment.",
+      "My first taste of real dev work. I turned Figma designs into responsive UIs with React, TypeScript, and Tailwind, and learned how a team actually ships software — pull requests, Jira tickets, code reviews, all of it.",
     tags: ["React", "TypeScript", "Figma", "Jira"],
   },
   {
@@ -45,7 +45,7 @@ const roles = [
     period: "2022 — 2024",
     image: "/mcdo.png",
     description:
-      "Worked at McDonald's for 2 years while studying full-time. Built strong time management, discipline, and multitasking skills under high-pressure environments. Developed customer service, teamwork, and communication abilities across busy daily shifts.",
+      "Two years on the service crew while studying full-time. Rush hour teaches you discipline, multitasking, and how to stay friendly when everything's on fire. Honestly, some of the best training I've ever had.",
     tags: ["Discipline", "Teamwork", "Customer Service"],
   },
 ];
@@ -62,8 +62,8 @@ const CareerPage = () => {
           CAREER<span className="text-blue-deep">.</span>
         </h1>
         <p className="text-sm sm:text-base text-ink-500 mt-4 max-w-xl mx-auto">
-          From the fry station to full automation systems — every step built the
-          discipline behind the workflows.
+          Started at McDonald's, ended up building CRM systems. Here's how that
+          happened.
         </p>
       </div>
 

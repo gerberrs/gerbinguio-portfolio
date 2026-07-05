@@ -109,7 +109,7 @@ const AboutMe = () => {
           ABOUT <span className="text-blue-deep">ME</span>
         </h1>
         <h2 className="text-sm sm:text-lg mt-3 text-center text-ink-500">
-          Get to know more about me, and my automation journey
+          A little about me and how I ended up in automation
         </h2>
       </motion.div>
 
@@ -163,30 +163,27 @@ const AboutMe = () => {
           {/* Bio */}
           <div className="mt-7 space-y-4 text-center sm:text-left">
             <p className="text-sm leading-relaxed text-ink-700">
-              I am an AI-driven worker who believes that the future of work is
-              built on intelligent systems and automation. I actively leverage AI
-              tools like Claude, ChatGPT, and Gemini in my day-to-day workflow —
-              not just as assistants, but as core parts of how I design, build,
-              and optimize automation systems.
+              I'm a CRM and Automation Specialist. Most of my day happens inside
+              GoHighLevel, Zoho, and Zapier — building systems that handle the
+              repetitive work so people don't have to. AI tools like Claude,
+              ChatGPT, and Gemini are part of my daily workflow too. Not just for
+              asking questions — they're baked into how I design and build.
             </p>
 
             <p className="text-sm leading-relaxed text-ink-700">
-              I am a 2025 graduate with a degree in Bachelor of Science in
-              Information Technology. Before my tech career, I spent 2 years as a
-              Service Crew at McDonald's while studying full-time — where I
-              developed strong discipline, time management, and the ability to
-              perform under pressure.
+              I graduated in 2025 with a BS in Information Technology. Before
+              tech, I spent two years on the service crew at McDonald's while
+              studying full-time. That job taught me more about discipline and
+              staying calm under pressure than any classroom ever did.
             </p>
 
             <p className="text-sm leading-relaxed text-ink-700">
-              I started my tech career as a Front-End Developer intern and later
-              worked as a Junior Software Engineer. Over time, I found my passion
-              in automation. I now specialize in CRM platforms like GoHighLevel
-              and Zoho, plus automation tools like Zapier and n8n — designing
-              end-to-end CRM systems, multi-step workflows, email campaigns,
-              pipeline management, and AI-powered reporting. I'm currently doing
-              freelance Zoho CRM work: lead imports, Zoho Campaigns emails, Zoho
-              Flow automations, and WordPress API &amp; webhook integrations.
+              I started out as a front-end developer intern, then worked as a
+              junior software engineer — and somewhere along the way I realized
+              automation was the part I actually loved. Right now I'm doing
+              freelance Zoho work for a client: importing their leads, building
+              email campaigns, and wiring their WordPress site straight into the
+              CRM so new leads create themselves.
             </p>
           </div>
         </motion.div>

@@ -161,11 +161,11 @@ const ContactPage = () => {
           className="block bg-sand-50 border border-sand-300 rounded-3xl shadow-[0_12px_40px_rgba(34,48,60,0.08)] p-4 sm:p-5 hover:border-blue/60 hover:shadow-[0_16px_50px_rgba(111,168,198,0.15)] transition-all group"
         >
           <div className="px-2 pt-2 pb-8 text-ink-500 text-base">
-            Message Gerbinguio about a project…
+            Got a project in mind? Tell me about it…
           </div>
           <div className="flex items-center justify-between gap-3">
             <span className="text-xs text-ink-500 pl-2 hidden sm:block">
-              Opens Gmail — replies fast ⚡
+              This opens Gmail. I usually reply within the day.
             </span>
             <span className="ml-auto w-10 h-10 rounded-xl bg-blue group-hover:bg-blue-dark transition-colors flex items-center justify-center shadow-md">
               <ArrowUp className="w-5 h-5 text-sand-50" />

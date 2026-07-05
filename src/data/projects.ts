@@ -23,7 +23,7 @@ export const projects: Project[] = [
     shelfTitle: "Zoho CRM",
     type: "CRM Setup, Email Campaigns, Automation & Integration",
     description:
-      "End-to-end Zoho CRM setup for a freelance client: imported leads from spreadsheets into Zoho CRM, designed branded emails in Zoho Campaigns, built automations with Zoho Flow and CRM workflow rules, and connected the client's WordPress website to Zoho Flow via API and webhooks so new leads are created automatically.",
+      "A real freelance project for a client running on WordPress. I moved their leads from spreadsheets into Zoho CRM, designed branded emails in Zoho Campaigns, built automations with Zoho Flow and workflow rules, and hooked their website forms straight into the CRM with webhooks — so new leads create themselves.",
     image: "/zoho-crm-cover.svg",
     tech: ["Zoho CRM", "Zoho Campaigns", "Zoho Flow", "Workflow Rules", "WordPress", "API & Webhooks"],
     link: "#",
@@ -66,7 +66,7 @@ export const projects: Project[] = [
     shelfTitle: "Brew Mania",
     type: "CRM, Funnel, Website, Pipeline, & Automation",
     description:
-      "Full CRM and booking automation system for a mock pop-up coffee bar. Includes lead capture, pipeline management, approval workflows, cancellation handling, Jotform feedback collection via Zapier, and AI-powered monthly reporting using Gemini AI and Google Docs.",
+      "A complete CRM and booking system for a mock pop-up coffee bar. Lead capture, pipelines, approval and cancellation workflows, feedback collection through Jotform and Zapier, and a monthly report that writes itself using Gemini AI and Google Docs.",
     image: "/brewmania.png",
     tech: ["GoHighLevel", "Zapier", "Jotform", "Gemini AI", "Google Sheets", "Google Docs"],
     link: "#",
@@ -138,7 +138,7 @@ export const projects: Project[] = [
     shelfTitle: "Brew Academy",
     type: "CRM, Funnel, Pipeline, Custom Email Templates, & Automation",
     description:
-      "Batch-based online barista coaching CRM with custom-coded HTML email templates for welcome, session schedule, and certificate emails. Features enrollment automation, payment verification, session tracking, no-show detection, graduation workflow, and alumni management. Includes custom JavaScript on funnel buttons.",
+      "A batch-based barista coaching CRM with hand-coded HTML emails for welcome, schedules, and certificates. It handles enrollment, payment checks, session tracking, no-shows, graduation, and alumni follow-ups — the whole student journey, automated.",
     image: "/brewacademy.png",
     tech: ["GoHighLevel", "Zapier", "HTML Email Templates", "JavaScript", "Pipeline Management"],
     link: "#",
@@ -192,7 +192,7 @@ export const projects: Project[] = [
     shelfTitle: "Brewsmarinas",
     type: "CRM, Funnel, Pipeline & Automation",
     description:
-      "Well-structured equipment rental CRM system for coffee gear sets. Handles rental requests, booking confirmation via service calendar, equipment out tracking, return management, damage assessment, re-engagement automation, and internal staff notifications throughout the rental lifecycle.",
+      "A rental CRM for coffee equipment. It covers the whole cycle — request, booking confirmation, equipment out, returns, damage checks — and even sends win-back emails to bring past customers back. Staff get notified at every step.",
     image: "/brewsmarinas.png",
     tech: ["GoHighLevel", "Service Calendar", "Pipeline Management", "Email Automation"],
     link: "#",
@@ -246,7 +246,7 @@ export const projects: Project[] = [
     shelfTitle: "Enrollment Bot",
     type: "Zapier Automation",
     description:
-      "Built an end-to-end enrollment automation that captures leads via Jotform, adds and enrolls them in ClickFunnels, tags them in ActiveCampaign, and triggers a personalized email via Gmail upon enrollment.",
+      "One form submission kicks off the whole chain: Jotform captures the lead, ClickFunnels enrolls them, ActiveCampaign tags them, and Gmail sends a personalized welcome. Nobody has to touch anything.",
     image: "/zapier-auto-enrollment-project.png",
     tech: ["Zapier", "Jotform", "ClickFunnels", "ActiveCampaign", "Gmail"],
     link: "#",
@@ -257,7 +257,7 @@ export const projects: Project[] = [
     shelfTitle: "AI Summarizer",
     type: "Zapier + AI Automation",
     description:
-      "Automated summarization of daily OJT Excel reports using Gemini AI. Every time a new row is added to Google Sheets, Gemini AI automatically summarizes the data and outputs a formatted report inside Google Docs.",
+      "Every time a new row lands in Google Sheets, Gemini AI summarizes it and drops a formatted report into Google Docs. I built it with Zapier to make my daily OJT reporting hands-free.",
     image: "/ojt-summarizer.png",
     tech: ["Zapier", "Gemini AI", "Google Sheets", "Google Docs"],
     link: "#",
@@ -268,7 +268,7 @@ export const projects: Project[] = [
     shelfTitle: "Booking System",
     type: "Full-Stack Web Application",
     description:
-      "A full-stack booking system built as a capstone project featuring a dynamic calendar for scheduling appointments. Users can view availability, select time slots, and manage bookings — backed by a PHP and SQL server with a clean Bootstrap frontend.",
+      "My capstone project — a full booking system with a dynamic calendar. Users check availability, pick a time slot, and manage their bookings, all running on PHP and SQL with a Bootstrap frontend.",
     image: "/snvhoa.jpg",
     tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL", "Bootstrap"],
     link: "#",
@@ -279,7 +279,7 @@ export const projects: Project[] = [
     shelfTitle: "SKU System",
     type: "AI-Assisted Web Application",
     description:
-      "A SKU request management system built using AI-assisted development. Frontend built with React, ShadCN, and Tailwind. Backend powered by Node.js with an SQL database.",
+      "An SKU request system I built with AI-assisted development. React, ShadCN, and Tailwind on the front, Node.js and SQL behind it. This one's live — go click around.",
     image: "/skuRequestSystem.jfif",
     tech: ["HTML", "CSS", "React", "Tailwind", "ShadCN", "Node.js"],
     link: "https://skusystem-wj8c.vercel.app/",
