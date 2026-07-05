@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type React from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -180,6 +181,42 @@ const ProjectsPage = () => {
     setLightboxImage(null);
   };
 
+  // Drag-to-scroll for the shelf (mouse; touch scrolls natively)
+  const shelfRef = useRef<HTMLDivElement>(null);
+  const drag = useRef({ down: false, startX: 0, scrollLeft: 0, moved: false });
+
+  const onShelfPointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType !== "mouse") return;
+    const el = shelfRef.current;
+    if (!el) return;
+    drag.current = {
+      down: true,
+      startX: e.clientX,
+      scrollLeft: el.scrollLeft,
+      moved: false,
+    };
+  };
+
+  const onShelfPointerMove = (e: React.PointerEvent) => {
+    const el = shelfRef.current;
+    if (!el || !drag.current.down) return;
+    const dx = e.clientX - drag.current.startX;
+    if (Math.abs(dx) > 5) drag.current.moved = true;
+    el.scrollLeft = drag.current.scrollLeft - dx;
+  };
+
+  const onShelfPointerEnd = () => {
+    drag.current.down = false;
+  };
+
+  const onShelfClickCapture = (e: React.MouseEvent) => {
+    if (drag.current.moved) {
+      e.preventDefault();
+      e.stopPropagation();
+      drag.current.moved = false;
+    }
+  };
+
   return (
     <div className="min-h-full">
       {/* Lightbox */}
@@ -237,16 +274,24 @@ const ProjectsPage = () => {
       </div>
 
       {/* Foliom-style vinyl shelf */}
-      <div className="shelf-perspective overflow-x-auto overflow-y-hidden scrollbar-hide mt-4 sm:mt-2">
+      <div
+        ref={shelfRef}
+        className="shelf-perspective overflow-x-auto overflow-y-hidden scrollbar-hide mt-4 sm:mt-2 select-none cursor-grab active:cursor-grabbing"
+        onPointerDown={onShelfPointerDown}
+        onPointerMove={onShelfPointerMove}
+        onPointerUp={onShelfPointerEnd}
+        onPointerLeave={onShelfPointerEnd}
+        onClickCapture={onShelfClickCapture}
+      >
         <div
-          className="flex items-center w-max mx-auto pl-16 pr-36 pt-16 pb-14"
+          className="flex items-center w-max mx-auto pl-6 pr-10 sm:pl-10 sm:pr-14 pt-16 pb-14"
           style={{ transformStyle: "preserve-3d" }}
         >
           {projects.map((project, i) => (
             <button
               key={project.slug}
               onClick={() => openProject(project)}
-              className="shelf-card relative flex-shrink-0 w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 -ml-24 sm:-ml-32 lg:-ml-40 first:ml-0 text-left focus:outline-none"
+              className="shelf-card relative flex-shrink-0 aspect-square w-[clamp(150px,17vw,300px)] -ml-[clamp(90px,10vw,176px)] first:ml-0 text-left focus:outline-none"
               style={{
                 zIndex: projects.length - i,
                 animation: `fadeInUp 0.6s ease-out ${i * 0.08}s backwards`,
