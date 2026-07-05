@@ -1,72 +1,22 @@
-import { useEffect, useState } from "react";
-import AboutMe from "./pages/AboutMe";
-import Introduction from "./pages/Introduction";
-import MyContact from "./pages/MyContact";
-
-import Navbar from "./components/Navbar";
-import HorizontalScrollSection from "./components/HorizontalScrollSection";
-import Experience from "./pages/Career";
-import LoadingScreen from "./components/LoadingScreen";
-import Lenis from "lenis";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { Navigate, Route, Routes } from "react-router-dom";
+import Landing from "./pages/Landing";
+import WorkspaceLayout from "./layouts/WorkspaceLayout";
+import ProjectsPage from "./pages/workspace/ProjectsPage";
+import CareerPage from "./pages/workspace/CareerPage";
+import ContactPage from "./pages/workspace/ContactPage";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (isLoading) return; // Don't init scroll until loading is done
-
-    const lenis = new Lenis({
-      lerp: 0.1,
-      duration: 1.2,
-      smoothWheel: true,
-    });
-
-    // Connect Lenis scroll events to GSAP ScrollTrigger
-    lenis.on("scroll", ScrollTrigger.update);
-
-    // Drive Lenis RAF through GSAP's ticker for perfect sync
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
-
-    return () => {
-      lenis.destroy();
-      gsap.ticker.remove(lenis.raf);
-    };
-  }, [isLoading]);
-
   return (
-    <>
-      {isLoading && (
-        <LoadingScreen onComplete={() => setIsLoading(false)} />
-      )}
-      <div
-        className="bg-gradient-to-br from-black via-gray-900 to-black text-white w-full min-h-screen"
-        style={{ overflowX: 'clip', visibility: isLoading ? 'hidden' : 'visible' }}
-      >
-        <Navbar />
-        <Introduction />
-        <div className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-black -z-10" />
-        <div className="relative z-10">
-          <div id="about">
-            <AboutMe />
-          </div>
-
-          <HorizontalScrollSection />
-          <div id="career">
-            <Experience />
-          </div>
-          <div id="contact">
-            <MyContact />
-          </div>
-        </div>
-      </div>
-    </>
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/work" element={<WorkspaceLayout />}>
+        <Route index element={<Navigate to="projects" replace />} />
+        <Route path="projects" element={<ProjectsPage />} />
+        <Route path="career" element={<CareerPage />} />
+        <Route path="contact" element={<ContactPage />} />
+      </Route>
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 

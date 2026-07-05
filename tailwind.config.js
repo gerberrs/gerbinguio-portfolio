@@ -6,13 +6,26 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Outfit', 'sans-serif'],
-			},
-			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				display: ['"Archivo Black"', 'sans-serif'],
 			},
 			colors: {
+				cream: {
+					50: '#FAF7F0',
+					100: '#F3EEE3',
+					200: '#EAE2D1',
+					300: '#DDD2BC',
+					400: '#C9BC9F',
+				},
+				ink: {
+					900: '#26221B',
+					700: '#4A4437',
+					500: '#77705E',
+				},
+				clay: {
+					DEFAULT: '#C96442',
+					dark: '#A94F2F',
+					soft: '#F0DDD1',
+				},
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {
@@ -46,14 +59,12 @@ export default {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
-				chart: {
-					'1': 'hsl(var(--chart-1))',
-					'2': 'hsl(var(--chart-2))',
-					'3': 'hsl(var(--chart-3))',
-					'4': 'hsl(var(--chart-4))',
-					'5': 'hsl(var(--chart-5))'
-				}
-			}
+			},
+			borderRadius: {
+				lg: 'var(--radius)',
+				md: 'calc(var(--radius) - 2px)',
+				sm: 'calc(var(--radius) - 4px)'
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
