@@ -1,34 +1,39 @@
-"use client";
-
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Career", href: "#career" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "#about", route: false },
+    { name: "Projects", href: "/work/projects", route: true },
+    { name: "Career", href: "/work/career", route: true },
+    { name: "Contact", href: "/work/contact", route: true },
   ];
+
+  const linkClass =
+    "text-ink-700 hover:text-blue-deep transition-colors text-sm font-medium";
 
   return (
     <nav className="absolute top-0 left-0 w-full bg-transparent z-50">
-      <div className="flex justify-between items-center px-4 sm:px-6 py-3">
-        <h1 className="text-white font-semibold text-sm sm:text-base">
-          Hi, I'm Gerbinguio!
-        </h1>
+      <div className="flex justify-between items-center px-4 sm:px-6 py-4">
+        <Link to="/" className="font-display text-ink-900 text-sm sm:text-base tracking-wide">
+          GERB<span className="text-blue-deep">.</span>
+        </Link>
 
         {/* Desktop nav links */}
-        <ul className="hidden md:flex space-x-6 list-none m-0 p-0">
+        <ul className="hidden md:flex space-x-8 list-none m-0 p-0">
           {navItems.map((item) => (
             <li key={item.name}>
-              <a
-                href={item.href}
-                className="text-white hover:text-gray-300 transition-colors text-sm"
-              >
-                {item.name}
-              </a>
+              {item.route ? (
+                <Link to={item.href} className={linkClass}>
+                  {item.name}
+                </Link>
+              ) : (
+                <a href={item.href} className={linkClass}>
+                  {item.name}
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -40,17 +45,17 @@ const Navbar = () => {
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
+            className={`block w-5 h-0.5 bg-ink-900 transition-all duration-300 ${
               isOpen ? "rotate-45 translate-y-2" : ""
             }`}
           />
           <span
-            className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
+            className={`block w-5 h-0.5 bg-ink-900 transition-all duration-300 ${
               isOpen ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
+            className={`block w-5 h-0.5 bg-ink-900 transition-all duration-300 ${
               isOpen ? "-rotate-45 -translate-y-2" : ""
             }`}
           />
@@ -63,16 +68,26 @@ const Navbar = () => {
           isOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <ul className="flex flex-col items-center gap-4 py-4 bg-black/90 border-t border-gray-800">
+        <ul className="flex flex-col items-center gap-4 py-4 bg-sand-50/95 backdrop-blur border-t border-sand-300">
           {navItems.map((item) => (
             <li key={item.name}>
-              <a
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className="text-white hover:text-gray-300 transition-colors text-base"
-              >
-                {item.name}
-              </a>
+              {item.route ? (
+                <Link
+                  to={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-ink-700 hover:text-blue-deep transition-colors text-base font-medium"
+                >
+                  {item.name}
+                </Link>
+              ) : (
+                <a
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-ink-700 hover:text-blue-deep transition-colors text-base font-medium"
+                >
+                  {item.name}
+                </a>
+              )}
             </li>
           ))}
         </ul>

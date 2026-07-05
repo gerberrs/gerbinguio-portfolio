@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#6FA8C6"/>
+  <g fill="none" stroke="#F7F4EF" stroke-opacity="0.22">
+    <circle cx="200" cy="200" r="170" stroke-width="1.5"/>
+    <circle cx="200" cy="200" r="150" stroke-width="1"/>
+    <circle cx="200" cy="200" r="130" stroke-width="1.5"/>
+    <circle cx="200" cy="200" r="110" stroke-width="1"/>
+    <circle cx="200" cy="200" r="90" stroke-width="1.5"/>
+  </g>
+  <circle cx="200" cy="200" r="72" fill="#EFE9E1"/>
+  <circle cx="200" cy="200" r="6" fill="#22303C"/>
+  <text x="200" y="176" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="28" fill="#22303C">ZOHO</text>
+  <text x="200" y="248" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="16" fill="#3E7396">CRM SETUP</text>
+  <text x="200" y="52" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" letter-spacing="6" fill="#F7F4EF">FREELANCE CLIENT</text>
+  <text x="200" y="366" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" letter-spacing="6" fill="#F7F4EF">CRM · EMAIL · AUTOMATION</text>
+</svg>

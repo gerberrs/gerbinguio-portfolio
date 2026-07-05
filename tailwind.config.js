@@ -6,13 +6,27 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Outfit', 'sans-serif'],
-			},
-			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				display: ['"Archivo Black"', 'sans-serif'],
 			},
 			colors: {
+				sand: {
+					50: '#F7F4EF',
+					100: '#EFE9E1',
+					200: '#E6DFD4',
+					300: '#D8CFC0',
+					400: '#C2B6A3',
+				},
+				ink: {
+					900: '#22303C',
+					700: '#3C4E5C',
+					500: '#5C7186',
+				},
+				blue: {
+					DEFAULT: '#6FA8C6',
+					dark: '#5590B2',
+					deep: '#3E7396',
+					soft: '#E1ECF4',
+				},
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {
@@ -46,14 +60,12 @@ export default {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
-				chart: {
-					'1': 'hsl(var(--chart-1))',
-					'2': 'hsl(var(--chart-2))',
-					'3': 'hsl(var(--chart-3))',
-					'4': 'hsl(var(--chart-4))',
-					'5': 'hsl(var(--chart-5))'
-				}
-			}
+			},
+			borderRadius: {
+				lg: 'var(--radius)',
+				md: 'calc(var(--radius) - 2px)',
+				sm: 'calc(var(--radius) - 4px)'
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

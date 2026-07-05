@@ -49,8 +49,8 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             y: 0,
             scale: 1,
             filter: "blur(0px)",
-            color: "#ffffff",
-            textShadow: "0 0 20px rgba(139, 92, 246, 0.8), 0 0 40px rgba(139, 92, 246, 0.4), 0 0 80px rgba(139, 92, 246, 0.2)",
+            color: "#22303C",
+            textShadow: "0 0 20px rgba(111, 168, 198, 0.6), 0 0 40px rgba(111, 168, 198, 0.3), 0 0 80px rgba(111, 168, 198, 0.15)",
             duration: 0.5,
             ease: "back.out(1.7)",
           },
@@ -61,7 +61,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
         tl.to(
           letter,
           {
-            textShadow: "0 0 10px rgba(139, 92, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.2)",
+            textShadow: "0 0 10px rgba(111, 168, 198, 0.4), 0 0 20px rgba(111, 168, 198, 0.15)",
             duration: 0.3,
             ease: "power2.out",
           },
@@ -107,7 +107,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
                 opacity: 0,
                 transform: "translateY(30px) scale(0.8)",
                 filter: "blur(8px)",
-                color: "rgba(255,255,255,0.1)",
+                color: "rgba(34,48,60,0.1)",
               }}
             >
               {letter}
