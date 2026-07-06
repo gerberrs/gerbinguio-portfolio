@@ -35,9 +35,19 @@ const ContactForm = () => {
     setErrorMsg("");
 
     try {
-      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, {
-        publicKey: PUBLIC_KEY,
-      });
+      const formData = new FormData(formRef.current);
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          name: formData.get("name"),
+          email: formData.get("email"),
+          message: formData.get("message"),
+        },
+        {
+          publicKey: PUBLIC_KEY,
+        }
+      );
       setStatus("sent");
       formRef.current.reset();
     } catch (err) {
@@ -101,7 +111,7 @@ const ContactForm = () => {
           <input
             id="user_name"
             type="text"
-            name="user_name"
+            name="name"
             required
             placeholder="Your name"
             className={inputClass}
@@ -114,7 +124,7 @@ const ContactForm = () => {
           <input
             id="user_email"
             type="email"
-            name="user_email"
+            name="email"
             required
             placeholder="you@email.com"
             className={inputClass}
