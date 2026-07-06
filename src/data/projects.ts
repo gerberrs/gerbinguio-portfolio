@@ -19,11 +19,11 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "zoho-crm-setup",
-    title: "Zoho CRM Setup — Freelance Client",
+    title: "Zoho CRM & Automation Setup",
     shelfTitle: "Zoho CRM",
     type: "CRM Setup, Email Campaigns, Automation & Integration",
     description:
-      "A real freelance project for a client running on WordPress. I moved their leads from spreadsheets into Zoho CRM, designed branded emails in Zoho Campaigns, built automations with Zoho Flow and workflow rules, and hooked their website forms straight into the CRM with webhooks — so new leads create themselves.",
+      "A full Zoho CRM and automation setup for a WordPress-based business. I moved their leads from spreadsheets into Zoho CRM, designed branded emails in Zoho Campaigns, built automations with Zoho Flow and workflow rules, and hooked the website forms straight into the CRM with webhooks — so new leads create themselves.",
     image: "/zoho-crm-cover.svg",
     tech: ["Zoho CRM", "Zoho Campaigns", "Zoho Flow", "Workflow Rules", "WordPress", "API & Webhooks"],
     link: "#",
@@ -31,7 +31,7 @@ export const projects: Project[] = [
       {
         title: "Overview",
         content:
-          "A real freelance engagement setting up a complete Zoho CRM system for a client. The scope covered the full lead lifecycle — getting existing leads into the CRM, nurturing them with branded email campaigns, automating follow-ups and internal processes, and wiring the client's WordPress website directly into the CRM so new inquiries become leads automatically.",
+          "A complete Zoho CRM and automation setup covering the full lead lifecycle — getting existing leads into the CRM, nurturing them with branded email campaigns, automating follow-ups and internal processes, and wiring a WordPress website directly into the CRM so new inquiries become leads automatically.",
       },
       {
         title: "Lead Import — Sheets to Zoho CRM",

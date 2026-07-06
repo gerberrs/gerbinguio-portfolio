@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 
 const roles = [
   {
-    title: "CRM Specialist — Zoho (Freelance)",
-    company: "Freelance Client · WordPress + Zoho stack",
+    title: "CRM & Automation Specialist — Zoho",
+    company: "Client Project · WordPress + Zoho stack",
     period: "2026 — Present",
     image: null,
     description:

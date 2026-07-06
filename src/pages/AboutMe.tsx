@@ -180,10 +180,10 @@ const AboutMe = () => {
             <p className="text-sm leading-relaxed text-ink-700">
               I started out as a front-end developer intern, then worked as a
               junior software engineer — and somewhere along the way I realized
-              automation was the part I actually loved. Right now I'm doing
-              freelance Zoho work for a client: importing their leads, building
-              email campaigns, and wiring their WordPress site straight into the
-              CRM so new leads create themselves.
+              automation was the part I actually loved. Right now I'm setting up a
+              full Zoho CRM system: importing leads, building email campaigns, and
+              wiring a WordPress site straight into the CRM so new leads create
+              themselves.
             </p>
           </div>
         </motion.div>

@@ -30,13 +30,11 @@ const Introduction = () => {
               transform: `translateX(${-progress * 150}px) scale(${1 - progress * 0.2})`,
             }}
           >
-            <div className="w-40 sm:w-72 md:w-96 lg:w-[450px] aspect-[3/4] overflow-hidden rounded-3xl shadow-[0_24px_60px_rgba(34,48,60,0.25)]">
-  <img
-    src="/gerbinpicture.jpg"
-    alt="My Picture"
-    className="w-full h-full object-cover object-top scale-[1.2] transition-opacity duration-200"
-  />
-</div>
+            <img
+              src="/gerbinpicture.jpg"
+              alt="Gerbinguio"
+              className="w-40 sm:w-72 md:w-96 lg:w-[450px] h-auto object-cover rounded-3xl shadow-[0_24px_60px_rgba(34,48,60,0.25)]"
+            />
           </div>
 
           {/* Text Section - Right Side */}
