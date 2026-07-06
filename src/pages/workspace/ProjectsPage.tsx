@@ -273,7 +273,7 @@ const ProjectsPage = () => {
       {/* Foliom-style vinyl shelf */}
       <div
         ref={shelfRef}
-        className="shelf-perspective overflow-x-auto overflow-y-hidden scrollbar-hide mt-4 sm:mt-2 select-none cursor-grab active:cursor-grabbing"
+        className="shelf-perspective overflow-x-auto overflow-y-visible scrollbar-hide mt-4 sm:mt-2 select-none cursor-grab active:cursor-grabbing min-h-[60vh]"
         onPointerDown={onShelfPointerDown}
         onPointerMove={onShelfPointerMove}
         onPointerUp={onShelfPointerEnd}
@@ -281,7 +281,7 @@ const ProjectsPage = () => {
         onClickCapture={onShelfClickCapture}
       >
         <div
-          className="flex items-center w-max mx-auto pl-6 pr-10 sm:pl-10 sm:pr-14 pt-16 pb-14"
+          className="flex items-end w-max mx-auto pl-6 pr-10 sm:pl-10 sm:pr-14 pt-28 pb-20"
           style={{ transformStyle: "preserve-3d" }}
         >
           {projects.map((project, i) => (

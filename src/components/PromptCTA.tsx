@@ -6,7 +6,12 @@ import { motion } from "framer-motion";
 import { ArrowUp, Briefcase, FolderKanban, Mail, Sparkles } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 
-const PLACEHOLDER = "Show me everything you've built…";
+const PHRASES = [
+  "Show me your recent projects...",
+  "Let's discuss how we can work together...",
+  "Walk me through your experience...",
+  "I'd like to automate my workflow...",
+];
 
 const chips = [
   { label: "View my projects", icon: FolderKanban, to: "/work/projects" },
@@ -17,19 +22,36 @@ const chips = [
 const PromptCTA = () => {
   const navigate = useNavigate();
   const [typed, setTyped] = useState("");
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [ref, inView] = useInView({ threshold: 0.4, triggerOnce: true });
 
   // Typewriter effect for the fake prompt
   useEffect(() => {
     if (!inView) return;
-    let i = 0;
-    const interval = setInterval(() => {
-      i += 1;
-      setTyped(PLACEHOLDER.slice(0, i));
-      if (i >= PLACEHOLDER.length) clearInterval(interval);
-    }, 40);
-    return () => clearInterval(interval);
-  }, [inView]);
+
+    const currentPhrase = PHRASES[phraseIndex];
+    let timeout: NodeJS.Timeout;
+
+    if (isDeleting) {
+      timeout = setTimeout(() => {
+        setTyped(currentPhrase.substring(0, typed.length - 1));
+        if (typed.length === 0) {
+          setIsDeleting(false);
+          setPhraseIndex((prev) => (prev + 1) % PHRASES.length);
+        }
+      }, 30); // delete speed
+    } else {
+      timeout = setTimeout(() => {
+        setTyped(currentPhrase.substring(0, typed.length + 1));
+        if (typed.length === currentPhrase.length) {
+          timeout = setTimeout(() => setIsDeleting(true), 2000); // pause before deleting
+        }
+      }, 60); // type speed
+    }
+
+    return () => clearTimeout(timeout);
+  }, [typed, isDeleting, phraseIndex, inView]);
 
   return (
     <section ref={ref} className="px-6 pt-16 pb-24 sm:pt-24 sm:pb-32">

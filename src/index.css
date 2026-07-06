@@ -227,7 +227,7 @@ body,
 
 .shelf-card:hover,
 .shelf-card:focus-visible {
-  transform: translateY(-72px) rotateY(-10deg) scale(1.08);
+  transform: translateY(-72px) rotateY(-45deg) scale(1.08);
   box-shadow: 0 46px 70px rgba(34, 48, 60, 0.38);
   z-index: 40 !important;
 }

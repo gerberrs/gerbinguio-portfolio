@@ -4,6 +4,8 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
+import { Settings, Code, Sparkles } from "lucide-react";
+
 const fadeInUp = {
   hidden: {
     opacity: 0,
@@ -73,10 +75,10 @@ const skillCategories = [
   },
 ];
 
-const stats = [
-  { value: "4", label: "CRM systems" },
-  { value: "20+", label: "workflows" },
-  { value: "10+", label: "tools" },
+const specialties = [
+  { icon: Settings, label: "Automation" },
+  { icon: Code, label: "Development" },
+  { icon: Sparkles, label: "AI" },
 ];
 
 const AboutMe = () => {
@@ -142,18 +144,18 @@ const AboutMe = () => {
               <p className="text-sm text-ink-500">
                 San Pedro City, Laguna, Philippines
               </p>
-              {/* Stats inline */}
+              {/* Specialties inline */}
               <div className="flex gap-4 pt-3 justify-center sm:justify-start">
-                {stats.map((stat) => (
-                  <div key={stat.label} className="flex flex-col items-center">
+                {specialties.map((spec) => (
+                  <div key={spec.label} className="flex flex-col items-center">
                     <motion.div
-                      className="w-11 h-11 flex items-center justify-center rounded-full bg-ink-900 text-sand-50 font-bold text-sm shadow-md cursor-pointer"
+                      className="w-11 h-11 flex items-center justify-center rounded-full bg-ink-900 text-sand-50 shadow-md cursor-pointer"
                       whileHover={{ scale: 1.2, backgroundColor: "#6FA8C6" }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
-                      {stat.value}
+                      <spec.icon className="w-5 h-5" />
                     </motion.div>
-                    <p className="mt-1 text-[10px] text-ink-500">{stat.label}</p>
+                    <p className="mt-1 text-[10px] text-ink-500">{spec.label}</p>
                   </div>
                 ))}
               </div>
