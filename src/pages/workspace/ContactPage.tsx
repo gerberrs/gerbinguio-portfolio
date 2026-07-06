@@ -1,14 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  ArrowUp,
-  Download,
-  Facebook,
-  Mail,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import { Download, Facebook, Mail, MapPin, Phone } from "lucide-react";
+import ContactForm from "../../components/ContactForm";
 
 const contactInfo = [
   {
@@ -146,7 +140,7 @@ const ContactPage = () => {
         </motion.div>
       </div>
 
-      {/* Claude-style "message me" input */}
+      {/* Real email submission form (EmailJS) */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -154,24 +148,7 @@ const ContactPage = () => {
         transition={{ duration: 0.55, delay: 0.1 }}
         className="max-w-4xl mx-auto mt-10"
       >
-        <a
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=gerbinguio@gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block bg-sand-50 border border-sand-300 rounded-3xl shadow-[0_12px_40px_rgba(34,48,60,0.08)] p-4 sm:p-5 hover:border-blue/60 hover:shadow-[0_16px_50px_rgba(111,168,198,0.15)] transition-all group"
-        >
-          <div className="px-2 pt-2 pb-8 text-ink-500 text-base">
-            Got a project in mind? Tell me about it…
-          </div>
-          <div className="flex items-center justify-between gap-3">
-            <span className="text-xs text-ink-500 pl-2 hidden sm:block">
-              This opens Gmail. I usually reply within the day.
-            </span>
-            <span className="ml-auto w-10 h-10 rounded-xl bg-blue group-hover:bg-blue-dark transition-colors flex items-center justify-center shadow-md">
-              <ArrowUp className="w-5 h-5 text-sand-50" />
-            </span>
-          </div>
-        </a>
+        <ContactForm />
       </motion.div>
 
       {/* Footer */}

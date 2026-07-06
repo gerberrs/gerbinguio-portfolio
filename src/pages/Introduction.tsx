@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const Introduction = () => {
   const [progress, setProgress] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -32,17 +31,9 @@ const Introduction = () => {
             }}
           >
             <img
-              src={
-                progress > 0.02
-                  ? "/pixelated_gradpic_lookingdown.png"
-                  : isHovered
-                  ? "/pixelated_gradpic_wink.png"
-                  : "/pixelated_gradpic.png"
-              }
-              alt="My Picture"
-              className="w-40 sm:w-72 md:w-96 lg:w-[450px] h-auto object-cover rounded-3xl transition-opacity duration-200 shadow-[0_24px_60px_rgba(34,48,60,0.25)]"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
+              src="/pixelated_gradpic.png"
+              alt="Gerbinguio"
+              className="w-40 sm:w-72 md:w-96 lg:w-[450px] h-auto object-cover rounded-3xl shadow-[0_24px_60px_rgba(34,48,60,0.25)]"
             />
           </div>
 

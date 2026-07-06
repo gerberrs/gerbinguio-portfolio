@@ -268,9 +268,6 @@ const ProjectsPage = () => {
         <h1 className="font-display text-[clamp(2.75rem,9vw,7rem)] leading-none text-ink-900">
           PROJECTS<span className="text-blue-deep">.</span>
         </h1>
-        <p className="text-sm sm:text-base text-ink-500 mt-4">
-          Hover a cover to pull it out. Click one to see how it works.
-        </p>
       </div>
 
       {/* Foliom-style vinyl shelf */}
