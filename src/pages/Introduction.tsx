@@ -31,7 +31,7 @@ const Introduction = () => {
             }}
           >
             <img
-              src="/pixelated_gradpic.png"
+              src="/gerbinpicture.jpg"
               alt="Gerbinguio"
               className="w-40 sm:w-72 md:w-96 lg:w-[450px] h-auto object-cover rounded-3xl shadow-[0_24px_60px_rgba(34,48,60,0.25)]"
             />
