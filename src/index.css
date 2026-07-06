@@ -33,13 +33,13 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #EFE9E1;
+  background-color: #FFFFFF;
   color: #22303C;
 }
 
 ::selection {
   background: #6FA8C6;
-  color: #F7F4EF;
+  color: #FFFFFF;
 }
 
 @keyframes float {
@@ -105,12 +105,12 @@ body,
 }
 
 .workspace-scroll::-webkit-scrollbar-thumb {
-  background: #D8CFC0;
+  background: #E3E7EC;
   border-radius: 999px;
 }
 
 .workspace-scroll::-webkit-scrollbar-thumb:hover {
-  background: #C2B6A3;
+  background: #C8CFD8;
 }
 
 /* ========== Loading Screen ========== */
@@ -121,7 +121,7 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse at center, #F7F4EF 0%, #E6DFD4 75%);
+  background: radial-gradient(ellipse at center, #FFFFFF 0%, #F1F3F6 75%);
   overflow: hidden;
 }
 

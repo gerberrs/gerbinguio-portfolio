@@ -16,10 +16,10 @@ const Introduction = () => {
   return (
     <>
       {/* Fixed intro — always behind everything */}
-      <div className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-12 z-0 overflow-hidden bg-sand-100">
+      <div className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-12 z-0 overflow-hidden bg-white">
         {/* Soft decorative blobs */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-soft/60 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -right-24 w-[28rem] h-[28rem] rounded-full bg-sand-200 blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-soft/70 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -right-24 w-[28rem] h-[28rem] rounded-full bg-blue/10 blur-3xl pointer-events-none" />
 
         <div className="relative flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12 max-w-6xl w-full">
           {/* Picture Section - Left Side */}

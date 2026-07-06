@@ -10,11 +10,11 @@ export default {
 			},
 			colors: {
 				sand: {
-					50: '#F7F4EF',
-					100: '#EFE9E1',
-					200: '#E6DFD4',
-					300: '#D8CFC0',
-					400: '#C2B6A3',
+					50: '#FFFFFF',
+					100: '#F8F9FB',
+					200: '#F1F3F6',
+					300: '#E3E7EC',
+					400: '#C8CFD8',
 				},
 				ink: {
 					900: '#22303C',
