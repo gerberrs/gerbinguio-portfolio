@@ -5,9 +5,9 @@ import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { ArrowUp, CheckCircle2, Loader2 } from "lucide-react";
 
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined;
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined;
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
+const SERVICE_ID = "service_szn24kw";
+const TEMPLATE_ID = "template_ei61e02";
+const PUBLIC_KEY = "OrvRuTo6piBjMViXB";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
