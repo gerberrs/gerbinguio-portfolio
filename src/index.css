@@ -315,6 +315,28 @@ body {
   z-index: 40 !important;
 }
 
+/* ========== Low-power fallback (phones / touch devices) ==========
+   Real-time backdrop-filter and huge animated blurs are too heavy on
+   mobile GPUs. Swap the live blur for a solid translucent fill that
+   reads the same, freeze the ambient light, and drop layered blurs. */
+@media (max-width: 900px), (pointer: coarse) {
+  .glass,
+  .glass-panel {
+    --glass-fill: rgba(23, 23, 31, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .ambient-orb {
+    display: none;
+  }
+
+  .noise-overlay {
+    mix-blend-mode: normal;
+    opacity: 0.028;
+  }
+}
+
 /* ========== Reduced motion ========== */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -9,8 +9,10 @@ const AmbientBackground = () => {
       aria-hidden
       className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
       style={{
+        /* static warm tints are part of the base paint — they carry the
+           amber mood on phones where the animated orbs are disabled */
         background:
-          "radial-gradient(120% 120% at 50% 0%, #0d0d13 0%, #0a0a0f 45%, #050507 100%)",
+          "radial-gradient(60% 50% at 0% 0%, rgba(212,165,116,0.10) 0%, rgba(212,165,116,0) 100%), radial-gradient(55% 45% at 100% 100%, rgba(139,94,60,0.10) 0%, rgba(139,94,60,0) 100%), radial-gradient(120% 120% at 50% 0%, #0d0d13 0%, #0a0a0f 45%, #050507 100%)",
       }}
     >
       {/* warm amber — top left */}

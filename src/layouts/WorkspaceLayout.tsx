@@ -118,7 +118,7 @@ const WorkspaceLayout = () => {
   return (
     <div className="h-screen w-full text-ink-900 flex flex-col md:flex-row overflow-hidden">
       {/* Mobile top bar */}
-      <header className="md:hidden flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black/40 backdrop-blur-xl z-30">
+      <header className="md:hidden flex items-center justify-between px-4 py-3 border-b border-white/10 bg-[#0b0b11]/95 z-30">
         <button
           onClick={() => setDrawerOpen(true)}
           aria-label="Open sidebar"
@@ -139,7 +139,7 @@ const WorkspaceLayout = () => {
             className="absolute inset-0 bg-black/60"
             onClick={() => setDrawerOpen(false)}
           />
-          <aside className="absolute left-0 top-0 h-full w-72 bg-[#0b0b12]/90 backdrop-blur-2xl border-r border-white/10 shadow-2xl animate-[slideInLeft_0.25s_ease-out]">
+          <aside className="absolute left-0 top-0 h-full w-72 bg-[#0b0b12]/97 border-r border-white/10 shadow-2xl animate-[slideInLeft_0.25s_ease-out]">
             <button
               onClick={() => setDrawerOpen(false)}
               aria-label="Close sidebar"
