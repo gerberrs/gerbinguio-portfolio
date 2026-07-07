@@ -398,7 +398,7 @@ const ProjectsPage = () => {
       <style>{`
         .case-study-swiper .swiper-button-next,
         .case-study-swiper .swiper-button-prev {
-          color: #d4a574;
+          color: #6FA8C6;
         }
         .case-study-swiper .swiper-button-next::after,
         .case-study-swiper .swiper-button-prev::after {

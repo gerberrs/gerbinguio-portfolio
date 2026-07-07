@@ -95,7 +95,7 @@ const PromptCTA = () => {
             <span className="text-xs text-ink-500 pl-2 hidden sm:block">
               Gerbinguio's portfolio
             </span>
-            <span className="ml-auto w-10 h-10 rounded-xl bg-blue hover:bg-blue-deep transition-colors flex items-center justify-center shadow-[0_6px_20px_-4px_rgba(212,165,116,0.55)]">
+            <span className="ml-auto w-10 h-10 rounded-xl bg-blue hover:bg-blue-deep transition-colors flex items-center justify-center shadow-[0_6px_20px_-4px_rgba(111,168,198,0.55)]">
               <ArrowUp className="w-5 h-5 text-base-950" />
             </span>
           </div>

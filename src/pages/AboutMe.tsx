@@ -4,7 +4,15 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
-import { Settings, Code, Sparkles } from "lucide-react";
+import {
+  Settings,
+  Code,
+  Sparkles,
+  Workflow,
+  Database,
+  Wrench,
+  Users,
+} from "lucide-react";
 
 const fadeInUp = {
   hidden: {
@@ -47,31 +55,65 @@ const fadeInUpStagger = {
 const skillCategories = [
   {
     title: "CRM & Automation",
-    items:
-      "GoHighLevel, Zoho CRM, Zoho Campaigns, Zoho Flow, ActiveCampaign, Zapier, n8n, Workflow Automation, Pipeline Management, Email Sequences, Funnel Building, Website Building",
+    icon: Workflow,
+    featured: ["GoHighLevel", "Zoho CRM", "Zapier"],
+    items: [
+      "Zoho Campaigns",
+      "Zoho Flow",
+      "ActiveCampaign",
+      "n8n",
+      "Pipeline Management",
+      "Email Sequences",
+      "Funnel Building",
+      "Website Building",
+    ],
   },
   {
     title: "AI Tools",
-    items: "Claude AI, ChatGPT, Gemini AI",
+    icon: Sparkles,
+    featured: ["Claude AI"],
+    items: ["ChatGPT", "Gemini AI"],
   },
   {
     title: "Forms & Data",
-    items: "Jotform, Google Sheets, Google Docs, GHL Forms",
+    icon: Database,
+    featured: [],
+    items: ["Jotform", "Google Sheets", "Google Docs", "GHL Forms"],
   },
   {
     title: "Development",
-    items:
-      "HTML, CSS, JavaScript, TypeScript, React.js, Tailwind, WordPress, APIs & Webhooks",
+    icon: Code,
+    featured: ["React.js", "TypeScript"],
+    items: ["HTML", "CSS", "JavaScript", "Tailwind", "WordPress", "APIs & Webhooks"],
   },
   {
     title: "Tools & Technology",
-    items:
-      "GitHub, Jira, Canva, VSCode, ClickFunnels, Word, PowerPoint, Excel, Antigravity",
+    icon: Wrench,
+    featured: [],
+    items: [
+      "GitHub",
+      "Jira",
+      "Canva",
+      "VSCode",
+      "ClickFunnels",
+      "Word",
+      "PowerPoint",
+      "Excel",
+      "Antigravity",
+    ],
   },
   {
     title: "Professional Skills",
-    items:
-      "Communication, Teamwork, Problem-Solving, Adaptability, Leadership, Attention to Detail",
+    icon: Users,
+    featured: [],
+    items: [
+      "Communication",
+      "Teamwork",
+      "Problem-Solving",
+      "Adaptability",
+      "Leadership",
+      "Attention to Detail",
+    ],
   },
 ];
 
@@ -198,19 +240,42 @@ const AboutMe = () => {
           <h3 className="font-display text-2xl sm:text-3xl mb-6 text-center lg:text-left text-ink-900">
             TOOLS I'VE <span className="text-blue-deep">USED</span>
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {skillCategories.map((cat, i) => (
+          <div className="glass rounded-3xl px-5 sm:px-7 divide-y divide-white/[0.06]">
+            {skillCategories.map((cat) => (
               <motion.div
-                key={i}
-                className="glass glass-hover rounded-2xl p-4 sm:p-5"
+                key={cat.title}
+                className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-5 py-5"
                 variants={fadeInUpStagger}
               >
-                <h4 className="text-sm sm:text-base font-bold mb-2 border-b border-white/10 pb-2">
-                  {cat.title}
-                </h4>
-                <p className="text-ink-500 text-xs sm:text-sm leading-relaxed">
-                  {cat.items}
-                </p>
+                {/* Category label */}
+                <div className="flex items-center gap-2.5 sm:w-44 flex-shrink-0 sm:pt-1">
+                  <span className="w-8 h-8 rounded-lg bg-blue-soft flex items-center justify-center flex-shrink-0">
+                    <cat.icon className="w-4 h-4 text-blue-deep" />
+                  </span>
+                  <h4 className="text-sm font-bold text-ink-900 leading-tight">
+                    {cat.title}
+                  </h4>
+                </div>
+
+                {/* Skill chips — featured ones get a blue tint */}
+                <div className="flex flex-wrap gap-2">
+                  {cat.featured.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-soft border border-blue/30 text-blue-deep"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                  {cat.items.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-ink-700 hover:border-blue/50 hover:text-blue-deep transition-colors"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </motion.div>
             ))}
           </div>
