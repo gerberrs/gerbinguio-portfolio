@@ -149,8 +149,8 @@ const AboutMe = () => {
                 {specialties.map((spec) => (
                   <div key={spec.label} className="flex flex-col items-center">
                     <motion.div
-                      className="w-11 h-11 flex items-center justify-center rounded-full bg-ink-900 text-sand-50 shadow-md cursor-pointer"
-                      whileHover={{ scale: 1.2, backgroundColor: "#6FA8C6" }}
+                      className="w-11 h-11 flex items-center justify-center rounded-full glass text-blue cursor-pointer"
+                      whileHover={{ scale: 1.2 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       <spec.icon className="w-5 h-5" />
@@ -202,10 +202,10 @@ const AboutMe = () => {
             {skillCategories.map((cat, i) => (
               <motion.div
                 key={i}
-                className="bg-sand-100 border border-sand-300 rounded-2xl p-4 sm:p-5 shadow-sm transition-all duration-300 hover:scale-[1.03] hover:border-blue hover:shadow-[0_8px_30px_rgba(111,168,198,0.15)]"
+                className="glass glass-hover rounded-2xl p-4 sm:p-5"
                 variants={fadeInUpStagger}
               >
-                <h4 className="text-sm sm:text-base font-bold mb-2 border-b border-sand-300 pb-2">
+                <h4 className="text-sm sm:text-base font-bold mb-2 border-b border-white/10 pb-2">
                   {cat.title}
                 </h4>
                 <p className="text-ink-500 text-xs sm:text-sm leading-relaxed">

@@ -5,6 +5,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import Introduction from "./Introduction";
 import AboutMe from "./AboutMe";
 import PromptCTA from "../components/PromptCTA";
+import ScrollBlob from "../components/ScrollBlob";
 
 const Landing = () => {
   const [isLoading, setIsLoading] = useState(
@@ -42,13 +43,13 @@ const Landing = () => {
     <>
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       <div
-        className="bg-sand-100 text-ink-900 w-full min-h-screen"
+        className="text-ink-900 w-full min-h-screen relative"
         style={{ overflowX: "clip", visibility: isLoading ? "hidden" : "visible" }}
       >
+        <ScrollBlob />
         <Navbar />
         <Introduction />
-        <div className="fixed inset-0 bg-sand-100 -z-10" />
-        <div className="relative z-10 bg-sand-50 rounded-t-[2.5rem] border-t border-sand-300 shadow-[0_-24px_60px_rgba(34,48,60,0.12)]">
+        <div className="relative z-10 bg-white/[0.02] backdrop-blur-[2px] rounded-t-[2.5rem] border-t border-white/10 shadow-[0_-24px_60px_rgba(0,0,0,0.4)]">
           <div id="about">
             <AboutMe />
           </div>

@@ -19,7 +19,12 @@
 @tailwind utilities;
 
 :root {
-  --radius: 0.75rem;
+  --radius: 1.25rem;
+  --glass-fill: rgba(255, 255, 255, 0.055);
+  --glass-fill-strong: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --amber: #d4a574;
+  --amber-deep: #8b5e3c;
 }
 
 html {
@@ -33,25 +38,130 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #FFFFFF;
-  color: #22303C;
+  background-color: #08080c;
+  color: #f4efe7;
+}
+
+body {
+  font-feature-settings: "ss01";
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: #6FA8C6;
-  color: #FFFFFF;
+  background: rgba(212, 165, 116, 0.35);
+  color: #fdf8f1;
+}
+
+/* ========== Liquid Glass material ========== */
+.glass {
+  position: relative;
+  background: var(--glass-fill);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid transparent;
+  border-radius: 20px;
+  /* gradient edge — bright top-left → faint bottom-right */
+  background-image:
+    linear-gradient(var(--glass-fill), var(--glass-fill)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.06));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  /* soft inner highlight (top-left light hitting glass) + drop shadow for depth */
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 0 24px rgba(255, 255, 255, 0.02),
+    0 18px 50px -20px rgba(0, 0, 0, 0.7);
+}
+
+/* specular sheen that shifts on hover */
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.55;
+  background: linear-gradient(115deg,
+      rgba(255, 255, 255, 0.10) 0%,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0) 70%,
+      rgba(255, 255, 255, 0.04) 100%);
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  transition: background-position 0.5s ease, opacity 0.3s ease;
+}
+
+/* calmer glass for large containers (no moving sheen over content) */
+.glass-panel {
+  background: var(--glass-fill);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.07),
+    0 24px 60px -24px rgba(0, 0, 0, 0.7);
+}
+
+.glass-hover {
+  transition:
+    transform 0.25s ease-out,
+    box-shadow 0.25s ease-out,
+    background-color 0.25s ease-out;
+  will-change: transform;
+}
+
+.glass-hover:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 0 30px rgba(255, 255, 255, 0.03),
+    0 26px 60px -20px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(212, 165, 116, 0.25),
+    0 0 34px -6px rgba(212, 165, 116, 0.28);
+}
+
+.glass-hover:hover::after {
+  opacity: 0.85;
+  background-position: 100% 100%;
+}
+
+/* ========== Noise / grain overlay ========== */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ========== Ambient light orbs ========== */
+@keyframes orbDrift1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6vw, 4vh, 0) scale(1.12); }
+}
+
+@keyframes orbDrift2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
+  50% { transform: translate3d(-5vw, -6vh, 0) scale(0.92); }
+}
+
+@keyframes orbDrift3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); }
+  50% { transform: translate3d(4vw, -3vh, 0) scale(1.1); }
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
 }
 
 @keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
 .animate-float {
@@ -59,27 +169,13 @@ body,
 }
 
 @keyframes slideInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  0% { opacity: 0; transform: translateX(-100px); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -87,15 +183,12 @@ body,
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 .scrollbar-hide {
   -ms-overflow-style: none;
-  /* IE and Edge */
   scrollbar-width: none;
-  /* Firefox */
 }
 
-/* Warm thin scrollbar for the workspace panel */
+/* Thin glass scrollbar for the workspace panel */
 .workspace-scroll::-webkit-scrollbar {
   width: 8px;
 }
@@ -105,12 +198,12 @@ body,
 }
 
 .workspace-scroll::-webkit-scrollbar-thumb {
-  background: #E3E7EC;
+  background: rgba(255, 255, 255, 0.14);
   border-radius: 999px;
 }
 
 .workspace-scroll::-webkit-scrollbar-thumb:hover {
-  background: #C8CFD8;
+  background: rgba(212, 165, 116, 0.4);
 }
 
 /* ========== Loading Screen ========== */
@@ -121,7 +214,7 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse at center, #FFFFFF 0%, #F1F3F6 75%);
+  background: radial-gradient(ellipse at center, #12100c 0%, #050507 72%);
   overflow: hidden;
 }
 
@@ -159,29 +252,28 @@ body,
 .loading-progress-track {
   width: 100%;
   height: 3px;
-  background: rgba(34, 48, 60, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 999px;
   overflow: hidden;
 }
 
 .loading-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #3E7396, #6FA8C6, #A8C8DC);
+  background: linear-gradient(90deg, #8b5e3c, #d4a574, #f0d3ac);
   border-radius: 999px;
   transition: width 0.1s linear;
-  box-shadow: 0 0 12px rgba(111, 168, 198, 0.5);
+  box-shadow: 0 0 12px rgba(212, 165, 116, 0.6);
 }
 
 .loading-counter {
   font-family: 'Outfit', sans-serif;
   font-size: 1.2rem;
   font-weight: 400;
-  color: rgba(34, 48, 60, 0.45);
+  color: rgba(244, 239, 231, 0.5);
   letter-spacing: 0.3em;
   font-variant-numeric: tabular-nums;
 }
 
-/* Floating particles */
 .loading-particles {
   position: absolute;
   inset: 0;
@@ -193,23 +285,14 @@ body,
   position: absolute;
   width: 3px;
   height: 3px;
-  background: rgba(111, 168, 198, 0.45);
+  background: rgba(212, 165, 116, 0.5);
   border-radius: 50%;
   animation: particleFloat 4s ease-in-out infinite;
 }
 
 @keyframes particleFloat {
-
-  0%,
-  100% {
-    opacity: 0;
-    transform: translateY(0) scale(0.5);
-  }
-
-  50% {
-    opacity: 1;
-    transform: translateY(-40px) scale(1);
-  }
+  0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+  50% { opacity: 1; transform: translateY(-40px) scale(1); }
 }
 
 /* ========== Foliom-style project shelf ========== */
@@ -222,12 +305,28 @@ body,
   transform: rotateY(-45deg);
   transform-style: preserve-3d;
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
-  box-shadow: 14px 20px 36px rgba(34, 48, 60, 0.22);
+  box-shadow: 14px 20px 40px rgba(0, 0, 0, 0.55);
 }
 
 .shelf-card:hover,
 .shelf-card:focus-visible {
   transform: translateY(-72px) rotateY(-45deg) scale(1.08);
-  box-shadow: 0 46px 70px rgba(34, 48, 60, 0.38);
+  box-shadow: 0 46px 80px rgba(0, 0, 0, 0.7), 0 0 40px -8px rgba(212, 165, 116, 0.4);
   z-index: 40 !important;
+}
+
+/* ========== Reduced motion ========== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ambient-orb {
+    animation: none !important;
+  }
 }

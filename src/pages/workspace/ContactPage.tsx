@@ -70,7 +70,7 @@ const ContactPage = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.55 }}
-          className="bg-sand-100 border border-sand-300 rounded-2xl p-6 space-y-4"
+          className="glass rounded-2xl p-6 space-y-4"
         >
           <h2 className="font-display text-lg text-ink-900 mb-2">
             CONTACT <span className="text-blue-deep">INFO</span>
@@ -109,7 +109,7 @@ const ContactPage = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.55 }}
-          className="bg-sand-100 border border-sand-300 rounded-2xl p-6 flex flex-col"
+          className="glass rounded-2xl p-6 flex flex-col"
         >
           <h2 className="font-display text-lg text-ink-900 mb-4">
             ONLINE <span className="text-blue-deep">PROFILES</span>
@@ -121,7 +121,7 @@ const ContactPage = () => {
                 href={profile.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 border border-sand-300 bg-sand-50 rounded-full text-sm font-medium text-ink-700 hover:border-blue hover:text-blue-deep hover:bg-blue-soft/40 transition-all"
+                className="px-4 py-2 rounded-full glass glass-hover text-sm font-medium text-ink-700 hover:text-blue-deep"
               >
                 {profile.label}
               </a>
@@ -132,7 +132,7 @@ const ContactPage = () => {
             download
             className="mt-auto pt-6 inline-flex"
           >
-            <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-ink-900 text-sand-50 rounded-xl text-sm font-semibold hover:bg-blue transition-colors shadow-md">
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-base-950 rounded-xl text-sm font-semibold hover:bg-blue-deep transition-colors shadow-md">
               <Download className="w-4 h-4" />
               Download Resume
             </span>
