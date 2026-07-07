@@ -37,14 +37,14 @@ const CaseStudyModal = ({
 
   return (
     <motion.div
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/75 p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
     >
       <motion.div
-        className="relative w-full max-w-3xl bg-[#0e0e15]/92 backdrop-blur-2xl border border-white/12 rounded-3xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-3xl bg-[#101018] border border-white/12 rounded-3xl overflow-hidden shadow-2xl"
         initial={{ scale: 0.9, opacity: 0, y: 40 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 40 }}
@@ -398,7 +398,7 @@ const ProjectsPage = () => {
       <style>{`
         .case-study-swiper .swiper-button-next,
         .case-study-swiper .swiper-button-prev {
-          color: #d4a574;
+          color: #6FA8C6;
         }
         .case-study-swiper .swiper-button-next::after,
         .case-study-swiper .swiper-button-prev::after {

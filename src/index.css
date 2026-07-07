@@ -23,8 +23,6 @@
   --glass-fill: rgba(255, 255, 255, 0.055);
   --glass-fill-strong: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.12);
-  --amber: #d4a574;
-  --amber-deep: #8b5e3c;
 }
 
 html {
@@ -39,7 +37,7 @@ body,
   margin: 0;
   padding: 0;
   background-color: #08080c;
-  color: #f4efe7;
+  color: #F2F4F7;
 }
 
 body {
@@ -48,8 +46,8 @@ body {
 }
 
 ::selection {
-  background: rgba(212, 165, 116, 0.35);
-  color: #fdf8f1;
+  background: rgba(111, 168, 198, 0.35);
+  color: #f4faff;
 }
 
 /* ========== Liquid Glass material ========== */
@@ -116,8 +114,8 @@ body {
     inset 1px 1px 0 rgba(255, 255, 255, 0.14),
     inset 0 0 30px rgba(255, 255, 255, 0.03),
     0 26px 60px -20px rgba(0, 0, 0, 0.75),
-    0 0 0 1px rgba(212, 165, 116, 0.25),
-    0 0 34px -6px rgba(212, 165, 116, 0.28);
+    0 0 0 1px rgba(111, 168, 198, 0.25),
+    0 0 34px -6px rgba(111, 168, 198, 0.28);
 }
 
 .glass-hover:hover::after {
@@ -203,7 +201,7 @@ body {
 }
 
 .workspace-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(212, 165, 116, 0.4);
+  background: rgba(111, 168, 198, 0.4);
 }
 
 /* ========== Loading Screen ========== */
@@ -214,7 +212,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse at center, #12100c 0%, #050507 72%);
+  background: radial-gradient(ellipse at center, #0c0e12 0%, #050507 72%);
   overflow: hidden;
 }
 
@@ -259,17 +257,17 @@ body {
 
 .loading-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #8b5e3c, #d4a574, #f0d3ac);
+  background: linear-gradient(90deg, #3E7396, #6FA8C6, #A8C8DC);
   border-radius: 999px;
   transition: width 0.1s linear;
-  box-shadow: 0 0 12px rgba(212, 165, 116, 0.6);
+  box-shadow: 0 0 12px rgba(111, 168, 198, 0.6);
 }
 
 .loading-counter {
   font-family: 'Outfit', sans-serif;
   font-size: 1.2rem;
   font-weight: 400;
-  color: rgba(244, 239, 231, 0.5);
+  color: rgba(242, 244, 247, 0.5);
   letter-spacing: 0.3em;
   font-variant-numeric: tabular-nums;
 }
@@ -285,7 +283,7 @@ body {
   position: absolute;
   width: 3px;
   height: 3px;
-  background: rgba(212, 165, 116, 0.5);
+  background: rgba(111, 168, 198, 0.5);
   border-radius: 50%;
   animation: particleFloat 4s ease-in-out infinite;
 }
@@ -311,8 +309,30 @@ body {
 .shelf-card:hover,
 .shelf-card:focus-visible {
   transform: translateY(-72px) rotateY(-45deg) scale(1.08);
-  box-shadow: 0 46px 80px rgba(0, 0, 0, 0.7), 0 0 40px -8px rgba(212, 165, 116, 0.4);
+  box-shadow: 0 46px 80px rgba(0, 0, 0, 0.7), 0 0 40px -8px rgba(111, 168, 198, 0.4);
   z-index: 40 !important;
+}
+
+/* ========== Low-power fallback (phones / touch devices) ==========
+   Real-time backdrop-filter and huge animated blurs are too heavy on
+   mobile GPUs. Swap the live blur for a solid translucent fill that
+   reads the same, freeze the ambient light, and drop layered blurs. */
+@media (max-width: 900px), (pointer: coarse) {
+  .glass,
+  .glass-panel {
+    --glass-fill: rgba(23, 23, 31, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .ambient-orb {
+    display: none;
+  }
+
+  .noise-overlay {
+    mix-blend-mode: normal;
+    opacity: 0.028;
+  }
 }
 
 /* ========== Reduced motion ========== */

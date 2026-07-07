@@ -9,8 +9,10 @@ const AmbientBackground = () => {
       aria-hidden
       className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
       style={{
+        /* static warm tints are part of the base paint — they carry the
+           amber mood on phones where the animated orbs are disabled */
         background:
-          "radial-gradient(120% 120% at 50% 0%, #0d0d13 0%, #0a0a0f 45%, #050507 100%)",
+          "radial-gradient(60% 50% at 0% 0%, rgba(111,168,198,0.10) 0%, rgba(111,168,198,0) 100%), radial-gradient(55% 45% at 100% 100%, rgba(62,115,150,0.10) 0%, rgba(62,115,150,0) 100%), radial-gradient(120% 120% at 50% 0%, #0d0d13 0%, #0a0a0f 45%, #050507 100%)",
       }}
     >
       {/* warm amber — top left */}
@@ -22,7 +24,7 @@ const AmbientBackground = () => {
           width: "46vw",
           height: "46vw",
           background:
-            "radial-gradient(circle, rgba(212,165,116,0.30) 0%, rgba(212,165,116,0) 68%)",
+            "radial-gradient(circle, rgba(111,168,198,0.30) 0%, rgba(111,168,198,0) 68%)",
           animation: "orbDrift1 16s ease-in-out infinite",
         }}
       />
@@ -35,7 +37,7 @@ const AmbientBackground = () => {
           width: "52vw",
           height: "52vw",
           background:
-            "radial-gradient(circle, rgba(139,94,60,0.28) 0%, rgba(139,94,60,0) 66%)",
+            "radial-gradient(circle, rgba(62,115,150,0.28) 0%, rgba(62,115,150,0) 66%)",
           animation: "orbDrift2 20s ease-in-out infinite",
         }}
       />
@@ -48,7 +50,7 @@ const AmbientBackground = () => {
           width: "30vw",
           height: "30vw",
           background:
-            "radial-gradient(circle, rgba(232,190,143,0.18) 0%, rgba(232,190,143,0) 70%)",
+            "radial-gradient(circle, rgba(160,200,225,0.18) 0%, rgba(160,200,225,0) 70%)",
           animation: "orbDrift3 13s ease-in-out infinite",
         }}
       />

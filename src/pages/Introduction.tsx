@@ -79,7 +79,7 @@ const Introduction = () => {
             >
               <Link
                 to="/work/projects"
-                className="px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-blue text-base-950 hover:bg-blue-deep rounded-2xl font-semibold transition-all transform hover:scale-105 text-center shadow-[0_10px_30px_-8px_rgba(212,165,116,0.5)]"
+                className="px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-blue text-base-950 hover:bg-blue-deep rounded-2xl font-semibold transition-all transform hover:scale-105 text-center shadow-[0_10px_30px_-8px_rgba(111,168,198,0.5)]"
               >
                 View My Work
               </Link>
