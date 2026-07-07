@@ -68,7 +68,7 @@ const Navbar = () => {
           isOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <ul className="flex flex-col items-center gap-4 py-4 bg-sand-50/95 backdrop-blur border-t border-sand-300">
+        <ul className="flex flex-col items-center gap-4 py-4 bg-black/70 backdrop-blur-xl border-t border-white/10">
           {navItems.map((item) => (
             <li key={item.name}>
               {item.route ? (

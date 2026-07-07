@@ -70,7 +70,7 @@ const CareerPage = () => {
       {/* Timeline */}
       <div className="relative max-w-3xl mx-auto">
         {/* Vertical line */}
-        <div className="absolute left-4 sm:left-5 top-2 bottom-2 w-px bg-sand-300" />
+        <div className="absolute left-4 sm:left-5 top-2 bottom-2 w-px bg-white/10" />
 
         <div className="space-y-10">
           {roles.map((role, i) => (
@@ -85,13 +85,13 @@ const CareerPage = () => {
               {/* Timeline dot */}
               <span className="absolute left-4 sm:left-5 top-2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-blue ring-4 ring-blue-soft" />
 
-              <div className="bg-sand-100 border border-sand-300 rounded-2xl p-5 sm:p-6 hover:border-blue hover:shadow-[0_8px_30px_rgba(111,168,198,0.12)] transition-all">
+              <div className="glass glass-hover rounded-2xl p-5 sm:p-6">
                 <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                   {role.image && (
                     <img
                       src={role.image}
                       alt={role.company}
-                      className="w-16 h-16 rounded-xl object-cover border border-sand-300 bg-sand-50 flex-shrink-0"
+                      className="w-16 h-16 rounded-xl object-cover border border-white/10 bg-white/5 flex-shrink-0"
                     />
                   )}
                   <div className="min-w-0 flex-1">
@@ -111,7 +111,7 @@ const CareerPage = () => {
                       {role.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-[10px] border border-sand-300 bg-sand-50 text-ink-500 rounded-full px-2.5 py-0.5"
+                          className="text-[10px] border border-white/10 bg-white/5 text-ink-500 rounded-full px-2.5 py-0.5"
                         >
                           {tag}
                         </span>

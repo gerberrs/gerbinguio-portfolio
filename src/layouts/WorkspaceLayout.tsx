@@ -21,7 +21,7 @@ const SidebarContent = ({ onNavigate }: { onNavigate?: () => void }) => (
   <div className="flex flex-col h-full">
     {/* Logo */}
     <div className="flex items-center gap-2.5 px-4 pt-5 pb-4">
-      <span className="w-8 h-8 rounded-lg bg-blue flex items-center justify-center text-sand-50 font-display text-sm flex-shrink-0">
+      <span className="w-8 h-8 rounded-lg bg-blue flex items-center justify-center text-base-950 font-display text-sm flex-shrink-0">
         G
       </span>
       <span className="font-display text-ink-900 text-sm tracking-wide">
@@ -51,8 +51,8 @@ const SidebarContent = ({ onNavigate }: { onNavigate?: () => void }) => (
           className={({ isActive }) =>
             `flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors ${
               isActive
-                ? "bg-sand-50 text-ink-900 font-semibold shadow-sm"
-                : "text-ink-700 hover:bg-sand-100/70 hover:text-ink-900"
+                ? "glass text-ink-900 font-semibold"
+                : "text-ink-700 hover:bg-white/5 hover:text-ink-900"
             }`
           }
         >
@@ -73,7 +73,7 @@ const SidebarContent = ({ onNavigate }: { onNavigate?: () => void }) => (
             key={project.slug}
             to={`/work/projects?p=${project.slug}`}
             onClick={onNavigate}
-            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-ink-700 hover:bg-sand-100/70 hover:text-ink-900 transition-colors group"
+            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-ink-700 hover:bg-white/5 hover:text-ink-900 transition-colors group"
           >
             <MessageSquare className="w-3.5 h-3.5 flex-shrink-0 text-ink-500 group-hover:text-blue-deep transition-colors" />
             <span className="truncate">{project.title}</span>
@@ -83,7 +83,7 @@ const SidebarContent = ({ onNavigate }: { onNavigate?: () => void }) => (
     </div>
 
     {/* Profile footer */}
-    <div className="border-t border-sand-300 px-4 py-3 flex items-center gap-3">
+    <div className="border-t border-white/10 px-4 py-3 flex items-center gap-3">
       <img
         src="/devPicture.png"
         alt="Gerbinguio"
@@ -116,18 +116,18 @@ const WorkspaceLayout = () => {
     "Workspace";
 
   return (
-    <div className="h-screen w-full bg-sand-200 text-ink-900 flex flex-col md:flex-row overflow-hidden">
+    <div className="h-screen w-full text-ink-900 flex flex-col md:flex-row overflow-hidden">
       {/* Mobile top bar */}
-      <header className="md:hidden flex items-center justify-between px-4 py-3 border-b border-sand-300 bg-sand-200 z-30">
+      <header className="md:hidden flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black/40 backdrop-blur-xl z-30">
         <button
           onClick={() => setDrawerOpen(true)}
           aria-label="Open sidebar"
-          className="p-2 -ml-2 rounded-lg text-ink-700 hover:bg-sand-100 transition-colors"
+          className="p-2 -ml-2 rounded-lg text-ink-700 hover:bg-white/5 transition-colors"
         >
           <PanelLeft className="w-5 h-5" />
         </button>
         <span className="font-display text-sm text-ink-900">{currentPage}</span>
-        <span className="w-8 h-8 rounded-lg bg-blue flex items-center justify-center text-sand-50 font-display text-xs">
+        <span className="w-8 h-8 rounded-lg bg-blue flex items-center justify-center text-base-950 font-display text-xs">
           G
         </span>
       </header>
@@ -136,14 +136,14 @@ const WorkspaceLayout = () => {
       {drawerOpen && (
         <div className="md:hidden fixed inset-0 z-50">
           <div
-            className="absolute inset-0 bg-ink-900/40"
+            className="absolute inset-0 bg-black/60"
             onClick={() => setDrawerOpen(false)}
           />
-          <aside className="absolute left-0 top-0 h-full w-72 bg-sand-200 shadow-2xl animate-[slideInLeft_0.25s_ease-out]">
+          <aside className="absolute left-0 top-0 h-full w-72 bg-[#0b0b12]/90 backdrop-blur-2xl border-r border-white/10 shadow-2xl animate-[slideInLeft_0.25s_ease-out]">
             <button
               onClick={() => setDrawerOpen(false)}
               aria-label="Close sidebar"
-              className="absolute top-4 right-3 p-1.5 rounded-lg text-ink-500 hover:bg-sand-100 transition-colors"
+              className="absolute top-4 right-3 p-1.5 rounded-lg text-ink-500 hover:bg-white/5 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -153,7 +153,7 @@ const WorkspaceLayout = () => {
       )}
 
       {/* Desktop sidebar */}
-      <aside className="hidden md:block w-72 flex-shrink-0 h-full">
+      <aside className="hidden md:block w-72 flex-shrink-0 h-full border-r border-white/5">
         <SidebarContent />
       </aside>
 
@@ -161,7 +161,7 @@ const WorkspaceLayout = () => {
       <main className="flex-1 min-h-0 min-w-0 p-2 md:p-3 md:pl-0">
         <div
           ref={mainRef}
-          className="workspace-scroll h-full w-full bg-sand-50 border border-sand-300 rounded-2xl overflow-y-auto overflow-x-hidden"
+          className="workspace-scroll glass-panel h-full w-full rounded-3xl overflow-y-auto overflow-x-hidden"
         >
           <Outlet />
         </div>

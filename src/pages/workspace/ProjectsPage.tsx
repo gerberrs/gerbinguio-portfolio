@@ -37,21 +37,21 @@ const CaseStudyModal = ({
 
   return (
     <motion.div
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-ink-900/50 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
     >
       <motion.div
-        className="relative w-full max-w-3xl bg-sand-50 border border-sand-300 rounded-3xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-3xl bg-[#0e0e15]/92 backdrop-blur-2xl border border-white/12 rounded-3xl overflow-hidden shadow-2xl"
         initial={{ scale: 0.9, opacity: 0, y: 40 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 40 }}
         transition={{ type: "spring", stiffness: 300, damping: 28 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-sand-300">
+        <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-white/10">
           <div>
             <p className="text-[10px] uppercase tracking-widest text-blue-deep font-semibold mb-1">
               {project.type}
@@ -86,7 +86,7 @@ const CaseStudyModal = ({
               <div className="flex flex-col gap-4 px-6 pb-8 pt-2 min-h-[320px]">
                 {slide.images && slide.images.length === 1 && (
                   <div
-                    className="relative w-full h-64 rounded-xl overflow-hidden cursor-zoom-in group border border-sand-300"
+                    className="relative w-full h-64 rounded-xl overflow-hidden cursor-zoom-in group border border-white/10"
                     onClick={() => setLightboxImage(slide.images![0])}
                   >
                     <img
@@ -94,8 +94,8 @@ const CaseStudyModal = ({
                       alt={slide.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-ink-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
-                      <span className="text-sand-50 text-sm font-semibold">
+                    <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
+                      <span className="text-white text-sm font-semibold">
                         Click to expand 🔍
                       </span>
                     </div>
@@ -106,7 +106,7 @@ const CaseStudyModal = ({
                     {slide.images.map((img, idx) => (
                       <div
                         key={idx}
-                        className="relative h-48 rounded-xl overflow-hidden cursor-zoom-in group border border-sand-300"
+                        className="relative h-48 rounded-xl overflow-hidden cursor-zoom-in group border border-white/10"
                         onClick={() => setLightboxImage(img)}
                       >
                         <img
@@ -114,8 +114,8 @@ const CaseStudyModal = ({
                           alt={`${slide.title} ${idx + 1}`}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
-                        <div className="absolute inset-0 bg-ink-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
-                          <span className="text-sand-50 text-xs font-semibold">
+                        <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
+                          <span className="text-white text-xs font-semibold">
                             Expand 🔍
                           </span>
                         </div>
@@ -140,11 +140,11 @@ const CaseStudyModal = ({
           ))}
         </Swiper>
 
-        <div className="px-6 pb-5 flex flex-wrap items-center gap-2 border-t border-sand-300 pt-4">
+        <div className="px-6 pb-5 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4">
           {project.tech.map((t) => (
             <span
               key={t}
-              className="border border-sand-300 bg-sand-100 text-ink-700 rounded-full px-3 py-1 text-[10px]"
+              className="border border-white/10 bg-white/5 text-ink-700 rounded-full px-3 py-1 text-[10px]"
             >
               {t}
             </span>
@@ -223,7 +223,7 @@ const ProjectsPage = () => {
       <AnimatePresence>
         {lightboxImage && (
           <motion.div
-            className="fixed inset-0 z-[70] flex items-center justify-center bg-ink-900/90 cursor-pointer"
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-black/90 cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -239,7 +239,7 @@ const ProjectsPage = () => {
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
             />
             <button
-              className="absolute top-6 right-6 text-sand-50 text-3xl font-bold hover:text-sand-300"
+              className="absolute top-6 right-6 text-white text-3xl font-bold hover:text-white/70"
               onClick={() => setLightboxImage(null)}
               aria-label="Close preview"
             >
@@ -297,7 +297,7 @@ const ProjectsPage = () => {
             >
               {/* Sleeve front */}
               <div
-                className="absolute inset-0 overflow-hidden bg-sand-200"
+                className="absolute inset-0 overflow-hidden bg-white/5"
                 style={{ backfaceVisibility: "hidden" }}
               >
                 <img
@@ -306,12 +306,12 @@ const ProjectsPage = () => {
                   className="absolute inset-0 w-full h-full object-cover"
                   draggable={false}
                 />
-                <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-ink-900/95 via-ink-900/60 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-4">
-                  <p className="text-[9px] uppercase tracking-widest text-sand-300 font-semibold mb-1 line-clamp-1">
+                  <p className="text-[9px] uppercase tracking-widest text-white/70 font-semibold mb-1 line-clamp-1">
                     {project.type}
                   </p>
-                  <p className="font-display text-sand-50 text-lg sm:text-xl leading-tight">
+                  <p className="font-display text-white text-lg sm:text-xl leading-tight">
                     {project.shelfTitle}
                   </p>
                 </div>
@@ -341,7 +341,7 @@ const ProjectsPage = () => {
       </div>
 
       {/* Shelf floor shadow */}
-      <div className="max-w-4xl mx-auto -mt-10 mb-16 h-6 rounded-[100%] bg-ink-900/10 blur-xl" />
+      <div className="max-w-4xl mx-auto -mt-10 mb-16 h-6 rounded-[100%] bg-black/40 blur-xl" />
 
       {/* All projects list */}
       <div className="px-6 sm:px-10 pb-16 max-w-5xl mx-auto">
@@ -357,12 +357,12 @@ const ProjectsPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.45, delay: (i % 2) * 0.08 }}
-              className="flex gap-4 items-start p-4 rounded-2xl border border-sand-300 bg-sand-100 hover:border-blue hover:shadow-[0_8px_30px_rgba(111,168,198,0.15)] transition-all text-left group"
+              className="flex gap-4 items-start p-4 rounded-2xl glass glass-hover text-left group"
             >
               <img
                 src={project.image}
                 alt=""
-                className="w-20 h-20 rounded-xl object-cover border border-sand-300 flex-shrink-0"
+                className="w-20 h-20 rounded-xl object-cover border border-white/10 flex-shrink-0"
               />
               <div className="min-w-0">
                 <p className="text-[10px] uppercase tracking-widest text-blue-deep font-semibold mb-0.5 line-clamp-1">
@@ -378,13 +378,13 @@ const ProjectsPage = () => {
                   {project.tech.slice(0, 4).map((t) => (
                     <span
                       key={t}
-                      className="text-[9px] border border-sand-300 bg-sand-50 text-ink-500 rounded-full px-2 py-0.5"
+                      className="text-[9px] border border-white/10 bg-white/5 text-ink-500 rounded-full px-2 py-0.5"
                     >
                       {t}
                     </span>
                   ))}
                   {project.tech.length > 4 && (
-                    <span className="text-[9px] border border-sand-300 bg-sand-50 text-ink-500 rounded-full px-2 py-0.5">
+                    <span className="text-[9px] border border-white/10 bg-white/5 text-ink-500 rounded-full px-2 py-0.5">
                       +{project.tech.length - 4}
                     </span>
                   )}
@@ -398,7 +398,7 @@ const ProjectsPage = () => {
       <style>{`
         .case-study-swiper .swiper-button-next,
         .case-study-swiper .swiper-button-prev {
-          color: #6FA8C6;
+          color: #d4a574;
         }
         .case-study-swiper .swiper-button-next::after,
         .case-study-swiper .swiper-button-prev::after {

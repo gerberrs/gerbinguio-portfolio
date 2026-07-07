@@ -65,7 +65,7 @@ const ContactForm = () => {
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4 }}
-        className="bg-sand-50 border border-sand-300 rounded-3xl shadow-[0_12px_40px_rgba(34,48,60,0.08)] p-8 text-center"
+        className="glass rounded-3xl p-8 text-center"
       >
         <div className="w-14 h-14 rounded-full bg-blue-soft flex items-center justify-center mx-auto mb-4">
           <CheckCircle2 className="w-7 h-7 text-blue-deep" />
@@ -88,13 +88,13 @@ const ContactForm = () => {
   }
 
   const inputClass =
-    "w-full bg-sand-100 border border-sand-300 rounded-xl px-4 py-3 text-sm text-ink-900 placeholder:text-ink-500/70 focus:outline-none focus:border-blue focus:ring-2 focus:ring-blue-soft transition-all";
+    "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-ink-900 placeholder:text-ink-500/70 focus:outline-none focus:border-blue focus:ring-2 focus:ring-blue-soft transition-all";
 
   return (
     <form
       ref={formRef}
       onSubmit={handleSubmit}
-      className="bg-sand-50 border border-sand-300 rounded-3xl shadow-[0_12px_40px_rgba(34,48,60,0.08)] p-5 sm:p-6"
+      className="glass rounded-3xl p-5 sm:p-6"
     >
       <h3 className="font-display text-lg text-ink-900 mb-1">
         SEND A <span className="text-blue-deep">MESSAGE</span>
@@ -155,7 +155,7 @@ const ContactForm = () => {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-ink-900 text-sand-50 rounded-xl text-sm font-semibold hover:bg-blue transition-colors shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue text-base-950 rounded-xl text-sm font-semibold hover:bg-blue-deep transition-colors shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {status === "sending" ? (
             <>
@@ -172,7 +172,7 @@ const ContactForm = () => {
       </div>
 
       {status === "error" && (
-        <div className="mt-4 pt-4 border-t border-sand-300 text-center">
+        <div className="mt-4 pt-4 border-t border-white/10 text-center">
           <a
             href={GMAIL_FALLBACK}
             target="_blank"

@@ -16,11 +16,7 @@ const Introduction = () => {
   return (
     <>
       {/* Fixed intro — always behind everything */}
-      <div className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-12 z-0 overflow-hidden bg-white">
-        {/* Soft decorative blobs */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-soft/70 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -right-24 w-[28rem] h-[28rem] rounded-full bg-blue/10 blur-3xl pointer-events-none" />
-
+      <div className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-12 z-0 overflow-hidden">
         <div className="relative flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12 max-w-6xl w-full">
           {/* Picture Section - Left Side */}
           <div
@@ -30,11 +26,13 @@ const Introduction = () => {
               transform: `translateX(${-progress * 150}px) scale(${1 - progress * 0.2})`,
             }}
           >
-            <img
-              src="/gerbinpicture.jpg"
-              alt="Gerbinguio"
-              className="w-40 sm:w-72 md:w-96 lg:w-[450px] h-auto object-cover rounded-3xl shadow-[0_24px_60px_rgba(34,48,60,0.25)]"
-            />
+            <div className="relative p-1.5 rounded-[1.75rem] glass glass-hover">
+              <img
+                src="/gerbinpicture.jpg"
+                alt="Gerbinguio"
+                className="w-40 sm:w-72 md:w-96 lg:w-[450px] h-auto object-cover rounded-3xl shadow-[0_30px_80px_-20px_rgba(0,0,0,0.85)]"
+              />
+            </div>
           </div>
 
           {/* Text Section - Right Side */}
@@ -81,13 +79,13 @@ const Introduction = () => {
             >
               <Link
                 to="/work/projects"
-                className="px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-ink-900 text-sand-50 hover:bg-blue rounded-xl font-semibold transition-all transform hover:scale-105 text-center shadow-lg"
+                className="px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-blue text-base-950 hover:bg-blue-deep rounded-2xl font-semibold transition-all transform hover:scale-105 text-center shadow-[0_10px_30px_-8px_rgba(212,165,116,0.5)]"
               >
                 View My Work
               </Link>
               <Link
                 to="/work/contact"
-                className="px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-sand-50 rounded-xl font-semibold transition-all transform hover:scale-105 text-center"
+                className="px-5 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base glass glass-hover text-ink-900 rounded-2xl font-semibold text-center"
               >
                 Hire Me
               </Link>
