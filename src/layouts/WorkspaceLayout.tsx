@@ -3,19 +3,132 @@ import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import {
   ArrowLeft,
   Briefcase,
+  Facebook,
+  FileText,
   FolderKanban,
+  Github,
+  Globe,
+  Linkedin,
   Mail,
   MessageSquare,
   PanelLeft,
+  Phone,
   X,
 } from "lucide-react";
 import { projects } from "../data/projects";
+import { careerRoles } from "../data/career";
 
 const navItems = [
   { name: "Projects", to: "/work/projects", icon: FolderKanban },
   { name: "Career", to: "/work/career", icon: Briefcase },
   { name: "Contact", to: "/work/contact", icon: Mail },
 ];
+
+const contactLinks = [
+  { label: "gerbinguio@gmail.com", href: "mailto:gerbinguio@gmail.com", icon: Mail },
+  { label: "+63 994 040 1002", href: "tel:+639940401002", icon: Phone },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/gerb-victorino-41a183366/",
+    icon: Linkedin,
+  },
+  { label: "GitHub", href: "https://github.com/gerberrs", icon: Github },
+  {
+    label: "Facebook",
+    href: "https://facebook.com/gerbinguio.victorino.3",
+    icon: Facebook,
+  },
+  {
+    label: "OnlineJobs",
+    href: "https://www.onlinejobs.ph/jobseekers/info/4175877",
+    icon: Globe,
+  },
+  { label: "Download resume", href: "/Victorino-2026-CV.pdf", icon: FileText },
+];
+
+const sideItemClass =
+  "flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-ink-700 hover:bg-white/5 hover:text-ink-900 transition-colors group";
+const sideIconClass =
+  "w-3.5 h-3.5 flex-shrink-0 text-ink-500 group-hover:text-blue-deep transition-colors";
+
+/** Contextual list under the nav — mirrors whichever section is open. */
+const SidebarRecents = ({ onNavigate }: { onNavigate?: () => void }) => {
+  const { pathname } = useLocation();
+
+  if (pathname.startsWith("/work/career")) {
+    return (
+      <>
+        <p className="px-3 text-[11px] uppercase tracking-widest text-ink-500 font-semibold mb-2">
+          Career history
+        </p>
+        <div className="space-y-0.5">
+          {careerRoles.map((role) => (
+            <Link
+              key={role.slug}
+              to={`/work/career?r=${role.slug}`}
+              onClick={onNavigate}
+              className={sideItemClass}
+            >
+              <Briefcase className={sideIconClass} />
+              <span className="min-w-0">
+                <span className="block truncate">{role.title}</span>
+                <span className="block text-[10px] text-ink-500 truncate">
+                  {role.period}
+                </span>
+              </span>
+            </Link>
+          ))}
+        </div>
+      </>
+    );
+  }
+
+  if (pathname.startsWith("/work/contact")) {
+    return (
+      <>
+        <p className="px-3 text-[11px] uppercase tracking-widest text-ink-500 font-semibold mb-2">
+          Reach me
+        </p>
+        <div className="space-y-0.5">
+          {contactLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel="noopener noreferrer"
+              download={link.href.endsWith(".pdf") || undefined}
+              className={sideItemClass}
+            >
+              <link.icon className={sideIconClass} />
+              <span className="truncate">{link.label}</span>
+            </a>
+          ))}
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <p className="px-3 text-[11px] uppercase tracking-widest text-ink-500 font-semibold mb-2">
+        Recent projects
+      </p>
+      <div className="space-y-0.5">
+        {projects.map((project) => (
+          <Link
+            key={project.slug}
+            to={`/work/projects?p=${project.slug}`}
+            onClick={onNavigate}
+            className={sideItemClass}
+          >
+            <MessageSquare className={sideIconClass} />
+            <span className="truncate">{project.title}</span>
+          </Link>
+        ))}
+      </div>
+    </>
+  );
+};
 
 const SidebarContent = ({ onNavigate }: { onNavigate?: () => void }) => (
   <div className="flex flex-col h-full">
@@ -62,24 +175,9 @@ const SidebarContent = ({ onNavigate }: { onNavigate?: () => void }) => (
       ))}
     </nav>
 
-    {/* Recents — fake recent chats linking to project case studies */}
+    {/* Contextual list — recent projects / career history / contact links */}
     <div className="mt-6 px-3 flex-1 overflow-y-auto scrollbar-hide">
-      <p className="px-3 text-[11px] uppercase tracking-widest text-ink-500 font-semibold mb-2">
-        Recents
-      </p>
-      <div className="space-y-0.5">
-        {projects.map((project) => (
-          <Link
-            key={project.slug}
-            to={`/work/projects?p=${project.slug}`}
-            onClick={onNavigate}
-            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-ink-700 hover:bg-white/5 hover:text-ink-900 transition-colors group"
-          >
-            <MessageSquare className="w-3.5 h-3.5 flex-shrink-0 text-ink-500 group-hover:text-blue-deep transition-colors" />
-            <span className="truncate">{project.title}</span>
-          </Link>
-        ))}
-      </div>
+      <SidebarRecents onNavigate={onNavigate} />
     </div>
 
     {/* Profile footer */}

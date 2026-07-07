@@ -1,56 +1,25 @@
 "use client";
 
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-
-const roles = [
-  {
-    title: "CRM & Automation Specialist — Zoho",
-    company: "Client Project · WordPress + Zoho stack",
-    period: "2026 — Present",
-    image: null,
-    description:
-      "A real client project. I moved their leads out of spreadsheets and into Zoho CRM, built branded emails in Zoho Campaigns, and set up automations with Zoho Flow and workflow rules. I also connected their WordPress site to the CRM through webhooks and API calls, so every form submission turns into a lead on its own.",
-    tags: ["Zoho CRM", "Zoho Campaigns", "Zoho Flow", "API & Webhooks", "WordPress"],
-  },
-  {
-    title: "GHL & Automation Specialist",
-    company: "Freelance / Portfolio Projects",
-    period: "2025 — Present",
-    image: null,
-    description:
-      "This is where I found my lane. I built three complete GoHighLevel systems — Brew Mania, Brewtomation, and Brewsmarinas — covering bookings, a coaching program, and equipment rentals. Pipelines, workflows, email sequences, calendars, plus Zapier and Gemini AI for monthly reports that write themselves.",
-    tags: ["GoHighLevel", "Zapier", "n8n", "AI Reporting"],
-  },
-  {
-    title: "Junior Software Engineer",
-    company: "Barbizon Everyday Corporation · 2 months",
-    period: "2025",
-    image: "/barbizon.png",
-    description:
-      "Built an internal SKU request system that two companies still use, covering around 20–25 templates. You type in an SKU code, it looks it up in the database, and fills out the right template for you. It used to be a slow, manual process where mistakes slipped in all the time.",
-    tags: ["React", "Node.js", "SQL", "Tailwind"],
-  },
-  {
-    title: "Front End Web Developer Intern",
-    company: "Monad Solutions Inc.",
-    period: "2025",
-    image: "/ojt.jfif",
-    description:
-      "My first taste of real dev work. I turned Figma designs into responsive UIs with React, TypeScript, and Tailwind, and learned how a team actually ships software — pull requests, Jira tickets, code reviews, all of it.",
-    tags: ["React", "TypeScript", "Figma", "Jira"],
-  },
-  {
-    title: "Service Crew",
-    company: "McDonald's · 2 years",
-    period: "2022 — 2024",
-    image: "/mcdo.png",
-    description:
-      "Two years on the service crew while studying full-time. Rush hour teaches you discipline, multitasking, and how to stay friendly when everything's on fire. Honestly, some of the best training I've ever had.",
-    tags: ["Discipline", "Teamwork", "Customer Service"],
-  },
-];
+import { careerRoles as roles } from "../../data/career";
 
 const CareerPage = () => {
+  const [searchParams] = useSearchParams();
+  const focusedRole = searchParams.get("r");
+
+  // Scroll the requested role into view (after the layout's scroll reset)
+  useEffect(() => {
+    if (!focusedRole) return;
+    const timer = setTimeout(() => {
+      document
+        .getElementById(`role-${focusedRole}`)
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 120);
+    return () => clearTimeout(timer);
+  }, [focusedRole]);
+
   return (
     <div className="min-h-full px-6 sm:px-10 pb-20">
       {/* Header */}
@@ -75,12 +44,13 @@ const CareerPage = () => {
         <div className="space-y-10">
           {roles.map((role, i) => (
             <motion.div
-              key={role.title}
+              key={role.slug}
+              id={`role-${role.slug}`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.55, delay: i * 0.05 }}
-              className="relative pl-12 sm:pl-16"
+              className="relative pl-12 sm:pl-16 scroll-mt-24"
             >
               {/* Timeline dot */}
               <span className="absolute left-4 sm:left-5 top-2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-blue ring-4 ring-blue-soft" />
