@@ -49,7 +49,7 @@ const Landing = () => {
         <ScrollBlob />
         <Navbar />
         <Introduction />
-        <div className="relative z-10 bg-[#0b0b11]/85 rounded-t-[2.5rem] border-t border-white/10 shadow-[0_-24px_60px_rgba(0,0,0,0.4)]">
+        <div className="relative z-10 bg-[rgba(11,11,17,0.85)] rounded-t-[2.5rem] border-t border-white/10 shadow-[0_-24px_60px_rgba(0,0,0,0.4)]">
           <div id="about">
             <AboutMe />
           </div>

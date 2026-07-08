@@ -23,7 +23,7 @@ export const projects: Project[] = [
     shelfTitle: "Zoho CRM",
     type: "CRM Setup, Email Campaigns, Automation & Integration",
     description:
-      "A full Zoho CRM and automation setup for a WordPress-based business. I moved their leads from spreadsheets into Zoho CRM, designed branded emails in Zoho Campaigns, built automations with Zoho Flow and workflow rules, and hooked the website forms straight into the CRM with webhooks — so new leads create themselves.",
+      "A full Zoho CRM and automation build for a WordPress-based AI advisory firm. I built a multi-pipeline CRM architecture, designed branded emails in Zoho Campaigns, built 20+ automations with Zoho Flow and workflow rules, and connected website forms to the CRM — debugging webhook integrations and field mappings so new leads flow in automatically.",
     image: "/zoho-crm-cover.svg",
     tech: ["Zoho CRM", "Zoho Campaigns", "Zoho Flow", "Workflow Rules", "WordPress", "API & Webhooks"],
     link: "#",
@@ -31,32 +31,32 @@ export const projects: Project[] = [
       {
         title: "Overview",
         content:
-          "A complete Zoho CRM and automation setup covering the full lead lifecycle — getting existing leads into the CRM, nurturing them with branded email campaigns, automating follow-ups and internal processes, and wiring a WordPress website directly into the CRM so new inquiries become leads automatically.",
+          "A complete Zoho CRM and automation build covering the full lead lifecycle — architecting pipelines and fields, building branded email campaigns, automating follow-ups and internal processes, and connecting website forms directly into the CRM so new inquiries become leads automatically.",
       },
       {
-        title: "Lead Import — Sheets to Zoho CRM",
+        title: "CRM Architecture — Pipelines & Fields",
         content:
-          "Migrated the client's existing lead database from spreadsheets into Zoho CRM. Cleaned and mapped the data to the right CRM fields, de-duplicated records, and organized leads so the client could immediately start working their pipeline from day one.",
+          "Designed and built 3 custom pipelines (Pre-Pipeline, Active Pipeline, Post-Sale) mapping the full lead-to-renewal journey, with humanized stage names and probability mapping on every stage. Built custom field architecture — including Industry/Sector, Staff Size, Lead Source, and Lead Tags — and 24 industry, 5 company size, and 4 role-based segments to organize 600+ leads.",
       },
       {
         title: "Email Design — Zoho Campaigns",
         content:
-          "Created clean, well-branded marketing and nurture emails in Zoho Campaigns — designed to look professional across devices and drive engagement, keeping the client's leads warm with consistent, on-brand communication.",
+          "Designed a full branded email system in Zoho Campaigns, including a 5-issue weekly executive newsletter with custom HTML layout, and iterated the design through multiple rounds of client feedback — restructuring sections, adding pull quotes and callout boxes, and refining copy for a more scannable, magazine-style read.",
       },
       {
         title: "Automation — Zoho Flow & Workflow Rules",
         content:
-          "Built automations on two levels: Zoho Flow for cross-app orchestration between services, and native CRM workflow rules for in-CRM triggers like field updates, notifications, and follow-up tasks — so routine actions happen automatically without manual work.",
+          "Built 20+ automations across two layers: Zoho Flow for cross-app orchestration between the website and CRM, and native CRM workflow rules for in-CRM triggers like stage-based task creation, internal notifications, and a 3-tier stalled-lead nurture sequence (14/30/60-day follow-ups) — so leads never go untouched without someone knowing.",
       },
       {
         title: "Website Integration — WordPress API & Webhooks",
         content:
-          "Connected the client's WordPress website to Zoho Flow using API calls and webhooks. When a visitor submits a form on the site, the webhook fires into Zoho Flow, which creates the lead in Zoho CRM instantly — no exports, no copy-paste, no missed inquiries.",
+          "Connected multiple WordPress forms to Zoho Flow via webhooks so form submissions create CRM leads automatically. Debugged real integration issues along the way — mismatched webhook URLs, malformed field mappings, and payload variable naming — to get each form reliably feeding clean data into the CRM.",
       },
       {
         title: "Tools Used",
         content:
-          "Zoho CRM (lead management, workflow rules), Zoho Campaigns (branded email design), Zoho Flow (cross-app automation), WordPress (client website), API & Webhooks (website-to-CRM lead creation).",
+          "Zoho CRM (pipelines, fields, workflow rules), Zoho Campaigns (branded email design), Zoho Flow (cross-app automation, webhook integrations), WordPress (client website), API & Webhooks (website-to-CRM lead creation).",
       },
     ],
   },
