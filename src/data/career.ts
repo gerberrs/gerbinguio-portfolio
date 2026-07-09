@@ -10,7 +10,7 @@ export type CareerRole = {
 export const careerRoles: CareerRole[] = [
   {
     slug: "ghl-assistant",
-    title: "Freelance GoHighLevel Assistant",
+    title: "Freelance GoHighLevel Assistant (outsourced)",
     period: "Feb 2026 — Jun 2026",
     image: null,
     description:
@@ -19,7 +19,7 @@ export const careerRoles: CareerRole[] = [
   },
   {
     slug: "zoho-specialist",
-    title: "CRM & Automation Specialist — Zoho",
+    title: "CRM & Automation Specialist — Zoho (gig)",
     period: "2026 — Present",
     image: null,
     description:
