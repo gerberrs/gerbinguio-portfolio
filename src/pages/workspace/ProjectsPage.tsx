@@ -5,7 +5,7 @@ import type React from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import type { Swiper as SwiperInstance } from "swiper";
 import "swiper/css";
 import { ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
 import { projects, type Project } from "../../data/projects";
@@ -26,6 +26,8 @@ const CaseStudyModal = ({
       images: [project.image],
     },
   ];
+  const swiperRef = useRef<SwiperInstance | null>(null);
+  const [slideIndex, setSlideIndex] = useState(0);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -70,17 +72,42 @@ const CaseStudyModal = ({
         </div>
 
         {slides.length > 1 && (
-          <div className="px-6 pt-2 pb-1 text-xs text-ink-500 text-right">
-            Use arrows to navigate →
+          <div className="px-6 pt-2 pb-1 flex items-center justify-between text-xs text-ink-500">
+            <span>
+              {slideIndex + 1} / {slides.length}
+            </span>
+            <span>Use arrows to navigate</span>
           </div>
         )}
 
-        <Swiper
-          modules={[Navigation]}
-          slidesPerView={1}
-          navigation
-          className="case-study-swiper"
-        >
+        <div className="relative">
+          {slides.length > 1 && (
+            <>
+              <button
+                onClick={() => swiperRef.current?.slidePrev()}
+                aria-label="Previous slide"
+                disabled={slideIndex === 0}
+                className="!absolute left-4 top-32 sm:top-36 -translate-y-1/2 z-20 w-10 h-10 rounded-full glass glass-hover flex items-center justify-center text-ink-900 disabled:opacity-30 disabled:pointer-events-none"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => swiperRef.current?.slideNext()}
+                aria-label="Next slide"
+                disabled={slideIndex === slides.length - 1}
+                className="!absolute right-4 top-32 sm:top-36 -translate-y-1/2 z-20 w-10 h-10 rounded-full glass glass-hover flex items-center justify-center text-ink-900 disabled:opacity-30 disabled:pointer-events-none"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </>
+          )}
+
+          <Swiper
+            slidesPerView={1}
+            onSwiper={(s) => (swiperRef.current = s)}
+            onSlideChange={(s) => setSlideIndex(s.activeIndex)}
+            className="case-study-swiper"
+          >
           {slides.map((slide, i) => (
             <SwiperSlide key={i}>
               <div className="flex flex-col gap-4 px-6 pb-8 pt-2 min-h-[320px]">
@@ -138,7 +165,8 @@ const CaseStudyModal = ({
               </div>
             </SwiperSlide>
           ))}
-        </Swiper>
+          </Swiper>
+        </div>
 
         <div className="px-6 pb-5 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4">
           {project.tech.map((t) => (
@@ -321,6 +349,16 @@ const ProjectsPage = () => {
                   className="absolute inset-0 w-full h-full object-cover"
                   draggable={false}
                 />
+                {/* Directional light sheen */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] via-transparent to-black/15" />
+                {/* Paper grain texture */}
+                <div
+                  className="absolute inset-0 opacity-[0.06] mix-blend-overlay"
+                  style={{
+                    backgroundImage:
+                      "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+                  }}
+                />
                 <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-4">
                   <p className="text-[9px] uppercase tracking-widest text-white/70 font-semibold mb-1 line-clamp-1">
@@ -330,18 +368,20 @@ const ProjectsPage = () => {
                     {project.shelfTitle}
                   </p>
                 </div>
+                {/* Sleeve wear vignette */}
+                <div className="absolute inset-0 shadow-[inset_0_0_18px_rgba(0,0,0,0.5)] pointer-events-none" />
               </div>
 
-              {/* Sleeve edge (thickness) */}
+              {/* Sleeve edge (thickness — paper/cardboard stack, lit from above) */}
               <div
                 className="absolute top-0 h-full"
                 style={{
                   left: "100%",
-                  width: "8px",
+                  width: "10px",
                   transformOrigin: "left center",
                   transform: "rotateY(90deg)",
                   background:
-                    "linear-gradient(180deg, #2C3E4D 0%, #22303C 50%, #1A252E 100%)",
+                    "linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.04) 35%, rgba(0,0,0,0.25) 100%), repeating-linear-gradient(180deg, #ded6c4 0px, #cdc3ac 1px, #b3a68d 2px, #cdc3ac 3px)",
                 }}
               />
 
@@ -409,18 +449,6 @@ const ProjectsPage = () => {
           ))}
         </div>
       </div>
-
-      <style>{`
-        .case-study-swiper .swiper-button-next,
-        .case-study-swiper .swiper-button-prev {
-          color: #6FA8C6;
-        }
-        .case-study-swiper .swiper-button-next::after,
-        .case-study-swiper .swiper-button-prev::after {
-          font-size: 14px;
-          font-weight: bold;
-        }
-      `}</style>
     </div>
   );
 };

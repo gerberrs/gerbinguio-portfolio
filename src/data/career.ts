@@ -27,19 +27,10 @@ export const careerRoles: CareerRole[] = [
     tags: ["Zoho CRM", "Zoho Campaigns", "Zoho Flow", "API & Webhooks", "WordPress"],
   },
   {
-    slug: "ghl-specialist",
-    title: "GHL & Automation Specialist",
-    period: "2025 — Present",
-    image: null,
-    description:
-      "This is where I found my lane. I built three complete GoHighLevel systems — Brew Mania, Brewtomation, and Brewsmarinas — covering bookings, a coaching program, and equipment rentals. Pipelines, workflows, email sequences, calendars, plus Zapier and Gemini AI for monthly reports that write themselves.",
-    tags: ["GoHighLevel", "Zapier", "n8n", "AI Reporting"],
-  },
-  {
     slug: "junior-software-engineer",
     title: "Junior Software Engineer",
     period: "2025",
-    image: "/barbizon.png",
+    image: null,
     description:
       "Built an internal SKU request system that two companies still use, covering around 20–25 templates. You type in an SKU code, it looks it up in the database, and fills out the right template for you. It used to be a slow, manual process where mistakes slipped in all the time.",
     tags: ["React", "Node.js", "SQL", "Tailwind"],
@@ -48,7 +39,7 @@ export const careerRoles: CareerRole[] = [
     slug: "frontend-intern",
     title: "Front End Web Developer Intern",
     period: "2025",
-    image: "/ojt.jfif",
+    image: null,
     description:
       "My first taste of real dev work. I turned Figma designs into responsive UIs with React, TypeScript, and Tailwind, and learned how a team actually ships software — pull requests, Jira tickets, code reviews, all of it.",
     tags: ["React", "TypeScript", "Figma", "Jira"],
@@ -57,7 +48,7 @@ export const careerRoles: CareerRole[] = [
     slug: "service-crew",
     title: "Service Crew",
     period: "2022 — 2024",
-    image: "/mcdo.png",
+    image: null,
     description:
       "Two years on the service crew while studying full-time. Rush hour teaches you discipline, multitasking, and how to stay friendly when everything's on fire. Honestly, some of the best training I've ever had.",
     tags: ["Discipline", "Teamwork", "Customer Service"],

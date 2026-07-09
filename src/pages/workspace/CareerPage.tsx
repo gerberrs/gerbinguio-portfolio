@@ -31,8 +31,9 @@ const CareerPage = () => {
           CAREER<span className="text-blue-deep">.</span>
         </h1>
         <p className="text-sm sm:text-base text-ink-500 mt-4 max-w-xl mx-auto">
-          Started at McDonald's, ended up building CRM systems. Here's how that
-          happened.
+          Started on the service crew at McDonald's, moved into front-end web
+          development, then software engineering — and landed where I actually
+          belong: building CRM and automation systems. Here's how that happened.
         </p>
       </div>
 
