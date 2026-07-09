@@ -1,7 +1,6 @@
 export type CareerRole = {
   slug: string;
   title: string;
-  company: string;
   period: string;
   image: string | null;
   description: string;
@@ -10,9 +9,17 @@ export type CareerRole = {
 
 export const careerRoles: CareerRole[] = [
   {
+    slug: "ghl-assistant",
+    title: "Freelance GoHighLevel Assistant",
+    period: "Feb 2026 — Jun 2026",
+    image: null,
+    description:
+      "Managed GoHighLevel subaccounts by creating effective email sequences and optimizing pipelines. Edited funnels to improve user experience and drive engagement. Built and maintained automated workflows using triggers, tags, pipeline stages, and email/SMS sequences to improve lead nurturing, customer follow-up, and operational efficiency.",
+    tags: ["GoHighLevel", "Email Sequences", "Funnel Building", "Automation"],
+  },
+  {
     slug: "zoho-specialist",
     title: "CRM & Automation Specialist — Zoho",
-    company: "Client Project · WordPress + Zoho stack",
     period: "2026 — Present",
     image: null,
     description:
@@ -22,7 +29,6 @@ export const careerRoles: CareerRole[] = [
   {
     slug: "ghl-specialist",
     title: "GHL & Automation Specialist",
-    company: "Freelance / Portfolio Projects",
     period: "2025 — Present",
     image: null,
     description:
@@ -32,7 +38,6 @@ export const careerRoles: CareerRole[] = [
   {
     slug: "junior-software-engineer",
     title: "Junior Software Engineer",
-    company: "Barbizon Everyday Corporation · 2 months",
     period: "2025",
     image: "/barbizon.png",
     description:
@@ -42,7 +47,6 @@ export const careerRoles: CareerRole[] = [
   {
     slug: "frontend-intern",
     title: "Front End Web Developer Intern",
-    company: "Monad Solutions Inc.",
     period: "2025",
     image: "/ojt.jfif",
     description:
@@ -52,7 +56,6 @@ export const careerRoles: CareerRole[] = [
   {
     slug: "service-crew",
     title: "Service Crew",
-    company: "McDonald's · 2 years",
     period: "2022 — 2024",
     image: "/mcdo.png",
     description:

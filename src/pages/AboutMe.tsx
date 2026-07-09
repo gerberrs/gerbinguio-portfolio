@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, useAnimation } from "framer-motion";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Settings,
@@ -72,7 +72,7 @@ const skillCategories = [
     title: "AI Tools",
     icon: Sparkles,
     featured: ["Claude AI"],
-    items: ["ChatGPT", "Gemini AI"],
+    items: ["ChatGPT", "Gemini AI", "Claude Code", "Lovable"],
   },
   {
     title: "Forms & Data",
@@ -93,6 +93,8 @@ const skillCategories = [
     items: [
       "GitHub",
       "Jira",
+      "Notion",
+      "Trello",
       "Canva",
       "VSCode",
       "ClickFunnels",
@@ -123,11 +125,30 @@ const specialties = [
   { icon: Sparkles, label: "AI" },
 ];
 
+const chipContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.035 },
+  },
+};
+
+const chipVariants = {
+  hidden: { opacity: 0, y: 8, scale: 0.92 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring" as const, stiffness: 380, damping: 26 },
+  },
+};
+
 const AboutMe = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({
     threshold: 0.1,
   });
+  const [activeCategory, setActiveCategory] = useState(0);
+  const active = skillCategories[activeCategory];
 
   useEffect(() => {
     if (inView) {
@@ -166,7 +187,7 @@ const AboutMe = () => {
       >
         {/* LEFT — About Me */}
         <motion.div
-          className="lg:w-[42%] flex-shrink-0"
+          className="w-full lg:w-[42%] flex-shrink-0"
           variants={fadeInUpStagger}
         >
           {/* Profile Row — image + info side by side */}
@@ -234,50 +255,84 @@ const AboutMe = () => {
 
         {/* RIGHT — Skills / Tools */}
         <motion.div
-          className="lg:w-[58%] flex flex-col"
+          className="w-full lg:w-[58%] flex flex-col min-w-0"
           variants={fadeInUpStagger}
         >
           <h3 className="font-display text-2xl sm:text-3xl mb-6 text-center lg:text-left text-ink-900">
             TOOLS I'VE <span className="text-blue-deep">USED</span>
           </h3>
-          <div className="glass rounded-3xl px-5 sm:px-7 divide-y divide-white/[0.06]">
-            {skillCategories.map((cat) => (
-              <motion.div
-                key={cat.title}
-                className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-5 py-5"
-                variants={fadeInUpStagger}
-              >
-                {/* Category label */}
-                <div className="flex items-center gap-2.5 sm:w-44 flex-shrink-0 sm:pt-1">
-                  <span className="w-8 h-8 rounded-lg bg-blue-soft flex items-center justify-center flex-shrink-0">
-                    <cat.icon className="w-4 h-4 text-blue-deep" />
-                  </span>
-                  <h4 className="text-sm font-bold text-ink-900 leading-tight">
-                    {cat.title}
-                  </h4>
-                </div>
 
-                {/* Skill chips — featured ones get a blue tint */}
-                <div className="flex flex-wrap gap-2">
-                  {cat.featured.map((skill) => (
-                    <span
+          {/* Category tabs — sliding active pill via layoutId; edge fades hint horizontal scroll on mobile */}
+          <div className="relative mb-4">
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-base-950 to-transparent z-10 sm:hidden" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-base-950 to-transparent z-10 sm:hidden" />
+            <div className="flex flex-nowrap sm:flex-wrap gap-1.5 overflow-x-auto sm:overflow-visible scrollbar-hide pb-1 px-1">
+              {skillCategories.map((cat, i) => {
+                const isActive = i === activeCategory;
+                return (
+                  <button
+                    key={cat.title}
+                    onClick={() => setActiveCategory(i)}
+                    className={`relative flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors ${
+                      isActive ? "text-base-950" : "text-ink-700 hover:text-ink-900"
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.span
+                        layoutId="activeSkillTab"
+                        className="absolute inset-0 bg-blue rounded-xl"
+                        transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                      />
+                    )}
+                    <cat.icon className="w-3.5 h-3.5 relative z-10" />
+                    <span className="relative z-10">{cat.title}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Active category panel */}
+          <div className="glass rounded-3xl px-5 sm:px-7 py-6 min-h-[14rem] overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active.title}
+                initial={{ opacity: 0, x: 16 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -16 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+              >
+                <motion.div
+                  className="flex flex-wrap gap-2.5"
+                  variants={chipContainerVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {active.featured.map((skill) => (
+                    <motion.span
                       key={skill}
-                      className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-soft border border-blue/30 text-blue-deep"
+                      variants={chipVariants}
+                      whileHover={{ scale: 1.06, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-blue-soft border border-blue/30 text-blue-deep cursor-default"
                     >
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
-                  {cat.items.map((skill) => (
-                    <span
+                  {active.items.map((skill) => (
+                    <motion.span
                       key={skill}
-                      className="px-3 py-1 rounded-full text-xs bg-white/5 border border-white/10 text-ink-700 hover:border-blue/50 hover:text-blue-deep transition-colors"
+                      variants={chipVariants}
+                      whileHover={{ scale: 1.06, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="px-3.5 py-1.5 rounded-full text-xs sm:text-sm bg-white/5 border border-white/10 text-ink-700 hover:border-blue/50 hover:text-blue-deep transition-colors cursor-default"
                     >
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
-                </div>
+                </motion.div>
               </motion.div>
-            ))}
+            </AnimatePresence>
           </div>
         </motion.div>
       </motion.div>

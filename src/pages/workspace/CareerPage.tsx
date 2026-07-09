@@ -60,7 +60,7 @@ const CareerPage = () => {
                   {role.image && (
                     <img
                       src={role.image}
-                      alt={role.company}
+                      alt={role.title}
                       className="w-16 h-16 rounded-xl object-cover border border-white/10 bg-white/5 flex-shrink-0"
                     />
                   )}
@@ -71,9 +71,6 @@ const CareerPage = () => {
                     <h2 className="text-lg sm:text-xl font-bold text-ink-900 leading-snug">
                       {role.title}
                     </h2>
-                    <p className="text-xs sm:text-sm font-semibold text-ink-500 mt-0.5">
-                      {role.company}
-                    </p>
                     <p className="text-ink-700 text-xs sm:text-sm leading-relaxed mt-3">
                       {role.description}
                     </p>

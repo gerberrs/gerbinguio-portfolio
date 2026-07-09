@@ -3,7 +3,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowUp, Briefcase, FolderKanban, Mail, Sparkles } from "lucide-react";
+import {
+  ArrowUp,
+  Briefcase,
+  ChevronRight,
+  FolderKanban,
+  Mail,
+  Sparkles,
+} from "lucide-react";
 import { useInView } from "react-intersection-observer";
 
 const PHRASES = [
@@ -73,13 +80,43 @@ const PromptCTA = () => {
           </p>
         </motion.div>
 
+        {/* Suggestion chips */}
+        <motion.p
+          className="text-xs text-ink-500"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          Jump straight in
+        </motion.p>
+        <motion.div
+          className="flex flex-wrap justify-center gap-3 mt-3 mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.15 }}
+        >
+          {chips.map((chip) => (
+            <motion.button
+              key={chip.label}
+              onClick={() => navigate(chip.to)}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="group flex items-center gap-2 pl-4 pr-3 py-2 rounded-full glass glass-hover border border-white/15 text-sm text-ink-700 hover:text-blue-deep hover:border-blue/40"
+            >
+              <chip.icon className="w-4 h-4" />
+              {chip.label}
+              <ChevronRight className="w-3.5 h-3.5 text-ink-500 group-hover:text-blue-deep group-hover:translate-x-0.5 transition-transform" />
+            </motion.button>
+          ))}
+        </motion.div>
+
         {/* Claude-style prompt card */}
         <motion.button
           type="button"
           onClick={() => navigate("/work/projects")}
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.15 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           whileHover={{ scale: 1.015 }}
           whileTap={{ scale: 0.99 }}
           className="w-full glass glass-hover rounded-3xl p-4 sm:p-5 text-left cursor-pointer"
@@ -100,25 +137,6 @@ const PromptCTA = () => {
             </span>
           </div>
         </motion.button>
-
-        {/* Suggestion chips */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-3 mt-6"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          {chips.map((chip) => (
-            <button
-              key={chip.label}
-              onClick={() => navigate(chip.to)}
-              className="flex items-center gap-2 px-4 py-2 rounded-full glass glass-hover text-sm text-ink-700 hover:text-blue-deep"
-            >
-              <chip.icon className="w-4 h-4" />
-              {chip.label}
-            </button>
-          ))}
-        </motion.div>
 
         {/* Footer */}
         <p className="text-ink-500 text-xs sm:text-sm mt-16">

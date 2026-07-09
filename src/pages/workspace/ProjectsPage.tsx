@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
-import { ExternalLink, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
 import { projects, type Project } from "../../data/projects";
 
 const CaseStudyModal = ({
@@ -268,6 +268,21 @@ const ProjectsPage = () => {
         <h1 className="font-display text-[clamp(2.75rem,9vw,7rem)] leading-none text-ink-900">
           PROJECTS<span className="text-blue-deep">.</span>
         </h1>
+        <div className="flex items-center justify-center gap-1.5 text-xs text-ink-500 mt-4">
+          <motion.span
+            animate={{ x: [-3, 0, -3] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronLeft className="w-3.5 h-3.5" />
+          </motion.span>
+          Drag to browse
+          <motion.span
+            animate={{ x: [3, 0, 3] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronRight className="w-3.5 h-3.5" />
+          </motion.span>
+        </div>
       </div>
 
       {/* Foliom-style vinyl shelf */}
