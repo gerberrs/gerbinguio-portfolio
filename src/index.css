@@ -7,22 +7,89 @@
 }
 
 @font-face {
-  font-family: 'Outfit';
+  font-family: 'Archivo';
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url('/fonts/outfit-variable.woff2') format('woff2');
+  src: url('/fonts/archivo-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('/fonts/bodoni-moda-variable.woff2') format('woff2');
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Theme tokens — two-layer: primitives are plain "R G B" triples so Tailwind's
+  rgb(var(--x) / <alpha-value>) pattern can apply opacity modifiers to them.
+  :root = light (Tailwind darkMode: ["class"] convention). .dark overrides.
+  Dark is the site's default/native identity; light is the alternate reached
+  via the theme toggle (see useTheme + the blocking script in index.html).
+*/
 :root {
   --radius: 1.25rem;
+
+  --bg: 247 247 245;
+  --surface-1: 255 255 254;
+  --surface-2: 255 255 255;
+
+  --ink: 12 12 12;
+  --ink-muted: 90 96 102;
+  --ink-faint: 140 145 150;
+
+  --accent: 62 115 150;
+  --accent-dark: 20 48 66;
+  --accent-deep: 32 68 92;
+  --accent-soft: 62 115 150;
+
+  /* what Tailwind's bare "white" utility resolves to — see tailwind.config.js.
+     Every `border-white/10`, `bg-white/5` etc. in the app is really "structural
+     tint on top of the surface," so remapping this one token retheme's all of
+     them without touching each call site. */
+  --fg-tint: 12 12 12;
+
+  /* Light mode gets depth from shadow + a near-opaque fill (per Apple/Material
+     guidance: light mode reads depth via shadow, not lighter-on-lighter fills —
+     the same low-opacity white that pops on a dark bg is invisible on a light one). */
+  --glass-fill: rgba(255, 255, 255, 0.82);
+  --glass-fill-strong: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-fill-lowpower: rgba(255, 255, 255, 0.94);
+  --glass-shadow: rgba(20, 22, 26, 0.10);
+  --glass-shadow-hover: rgba(20, 22, 26, 0.16);
+  --glass-inset: rgba(255, 255, 255, 0.7);
+}
+
+.dark {
+  --bg: 8 8 12;
+  --surface-1: 10 10 15;
+  --surface-2: 18 18 26;
+
+  --ink: 242 244 247;
+  --ink-muted: 196 203 212;
+  --ink-faint: 126 135 148;
+
+  --accent: 111 168 198;
+  --accent-dark: 85 144 178;
+  --accent-deep: 143 193 222;
+  --accent-soft: 111 168 198;
+
+  --fg-tint: 255 255 255;
+
   --glass-fill: rgba(255, 255, 255, 0.055);
   --glass-fill-strong: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-fill-lowpower: rgba(23, 23, 31, 0.88);
+  --glass-shadow: rgba(0, 0, 0, 0.7);
+  --glass-shadow-hover: rgba(0, 0, 0, 0.75);
+  --glass-inset: rgba(255, 255, 255, 0.09);
 }
 
 html {
@@ -36,8 +103,9 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #08080c;
-  color: #F2F4F7;
+  background-color: rgb(var(--bg));
+  color: rgb(var(--ink));
+  transition: background-color 400ms ease, color 400ms ease;
 }
 
 body {
@@ -46,8 +114,8 @@ body {
 }
 
 ::selection {
-  background: rgba(111, 168, 198, 0.35);
-  color: #f4faff;
+  background: rgb(var(--accent) / 0.35);
+  color: rgb(var(--ink));
 }
 
 /* ========== Liquid Glass material ========== */
@@ -66,9 +134,9 @@ body {
   background-clip: padding-box, border-box;
   /* soft inner highlight (top-left light hitting glass) + drop shadow for depth */
   box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.09),
+    inset 1px 1px 0 var(--glass-inset),
     inset 0 0 24px rgba(255, 255, 255, 0.02),
-    0 18px 50px -20px rgba(0, 0, 0, 0.7);
+    0 18px 50px -20px var(--glass-shadow);
 }
 
 /* specular sheen that shifts on hover */
@@ -96,8 +164,8 @@ body {
   -webkit-backdrop-filter: blur(22px) saturate(160%);
   border: 1px solid var(--glass-border);
   box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.07),
-    0 24px 60px -24px rgba(0, 0, 0, 0.7);
+    inset 1px 1px 0 var(--glass-inset),
+    0 24px 60px -24px var(--glass-shadow);
 }
 
 .glass-hover {
@@ -111,11 +179,11 @@ body {
 .glass-hover:hover {
   transform: translateY(-2px) scale(1.02);
   box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.14),
+    inset 1px 1px 0 var(--glass-inset),
     inset 0 0 30px rgba(255, 255, 255, 0.03),
-    0 26px 60px -20px rgba(0, 0, 0, 0.75),
-    0 0 0 1px rgba(111, 168, 198, 0.25),
-    0 0 34px -6px rgba(111, 168, 198, 0.28);
+    0 26px 60px -20px var(--glass-shadow-hover),
+    0 0 0 1px rgb(var(--accent) / 0.25),
+    0 0 34px -6px rgb(var(--accent) / 0.28);
 }
 
 .glass-hover:hover::after {
@@ -166,6 +234,27 @@ body {
   animation: float 3s ease-in-out infinite;
 }
 
+/* ========== Hero headline ========== */
+.hero-headline {
+  font-size: clamp(4rem, 12vw, 11rem);
+}
+
+@media (max-width: 639px) {
+  .hero-headline {
+    font-size: clamp(2.5rem, 15vw, 4rem);
+  }
+}
+
+/* ========== Marquee ticker ========== */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
 @keyframes slideInLeft {
   0% { opacity: 0; transform: translateX(-100px); }
   100% { opacity: 1; transform: translateX(0); }
@@ -196,12 +285,12 @@ body {
 }
 
 .workspace-scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgb(var(--fg-tint) / 0.14);
   border-radius: 999px;
 }
 
 .workspace-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(111, 168, 198, 0.4);
+  background: rgb(var(--accent) / 0.4);
 }
 
 /* ========== Loading Screen ========== */
@@ -264,7 +353,7 @@ body {
 }
 
 .loading-counter {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Archivo', sans-serif;
   font-size: 1.2rem;
   font-weight: 400;
   color: rgba(242, 244, 247, 0.5);
@@ -320,7 +409,7 @@ body {
 @media (max-width: 900px), (pointer: coarse) {
   .glass,
   .glass-panel {
-    --glass-fill: rgba(23, 23, 31, 0.88);
+    --glass-fill: var(--glass-fill-lowpower);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }

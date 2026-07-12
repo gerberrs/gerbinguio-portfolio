@@ -5,32 +5,38 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['Outfit', 'sans-serif'],
+				sans: ['Archivo', 'sans-serif'],
 				display: ['"Archivo Black"', 'sans-serif'],
+				serif: ['"Bodoni Moda"', 'serif'],
 			},
 			colors: {
+				// Tailwind's opacity-modifier pattern: rgb(var(--x) / <alpha-value>).
+				// The CSS variables themselves are redefined per theme in index.css
+				// (:root = light, .dark = dark), so every utility built from these
+				// tokens is theme-reactive without per-component edits.
+				white: 'rgb(var(--fg-tint) / <alpha-value>)',
 				base: {
-					950: '#050507',
-					900: '#0A0A0F',
-					800: '#12121A',
+					950: 'rgb(var(--bg) / <alpha-value>)',
+					900: 'rgb(var(--surface-1) / <alpha-value>)',
+					800: 'rgb(var(--surface-2) / <alpha-value>)',
 				},
 				sand: {
-					50: 'rgba(255,255,255,0.07)',
-					100: 'rgba(255,255,255,0.05)',
-					200: 'rgba(255,255,255,0.04)',
-					300: 'rgba(255,255,255,0.10)',
-					400: 'rgba(255,255,255,0.20)',
+					50: 'rgb(var(--fg-tint) / 0.07)',
+					100: 'rgb(var(--fg-tint) / 0.05)',
+					200: 'rgb(var(--fg-tint) / 0.04)',
+					300: 'rgb(var(--fg-tint) / 0.10)',
+					400: 'rgb(var(--fg-tint) / 0.20)',
 				},
 				ink: {
-					900: '#F2F4F7',
-					700: '#C4CBD4',
-					500: '#7E8794',
+					900: 'rgb(var(--ink) / <alpha-value>)',
+					700: 'rgb(var(--ink-muted) / <alpha-value>)',
+					500: 'rgb(var(--ink-faint) / <alpha-value>)',
 				},
 				blue: {
-					DEFAULT: '#6FA8C6',
-					dark: '#5590B2',
-					deep: '#8FC1DE',
-					soft: 'rgba(111,168,198,0.14)',
+					DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+					dark: 'rgb(var(--accent-dark) / <alpha-value>)',
+					deep: 'rgb(var(--accent-deep) / <alpha-value>)',
+					soft: 'rgb(var(--accent-soft) / 0.14)',
 				},
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',

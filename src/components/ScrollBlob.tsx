@@ -56,7 +56,7 @@ const ScrollBlob = () => {
             borderRadius: "50%",
             filter: "blur(50px)",
             background:
-              "radial-gradient(circle at 50% 50%, transparent 30%, rgba(111,168,198,0.16) 42%, rgba(62,115,150,0.10) 56%, transparent 70%)",
+              "radial-gradient(circle at 50% 50%, transparent 30%, rgb(var(--accent) / 0.16) 42%, rgb(var(--accent-dark) / 0.10) 56%, transparent 70%)",
           }}
         />
       </motion.div>

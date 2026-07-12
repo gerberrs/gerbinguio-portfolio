@@ -46,7 +46,7 @@ const CaseStudyModal = ({
       onClick={onClose}
     >
       <motion.div
-        className="relative w-full max-w-3xl bg-[#101018] border border-white/12 rounded-3xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-3xl bg-base-900 border border-white/12 rounded-3xl overflow-hidden shadow-2xl"
         initial={{ scale: 0.9, opacity: 0, y: 40 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 40 }}
@@ -290,13 +290,14 @@ const ProjectsPage = () => {
 
       {/* Header */}
       <div className="pt-12 sm:pt-16 px-6 text-center">
-        <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-ink-500 font-semibold mb-3">
-          Things I've built
-        </p>
         <h1 className="font-display text-[clamp(2.75rem,9vw,7rem)] leading-none text-ink-900">
           PROJECTS<span className="text-blue-deep">.</span>
         </h1>
-        <div className="flex items-center justify-center gap-1.5 text-xs text-ink-500 mt-4">
+        <p className="text-sm sm:text-base text-ink-500 mt-4 max-w-xl mx-auto">
+          Pipelines, workflows, and the odd full-stack build — pull one off the
+          shelf.
+        </p>
+        <div className="flex items-center justify-center gap-1.5 text-xs text-ink-500 mt-5">
           <motion.span
             animate={{ x: [-3, 0, -3] }}
             transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}

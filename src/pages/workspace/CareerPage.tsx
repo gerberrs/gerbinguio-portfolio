@@ -24,9 +24,6 @@ const CareerPage = () => {
     <div className="min-h-full px-6 sm:px-10 pb-20">
       {/* Header */}
       <div className="pt-12 sm:pt-16 text-center mb-12 sm:mb-16">
-        <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-ink-500 font-semibold mb-3">
-          The journey so far
-        </p>
         <h1 className="font-display text-[clamp(2.75rem,9vw,7rem)] leading-none text-ink-900">
           CAREER<span className="text-blue-deep">.</span>
         </h1>

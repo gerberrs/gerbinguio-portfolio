@@ -68,11 +68,9 @@ const PromptCTA = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-xs sm:text-sm uppercase tracking-[0.35em] text-ink-500 font-semibold mb-4">
-            Want the full tour?
-          </p>
           <h2 className="font-display text-3xl sm:text-5xl text-ink-900 leading-tight mb-4">
-            STEP INTO MY <span className="text-blue-deep">WORKSPACE</span>
+            WANT THE FULL TOUR? STEP INTO MY{" "}
+            <span className="text-blue-deep">WORKSPACE</span>
           </h2>
           <p className="text-sm sm:text-base text-ink-700 max-w-xl mx-auto mb-10">
             My projects, career, and contact info all live in here — laid out

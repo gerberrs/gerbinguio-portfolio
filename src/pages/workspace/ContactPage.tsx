@@ -52,14 +52,12 @@ const ContactPage = () => {
     <div className="min-h-full px-6 sm:px-10 pb-20">
       {/* Header */}
       <div className="pt-12 sm:pt-16 text-center mb-12 sm:mb-16">
-        <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-ink-500 font-semibold mb-3">
-          Let's work together
-        </p>
         <h1 className="font-display text-[clamp(2.75rem,9vw,7rem)] leading-none text-ink-900">
           CONTACT<span className="text-blue-deep">.</span>
         </h1>
         <p className="text-sm sm:text-base text-ink-500 mt-4 max-w-xl mx-auto">
-          I'm open to freelance, collaborations, or full-time opportunities.
+          Let's work together — open to freelance, collaborations, or
+          full-time opportunities.
         </p>
       </div>
 

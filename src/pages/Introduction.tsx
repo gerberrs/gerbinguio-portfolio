@@ -37,12 +37,6 @@ const Introduction = () => {
 
           {/* Text Section - Right Side */}
           <div className="w-full md:w-1/2 space-y-3 sm:space-y-6 text-center md:text-left">
-            <p
-              className="text-xs sm:text-sm uppercase tracking-[0.35em] text-ink-500 font-semibold animate-[fadeInUp_1s_ease-out_0.2s_backwards]"
-              style={{ opacity: 1 - progress * 2 }}
-            >
-              Hi, I'm Gerbinguio
-            </p>
             <h1
               className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-ink-900 leading-[0.95] animate-[fadeInUp_1s_ease-out_0.3s_backwards]"
               style={{

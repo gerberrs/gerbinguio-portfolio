@@ -12,7 +12,7 @@ const AmbientBackground = () => {
         /* static warm tints are part of the base paint — they carry the
            amber mood on phones where the animated orbs are disabled */
         background:
-          "radial-gradient(60% 50% at 0% 0%, rgba(111,168,198,0.10) 0%, rgba(111,168,198,0) 100%), radial-gradient(55% 45% at 100% 100%, rgba(62,115,150,0.10) 0%, rgba(62,115,150,0) 100%), radial-gradient(120% 120% at 50% 0%, #0d0d13 0%, #0a0a0f 45%, #050507 100%)",
+          "radial-gradient(60% 50% at 0% 0%, rgb(var(--accent) / 0.10) 0%, rgb(var(--accent) / 0) 100%), radial-gradient(55% 45% at 100% 100%, rgb(var(--accent-dark) / 0.10) 0%, rgb(var(--accent-dark) / 0) 100%), radial-gradient(120% 120% at 50% 0%, rgb(var(--surface-2)) 0%, rgb(var(--surface-1)) 45%, rgb(var(--bg)) 100%)",
       }}
     >
       {/* warm amber — top left */}
@@ -24,7 +24,7 @@ const AmbientBackground = () => {
           width: "46vw",
           height: "46vw",
           background:
-            "radial-gradient(circle, rgba(111,168,198,0.30) 0%, rgba(111,168,198,0) 68%)",
+            "radial-gradient(circle, rgb(var(--accent) / 0.30) 0%, rgb(var(--accent) / 0) 68%)",
           animation: "orbDrift1 16s ease-in-out infinite",
         }}
       />
@@ -37,7 +37,7 @@ const AmbientBackground = () => {
           width: "52vw",
           height: "52vw",
           background:
-            "radial-gradient(circle, rgba(62,115,150,0.28) 0%, rgba(62,115,150,0) 66%)",
+            "radial-gradient(circle, rgb(var(--accent-dark) / 0.28) 0%, rgb(var(--accent-dark) / 0) 66%)",
           animation: "orbDrift2 20s ease-in-out infinite",
         }}
       />
@@ -50,7 +50,7 @@ const AmbientBackground = () => {
           width: "30vw",
           height: "30vw",
           background:
-            "radial-gradient(circle, rgba(160,200,225,0.18) 0%, rgba(160,200,225,0) 70%)",
+            "radial-gradient(circle, rgb(var(--accent-deep) / 0.18) 0%, rgb(var(--accent-deep) / 0) 70%)",
           animation: "orbDrift3 13s ease-in-out infinite",
         }}
       />
