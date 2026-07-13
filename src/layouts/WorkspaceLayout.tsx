@@ -237,7 +237,7 @@ const WorkspaceLayout = () => {
             className="absolute inset-0 bg-black/60"
             onClick={() => setDrawerOpen(false)}
           />
-          <aside className="absolute left-0 top-0 h-full w-72 bg-base-900/97 border-r border-white/10 shadow-2xl animate-[slideInLeft_0.25s_ease-out]">
+          <aside className="absolute left-0 top-0 h-full w-72 bg-base-900/95 border-r border-white/10 shadow-2xl animate-[slideInLeft_0.25s_ease-out]">
             <button
               onClick={() => setDrawerOpen(false)}
               aria-label="Close sidebar"
