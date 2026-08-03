@@ -28,9 +28,12 @@ const CareerPage = () => {
           CAREER<span className="text-blue-deep">.</span>
         </h1>
         <p className="text-sm sm:text-base text-ink-500 mt-4 max-w-xl mx-auto">
-          Started on the service crew at McDonald's, moved into front-end web
-          development, then software engineering — and landed where I actually
-          belong: building CRM and automation systems. Here's how that happened.
+          My career didn't start in tech. I spent nearly three years working as
+          a service crew member while finishing my degree, then got my first
+          opportunity as a front-end developer intern. Since then, I've worked
+          in software engineering and eventually specialized in CRM and
+          automation systems, helping businesses streamline their operations
+          through custom workflows and integrations.
         </p>
       </div>
 
@@ -50,9 +53,6 @@ const CareerPage = () => {
               transition={{ duration: 0.55, delay: i * 0.05 }}
               className="relative pl-12 sm:pl-16 scroll-mt-24"
             >
-              {/* Timeline dot */}
-              <span className="absolute left-4 sm:left-5 top-2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-blue ring-4 ring-blue-soft" />
-
               <div className="glass glass-hover rounded-2xl p-5 sm:p-6">
                 <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                   {role.image && (
