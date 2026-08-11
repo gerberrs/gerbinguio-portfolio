@@ -18,14 +18,15 @@ export const careerRoles: CareerRole[] = [
     tags: ["Zoho CRM", "Zoho Flow", "Zoho Bookings", "Zoho Campaigns", "Email Campaigns", "API & Webhooks", "WordPress"],
   },
   {
-    slug: "ghl-assistant",
-    title: "GoHighLevel Automation Specialist (Freelance)",
-    period: "Jun 2025 — Present",
-    image: null,
-    description:
-      "I worked with clients to build and improve their GoHighLevel systems. This included creating lead nurturing sequences, appointment reminders, missed-call text back automations, and pipeline workflows. A big part of my work was troubleshooting broken automations and simplifying processes so clients spent less time doing manual follow-ups.",
-    tags: ["GoHighLevel", "Custom Code Funnel", "Website", "Email Design", "Email Sequences", "Funnel Building", "Automation"],
-  },
+slug: "ghl-specialist",
+title: "GoHighLevel Specialist (Freelance)",
+period: "Jun 2025 — Present",
+image: null,
+description:
+"I work with clients to build, manage, and improve their GoHighLevel systems. My work includes building websites and funnels, connecting domains and configuring DNS, setting up lead nurturing sequences, appointment reminders, missed-call text back automations, pipeline workflows, and other client automations. I also design email campaigns and newsletters, troubleshoot broken workflows, and streamline processes to reduce manual work and improve overall client operations.",
+tags: ["GoHighLevel", "Website Building", "Funnel Building", "Domain & DNS Setup", "Automation", "Email Design", "Email Marketing", "Email Sequences", "Custom Code"],
+},
+
   {
     slug: "junior-software-engineer",
     title: "Junior Software Engineer",
