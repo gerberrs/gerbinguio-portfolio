@@ -1,83 +1,63 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-	darkMode: ["class"],
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['Archivo', 'sans-serif'],
-				display: ['"Archivo Black"', 'sans-serif'],
-				serif: ['"Bodoni Moda"', 'serif'],
+				sans: ['Archivo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
 			},
+			// Tokens live in index.css as HSL triples; <alpha-value> keeps
+			// opacity modifiers (bg-brand/10, border-foreground/5…) working.
 			colors: {
-				// Tailwind's opacity-modifier pattern: rgb(var(--x) / <alpha-value>).
-				// The CSS variables themselves are redefined per theme in index.css
-				// (:root = light, .dark = dark), so every utility built from these
-				// tokens is theme-reactive without per-component edits.
-				white: 'rgb(var(--fg-tint) / <alpha-value>)',
-				base: {
-					950: 'rgb(var(--bg) / <alpha-value>)',
-					900: 'rgb(var(--surface-1) / <alpha-value>)',
-					800: 'rgb(var(--surface-2) / <alpha-value>)',
-				},
-				sand: {
-					50: 'rgb(var(--fg-tint) / 0.07)',
-					100: 'rgb(var(--fg-tint) / 0.05)',
-					200: 'rgb(var(--fg-tint) / 0.04)',
-					300: 'rgb(var(--fg-tint) / 0.10)',
-					400: 'rgb(var(--fg-tint) / 0.20)',
-				},
-				ink: {
-					900: 'rgb(var(--ink) / <alpha-value>)',
-					700: 'rgb(var(--ink-muted) / <alpha-value>)',
-					500: 'rgb(var(--ink-faint) / <alpha-value>)',
-				},
-				blue: {
-					DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
-					dark: 'rgb(var(--accent-dark) / <alpha-value>)',
-					deep: 'rgb(var(--accent-deep) / <alpha-value>)',
-					soft: 'rgb(var(--accent-soft) / 0.14)',
-				},
-				background: 'hsl(var(--background))',
-				foreground: 'hsl(var(--foreground))',
+				background: 'hsl(var(--background) / <alpha-value>)',
+				foreground: 'hsl(var(--foreground) / <alpha-value>)',
 				card: {
-					DEFAULT: 'hsl(var(--card))',
-					foreground: 'hsl(var(--card-foreground))'
+					DEFAULT: 'hsl(var(--card) / <alpha-value>)',
+					foreground: 'hsl(var(--card-foreground) / <alpha-value>)',
 				},
 				popover: {
-					DEFAULT: 'hsl(var(--popover))',
-					foreground: 'hsl(var(--popover-foreground))'
+					DEFAULT: 'hsl(var(--popover) / <alpha-value>)',
+					foreground: 'hsl(var(--popover-foreground) / <alpha-value>)',
 				},
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
+					foreground: 'hsl(var(--primary-foreground) / <alpha-value>)',
 				},
 				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))'
+					DEFAULT: 'hsl(var(--secondary) / <alpha-value>)',
+					foreground: 'hsl(var(--secondary-foreground) / <alpha-value>)',
 				},
 				muted: {
-					DEFAULT: 'hsl(var(--muted))',
-					foreground: 'hsl(var(--muted-foreground))'
+					DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
+					foreground: 'hsl(var(--muted-foreground) / <alpha-value>)',
 				},
 				accent: {
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+					DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
+					foreground: 'hsl(var(--accent-foreground) / <alpha-value>)',
 				},
 				destructive: {
-					DEFAULT: 'hsl(var(--destructive))',
-					foreground: 'hsl(var(--destructive-foreground))'
+					DEFAULT: 'hsl(var(--destructive) / <alpha-value>)',
+					foreground: 'hsl(var(--destructive-foreground) / <alpha-value>)',
 				},
-				border: 'hsl(var(--border))',
-				input: 'hsl(var(--input))',
-				ring: 'hsl(var(--ring))',
+				brand: {
+					DEFAULT: 'hsl(var(--brand) / <alpha-value>)',
+					soft: 'hsl(var(--brand-soft) / <alpha-value>)',
+				},
+				border: 'hsl(var(--border) / <alpha-value>)',
+				input: 'hsl(var(--input) / <alpha-value>)',
+				ring: 'hsl(var(--ring) / <alpha-value>)',
 			},
 			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				xl: 'var(--radius)',
+				lg: 'calc(var(--radius) - 2px)',
+				md: 'calc(var(--radius) - 4px)',
+				sm: 'calc(var(--radius) - 6px)',
 			},
-		}
+			maxWidth: {
+				prose: '64ch',
+			},
+		},
 	},
 	plugins: [require("tailwindcss-animate")],
 };

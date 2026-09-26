@@ -1,12 +1,4 @@
 @font-face {
-  font-family: 'Archivo Black';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/archivo-black.woff2') format('woff2');
-}
-
-@font-face {
   font-family: 'Archivo';
   font-style: normal;
   font-weight: 100 900;
@@ -15,11 +7,19 @@
 }
 
 @font-face {
-  font-family: 'Bodoni Moda';
+  font-family: 'IBM Plex Mono';
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 400;
   font-display: swap;
-  src: url('/fonts/bodoni-moda-variable.woff2') format('woff2');
+  src: url('/fonts/ibm-plex-mono-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-500.woff2') format('woff2');
 }
 
 @tailwind base;
@@ -27,404 +27,128 @@
 @tailwind utilities;
 
 /*
-  Theme tokens — two-layer: primitives are plain "R G B" triples so Tailwind's
-  rgb(var(--x) / <alpha-value>) pattern can apply opacity modifiers to them.
-  :root = light (Tailwind darkMode: ["class"] convention). .dark overrides.
-  Dark is the site's default/native identity; light is the alternate reached
-  via the theme toggle (see useTheme + the blocking script in index.html).
+  Design tokens — HSL triples consumed by tailwind.config.js as
+  hsl(var(--x) / <alpha-value>). Names follow shadcn/ui conventions so the
+  primitives in src/components/ui work unchanged; `--brand` is the single
+  restrained accent. The site is light-only by design.
 */
-:root {
-  --radius: 1.25rem;
+@layer base {
+  :root {
+    --background: 40 20% 97%;
+    --foreground: 240 6% 10%;
 
-  --bg: 247 247 245;
-  --surface-1: 255 255 254;
-  --surface-2: 255 255 255;
+    --card: 0 0% 100%;
+    --card-foreground: 240 6% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 6% 10%;
 
-  --ink: 12 12 12;
-  --ink-muted: 90 96 102;
-  --ink-faint: 140 145 150;
+    --primary: 240 6% 10%;
+    --primary-foreground: 40 20% 98%;
+    --secondary: 40 12% 92%;
+    --secondary-foreground: 240 6% 10%;
+    --muted: 40 12% 93%;
+    --muted-foreground: 240 4% 36%;
+    --accent: 40 12% 92%;
+    --accent-foreground: 240 6% 10%;
+    --destructive: 0 70% 42%;
+    --destructive-foreground: 0 0% 100%;
 
-  --accent: 62 115 150;
-  --accent-dark: 20 48 66;
-  --accent-deep: 32 68 92;
-  --accent-soft: 62 115 150;
+    --border: 40 8% 86%;
+    --input: 40 8% 82%;
+    --ring: 166 45% 26%;
 
-  /* what Tailwind's bare "white" utility resolves to — see tailwind.config.js.
-     Every `border-white/10`, `bg-white/5` etc. in the app is really "structural
-     tint on top of the surface," so remapping this one token retheme's all of
-     them without touching each call site. */
-  --fg-tint: 12 12 12;
+    /* deep green-teal: calm, professional, reads well on warm white (~7:1) */
+    --brand: 166 45% 26%;
+    --brand-soft: 160 28% 92%;
 
-  /* Light mode gets depth from shadow + a near-opaque fill (per Apple/Material
-     guidance: light mode reads depth via shadow, not lighter-on-lighter fills —
-     the same low-opacity white that pops on a dark bg is invisible on a light one). */
-  --glass-fill: rgba(255, 255, 255, 0.82);
-  --glass-fill-strong: rgba(255, 255, 255, 0.95);
-  --glass-border: rgba(0, 0, 0, 0.08);
-  --glass-fill-lowpower: rgba(255, 255, 255, 0.94);
-  --glass-shadow: rgba(20, 22, 26, 0.10);
-  --glass-shadow-hover: rgba(20, 22, 26, 0.16);
-  --glass-inset: rgba(255, 255, 255, 0.7);
-}
+    --radius: 0.75rem;
+    --nav-height: 4.5rem;
+  }
 
-.dark {
-  --bg: 8 8 12;
-  --surface-1: 10 10 15;
-  --surface-2: 18 18 26;
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: var(--nav-height);
+  }
 
-  --ink: 242 244 247;
-  --ink-muted: 196 203 212;
-  --ink-faint: 126 135 148;
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    font-feature-settings: "ss01";
+    text-rendering: optimizeLegibility;
+  }
 
-  --accent: 111 168 198;
-  --accent-dark: 85 144 178;
-  --accent-deep: 143 193 222;
-  --accent-soft: 111 168 198;
+  ::selection {
+    background: hsl(var(--brand) / 0.18);
+  }
 
-  --fg-tint: 255 255 255;
-
-  --glass-fill: rgba(255, 255, 255, 0.055);
-  --glass-fill-strong: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-fill-lowpower: rgba(23, 23, 31, 0.88);
-  --glass-shadow: rgba(0, 0, 0, 0.7);
-  --glass-shadow-hover: rgba(0, 0, 0, 0.75);
-  --glass-inset: rgba(255, 255, 255, 0.09);
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-html,
-body,
-#root {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: rgb(var(--bg));
-  color: rgb(var(--ink));
-  transition: background-color 400ms ease, color 400ms ease;
-}
-
-body {
-  font-feature-settings: "ss01";
-  -webkit-font-smoothing: antialiased;
-}
-
-::selection {
-  background: rgb(var(--accent) / 0.35);
-  color: rgb(var(--ink));
-}
-
-/* ========== Liquid Glass material ========== */
-.glass {
-  position: relative;
-  background: var(--glass-fill);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid transparent;
-  border-radius: 20px;
-  /* gradient edge — bright top-left → faint bottom-right */
-  background-image:
-    linear-gradient(var(--glass-fill), var(--glass-fill)),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.06));
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  /* soft inner highlight (top-left light hitting glass) + drop shadow for depth */
-  box-shadow:
-    inset 1px 1px 0 var(--glass-inset),
-    inset 0 0 24px rgba(255, 255, 255, 0.02),
-    0 18px 50px -20px var(--glass-shadow);
-}
-
-/* specular sheen that shifts on hover */
-.glass::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0.55;
-  background: linear-gradient(115deg,
-      rgba(255, 255, 255, 0.10) 0%,
-      rgba(255, 255, 255, 0) 30%,
-      rgba(255, 255, 255, 0) 70%,
-      rgba(255, 255, 255, 0.04) 100%);
-  background-size: 200% 200%;
-  background-position: 0% 0%;
-  transition: background-position 0.5s ease, opacity 0.3s ease;
-}
-
-/* calmer glass for large containers (no moving sheen over content) */
-.glass-panel {
-  background: var(--glass-fill);
-  backdrop-filter: blur(22px) saturate(160%);
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
-  border: 1px solid var(--glass-border);
-  box-shadow:
-    inset 1px 1px 0 var(--glass-inset),
-    0 24px 60px -24px var(--glass-shadow);
-}
-
-.glass-hover {
-  transition:
-    transform 0.25s ease-out,
-    box-shadow 0.25s ease-out,
-    background-color 0.25s ease-out;
-  will-change: transform;
-}
-
-.glass-hover:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow:
-    inset 1px 1px 0 var(--glass-inset),
-    inset 0 0 30px rgba(255, 255, 255, 0.03),
-    0 26px 60px -20px var(--glass-shadow-hover),
-    0 0 0 1px rgb(var(--accent) / 0.25),
-    0 0 34px -6px rgb(var(--accent) / 0.28);
-}
-
-.glass-hover:hover::after {
-  opacity: 0.85;
-  background-position: 100% 100%;
-}
-
-/* ========== Noise / grain overlay ========== */
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.035;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ========== Ambient light orbs ========== */
-@keyframes orbDrift1 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(6vw, 4vh, 0) scale(1.12); }
-}
-
-@keyframes orbDrift2 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
-  50% { transform: translate3d(-5vw, -6vh, 0) scale(0.92); }
-}
-
-@keyframes orbDrift3 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); }
-  50% { transform: translate3d(4vw, -3vh, 0) scale(1.1); }
-}
-
-.ambient-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  will-change: transform;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* ========== Hero headline ========== */
-.hero-headline {
-  font-size: clamp(4rem, 12vw, 11rem);
-}
-
-@media (max-width: 639px) {
-  .hero-headline {
-    font-size: clamp(2.5rem, 15vw, 4rem);
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 }
 
-/* ========== Marquee ticker ========== */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+@layer components {
+  /*
+    Light glass. Used selectively (nav, panels over imagery, compact meta
+    blocks, overlays) — never for whole sections. Deliberately does NOT set
+    `position`, so it composes with Tailwind's `absolute`/`sticky` classes.
+  */
+  .glass {
+    background-color: rgb(255 255 255 / 0.62);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgb(255 255 255 / 0.7);
+    box-shadow:
+      0 0 0 1px hsl(var(--foreground) / 0.05),
+      inset 0 1px 0 rgb(255 255 255 / 0.6),
+      0 12px 32px -18px hsl(var(--foreground) / 0.22);
+  }
+
+  /* Hairline underline that draws in on hover — used for text links. */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 250ms ease;
+  }
+
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8;
+  }
 }
 
-.animate-marquee {
-  animation: marquee 40s linear infinite;
+/* Lenis (smooth scroll) base rules — mirrors lenis/dist/lenis.css */
+html.lenis,
+html.lenis body {
+  height: auto;
 }
 
-@keyframes slideInLeft {
-  0% { opacity: 0; transform: translateX(-100px); }
-  100% { opacity: 1; transform: translateX(0); }
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
 }
 
-@keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Thin glass scrollbar for the workspace panel */
-.workspace-scroll::-webkit-scrollbar {
-  width: 8px;
-}
-
-.workspace-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.workspace-scroll::-webkit-scrollbar-thumb {
-  background: rgb(var(--fg-tint) / 0.14);
-  border-radius: 999px;
-}
-
-.workspace-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--accent) / 0.4);
-}
-
-/* ========== Loading Screen ========== */
-.loading-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(ellipse at center, #0c0e12 0%, #050507 72%);
-  overflow: hidden;
-}
-
-.loading-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
-  z-index: 2;
-}
-
-.loading-letters-container {
-  display: flex;
-  gap: 0.15em;
-  font-family: 'Archivo Black', sans-serif;
-  font-size: clamp(2rem, 7vw, 5.5rem);
-  letter-spacing: 0.04em;
-  user-select: none;
-}
-
-.loading-letter {
-  display: inline-block;
-  will-change: transform, opacity, filter;
-  transition: text-shadow 0.3s ease;
-}
-
-.loading-counter-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  width: min(400px, 80vw);
-}
-
-.loading-progress-track {
-  width: 100%;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.loading-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #3E7396, #6FA8C6, #A8C8DC);
-  border-radius: 999px;
-  transition: width 0.1s linear;
-  box-shadow: 0 0 12px rgba(111, 168, 198, 0.6);
-}
-
-.loading-counter {
-  font-family: 'Archivo', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: rgba(242, 244, 247, 0.5);
-  letter-spacing: 0.3em;
-  font-variant-numeric: tabular-nums;
-}
-
-.loading-particles {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.loading-particle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: rgba(111, 168, 198, 0.5);
-  border-radius: 50%;
-  animation: particleFloat 4s ease-in-out infinite;
-}
-
-@keyframes particleFloat {
-  0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
-  50% { opacity: 1; transform: translateY(-40px) scale(1); }
-}
-
-/* ========== Foliom-style project shelf ========== */
-.shelf-perspective {
-  perspective: 1600px;
-  perspective-origin: 15% 50%;
-}
-
-.shelf-card {
-  transform: rotateY(-45deg);
-  transform-style: preserve-3d;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
-  box-shadow: 14px 20px 40px rgba(0, 0, 0, 0.55);
-}
-
-.shelf-card:hover,
-.shelf-card:focus-visible {
-  transform: translateY(-72px) rotateY(-45deg) scale(1.08);
-  box-shadow: 0 46px 80px rgba(0, 0, 0, 0.7), 0 0 40px -8px rgba(111, 168, 198, 0.4);
-  z-index: 40 !important;
-}
-
-/* ========== Low-power fallback (phones / touch devices) ==========
-   Real-time backdrop-filter and huge animated blurs are too heavy on
-   mobile GPUs. Swap the live blur for a solid translucent fill that
-   reads the same, freeze the ambient light, and drop layered blurs. */
+/*
+  Phones / touch devices: live backdrop blur is GPU-heavy, so the glass falls
+  back to a near-opaque fill that reads the same.
+*/
 @media (max-width: 900px), (pointer: coarse) {
-  .glass,
-  .glass-panel {
-    --glass-fill: var(--glass-fill-lowpower);
-    backdrop-filter: none;
+  .glass {
+    background-color: rgb(255 255 255 / 0.9);
     -webkit-backdrop-filter: none;
-  }
-
-  .ambient-orb {
-    display: none;
-  }
-
-  .noise-overlay {
-    mix-blend-mode: normal;
-    opacity: 0.028;
+    backdrop-filter: none;
   }
 }
 
-/* ========== Reduced motion ========== */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -433,9 +157,5 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
-  }
-
-  .ambient-orb {
-    animation: none !important;
   }
 }

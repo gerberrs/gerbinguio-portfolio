@@ -8,8 +8,8 @@
       name="description"
       content="Gerbinguio Victorino — CRM & Automation Specialist. I design and build end-to-end CRM systems and automation workflows."
     />
-    <meta name="theme-color" content="#08080c" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#f8f7f4" />
+    <link rel="preload" href="/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Gerbinguio — CRM & Automation Specialist" />
     <meta
@@ -23,24 +23,6 @@
       content="Gerbinguio Victorino — CRM & Automation Specialist. I design and build end-to-end CRM systems and automation workflows."
     />
     <title>Gerbinguio — CRM & Automation Specialist</title>
-    <script>
-      (function () {
-        try {
-          var stored = localStorage.getItem("theme");
-          var theme =
-            stored === "light" || stored === "dark"
-              ? stored
-              : window.matchMedia("(prefers-color-scheme: dark)").matches
-                ? "dark"
-                : "light";
-          if (theme === "dark") {
-            document.documentElement.classList.add("dark");
-          }
-        } catch (e) {
-          document.documentElement.classList.add("dark");
-        }
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>

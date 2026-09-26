@@ -12,23 +12,47 @@ export type CaseStudySlide = {
   links?: SlideLink[];
 };
 
+/**
+ * How much room a project gets on the page. The Work section composes
+ * layouts from this (one featured, alternating rows, then a compact grid) —
+ * change a tier here rather than reordering JSX.
+ */
+export type ProjectTier = "featured" | "selected" | "compact";
+
 export type Project = {
   slug: string;
+  /** Display name used in headings on the page. */
+  name: string;
+  /** Full title, used in the case-study dialog. */
   title: string;
-  shelfTitle: string;
+  tier: ProjectTier;
   type: string;
   description: string;
   image: string;
+  /** Visuals for the on-page composition (falls back to `image`). */
+  gallery?: { src: string; alt: string }[];
+  /** My role on the project, as stated in my career history. */
+  role?: string;
+  /** Client / setting, as described in the project copy. */
+  context?: string;
+  period?: string;
+  /** A short ordered sequence (lead stages, a Zap chain…) shown as a flow. */
+  flow?: { label: string; steps: string[] };
   tech: string[];
-  link: string;
+  link?: string;
   caseStudy?: CaseStudySlide[];
 };
 
 export const projects: Project[] = [
   {
     slug: "neya-clinic",
+    name: "The Neya Clinic",
     title: "Full Business System — The Neya Clinic",
-    shelfTitle: "The Neya Clinic",
+    tier: "featured",
+    role: "Freelance GoHighLevel specialist",
+    context: "UK aesthetics clinic & its owner's coaching brand",
+    period: "Aug 2026 — ongoing",
+    gallery: [{ src: "/neya-innercircle.jpg", alt: "The NEYA Inner Circle membership sales page" }],
     type: "Membership Program, Coaching Offer, Live Event, Online Course & Booking System",
     description:
       "An ongoing build for a UK aesthetics clinic and its owner's coaching brand, since August 2026. Five builds with one goal: taking manual, repetitive work off the owner's plate. A membership program with custom billing dates, a coaching offer checkout, a live event sequence, an online course, and a booking system migrated off Ovatu. Built on GoHighLevel, Stripe, and Cloudflare Workers.",
@@ -125,14 +149,20 @@ export const projects: Project[] = [
   },
   {
     slug: "lead-flow-ops",
+    name: "Lead Flow Ops",
     title: "Contract GHL Builder — Lead Flow Ops",
-    shelfTitle: "Lead Flow Ops",
+    tier: "selected",
+    role: "Contract GoHighLevel builder",
+    context: "GHL agency · 4 clients, 5 sub-accounts",
+    gallery: [
+      { src: "/lfo-rrg.jpg", alt: "Revenue Restoration Group website" },
+      { src: "/lfo-gottfried.jpg", alt: "Gottfried Marketing custom ordering site" },
+    ],
     type: "AI Voice Agent, Webhooks, Memberships, Checkouts & Custom Front-End",
     description:
       "Contract GoHighLevel builder for a GHL agency, taking over build work across 4 active clients and 5 sub-accounts: a roofing revenue recovery agency, a tax deed investing education company, a print shop and psychology membership site with the same owner, and a roof care product brand. The work spans AI, automation, integrations, memberships, payments, and custom front-end, often built on top of systems other people started.",
     image: "/lfo-cover.jpg",
     tech: ["GoHighLevel", "Voice AI", "AI Extract Data", "Inbound Webhooks", "Workflows", "Memberships", "Square", "HTML", "CSS", "JavaScript", "SEO", "Meta Pixel"],
-    link: "#",
     caseStudy: [
       {
         title: "Revenue Restoration Group: AI Voice Agent",
@@ -228,14 +258,21 @@ export const projects: Project[] = [
   },
   {
     slug: "zoho-crm-setup",
+    name: "Zoho CRM & Automation Setup",
     title: "Zoho CRM & Automation Setup",
-    shelfTitle: "Zoho CRM",
+    tier: "selected",
+    role: "Freelance Zoho CRM & automation specialist",
+    context: "WordPress-based AI advisory firm",
+    gallery: [
+      { src: "/1stZoho.jpg", alt: "Zoho CRM analytics dashboard" },
+      { src: "/2ndZoho.jpg", alt: "Zoho CRM lead pipeline by Lead Status" },
+    ],
+    flow: { label: "Lead Status flow", steps: ["New Lead", "Booked Call", "Call Completed", "Won / Lost"] },
     type: "CRM Setup, Booking System, Email Campaigns, Automation & Integration",
     description:
       "A full Zoho CRM and automation build for a WordPress-based AI advisory firm. Architected the CRM around a Lead Status flow, connected Zoho Bookings for call scheduling, and built branded email campaigns and workflow automations across the lead lifecycle. Also connected website forms to the CRM, debugging webhook integrations and field mappings so new leads flow in automatically.",
     image: "/1stZoho.jpg",
     tech: ["Zoho CRM", "Zoho Bookings", "Zoho Campaigns", "Zoho Flow", "WordPress"],
-    link: "#",
     caseStudy: [
       {
         title: "Overview",
@@ -277,8 +314,15 @@ export const projects: Project[] = [
   },
   {
     slug: "content-growth-systems",
+    name: "Content & Growth Systems",
     title: "Content & Growth Systems",
-    shelfTitle: "Content Systems",
+    tier: "selected",
+    context: "Same AI advisory firm, beyond the CRM build",
+    gallery: [
+      { src: "/ainc-what-will-ai-drive.jpg", alt: "Branded article header image" },
+      { src: "/ainc-ikea-workforce.jpg", alt: "Article header image for the IKEA chatbot piece" },
+    ],
+    flow: { label: "4-pass editing pipeline", steps: ["Draft", "Tighten", "Fact & logic check", "Client review"] },
     type: "Article Production, SEO / AEO / GEO, Newsletter Design, Visual Templates & Content Ops",
     description:
       "A content and marketing operations workstream for the same AI advisory firm, beyond the original CRM build. Built a research-to-publish article system with a 4-pass editing pipeline and strict sourcing standards, optimized each piece for both traditional search and AI answer engines, and designed the branded newsletter and article image templates that ship with every issue.",
@@ -313,14 +357,20 @@ export const projects: Project[] = [
   },
   {
     slug: "brew-ghl-sub-accounts",
+    name: "Brew Mania, Brewtomation & Brewsmarinas",
     title: "GHL Sub-Accounts — Brew Mania, Brewtomation & Brewsmarinas",
-    shelfTitle: "Brew Series",
+    tier: "selected",
+    context: "Three mock coffee businesses",
+    gallery: [
+      { src: "/brewmania-cover.jpg", alt: "Brew Mania" },
+      { src: "/brewacademy-cover.jpg", alt: "Brewtomation" },
+      { src: "/brewsmarinas-cover.jpg", alt: "Brewsmarinas" },
+    ],
     type: "3 GHL Sub-Accounts: CRM, Funnels, Pipelines & Automation",
     description:
       "Three complete GoHighLevel sub-accounts for three mock coffee businesses: an event booking CRM for a pop-up coffee bar, a batch-based barista coaching program, and a coffee equipment rental system. Each one has its own funnel, pipeline, and workflows covering the whole customer journey, plus an AI monthly report built with Zapier and Gemini.",
     image: "/brew-series-cover.jpg",
     tech: ["GoHighLevel", "Zapier", "Jotform", "Gemini AI", "HTML Email Templates", "JavaScript", "Service Calendar", "Google Sheets", "Google Docs"],
-    link: "#",
     caseStudy: [
       {
         title: "Brew Mania — Event Booking CRM",
@@ -344,7 +394,7 @@ export const projects: Project[] = [
         title: "Brewtomation — Barista Coaching Program",
         content:
           "A batch-based online barista coaching system. Students enroll through a custom funnel, go through 3 coaching sessions, and graduate with a certificate, all tracked per batch. The pipeline follows each student from New Lead through Enrolled, each session, Graduate, and Alumni, with separate stages for lost leads, dropouts, and no-shows.",
-        images: ["/brewacademy.png", "/brewto-pipeline.png"],
+        images: ["/brewacademy.jpg", "/brewto-pipeline.png"],
       },
       {
         title: "Brewtomation — Enrollment, Sessions & Custom Emails",
@@ -356,7 +406,7 @@ export const projects: Project[] = [
         title: "Brewsmarinas — Equipment Rental CRM",
         content:
           "A coffee equipment rental CRM across three equipment tiers: Starter, Barista, and Full Café. An 11-stage pipeline covers the full rental lifecycle, from New Rental Request through Confirmed, Equipment Out, Returned, and Completed, with separate stages for cancellations, damage, and lost leads.",
-        images: ["/brewsmarinas.png", "/brewsma-pipeline.png"],
+        images: ["/brewsmarinas.jpg", "/brewsma-pipeline.png"],
       },
       {
         title: "Brewsmarinas — Rental Lifecycle Workflows",
@@ -368,41 +418,45 @@ export const projects: Project[] = [
   },
   {
     slug: "zapier-enrollment",
+    name: "Enrollment Automation",
     title: "Enrollment Automation — Zapier",
-    shelfTitle: "Enrollment Bot",
+    tier: "compact",
+    flow: { label: "Zap chain", steps: ["Jotform", "ClickFunnels", "ActiveCampaign", "Gmail"] },
     type: "Zapier Automation",
     description:
       "One form submission kicks off the whole chain: Jotform captures the lead, ClickFunnels enrolls them, ActiveCampaign tags them, and Gmail sends a personalized welcome. Nobody has to touch anything.",
     image: "/zapier-auto-enrollment-project.png",
     tech: ["Zapier", "Jotform", "ClickFunnels", "ActiveCampaign", "Gmail"],
-    link: "#",
   },
   {
     slug: "ojt-summarizer",
+    name: "OJT Report Summarizer",
     title: "OJT Report Summarizer",
-    shelfTitle: "AI Summarizer",
+    tier: "compact",
+    flow: { label: "Zap chain", steps: ["Google Sheets", "Gemini AI", "Google Docs"] },
     type: "Zapier + AI Automation",
     description:
       "Every time a new row lands in Google Sheets, Gemini AI summarizes it and drops a formatted report into Google Docs. I built it with Zapier to make my daily OJT reporting hands-free.",
     image: "/ojt-summarizer.png",
     tech: ["Zapier", "Gemini AI", "Google Sheets", "Google Docs"],
-    link: "#",
   },
   {
     slug: "capstone-booking",
+    name: "Capstone Booking System",
     title: "Capstone Booking System",
-    shelfTitle: "Booking System",
+    tier: "compact",
+    role: "Capstone project",
     type: "Full-Stack Web Application",
     description:
       "My capstone project — a full booking system with a dynamic calendar. Users check availability, pick a time slot, and manage their bookings, all running on PHP and SQL with a Bootstrap frontend.",
     image: "/snvhoa.jpg",
     tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL", "Bootstrap"],
-    link: "#",
   },
   {
     slug: "sku-request",
+    name: "SKU Request System",
     title: "SKU Request System",
-    shelfTitle: "SKU System",
+    tier: "compact",
     type: "AI-Assisted Web Application",
     description:
       "An SKU request system I built with AI-assisted development. React, ShadCN, and Tailwind on the front, Node.js and SQL behind it. This one's live — go click around.",

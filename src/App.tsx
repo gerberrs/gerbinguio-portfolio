@@ -1,33 +1,60 @@
-import { lazy, Suspense } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { MotionConfig } from "framer-motion";
-import Landing from "./pages/Landing";
-import WorkspaceLayout from "./layouts/WorkspaceLayout";
-import AmbientBackground from "./components/AmbientBackground";
+import { useCallback, useRef, useState } from "react";
+import { projects } from "@/data/projects";
+import { useProjectParam } from "@/hooks/useProjectParam";
+import { useScrollAnimations } from "@/hooks/useScrollAnimations";
+import { Navbar } from "@/components/portfolio/Navbar";
+import { Hero } from "@/components/portfolio/Hero";
+import { Work } from "@/components/portfolio/Work";
+import { Capabilities } from "@/components/portfolio/Capabilities";
+import { Experience } from "@/components/portfolio/Experience";
+import { About } from "@/components/portfolio/About";
+import { Contact } from "@/components/portfolio/Contact";
+import { ProjectDialog } from "@/components/portfolio/ProjectDialog";
 
-// Workspace pages are split out so Swiper/EmailJS stay off the landing bundle
-const ProjectsPage = lazy(() => import("./pages/workspace/ProjectsPage"));
-const CareerPage = lazy(() => import("./pages/workspace/CareerPage"));
-const ContactPage = lazy(() => import("./pages/workspace/ContactPage"));
-
+/**
+ * The whole portfolio is one page: Hero → Work → Capabilities → Experience →
+ * About → Contact. Project case studies open in a dialog addressed by
+ * `?project=<slug>` rather than separate routes.
+ */
 function App() {
+  const mainRef = useRef<HTMLElement>(null);
+  useScrollAnimations(mainRef);
+
+  const [slug, setSlug] = useProjectParam();
+  const [initialSlide, setInitialSlide] = useState<number | null>(null);
+  const activeProject = projects.find((p) => p.slug === slug) ?? null;
+
+  const openProject = useCallback(
+    (next: string, slide?: number) => {
+      setInitialSlide(slide ?? null);
+      setSlug(next);
+    },
+    [setSlug],
+  );
+
   return (
-    // reducedMotion="user": Framer Motion skips transform/layout animations
-    // for visitors with prefers-reduced-motion (the CSS block in index.css
-    // only covers CSS animations, not JS-driven ones).
-    <MotionConfig reducedMotion="user">
-      <AmbientBackground />
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/work" element={<WorkspaceLayout />}>
-          <Route index element={<Navigate to="projects" replace />} />
-          <Route path="projects" element={<Suspense fallback={null}><ProjectsPage /></Suspense>} />
-          <Route path="career" element={<Suspense fallback={null}><CareerPage /></Suspense>} />
-          <Route path="contact" element={<Suspense fallback={null}><ContactPage /></Suspense>} />
-        </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </MotionConfig>
+    <>
+      <a
+        href="#work"
+        className="sr-only z-50 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+      >
+        Skip to projects
+      </a>
+      <Navbar />
+      <main ref={mainRef} className="overflow-x-clip">
+        <Hero />
+        <Work onOpen={openProject} />
+        <Capabilities />
+        <Experience />
+        <About />
+        <Contact />
+      </main>
+      <ProjectDialog
+        project={activeProject}
+        initialSlide={initialSlide}
+        onClose={() => setSlug(null)}
+      />
+    </>
   );
 }
 
