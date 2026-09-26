@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Gerbinguio Victorino's personal portfolio site — a React + TypeScript + Vite single-page portfolio. Minimal, project-focused, white by default with a dark mode, and restrained glassmorphism. (The previous dark "AI workspace" version with `/work/*` routes lives on `main`; this branch is the one-page redesign.)
+Gerbinguio Victorino's personal portfolio site — a React + TypeScript + Vite single-page portfolio. Minimal, project-focused, white by default with a dark mode, and restrained glassmorphism. (It replaced an earlier dark "AI workspace" multi-page version with `/work/*` routes, preserved in git history at commit `9da7893`.)
 
 ## Commands
 
