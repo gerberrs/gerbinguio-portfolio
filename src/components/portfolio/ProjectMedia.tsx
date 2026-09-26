@@ -57,7 +57,7 @@ export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: ()
             data-reveal-image
             className={cn(
               frame,
-              "absolute bottom-0 right-0 aspect-[16/10] w-[46%] shadow-[0_18px_40px_-20px_hsl(var(--foreground)/0.35)] ring-4 ring-background",
+              "absolute bottom-0 right-0 aspect-[16/10] w-[46%] shadow-[0_18px_40px_-20px_hsl(var(--shadow)/0.35)] ring-4 ring-background",
             )}
           >
             <img

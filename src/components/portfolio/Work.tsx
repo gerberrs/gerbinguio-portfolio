@@ -189,7 +189,7 @@ function CompactProject({ project, onOpen }: { project: Project; onOpen: OpenPro
         onClick={() => onOpen(project.slug)}
         className="group block w-full text-left"
       >
-        <div className="aspect-[4/3] overflow-hidden rounded-lg border border-foreground/10 bg-white">
+        <div className="aspect-[4/3] overflow-hidden rounded-lg border border-foreground/10 bg-card">
           <img
             src={thumbSrc(project.image)}
             alt={`${project.name} screenshot`}

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Gerbinguio Victorino's personal portfolio site — a React + TypeScript + Vite single-page portfolio. Light, minimal, project-focused, with restrained light glassmorphism. (The previous dark "AI workspace" version with `/work/*` routes lives on `main`; this branch is the one-page redesign.)
+Gerbinguio Victorino's personal portfolio site — a React + TypeScript + Vite single-page portfolio. Minimal, project-focused, white by default with a dark mode, and restrained glassmorphism. (The previous dark "AI workspace" version with `/work/*` routes lives on `main`; this branch is the one-page redesign.)
 
 ## Commands
 
@@ -37,9 +37,11 @@ There is no test suite/framework configured in this repo.
 
 **Images** live in `public/img/` as WebP: a full version (≤1600px, `name.webp`) plus a 640px `name-sm.webp`. Reference the full path in data (`/img/name.webp`); components use `responsiveImage(src, sizes)` (srcset) or `thumbSrc(src)` for small frames, from `src/lib/project.ts`. When adding an image, generate both variants (e.g. with Pillow: quality ~80 full, ~76 small). Optional fields (`role`, `context`, `period`, `flow`, `gallery`) render only when present.
 
-### Theming
+### Theming (light + dark)
 
-Light-only. Tokens are HSL triples in `index.css` (`:root`), wired in `tailwind.config.js` as `hsl(var(--x) / <alpha-value>)` using shadcn names (`background`, `foreground`, `muted`, `border`, …) plus one accent, `brand` (deep green-teal). Use these tokens instead of hardcoded colors.
+Neutral white light theme by default; dark theme via `.dark` on `<html>`. Tokens are HSL triples in `index.css` (`:root` = light, `.dark` = dark), wired in `tailwind.config.js` (`darkMode: ["class"]`) as `hsl(var(--x) / <alpha-value>)` using shadcn names (`background`, `foreground`, `card`, `muted`, `border`, …) plus one accent, `brand` (green-teal, lighter in dark). Components never branch on theme — use tokens (`bg-card`, `text-muted-foreground`, `border-foreground/10`), not `bg-white`/hex. Drop shadows use `hsl(var(--shadow) / a)`; modal scrims use `bg-black/NN` in both themes.
+
+The theme is set before paint by an inline script in `index.html` (localStorage `theme`, else `prefers-color-scheme`). `src/hooks/useTheme.ts` keeps React in sync, persists explicit choices, follows OS changes until the visitor chooses, and updates `<meta name="theme-color">`. `ThemeToggle` sits in the navbar.
 
 `.glass` (in `index.css`) is the light glass surface — use it selectively (nav when scrolled, panels over imagery, compact meta blocks, the contact form), never for whole sections. It deliberately does not set `position`. On phones/coarse pointers it swaps live `backdrop-filter` for a near-opaque fill.
 

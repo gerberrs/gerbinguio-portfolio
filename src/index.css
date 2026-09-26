@@ -30,11 +30,13 @@
   Design tokens — HSL triples consumed by tailwind.config.js as
   hsl(var(--x) / <alpha-value>). Names follow shadcn/ui conventions so the
   primitives in src/components/ui work unchanged; `--brand` is the single
-  restrained accent. The site is light-only by design.
+  restrained accent. `:root` is the light theme; `.dark` on <html> (set
+  before paint by the inline script in index.html, toggled by useTheme)
+  swaps every token, so components never branch on theme.
 */
 @layer base {
   :root {
-    --background: 40 20% 97%;
+    --background: 0 0% 100%;
     --foreground: 240 6% 10%;
 
     --card: 0 0% 100%;
@@ -43,26 +45,74 @@
     --popover-foreground: 240 6% 10%;
 
     --primary: 240 6% 10%;
-    --primary-foreground: 40 20% 98%;
-    --secondary: 40 12% 92%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 5% 96%;
     --secondary-foreground: 240 6% 10%;
-    --muted: 40 12% 93%;
-    --muted-foreground: 240 4% 36%;
-    --accent: 40 12% 92%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 38%;
+    --accent: 240 5% 96%;
     --accent-foreground: 240 6% 10%;
     --destructive: 0 70% 42%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 8% 86%;
-    --input: 40 8% 82%;
+    --border: 240 6% 90%;
+    --input: 240 6% 86%;
     --ring: 166 45% 26%;
 
-    /* deep green-teal: calm, professional, reads well on warm white (~7:1) */
+    /* deep green-teal: calm, professional, ~7:1 on white */
     --brand: 166 45% 26%;
-    --brand-soft: 160 28% 92%;
+    --brand-soft: 160 30% 94%;
+
+    /* colour used for drop shadows (stays dark in both themes) */
+    --shadow: 240 10% 4%;
+
+    --glass-bg: rgb(255 255 255 / 0.7);
+    --glass-bg-solid: rgb(255 255 255 / 0.92);
+    --glass-border: rgb(255 255 255 / 0.75);
+    --glass-highlight: rgb(255 255 255 / 0.6);
+    --glass-hairline: hsl(var(--foreground) / 0.07);
 
     --radius: 0.75rem;
     --nav-height: 4.5rem;
+    color-scheme: light;
+  }
+
+  .dark {
+    --background: 240 6% 7%;
+    --foreground: 0 0% 95%;
+
+    --card: 240 5% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 240 5% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 0% 95%;
+    --primary-foreground: 240 6% 8%;
+    --secondary: 240 4% 14%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 240 4% 14%;
+    --muted-foreground: 240 5% 66%;
+    --accent: 240 4% 14%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 72% 62%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 4% 18%;
+    --input: 240 4% 24%;
+    --ring: 164 42% 56%;
+
+    --brand: 164 42% 56%;
+    --brand-soft: 166 30% 13%;
+
+    --shadow: 0 0% 0%;
+
+    --glass-bg: rgb(24 24 27 / 0.62);
+    --glass-bg-solid: rgb(24 24 27 / 0.94);
+    --glass-border: rgb(255 255 255 / 0.08);
+    --glass-highlight: rgb(255 255 255 / 0.05);
+    --glass-hairline: rgb(0 0 0 / 0.4);
+
+    color-scheme: dark;
   }
 
   html {
@@ -72,6 +122,9 @@
 
   body {
     @apply bg-background font-sans text-foreground antialiased;
+    transition:
+      background-color 250ms ease,
+      color 250ms ease;
     font-feature-settings: "ss01";
     text-rendering: optimizeLegibility;
   }
@@ -89,19 +142,19 @@
 
 @layer components {
   /*
-    Light glass. Used selectively (nav, panels over imagery, compact meta
+    Glass surface (light or dark per theme tokens). Used selectively (nav, panels over imagery, compact meta
     blocks, overlays) — never for whole sections. Deliberately does NOT set
     `position`, so it composes with Tailwind's `absolute`/`sticky` classes.
   */
   .glass {
-    background-color: rgb(255 255 255 / 0.62);
+    background-color: var(--glass-bg);
     -webkit-backdrop-filter: blur(16px) saturate(140%);
     backdrop-filter: blur(16px) saturate(140%);
-    border: 1px solid rgb(255 255 255 / 0.7);
+    border: 1px solid var(--glass-border);
     box-shadow:
-      0 0 0 1px hsl(var(--foreground) / 0.05),
-      inset 0 1px 0 rgb(255 255 255 / 0.6),
-      0 12px 32px -18px hsl(var(--foreground) / 0.22);
+      0 0 0 1px var(--glass-hairline),
+      inset 0 1px 0 var(--glass-highlight),
+      0 12px 32px -18px hsl(var(--shadow) / 0.3);
   }
 
   /* Hairline underline that draws in on hover — used for text links. */
@@ -150,7 +203,7 @@ html.lenis body {
 */
 @media (max-width: 900px), (pointer: coarse) {
   .glass {
-    background-color: rgb(255 255 255 / 0.9);
+    background-color: var(--glass-bg-solid);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }

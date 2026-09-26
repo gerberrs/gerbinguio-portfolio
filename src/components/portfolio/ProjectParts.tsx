@@ -74,7 +74,7 @@ export function FlowSteps({
       <ol className="mt-3 flex flex-wrap items-center gap-y-2 font-mono text-xs">
         {flow.steps.map((step, i) => (
           <li key={step} className="flex items-center">
-            <span className="rounded-md border border-foreground/10 bg-white/70 px-2 py-1 text-foreground">
+            <span className="rounded-md border border-foreground/10 bg-card/70 px-2 py-1 text-foreground">
               {step}
             </span>
             {i < flow.steps.length - 1 && (

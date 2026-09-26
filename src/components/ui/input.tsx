@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const fieldClass =
-  "flex w-full rounded-md border border-input bg-white/80 px-3.5 text-[15px] text-foreground transition-[border-color,box-shadow] duration-200 placeholder:text-muted-foreground/70 focus-visible:border-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/10 disabled:cursor-not-allowed disabled:opacity-50";
+  "flex w-full rounded-md border border-input bg-card/80 px-3.5 text-[15px] text-foreground transition-[border-color,box-shadow] duration-200 placeholder:text-muted-foreground/70 focus-visible:border-brand focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/10 disabled:cursor-not-allowed disabled:opacity-50";
 
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
   ({ className, type, ...props }, ref) => (
