@@ -26,7 +26,7 @@ Read `CLAUDE.md` at the repo root before doing anything. It documents intentiona
 - Images in `public/`: flag anything over ~300 KB (`du -h`). Screenshots/photos should be WebP (or JPG), sized to their max displayed width (~2x for retina). On macOS, `sips` can resize/convert to JPEG; use `cwebp` if installed (`which cwebp`). Pixel-art images (e.g. `pixelated_*`) should stay PNG — shrink dimensions or palette instead of using lossy compression.
 - `<img>` tags: below-the-fold images need `loading="lazy"` and `decoding="async"`, plus explicit `width`/`height` or `aspect-ratio` to prevent layout shift.
 - Heavy dependencies (`three`, `@react-three/*`, `swiper`) should be lazy-loaded (`React.lazy` / dynamic `import()`) if they aren't needed on first paint. Check route-level code splitting in `src/App.tsx`.
-- Run `npm run build` and look at the chunk sizes Vite reports; flag chunks over ~500 KB.
+- Run `yarn build` and look at the chunk sizes Vite reports; flag chunks over ~500 KB.
 - Unused dependencies/dead code: CLAUDE.md lists known dead shadcn scaffolding and `src/lib/motion.ts`. Report them; don't delete them unless asked.
 
 **Accessibility**
@@ -54,7 +54,7 @@ Read `CLAUDE.md` at the repo root before doing anything. It documents intentiona
 - **Safe, clear-cut fixes** (missing `alt`/`aria-label`, `loading="lazy"`, token swaps, `!absolute`, meta tags): apply them directly.
 - **Asset changes** (converting/resizing images, deleting orphaned files) and **structural changes** (code splitting, removing dependencies): don't do them silently. List them with the expected savings and ask for confirmation first. When converting an image, update every reference to the new filename and delete the original only after confirmation.
 - Never change copy, layout, or visual design without asking.
-- After editing, run `npm run lint` and `npm run build`. Both must pass; if they don't, fix or revert your change.
+- After editing, run `yarn lint` and `yarn build`. Both must pass; if they don't, fix or revert your change.
 
 ## Report format
 

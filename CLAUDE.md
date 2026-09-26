@@ -9,13 +9,15 @@ Gerbinguio Victorino's personal portfolio site — a React + TypeScript + Vite s
 ## Commands
 
 ```
-npm run dev       # start Vite dev server
-npm run build     # tsc -b && vite build (type-checks via project references, then bundles)
-npm run lint      # eslint .
-npm run preview   # preview the production build
+yarn dev       # start Vite dev server
+yarn build     # tsc -b && vite build (type-checks via project references, then bundles)
+yarn lint      # eslint .
+yarn preview   # preview the production build
 ```
 
 There is no test suite/framework configured in this repo.
+
+**Yarn only.** The repo uses Yarn 1 (pinned in `package.json`'s `packageManager`, run via Corepack) with `yarn.lock` as the only lockfile. Don't run `npm install`: it recreates `package-lock.json` and has a known bug that skips Rollup's native ARM64 package on Apple Silicon (`Cannot find module @rollup/rollup-darwin-arm64`). Node 22.12+ is required by Vite 7; `.nvmrc` pins Node 22.
 
 ## Architecture
 

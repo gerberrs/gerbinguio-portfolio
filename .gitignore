@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 .npm-cache/
 .temp/
+
+# Yarn-only repo: keep other package managers' lockfiles out
+package-lock.json
+pnpm-lock.yaml
