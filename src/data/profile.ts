@@ -16,6 +16,13 @@ export const profile = {
   candid: "/devPicture.png",
 };
 
+/** What I'm working on right now — shown in the hero. No client names. */
+export const currentWork = [
+  { title: "GoHighLevel Specialist", detail: "Direct client" },
+  { title: "GoHighLevel Builder", detail: "Agency level" },
+  { title: "Zoho CRM & SEO Article Writing", detail: "CRM, automation & content" },
+];
+
 export type ProfileLink = { label: string; href: string };
 
 export const profileLinks: ProfileLink[] = [

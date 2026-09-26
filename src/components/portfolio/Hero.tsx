@@ -1,24 +1,25 @@
 import { useRef } from "react";
 import { ArrowDown, Download, MapPin } from "lucide-react";
-import { profile } from "@/data/profile";
-import { projects } from "@/data/projects";
+import { currentWork, profile } from "@/data/profile";
 import { Button } from "@/components/ui/button";
 import { useSmoothScroll } from "@/components/SmoothScroll";
 import { gsap, motionQueries, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
-const current = projects.find((p) => p.tier === "featured");
-
 function StatusPanel({ className }: { className?: string }) {
   return (
     <div className={cn("space-y-3 text-sm", className)}>
-      {current && (
-        <div>
-          <p className="font-mono text-xs text-muted-foreground">Currently</p>
-          <p className="mt-1 font-medium leading-snug">{current.title}</p>
-          {current.period && <p className="mt-0.5 text-muted-foreground">{current.period}</p>}
-        </div>
-      )}
+      <div>
+        <p className="font-mono text-xs text-muted-foreground">Currently</p>
+        <ul className="mt-2 space-y-2">
+          {currentWork.map((work) => (
+            <li key={work.title} className="leading-snug">
+              <span className="font-medium">{work.title}</span>
+              <span className="block text-muted-foreground">{work.detail}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="space-y-1.5 border-t border-foreground/10 pt-3 text-muted-foreground">
         <p className="flex items-center gap-2">
           <MapPin aria-hidden className="size-3.5 shrink-0" />
