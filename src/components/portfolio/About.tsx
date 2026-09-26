@@ -1,5 +1,6 @@
 import { about, profile } from "@/data/profile";
 import { education } from "@/data/career";
+import { responsiveImage } from "@/lib/project";
 
 const facts = [
   ["Based in", profile.location],
@@ -19,7 +20,7 @@ export function About() {
         <div className="relative md:col-span-5">
           <div data-reveal-image className="aspect-[4/5] overflow-hidden rounded-xl bg-muted">
             <img
-              src={profile.candid}
+              {...responsiveImage(profile.candid, "(min-width: 768px) 40vw, 100vw")}
               alt={`${profile.shortName} at an outdoor concert`}
               loading="lazy"
               decoding="async"

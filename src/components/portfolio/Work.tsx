@@ -1,7 +1,13 @@
 import { ArrowRight } from "lucide-react";
 import { projects, type Project } from "@/data/projects";
 import { Button } from "@/components/ui/button";
-import { projectOutcome, projectVisuals, type OpenProject } from "@/lib/project";
+import {
+  projectOutcome,
+  projectVisuals,
+  responsiveImage,
+  thumbSrc,
+  type OpenProject,
+} from "@/lib/project";
 import { cn } from "@/lib/utils";
 import { SectionHeader } from "./SectionHeader";
 import { ProjectMedia } from "./ProjectMedia";
@@ -44,8 +50,9 @@ function FeaturedProject({ project, onOpen }: { project: Project; onOpen: OpenPr
             className="aspect-[4/3] overflow-hidden rounded-xl border border-foreground/10 bg-muted sm:aspect-[16/9]"
           >
             <img
-              src={cover.src}
+              {...responsiveImage(cover.src, "(min-width: 1240px) 1176px, 100vw")}
               alt={cover.alt}
+              loading="lazy"
               data-parallax="0.04"
               decoding="async"
               className="size-full object-cover object-top"
@@ -96,7 +103,7 @@ function FeaturedProject({ project, onOpen }: { project: Project; onOpen: OpenPr
                   <div className="aspect-[16/10] overflow-hidden rounded-lg border border-foreground/10 bg-muted">
                     {build.images?.[0] && (
                       <img
-                        src={build.images[0]}
+                        src={thumbSrc(build.images[0])}
                         alt=""
                         loading="lazy"
                         decoding="async"
@@ -184,7 +191,7 @@ function CompactProject({ project, onOpen }: { project: Project; onOpen: OpenPro
       >
         <div className="aspect-[4/3] overflow-hidden rounded-lg border border-foreground/10 bg-white">
           <img
-            src={project.image}
+            src={thumbSrc(project.image)}
             alt={`${project.name} screenshot`}
             loading="lazy"
             decoding="async"

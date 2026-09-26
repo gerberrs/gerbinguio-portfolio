@@ -3,6 +3,7 @@ import { Check, Maximize2 } from "lucide-react";
 import type { CaseStudySlide, Project } from "@/data/projects";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { useSmoothScroll } from "@/components/SmoothScroll";
+import { responsiveImage } from "@/lib/project";
 import { cn } from "@/lib/utils";
 import { ExternalLink, MetaList, TechList } from "./ProjectParts";
 
@@ -24,7 +25,7 @@ function Shot({
       className="group relative block w-full cursor-zoom-in overflow-hidden rounded-lg border border-foreground/10 bg-muted"
     >
       <img
-        src={src}
+        {...responsiveImage(src, "(min-width: 1024px) 720px, 100vw")}
         alt={alt}
         loading="lazy"
         decoding="async"

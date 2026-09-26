@@ -29,15 +29,17 @@ const SmoothScrollContext = createContext<SmoothScrollValue | null>(null);
 /**
  * Lenis smooth scrolling, carried over from the previous landing page
  * (same lerp: 0.1 feel), now driven by GSAP's ticker so ScrollTrigger and
- * Lenis share one animation frame and never drift. Skipped entirely for
- * prefers-reduced-motion visitors — they get native scrolling.
+ * Lenis share one animation frame and never drift. Skipped for
+ * prefers-reduced-motion visitors and on touch devices, where native
+ * momentum scrolling is already smooth and cheaper than a JS loop.
  */
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (!prefersReducedMotion()) {
+    const touch = window.matchMedia("(pointer: coarse)").matches;
+    if (!prefersReducedMotion() && !touch) {
       const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
       lenisRef.current = lenis;
 

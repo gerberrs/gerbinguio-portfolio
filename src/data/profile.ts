@@ -12,8 +12,8 @@ export const profile = {
   email: "gerbinguio@gmail.com",
   phone: { display: "+63 994 040 1002", href: "tel:+639940401002" },
   resume: "/Victorino-2026-CV.pdf",
-  portrait: "/gerbinpicture.jpg",
-  candid: "/devPicture.png",
+  portrait: "/img/gerbinpicture.webp",
+  candid: "/img/devPicture.webp",
 };
 
 /** What I'm working on right now — shown in the hero. No client names. */

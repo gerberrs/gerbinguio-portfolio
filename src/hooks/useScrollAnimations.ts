@@ -6,7 +6,8 @@ import { gsap, motionQueries, ScrollTrigger, useGSAP } from "@/lib/gsap";
  * with data attributes instead of each owning GSAP code:
  *
  *   data-reveal          fade + 16px rise as it enters (batched + staggered)
- *   data-reveal-image    clip-path reveal of a media frame, inner <img> settles from 1.06
+ *   data-reveal-image    media frame fades/rises in, inner <img> settles from 1.06
+ *                        (transform + opacity only, so it stays on the compositor)
  *   data-parallax="0.06" gentle scrubbed drift on an <img> inside an overflow-hidden frame
  *                        (desktop + fine pointer only)
  *
@@ -42,8 +43,8 @@ export function useScrollAnimations(scope: RefObject<HTMLElement | null>) {
           });
           tl.fromTo(
             frame,
-            { clipPath: "inset(8% 0% 0% 0%)" },
-            { clipPath: "inset(0% 0% 0% 0%)", clearProps: "clipPath" },
+            { autoAlpha: 0, y: 24 },
+            { autoAlpha: 1, y: 0, clearProps: "transform" },
           );
           if (img && !img.hasAttribute("data-parallax")) {
             tl.fromTo(img, { scale: 1.06 }, { scale: 1, clearProps: "scale" }, 0);

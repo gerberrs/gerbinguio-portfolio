@@ -137,6 +137,13 @@ html.lenis body {
   overscroll-behavior: contain;
 }
 
+/* Parallax images are scrubbed every scroll frame — keep them on their own layer. */
+@media (min-width: 768px) and (pointer: fine) {
+  [data-parallax] {
+    will-change: transform;
+  }
+}
+
 /*
   Phones / touch devices: live backdrop blur is GPU-heavy, so the glass falls
   back to a near-opaque fill that reads the same.

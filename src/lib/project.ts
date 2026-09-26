@@ -13,3 +13,16 @@ export const projectVisuals = (project: Project) =>
 
 /** Opens a project's case study, optionally at a specific slide. */
 export type OpenProject = (slug: string, slide?: number) => void;
+
+/**
+ * Every image in /img ships as a full WebP (≤1600px) plus a `-sm` 640px
+ * variant. `responsiveImage` lets the browser pick; `thumbSrc` is for frames
+ * that never render wider than ~320px.
+ */
+export const thumbSrc = (src: string) => src.replace(/\.webp$/, "-sm.webp");
+
+export const responsiveImage = (src: string, sizes: string) => ({
+  src,
+  srcSet: `${thumbSrc(src)} 640w, ${src} 1600w`,
+  sizes,
+});

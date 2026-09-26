@@ -1,5 +1,5 @@
 import type { Project } from "@/data/projects";
-import { projectVisuals } from "@/lib/project";
+import { projectVisuals, responsiveImage } from "@/lib/project";
 import { cn } from "@/lib/utils";
 
 const frame = "overflow-hidden rounded-xl border border-foreground/10 bg-muted";
@@ -29,7 +29,7 @@ export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: ()
             <figure key={v.src} className={cn(i === 1 && "sm:translate-y-8")}>
               <div data-reveal-image className={cn(frame, "aspect-[3/5]")}>
                 <img
-                  src={v.src}
+                  {...responsiveImage(v.src, "(min-width: 768px) 18vw, 32vw")}
                   alt={`${v.alt} website`}
                   loading="lazy"
                   decoding="async"
@@ -46,7 +46,7 @@ export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: ()
         <div className="relative pb-[12%]">
           <div data-reveal-image className={cn(frame, "aspect-[16/10] w-[90%]")}>
             <img
-              src={visuals[0].src}
+              {...responsiveImage(visuals[0].src, "(min-width: 768px) 52vw, 90vw")}
               alt={visuals[0].alt}
               loading="lazy"
               decoding="async"
@@ -61,7 +61,7 @@ export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: ()
             )}
           >
             <img
-              src={visuals[1].src}
+              {...responsiveImage(visuals[1].src, "(min-width: 768px) 27vw, 46vw")}
               alt={visuals[1].alt}
               loading="lazy"
               decoding="async"
@@ -72,7 +72,7 @@ export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: ()
       ) : (
         <div data-reveal-image className={cn(frame, "aspect-[16/10]")}>
           <img
-            src={visuals[0].src}
+            {...responsiveImage(visuals[0].src, "(min-width: 768px) 55vw, 100vw")}
             alt={visuals[0].alt}
             loading="lazy"
             decoding="async"

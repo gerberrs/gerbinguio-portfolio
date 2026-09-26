@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Textarea } from "@/components/ui/input";
@@ -32,6 +31,8 @@ const ContactForm = () => {
 
     try {
       const formData = new FormData(formRef.current);
+      // Loaded on demand so the email SDK isn't part of the initial bundle.
+      const { default: emailjs } = await import("@emailjs/browser");
       await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,

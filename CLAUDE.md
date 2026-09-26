@@ -33,7 +33,9 @@ There is no test suite/framework configured in this repo.
 
 ### Data-driven content
 
-`src/data/projects.ts`, `src/data/career.ts`, `src/data/profile.ts` are the single source of truth — edit data, not JSX. Only use real content from these files; don't invent metrics, roles or clients. Optional fields (`role`, `context`, `period`, `flow`, `gallery`) render only when present.
+`src/data/projects.ts`, `src/data/career.ts`, `src/data/profile.ts` are the single source of truth — edit data, not JSX. Only use real content from these files; don't invent metrics, roles or clients.
+
+**Images** live in `public/img/` as WebP: a full version (≤1600px, `name.webp`) plus a 640px `name-sm.webp`. Reference the full path in data (`/img/name.webp`); components use `responsiveImage(src, sizes)` (srcset) or `thumbSrc(src)` for small frames, from `src/lib/project.ts`. When adding an image, generate both variants (e.g. with Pillow: quality ~80 full, ~76 small). Optional fields (`role`, `context`, `period`, `flow`, `gallery`) render only when present.
 
 ### Theming
 
@@ -48,8 +50,8 @@ Self-hosted in `public/fonts/`: Archivo (variable, `font-sans`) and IBM Plex Mon
 ### Animation & scrolling (GSAP + Lenis)
 
 - `src/lib/gsap.ts` registers `ScrollTrigger` and `useGSAP` once; import GSAP from there.
-- `src/components/SmoothScroll.tsx` — Lenis (`lerp: 0.1`), driven by `gsap.ticker` and calling `ScrollTrigger.update` on scroll so both stay in sync. Exposes `useSmoothScroll()` → `scrollTo(target)` and `setPaused()` (the dialog pauses page scroll; its scroll body has `data-lenis-prevent`). Disabled for `prefers-reduced-motion`. `scroll-padding-top` (nav height) handles anchor offsets for both Lenis and native scroll — don't add a manual offset.
-- `src/hooks/useScrollAnimations.ts` — one hook (called in `App`) that animates by data attribute: `data-reveal` (batched fade/rise), `data-reveal-image` (clip-path reveal), `data-parallax="0.05"` (scrubbed drift on an `<img>` inside an overflow-hidden frame, desktop only). All inside `gsap.matchMedia`, so reduced-motion users get static, visible content. Prefer adding attributes over new per-component GSAP code.
+- `src/components/SmoothScroll.tsx` — Lenis (`lerp: 0.1`), driven by `gsap.ticker` and calling `ScrollTrigger.update` on scroll so both stay in sync. Exposes `useSmoothScroll()` → `scrollTo(target)` and `setPaused()` (the dialog pauses page scroll; its scroll body has `data-lenis-prevent`). Disabled for `prefers-reduced-motion` and on touch devices (`pointer: coarse`), where native scrolling is smoother and cheaper. `scroll-padding-top` (nav height) handles anchor offsets for both Lenis and native scroll — don't add a manual offset.
+- `src/hooks/useScrollAnimations.ts` — one hook (called in `App`) that animates by data attribute: `data-reveal` (batched fade/rise), `data-reveal-image` (fade/rise + image settle — transform/opacity only; avoid animating clip-path/filters, which repaint every frame on phones), `data-parallax="0.05"` (scrubbed drift on an `<img>` inside an overflow-hidden frame, desktop only). All inside `gsap.matchMedia`, so reduced-motion users get static, visible content. Prefer adding attributes over new per-component GSAP code.
 - `src/hooks/useScrollState.ts` — active nav section + "scrolled" nav state via ScrollTrigger (no extra scroll listeners).
 - `Hero.tsx` has its own short intro timeline.
 

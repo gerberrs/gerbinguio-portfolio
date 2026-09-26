@@ -4,6 +4,7 @@ import { currentWork, profile } from "@/data/profile";
 import { Button } from "@/components/ui/button";
 import { useSmoothScroll } from "@/components/SmoothScroll";
 import { gsap, motionQueries, useGSAP } from "@/lib/gsap";
+import { responsiveImage, thumbSrc } from "@/lib/project";
 import { cn } from "@/lib/utils";
 
 function StatusPanel({ className }: { className?: string }) {
@@ -47,16 +48,7 @@ export function Hero() {
         gsap
           .timeline({ defaults: { ease: "power3.out" } })
           .from("[data-hero-item]", { autoAlpha: 0, y: 14, duration: 0.8, stagger: 0.08 })
-          .from(
-            "[data-hero-portrait]",
-            {
-              clipPath: "inset(0% 0% 100% 0%)",
-              duration: 1.2,
-              ease: "power3.inOut",
-              clearProps: "clipPath",
-            },
-            0.1,
-          )
+          .from("[data-hero-portrait]", { autoAlpha: 0, y: 24, duration: 1.1 }, 0.1)
           .from("[data-hero-panel]", { autoAlpha: 0, y: 12, duration: 0.7 }, 0.7);
       });
       return () => mm.revert();
@@ -76,7 +68,7 @@ export function Hero() {
         <div className="md:col-span-7">
           <div data-hero-item className="flex items-center gap-3">
             <img
-              src={profile.portrait}
+              src={thumbSrc(profile.portrait)}
               alt=""
               width={48}
               height={48}
@@ -128,7 +120,7 @@ export function Hero() {
         <div className="relative hidden md:col-span-5 md:block">
           <div data-hero-portrait className="aspect-[4/5] overflow-hidden rounded-xl bg-muted">
             <img
-              src={profile.portrait}
+              {...responsiveImage(profile.portrait, "(min-width: 768px) 40vw, 1px")}
               alt={`Portrait of ${profile.name}`}
               width={820}
               height={1024}
