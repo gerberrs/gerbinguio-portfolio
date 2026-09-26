@@ -18,15 +18,14 @@ export const careerRoles: CareerRole[] = [
     tags: ["Zoho CRM", "Zoho Flow", "Zoho Bookings", "Zoho Campaigns", "Email Campaigns", "API & Webhooks", "WordPress"],
   },
   {
-slug: "ghl-specialist",
-title: "GoHighLevel Specialist (Freelance)",
-period: "Jun 2025 — Present",
-image: null,
-description:
-"I work with clients to build, manage, and improve their GoHighLevel systems. My work includes building websites and funnels, connecting domains and configuring DNS, setting up lead nurturing sequences, appointment reminders, missed-call text back automations, pipeline workflows, and other client automations. I also design email campaigns and newsletters, troubleshoot broken workflows, and streamline processes to reduce manual work and improve overall client operations.",
-tags: ["GoHighLevel", "Website Building", "Funnel Building", "Domain & DNS Setup", "Automation", "Email Design", "Email Marketing", "Email Sequences", "Custom Code"],
-},
-
+    slug: "ghl-specialist",
+    title: "GoHighLevel Specialist (Freelance)",
+    period: "Jun 2025 — Present",
+    image: null,
+    description:
+      "I build and run GoHighLevel systems for clients, from websites and funnels to full automation. My biggest ongoing project is for a UK aesthetics clinic, where I built their membership site with Stripe subscriptions and custom billing dates, an NFC member portal on Cloudflare Workers, automated payment recovery and win-back sequences, consent form automation, and a full booking migration from Ovatu covering 110 services. I also handle domains and DNS, email design, course builds, and troubleshooting broken workflows, and I document every build so clients can maintain it themselves.",
+    tags: ["GoHighLevel", "Stripe", "Cloudflare Workers", "Website + Funnel Building", "Automation", "Email Design", "Domain & DNS", "Course Builds", "Custom Code"],
+  },
   {
     slug: "junior-software-engineer",
     title: "Junior Software Engineer",

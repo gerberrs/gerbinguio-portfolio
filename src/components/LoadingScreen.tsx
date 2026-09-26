@@ -7,11 +7,22 @@ interface LoadingScreenProps {
 
 const LETTERS = "GERBINGUIO".split("");
 
+// Generated once per mount — randomizing inside render re-positioned every
+// particle on each counter tick (~60 re-renders/sec during the intro).
+const makeParticles = () =>
+  Array.from({ length: 20 }, () => ({
+    left: `${Math.random() * 100}%`,
+    top: `${Math.random() * 100}%`,
+    animationDelay: `${Math.random() * 3}s`,
+    animationDuration: `${2 + Math.random() * 3}s`,
+  }));
+
 export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const lettersRef = useRef<(HTMLSpanElement | null)[]>([]);
   const counterRef = useRef<HTMLSpanElement>(null);
   const [counter, setCounter] = useState(0);
+  const [particles] = useState(makeParticles);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -78,20 +89,11 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   }, [onComplete]);
 
   return (
-    <div ref={containerRef} className="loading-screen">
+    <div ref={containerRef} className="loading-screen" aria-hidden="true">
       {/* Background particles / decorative elements */}
       <div className="loading-particles">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div
-            key={i}
-            className="loading-particle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`,
-            }}
-          />
+        {particles.map((style, i) => (
+          <div key={i} className="loading-particle" style={style} />
         ))}
       </div>
 

@@ -59,6 +59,8 @@ const CareerPage = () => {
                     <img
                       src={role.image}
                       alt={role.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-16 h-16 rounded-xl object-cover border border-white/10 bg-white/5 flex-shrink-0"
                     />
                   )}

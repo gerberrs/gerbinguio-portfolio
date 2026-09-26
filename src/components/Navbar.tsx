@@ -43,6 +43,8 @@ const Navbar = () => {
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5"
           aria-label="Toggle menu"
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
           <span
             className={`block w-5 h-0.5 bg-ink-900 transition-all duration-300 ${
@@ -64,6 +66,8 @@ const Navbar = () => {
 
       {/* Mobile dropdown menu */}
       <div
+        id="mobile-menu"
+        inert={!isOpen}
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
           isOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
         }`}

@@ -1,19 +1,26 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import Lenis from "lenis";
 import Navbar from "../components/Navbar";
-import LoadingScreen from "../components/LoadingScreen";
 import Introduction from "./Introduction";
 import AboutMe from "./AboutMe";
 import PromptCTA from "../components/PromptCTA";
 import ScrollBlob from "../components/ScrollBlob";
 
+// GSAP is only used by the intro, so it loads with it (and is skipped once seen)
+const LoadingScreen = lazy(() => import("../components/LoadingScreen"));
+
+const prefersReducedMotion = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 const Landing = () => {
+  // Skip the 4s animated intro for reduced-motion visitors
   const [isLoading, setIsLoading] = useState(
-    () => !sessionStorage.getItem("intro-seen")
+    () => !sessionStorage.getItem("intro-seen") && !prefersReducedMotion()
   );
 
   useEffect(() => {
-    if (isLoading) return;
+    // Lenis smooth-scroll inertia is itself motion — native scroll for reduced-motion users
+    if (isLoading || prefersReducedMotion()) return;
 
     const lenis = new Lenis({
       lerp: 0.1,
@@ -41,7 +48,11 @@ const Landing = () => {
 
   return (
     <>
-      {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
+      {isLoading && (
+        <Suspense fallback={null}>
+          <LoadingScreen onComplete={handleLoadingComplete} />
+        </Suspense>
+      )}
       <div
         className="text-ink-900 w-full min-h-screen relative"
         style={{ overflowX: "clip", visibility: isLoading ? "hidden" : "visible" }}

@@ -147,7 +147,7 @@ const ContactForm = () => {
       </div>
 
       <div className="flex items-center justify-between gap-3">
-        <div className="text-xs min-h-[1.25rem]">
+        <div className="text-xs min-h-[1.25rem]" role="alert" aria-live="assertive">
           {status === "error" && (
             <span className="text-red-600">{errorMsg}</span>
           )}

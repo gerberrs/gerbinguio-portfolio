@@ -30,6 +30,9 @@ const Introduction = () => {
               <img
                 src="/gerbinpicture.jpg"
                 alt="Gerbinguio"
+                width={820}
+                height={1024}
+                fetchPriority="high"
                 className="w-40 sm:w-72 md:w-96 lg:w-[450px] h-auto object-cover rounded-3xl shadow-[0_30px_80px_-20px_rgba(0,0,0,0.85)]"
               />
             </div>

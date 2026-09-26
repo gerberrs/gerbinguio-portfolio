@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperInstance } from "swiper";
 import "swiper/css";
-import { ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
 import { projects, type Project } from "../../data/projects";
 
 const CaseStudyModal = ({
@@ -46,7 +46,10 @@ const CaseStudyModal = ({
       onClick={onClose}
     >
       <motion.div
-        className="relative w-full max-w-3xl bg-base-900 border border-white/12 rounded-3xl overflow-hidden shadow-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="case-study-title"
+        className="relative w-full max-w-3xl max-h-[calc(100dvh-2rem)] overflow-y-auto overscroll-contain bg-base-900 border border-white/12 rounded-3xl shadow-2xl"
         initial={{ scale: 0.9, opacity: 0, y: 40 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 40 }}
@@ -58,7 +61,10 @@ const CaseStudyModal = ({
             <p className="text-[10px] uppercase tracking-widest text-blue-deep font-semibold mb-1">
               {project.type}
             </p>
-            <h2 className="text-base sm:text-lg font-bold text-ink-900">
+            <h2
+              id="case-study-title"
+              className="text-base sm:text-lg font-bold text-ink-900"
+            >
               {project.title}
             </h2>
           </div>
@@ -106,19 +112,24 @@ const CaseStudyModal = ({
             slidesPerView={1}
             onSwiper={(s) => (swiperRef.current = s)}
             onSlideChange={(s) => setSlideIndex(s.activeIndex)}
+            autoHeight
             className="case-study-swiper"
           >
           {slides.map((slide, i) => (
             <SwiperSlide key={i}>
               <div className="flex flex-col gap-4 px-6 pb-8 pt-2 min-h-[320px]">
                 {slide.images && slide.images.length === 1 && (
-                  <div
-                    className="relative w-full h-64 rounded-xl overflow-hidden cursor-zoom-in group border border-white/10"
+                  <button
+                    type="button"
+                    aria-label={`Expand image: ${slide.title}`}
+                    className="relative block w-full h-64 rounded-xl overflow-hidden cursor-zoom-in group border border-white/10"
                     onClick={() => setLightboxImage(slide.images![0])}
                   >
                     <img
                       src={slide.images[0]}
                       alt={slide.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
@@ -126,19 +137,23 @@ const CaseStudyModal = ({
                         Click to expand 🔍
                       </span>
                     </div>
-                  </div>
+                  </button>
                 )}
                 {slide.images && slide.images.length === 2 && (
                   <div className="grid grid-cols-2 gap-2 w-full">
                     {slide.images.map((img, idx) => (
-                      <div
+                      <button
+                        type="button"
                         key={idx}
-                        className="relative h-48 rounded-xl overflow-hidden cursor-zoom-in group border border-white/10"
+                        aria-label={`Expand image: ${slide.title} ${idx + 1}`}
+                        className="relative block w-full h-48 rounded-xl overflow-hidden cursor-zoom-in group border border-white/10"
                         onClick={() => setLightboxImage(img)}
                       >
                         <img
                           src={img}
                           alt={`${slide.title} ${idx + 1}`}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                         <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none">
@@ -146,7 +161,7 @@ const CaseStudyModal = ({
                             Expand 🔍
                           </span>
                         </div>
-                      </div>
+                      </button>
                     ))}
                   </div>
                 )}
@@ -161,6 +176,44 @@ const CaseStudyModal = ({
                   <p className="text-sm text-ink-700 leading-relaxed">
                     {slide.content}
                   </p>
+                  {slide.highlights && slide.highlights.length > 0 && (
+                    <div className="mt-4">
+                      <p className="text-[10px] uppercase tracking-widest text-blue-deep font-semibold mb-2">
+                        What I automated
+                      </p>
+                      <ul className="flex flex-col gap-1.5">
+                        {slide.highlights.map((h) => (
+                          <li key={h} className="flex gap-2 text-sm text-ink-700 leading-relaxed">
+                            <Check className="w-4 h-4 mt-0.5 flex-shrink-0 text-blue-deep" />
+                            <span>{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {slide.impact && (
+                    <div className="mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                      <p className="text-[10px] uppercase tracking-widest text-blue-deep font-semibold mb-1">
+                        Business impact
+                      </p>
+                      <p className="text-sm text-ink-900 leading-relaxed">{slide.impact}</p>
+                    </div>
+                  )}
+                  {slide.links && slide.links.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {slide.links.map((l) => (
+                        <a
+                          key={l.url}
+                          href={l.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 border border-white/10 bg-white/5 hover:bg-white/10 rounded-full px-3 py-1 text-xs font-semibold text-blue-deep transition"
+                        >
+                          {l.label} <ExternalLink className="w-3 h-3" />
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </SwiperSlide>
@@ -347,6 +400,8 @@ const ProjectsPage = () => {
                 <img
                   src={project.image}
                   alt={project.shelfTitle}
+                  loading={i < 4 ? "eager" : "lazy"}
+                  decoding="async"
                   className="absolute inset-0 w-full h-full object-cover"
                   draggable={false}
                 />
@@ -418,6 +473,8 @@ const ProjectsPage = () => {
               <img
                 src={project.image}
                 alt=""
+                loading="lazy"
+                decoding="async"
                 className="w-20 h-20 rounded-xl object-cover border border-white/10 flex-shrink-0"
               />
               <div className="min-w-0">

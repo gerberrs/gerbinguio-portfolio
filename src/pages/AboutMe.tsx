@@ -170,12 +170,12 @@ const AboutMe = () => {
         initial="hidden"
         animate={controls}
       >
-        <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-ink-900">
+        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-ink-900">
           ABOUT <span className="text-blue-deep">ME</span>
-        </h1>
-        <h2 className="text-sm sm:text-lg mt-3 text-center text-ink-500">
-          A little about me and how I ended up in automation
         </h2>
+        <p className="text-sm sm:text-lg mt-3 text-center text-ink-500">
+          A little about me and how I ended up in automation
+        </p>
       </motion.div>
 
       {/* Two-Column Layout */}
@@ -194,7 +194,9 @@ const AboutMe = () => {
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
             <motion.img
               src="/devPicture.png"
-              alt="Profile"
+              alt="Gerbinguio"
+              loading="lazy"
+              decoding="async"
               className="w-32 h-32 sm:w-36 sm:h-36 object-cover rounded-full shadow-lg border-4 border-blue bg-sand-200 flex-shrink-0"
               whileHover={{ scale: 1.05, rotate: 2 }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -273,6 +275,7 @@ const AboutMe = () => {
                   <button
                     key={cat.title}
                     onClick={() => setActiveCategory(i)}
+                    aria-pressed={isActive}
                     className={`relative flex-shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors ${
                       isActive ? "text-base-950" : "text-ink-700 hover:text-ink-900"
                     }`}

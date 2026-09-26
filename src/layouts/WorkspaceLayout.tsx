@@ -185,6 +185,9 @@ const SidebarContent = ({ onNavigate }: { onNavigate?: () => void }) => (
       <img
         src="/devPicture.png"
         alt="Gerbinguio"
+        width={36}
+        height={36}
+        decoding="async"
         className="w-9 h-9 rounded-full object-cover border-2 border-blue flex-shrink-0"
       />
       <div className="min-w-0">
