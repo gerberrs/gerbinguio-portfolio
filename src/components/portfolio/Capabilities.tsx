@@ -20,9 +20,9 @@ export function Capabilities() {
               {i > 0 && (
                 <span data-rule aria-hidden className="absolute inset-x-0 top-0 h-px bg-border" />
               )}
-              <dt className="text-sm font-medium md:col-span-3 md:pt-0.5">{group.title}</dt>
+              <dt data-slide className="text-sm font-medium md:col-span-3 md:pt-0.5">{group.title}</dt>
               <dd className="md:col-span-9">
-                <ul data-stagger className="flex flex-wrap gap-1.5">
+                <ul data-stagger="pop" className="flex flex-wrap gap-1.5">
                   {group.primary.map((item) => (
                     <li key={item}>
                       <Badge variant="brand">{item}</Badge>

@@ -77,7 +77,7 @@ export function Contact() {
             </Button>
           </div>
 
-          <div data-reveal className="glass rounded-xl p-6 sm:p-8 md:col-span-6">
+          <div data-reveal data-zoom="0.9" className="glass rounded-xl p-6 sm:p-8 md:col-span-6">
             <ContactForm />
           </div>
         </div>

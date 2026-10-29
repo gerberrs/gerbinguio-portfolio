@@ -444,7 +444,7 @@ export function Work({ onOpen }: { onOpen: OpenProject }) {
               <h3 className="text-lg font-semibold">Smaller builds</h3>
               <p className="font-mono text-xs text-muted-foreground">Automations &amp; web apps</p>
             </div>
-            <ul data-stagger className="mt-8 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+            <ul data-stagger="rise" className="mt-8 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
               {compact.map((project) => (
                 <CompactProject key={project.slug} project={project} onOpen={onOpen} />
               ))}

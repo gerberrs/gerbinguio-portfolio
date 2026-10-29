@@ -10,9 +10,15 @@ import { gsap, motionQueries, ScrollTrigger, useGSAP } from "@/lib/gsap";
  *                        (transform + opacity only, so it stays on the compositor)
  *   data-parallax="0.06" gentle scrubbed drift on an <img> inside an overflow-hidden frame
  *                        (desktop + fine pointer only)
- *   data-words           heading words (from <SplitWords>) slide up out of their masks
+ *   data-words           heading words (from <SplitWords>) tilt up out of their masks
+ *   data-fill-words      paragraph words (unmasked <SplitWords>) brighten as you read down (scrubbed)
  *   data-rule            hairline draws in from the left as it enters
- *   data-stagger         its direct children fade/rise in one after another
+ *   data-slide           slides in from the left as it enters
+ *   data-stagger         its direct children reveal one after another;
+ *                        ="pop" springs them up from small, ="rise" lifts them with a tilt
+ *   data-exit="text|image"  scrubbed exit as its section scrolls away (hero)
+ *   data-rail            a [data-rail-fill] line fills down the list as you scroll and each
+ *                        [data-rail-dot] gets `.is-active` once reached
  *   data-zoom="0.86"     scrubbed zoom from that scale to full size as the block scrolls in
  *   data-drift="28"      scrubbed vertical drift (in % of its own height, from +n to −n)
  *                        so layered frames move at their own speed (desktop only)
@@ -65,14 +71,33 @@ export function useScrollAnimations(scope: RefObject<HTMLElement | null>) {
 
         gsap.utils.toArray<HTMLElement>("[data-words]").forEach((heading) => {
           const words = heading.querySelectorAll("[data-word]");
-          gsap.set(words, { yPercent: 110 });
+          gsap.set(words, { yPercent: 115, rotate: 6, transformOrigin: "0% 100%" });
           ScrollTrigger.create({
             trigger: heading,
-            start: "top 90%",
+            start: "top 82%",
             once: true,
             onEnter: () =>
-              gsap.to(words, { yPercent: 0, duration: 0.9, ease: "power3.out", stagger: 0.05 }),
+              gsap.to(words, {
+                yPercent: 0,
+                rotate: 0,
+                duration: 1.1,
+                ease: "power4.out",
+                stagger: 0.07,
+              }),
           });
+        });
+
+        gsap.utils.toArray<HTMLElement>("[data-fill-words]").forEach((paragraph) => {
+          gsap.fromTo(
+            paragraph.querySelectorAll("[data-word]"),
+            { opacity: 0.16 },
+            {
+              opacity: 1,
+              ease: "none",
+              stagger: 0.1,
+              scrollTrigger: { trigger: paragraph, start: "top 85%", end: "bottom 50%", scrub: true },
+            },
+          );
         });
 
         gsap.utils.toArray<HTMLElement>("[data-rule]").forEach((rule) => {
@@ -81,22 +106,92 @@ export function useScrollAnimations(scope: RefObject<HTMLElement | null>) {
             { scaleX: 0, transformOrigin: "0% 50%" },
             {
               scaleX: 1,
-              duration: 1.2,
+              duration: 1.4,
               ease: "power3.inOut",
-              scrollTrigger: { trigger: rule, start: "top 92%", once: true },
+              scrollTrigger: { trigger: rule, start: "top 88%", once: true },
             },
           );
         });
 
+        const slides = gsap.utils.toArray<HTMLElement>("[data-slide]");
+        gsap.set(slides, { autoAlpha: 0, x: -48 });
+        ScrollTrigger.batch(slides, {
+          start: "top 85%",
+          once: true,
+          onEnter: (batch) =>
+            gsap.to(batch, {
+              autoAlpha: 1,
+              x: 0,
+              duration: 0.9,
+              ease: "power3.out",
+              stagger: 0.1,
+              overwrite: true,
+            }),
+        });
+
+        const staggerFrom: Record<string, gsap.TweenVars> = {
+          pop: { autoAlpha: 0, scale: 0.4, y: 10 },
+          rise: { autoAlpha: 0, y: 60, rotate: 2.5, transformOrigin: "0% 100%" },
+        };
         gsap.utils.toArray<HTMLElement>("[data-stagger]").forEach((group) => {
+          const variant = group.dataset.stagger ?? "";
           const items = Array.from(group.children);
-          gsap.set(items, { autoAlpha: 0, y: 14 });
+          gsap.set(items, staggerFrom[variant] ?? { autoAlpha: 0, y: 18 });
           ScrollTrigger.create({
             trigger: group,
-            start: "top 88%",
+            start: "top 82%",
             once: true,
             onEnter: () =>
-              gsap.to(items, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.06, overwrite: true }),
+              gsap.to(items, {
+                autoAlpha: 1,
+                y: 0,
+                scale: 1,
+                rotate: 0,
+                duration: variant === "pop" ? 0.55 : 0.8,
+                ease: variant === "pop" ? "back.out(2.2)" : "power3.out",
+                stagger: variant === "pop" ? 0.035 : 0.09,
+                overwrite: true,
+              }),
+          });
+        });
+
+        gsap.utils.toArray<HTMLElement>("[data-exit]").forEach((el) => {
+          const image = el.dataset.exit === "image";
+          gsap.to(el, {
+            ...(image
+              ? { scale: 0.86, y: 90, transformOrigin: "50% 100%" }
+              : { y: -110, autoAlpha: 0.1 }),
+            ease: "none",
+            scrollTrigger: {
+              trigger: el.closest("section") ?? el,
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        });
+
+        gsap.utils.toArray<HTMLElement>("[data-rail]").forEach((list) => {
+          const fill = list.querySelector("[data-rail-fill]");
+          if (fill) {
+            gsap.fromTo(
+              fill,
+              { scaleY: 0 },
+              {
+                scaleY: 1,
+                ease: "none",
+                scrollTrigger: { trigger: list, start: "top 70%", end: "bottom 70%", scrub: true },
+              },
+            );
+          }
+          list.querySelectorAll<HTMLElement>("[data-rail-dot]").forEach((dot) => {
+            // Stays lit once passed; only scrolling back above it turns it off.
+            ScrollTrigger.create({
+              trigger: dot,
+              start: "top 70%",
+              onEnter: () => dot.classList.add("is-active"),
+              onLeaveBack: () => dot.classList.remove("is-active"),
+            });
           });
         });
 
@@ -213,6 +308,9 @@ export function useScrollAnimations(scope: RefObject<HTMLElement | null>) {
                 pin: true,
                 scrub: 0.5,
                 invalidateOnRefresh: true,
+                // The pin adds a lot of scroll length. Measure it before everything else, or
+                // every trigger further down the page fires that much too early.
+                refreshPriority: 1,
               },
             });
             tl.to(track, { x: () => -distance(), duration: slideLen }, 0);
@@ -296,6 +394,9 @@ export function useScrollAnimations(scope: RefObject<HTMLElement | null>) {
             cleanups.push(() => section.removeEventListener("focusin", onFocus));
           });
         }
+
+        // Triggers below the pin were created first; re-sort so they refresh after it.
+        ScrollTrigger.sort();
 
         return () => cleanups.forEach((fn) => fn());
       });

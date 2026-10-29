@@ -1,13 +1,26 @@
 import { Fragment } from "react";
 
 /**
- * Splits a heading into masked words for the `data-words` rise in
- * useScrollAnimations: each word sits in an overflow-clipped box and slides up
- * into view. The spaces stay real text, so wrapping and screen readers are
- * unaffected. Put `data-words` on the heading itself.
+ * Splits text into words for useScrollAnimations. Default (`masked`): each word
+ * sits in an overflow-clipped box for the `data-words` rise on headings. With
+ * `masked={false}` the words are plain spans for the `data-fill-words` scrubbed
+ * read-along on paragraphs. The spaces stay real text, so wrapping and screen
+ * readers are unaffected. Put the data attribute on the parent element.
  */
-export function SplitWords({ text }: { text: string }) {
+export function SplitWords({ text, masked = true }: { text: string; masked?: boolean }) {
   const words = text.split(" ");
+  if (!masked) {
+    return (
+      <>
+        {words.map((word, i) => (
+          <Fragment key={i}>
+            <span data-word>{word}</span>
+            {i < words.length - 1 && " "}
+          </Fragment>
+        ))}
+      </>
+    );
+  }
   return (
     <>
       {words.map((word, i) => (

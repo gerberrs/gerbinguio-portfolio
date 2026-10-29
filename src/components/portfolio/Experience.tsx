@@ -4,6 +4,17 @@ import { ScrollTrigger } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import { SectionHeader } from "./SectionHeader";
 
+/** Marker on the Experience rail (desktop), lit by `data-rail` when reached. */
+function RailDot() {
+  return (
+    <span
+      aria-hidden
+      data-rail-dot
+      className="absolute -left-[calc(2.5rem+5px)] top-[calc(2.5rem+4px)] hidden size-2.5 rounded-full border border-foreground/25 bg-background transition-colors duration-300 md:block"
+    />
+  );
+}
+
 /**
  * One role. Descriptions start clamped (current roles get a little more room
  * than older ones) so the timeline reads at a glance; "Read more" opens the rest.
@@ -15,8 +26,9 @@ function Role({ role, first }: { role: CareerRole; first?: boolean }) {
   const id = `role-${role.slug}`;
 
   return (
-    <li data-reveal className="relative grid gap-3 py-8 md:grid-cols-12 md:gap-8 md:py-10">
+    <li data-slide className="relative grid gap-3 py-8 md:grid-cols-12 md:gap-8 md:py-10">
       {!first && <span data-rule aria-hidden className="absolute inset-x-0 top-0 h-px bg-border" />}
+      <RailDot />
       <div className="md:col-span-3">
         <p className="flex items-center gap-2 font-mono text-[13px] text-foreground">
           {current && <span aria-hidden className="size-1.5 rounded-full bg-brand" />}
@@ -80,12 +92,17 @@ export function Experience() {
           </p>
         </SectionHeader>
 
-        <ol>
+        {/* The rail on the left fills as you scroll; each role's dot lights up on arrival. */}
+        <ol data-rail className="relative md:pl-10">
+          <span aria-hidden className="absolute left-0 top-0 hidden h-full w-px bg-border md:block">
+            <span data-rail-fill className="block h-full w-px origin-top bg-brand" />
+          </span>
           {careerRoles.map((role, i) => (
             <Role key={role.slug} role={role} first={i === 0} />
           ))}
-          <li data-reveal className="relative grid gap-3 py-8 md:grid-cols-12 md:gap-8 md:py-10">
+          <li data-slide className="relative grid gap-3 py-8 md:grid-cols-12 md:gap-8 md:py-10">
             <span data-rule aria-hidden className="absolute inset-x-0 top-0 h-px bg-border" />
+            <RailDot />
             <div className="md:col-span-3">
               <p className="font-mono text-[13px]">{education.year}</p>
               <p className="mt-1 text-sm text-muted-foreground">Education</p>

@@ -52,8 +52,8 @@ export function About() {
           </div>
           <div className="mt-8 max-w-prose space-y-5 text-[17px] leading-relaxed text-foreground/80">
             {about.map((paragraph) => (
-              <p key={paragraph.slice(0, 24)} data-reveal>
-                {paragraph}
+              <p key={paragraph.slice(0, 24)} data-fill-words>
+                <SplitWords text={paragraph} masked={false} />
               </p>
             ))}
           </div>
