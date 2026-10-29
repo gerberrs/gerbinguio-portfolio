@@ -30,7 +30,7 @@ There is no test suite/framework configured in this repo.
 ### Components
 
 - `src/components/ui/*` — shadcn/ui primitives (button, badge, dialog, sheet, separator, input/textarea), customized: `rounded-md` buttons/badges, no pills.
-- `src/components/portfolio/*` — the page sections. `Work.tsx` composes layouts from each project's `tier`: one `featured` (large image + glass meta overlay + build thumbnails), `selected` projects as alternating image/copy rows (`ProjectMedia` picks single / overlapping pair / triptych from `gallery` length), `compact` projects in a grid.
+- `src/components/portfolio/*` — the page sections. `Work.tsx` composes layouts from each project's `tier`: one `featured` (large zooming image + glass meta overlay + its builds as a horizontal strip, with an impact card for builds without a screenshot, ending in a live miniature of the next row; when pinned, the whole strip zooms in on it until it lands exactly on the real row, which takes over), `selected` projects as alternating image/copy rows (`ProjectMedia` picks single / overlapping pair / triptych from `gallery` length), `compact` projects in a grid.
 - `src/lib/project.ts` — project helpers (`projectOutcome`, `projectVisuals`, `linkHost`).
 
 ### Data-driven content
@@ -55,8 +55,8 @@ Self-hosted in `public/fonts/`: Archivo (variable, `font-sans`) and IBM Plex Mon
 
 - `src/lib/gsap.ts` registers `ScrollTrigger` and `useGSAP` once; import GSAP from there.
 - `src/components/SmoothScroll.tsx` — Lenis (`lerp: 0.1`), driven by `gsap.ticker` and calling `ScrollTrigger.update` on scroll so both stay in sync. Exposes `useSmoothScroll()` → `scrollTo(target)` and `setPaused()` (the dialog pauses page scroll; its scroll body has `data-lenis-prevent`). Disabled for `prefers-reduced-motion` and on touch devices (`pointer: coarse`), where native scrolling is smoother and cheaper. `scroll-padding-top` (nav height) handles anchor offsets for both Lenis and native scroll — don't add a manual offset.
-- `src/hooks/useScrollAnimations.ts` — one hook (called in `App`) that animates by data attribute: `data-reveal` (batched fade/rise), `data-reveal-image` (fade/rise + image settle — transform/opacity only; avoid animating clip-path/filters, which repaint every frame on phones), `data-parallax="0.05"` (scrubbed drift on an `<img>` inside an overflow-hidden frame, desktop only). All inside `gsap.matchMedia`, so reduced-motion users get static, visible content. Prefer adding attributes over new per-component GSAP code.
+- `src/hooks/useScrollAnimations.ts` — one hook (called in `App`) that animates by data attribute: `data-reveal` (batched fade/rise), `data-reveal-image` (fade/rise + image settle — transform/opacity only; avoid animating clip-path/filters, which repaint every frame on phones), `data-parallax="0.05"` (scrubbed drift on an `<img>` inside an overflow-hidden frame, desktop only), `data-zoom` (scrubbed zoom-in from 86%, used on the featured cover block), `data-drift="28"` (layered frames drift at their own speed, desktop only), and `data-horizontal` (pins a strip and turns scroll into sideways travel on desktop; a native snap/swipe row elsewhere). All inside `gsap.matchMedia`, so reduced-motion users get static, visible content. Prefer adding attributes over new per-component GSAP code.
 - `src/hooks/useScrollState.ts` — active nav section + "scrolled" nav state via ScrollTrigger (no extra scroll listeners).
 - `Hero.tsx` has its own short intro timeline.
 
-Keep motion subtle: no pinning, no scroll hijacking, nothing that delays reading. Framer Motion is not used on this branch.
+Keep motion purposeful: the featured builds strip is the only pinned element (desktop, with motion), no other scroll hijacking, nothing that delays reading. Framer Motion is not used on this branch.
