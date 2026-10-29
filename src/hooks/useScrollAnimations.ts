@@ -10,7 +10,10 @@ import { gsap, motionQueries, ScrollTrigger, useGSAP } from "@/lib/gsap";
  *                        (transform + opacity only, so it stays on the compositor)
  *   data-parallax="0.06" gentle scrubbed drift on an <img> inside an overflow-hidden frame
  *                        (desktop + fine pointer only)
- *   data-zoom            scrubbed zoom from 86% to full size as the block scrolls in
+ *   data-words           heading words (from <SplitWords>) slide up out of their masks
+ *   data-rule            hairline draws in from the left as it enters
+ *   data-stagger         its direct children fade/rise in one after another
+ *   data-zoom="0.86"     scrubbed zoom from that scale to full size as the block scrolls in
  *   data-drift="28"      scrubbed vertical drift (in % of its own height, from +n to −n)
  *                        so layered frames move at their own speed (desktop only)
  *   data-horizontal      pins the block and turns vertical scroll into sideways
@@ -60,10 +63,47 @@ export function useScrollAnimations(scope: RefObject<HTMLElement | null>) {
           }
         });
 
+        gsap.utils.toArray<HTMLElement>("[data-words]").forEach((heading) => {
+          const words = heading.querySelectorAll("[data-word]");
+          gsap.set(words, { yPercent: 110 });
+          ScrollTrigger.create({
+            trigger: heading,
+            start: "top 90%",
+            once: true,
+            onEnter: () =>
+              gsap.to(words, { yPercent: 0, duration: 0.9, ease: "power3.out", stagger: 0.05 }),
+          });
+        });
+
+        gsap.utils.toArray<HTMLElement>("[data-rule]").forEach((rule) => {
+          gsap.fromTo(
+            rule,
+            { scaleX: 0, transformOrigin: "0% 50%" },
+            {
+              scaleX: 1,
+              duration: 1.2,
+              ease: "power3.inOut",
+              scrollTrigger: { trigger: rule, start: "top 92%", once: true },
+            },
+          );
+        });
+
+        gsap.utils.toArray<HTMLElement>("[data-stagger]").forEach((group) => {
+          const items = Array.from(group.children);
+          gsap.set(items, { autoAlpha: 0, y: 14 });
+          ScrollTrigger.create({
+            trigger: group,
+            start: "top 88%",
+            once: true,
+            onEnter: () =>
+              gsap.to(items, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.06, overwrite: true }),
+          });
+        });
+
         gsap.utils.toArray<HTMLElement>("[data-zoom]").forEach((el) => {
           gsap.fromTo(
             el,
-            { scale: 0.86, transformOrigin: "50% 0%" },
+            { scale: parseFloat(el.dataset.zoom || "") || 0.86, transformOrigin: "50% 0%" },
             {
               scale: 1,
               ease: "none",

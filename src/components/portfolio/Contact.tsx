@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useSmoothScroll } from "@/components/SmoothScroll";
 import ContactForm from "./ContactForm";
 import { ExternalLink } from "./ProjectParts";
+import { SplitWords } from "./SplitWords";
 
 export function Contact() {
   const { scrollTo } = useSmoothScroll();
@@ -21,9 +22,10 @@ export function Contact() {
             <p className="font-mono text-xs text-brand">Contact</p>
             <h2
               id="contact-title"
+              data-words
               className="mt-3 text-[clamp(2rem,4.5vw,3.25rem)] font-semibold leading-[1.05] tracking-[-0.03em]"
             >
-              Let's work together.
+              <SplitWords text="Let's work together." />
             </h2>
             <p className="mt-5 max-w-md text-[17px] leading-relaxed text-foreground/75">
               {profile.availability}

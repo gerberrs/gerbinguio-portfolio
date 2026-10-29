@@ -176,6 +176,17 @@
   }
 }
 
+/*
+  Theme switch (useTheme): the browser's default cross-fade is replaced by a
+  circle reveal of the new theme, animated from JS. Both snapshots stay fully
+  opaque so only the circle's edge moves.
+*/
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
 /* Lenis (smooth scroll) base rules — mirrors lenis/dist/lenis.css */
 html.lenis,
 html.lenis body {

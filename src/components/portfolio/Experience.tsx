@@ -8,14 +8,15 @@ import { SectionHeader } from "./SectionHeader";
  * One role. Descriptions start clamped (current roles get a little more room
  * than older ones) so the timeline reads at a glance; "Read more" opens the rest.
  */
-function Role({ role }: { role: CareerRole }) {
+function Role({ role, first }: { role: CareerRole; first?: boolean }) {
   const [expanded, setExpanded] = useState(false);
   const current = /present/i.test(role.period);
   const clampable = role.description.length > 160;
   const id = `role-${role.slug}`;
 
   return (
-    <li data-reveal className="grid gap-3 py-8 md:grid-cols-12 md:gap-8 md:py-10">
+    <li data-reveal className="relative grid gap-3 py-8 md:grid-cols-12 md:gap-8 md:py-10">
+      {!first && <span data-rule aria-hidden className="absolute inset-x-0 top-0 h-px bg-border" />}
       <div className="md:col-span-3">
         <p className="flex items-center gap-2 font-mono text-[13px] text-foreground">
           {current && <span aria-hidden className="size-1.5 rounded-full bg-brand" />}
@@ -79,11 +80,12 @@ export function Experience() {
           </p>
         </SectionHeader>
 
-        <ol className="divide-y divide-border">
-          {careerRoles.map((role) => (
-            <Role key={role.slug} role={role} />
+        <ol>
+          {careerRoles.map((role, i) => (
+            <Role key={role.slug} role={role} first={i === 0} />
           ))}
-          <li data-reveal className="grid gap-3 py-8 md:grid-cols-12 md:gap-8 md:py-10">
+          <li data-reveal className="relative grid gap-3 py-8 md:grid-cols-12 md:gap-8 md:py-10">
+            <span data-rule aria-hidden className="absolute inset-x-0 top-0 h-px bg-border" />
             <div className="md:col-span-3">
               <p className="font-mono text-[13px]">{education.year}</p>
               <p className="mt-1 text-sm text-muted-foreground">Education</p>

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { flushSync } from "react-dom";
 
 export type Theme = "light" | "dark";
 
@@ -43,10 +44,45 @@ export function useTheme() {
     return () => media.removeEventListener("change", onChange);
   }, []);
 
-  const toggleTheme = useCallback(() => {
+  /**
+   * Switches theme. Given the point the visitor clicked, the new theme grows
+   * out of it as a circle (View Transitions API); browsers without it, and
+   * reduced-motion visitors, switch instantly.
+   */
+  const toggleTheme = useCallback((origin?: { x: number; y: number }) => {
     const next: Theme = readTheme() === "dark" ? "light" : "dark";
-    applyTheme(next);
-    setThemeState(next);
+    const commit = () => {
+      applyTheme(next);
+      setThemeState(next);
+    };
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!origin || reduced || !document.startViewTransition) {
+      commit();
+    } else {
+      // flushSync so the "new" snapshot already has the swapped toggle icon.
+      const transition = document.startViewTransition(() => flushSync(commit));
+      transition.ready
+        .then(() => {
+          const { x, y } = origin;
+          const radius = Math.hypot(
+            Math.max(x, window.innerWidth - x),
+            Math.max(y, window.innerHeight - y),
+          );
+          document.documentElement.animate(
+            { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+            {
+              duration: 700,
+              easing: "cubic-bezier(0.65, 0, 0.35, 1)",
+              pseudoElement: "::view-transition-new(root)",
+            },
+          );
+        })
+        .catch(() => {
+          // Transition skipped (e.g. another one started): the theme is applied anyway.
+        });
+    }
+
     try {
       localStorage.setItem(STORAGE_KEY, next);
     } catch {
