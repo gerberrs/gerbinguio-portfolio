@@ -213,7 +213,7 @@ export const projects: Project[] = [
     description:
       "Contract GoHighLevel builder for a GHL agency, taking over build work across 4 active clients and 5 sub-accounts: a roofing revenue recovery agency, a tax deed investing education company, a print shop and psychology membership site with the same owner, and a roof care product brand. The work spans AI, automation, integrations, memberships, payments, and custom front-end, often built on top of systems other people started. I also train and review the work of a junior builder on the team.",
     image: "/img/lfo-cover.webp",
-    tech: ["GoHighLevel", "Voice AI", "AI Extract Data", "Inbound Webhooks", "Workflows", "Memberships", "Square", "HTML", "CSS", "JavaScript", "SEO", "Meta Pixel", "Cloudflare Workers", "Stripe API", "HeyGen", "Sendspark", "Social Planner", "AI Agents"],
+    tech: ["GoHighLevel", "Voice AI", "AI Extract Data", "Inbound Webhooks", "Workflows", "Memberships", "Square", "HTML", "CSS", "JavaScript", "SEO", "Meta Pixel", "Cloudflare Workers", "Stripe API", "HeyGen", "Sendspark", "Social Planner", "AI Agents", "GHL Blogs", "Private Integrations"],
     caseStudy: [
       {
         title: "Revenue Restoration Group: AI Voice Agent",
@@ -280,6 +280,8 @@ export const projects: Project[] = [
           "A new ads funnel: lead form to webhook to booking page, with automatic reminders for the sales rep's calls, a nurture for people who don't book, and a step that stops follow-ups once someone books",
           "A warm list reactivation campaign to 695 past contacts, with 21% and 25% open rates on the first two emails",
           "Bounce cleanup and list hygiene before every send",
+          "Instant alerts for Facebook Instant Form leads: these skip website-form workflows, so I added a workflow on the lead form trigger that emails the team each new lead the moment it comes in, unblocking the ads launch the same night",
+          "Checked the dedicated sending domain's warmup stage and daily limits before planning a cold email campaign",
         ],
         impact:
           "New members now get 3 clean emails per purchase instead of a pile of conflicting instructions, and trials run without anyone granting or revoking access by hand. Ad leads now go straight to a booked call with the sales rep.",
@@ -317,9 +319,11 @@ export const projects: Project[] = [
           "Fixed two platform bugs along the way: ignored noindex tags and blocked cross-domain downloads",
           "Website work across the brand: mobile navigation, SEO, blog, footer, Terms, pricing, and the dealer page",
           "Facebook lead forms mapped into GHL, with an automatic follow-up email that sends dealers to the booking section",
+          "A GHL blog on the brand's main domain, launched by republishing an existing long-form article with a canonical link back to the original, so it doesn't count as duplicate content",
+          "An AI SEO tool (BabyLoveGrowth) now publishes new articles to the blog automatically, connected through a least-privilege Private Integration with only the 7 blog scopes it needs",
         ],
         impact:
-          "The brand gets a recurring-revenue dealer program ready to launch, and dealers already have a self-serve home for their resources, with no one emailing files to each new dealer.",
+          "The brand gets a recurring-revenue dealer program ready to launch, and dealers already have a self-serve home for their resources, with no one emailing files to each new dealer. New SEO articles now publish to the brand's own blog on their own.",
         links: [
           { label: "roofsauce.com", url: "https://roofsauce.com" },
           { label: "Dealer program", url: "https://roofsauce.com/roof-rejuvenation-dealer-program" },
@@ -379,8 +383,8 @@ export const projects: Project[] = [
         // TODO(screenshot): Events Manager or pixel requests view → images: ["/img/la-pixel.webp"]
         highlights: [
           "PageView, Lead and Schedule events placed on the right page and the right action for each funnel",
-          "For one client, I rebuilt tracking so Schedule fires only when a booking is actually completed, read from the booking widget's completion message, plus a custom VSL Start event on the first real play of the video",
-          "Found and removed the sources of fake conversions: Schedule firing on every FAQ page load, Lead firing on page load, and an old funnel still sending events",
+          "For one client, I rebuilt tracking so Schedule fires only when a booking is actually completed, read from the booking widget's completion message, plus a custom VSL Start event that fires once, on the first real play with sound (muted autoplay doesn't count)",
+          "Found and removed the sources of fake conversions: Schedule firing on every FAQ page load, Lead firing on page load, and server-side (CAPI) events from an old funnel outside the account, which I traced and coordinated the cleanup for",
           "Every change verified live by checking which pixel requests the page actually sends",
         ],
         impact:

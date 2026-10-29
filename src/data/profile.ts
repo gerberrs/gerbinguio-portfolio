@@ -64,7 +64,7 @@ export const capabilities: CapabilityGroup[] = [
   {
     title: "AI Tools",
     primary: ["Claude AI"],
-    items: ["ChatGPT", "Gemini AI", "Claude Code", "Lovable", "Claude API", "HeyGen", "Sendspark"],
+    items: ["ChatGPT", "Gemini AI", "Claude Code", "Lovable", "Claude API", "HeyGen", "Sendspark", "BabyLoveGrowth"],
   },
   {
     title: "Ads & Tracking",
@@ -77,6 +77,7 @@ export const capabilities: CapabilityGroup[] = [
       "Google Search Console",
       "GHL Social Planner",
       "A2P 10DLC",
+      "Meta Conversions API",
     ],
   },
   {
