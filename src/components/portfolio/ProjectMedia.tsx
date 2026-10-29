@@ -11,6 +11,8 @@ const image =
  *   3+ images → a staggered triptych of tall site captures
  *   2 images  → primary shot with a second one overlapping its corner
  *   1 image   → a single clean frame
+ * `data-drift` moves the overlapping/middle frame at its own speed while
+ * scrolling (desktop), so the composition reads as layered.
  * The whole block is one button that opens the case study.
  */
 export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: () => void }) {
@@ -26,7 +28,11 @@ export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: ()
       {visuals.length >= 3 ? (
         <div className="grid grid-cols-3 gap-3 sm:gap-4">
           {visuals.slice(0, 3).map((v, i) => (
-            <figure key={v.src} className={cn(i === 1 && "sm:translate-y-8")}>
+            <figure
+              key={v.src}
+              data-drift={i === 1 ? "10" : undefined}
+              className={cn(i === 1 && "sm:translate-y-8")}
+            >
               <div data-reveal-image className={cn(frame, "aspect-[3/5]")}>
                 <img
                   {...responsiveImage(v.src, "(min-width: 768px) 18vw, 32vw")}
@@ -55,6 +61,7 @@ export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: ()
           </div>
           <div
             data-reveal-image
+            data-drift="28"
             className={cn(
               frame,
               "absolute bottom-0 right-0 aspect-[16/10] w-[46%] shadow-[0_18px_40px_-20px_hsl(var(--shadow)/0.35)] ring-4 ring-background",

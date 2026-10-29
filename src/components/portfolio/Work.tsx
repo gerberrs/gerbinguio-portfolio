@@ -1,7 +1,6 @@
 import { ArrowRight } from "lucide-react";
-import { projects, type Project } from "@/data/projects";
+import { projects, type CaseStudySlide, type Project } from "@/data/projects";
 import { Button } from "@/components/ui/button";
-import { CardFanCarousel } from "@/components/ui/card-fan-carousel";
 import {
   projectOutcome,
   projectVisuals,
@@ -39,17 +38,14 @@ function FeaturedProject({ project, onOpen }: { project: Project; onOpen: OpenPr
 
   return (
     <article aria-labelledby={`${project.slug}-title`}>
-      <div className="relative">
+      <div data-zoom className="relative">
         <button
           type="button"
           onClick={() => onOpen(project.slug)}
           aria-label={`Open case study: ${project.name}`}
           className="group block w-full"
         >
-          <div
-            data-reveal-image
-            className="aspect-[4/3] overflow-hidden rounded-xl border border-foreground/10 bg-muted sm:aspect-[16/9]"
-          >
+          <div className="aspect-[4/3] overflow-hidden rounded-xl border border-foreground/10 bg-muted sm:aspect-[16/9]">
             <img
               {...responsiveImage(cover.src, "(min-width: 1240px) 1176px, 100vw")}
               alt={cover.alt}
@@ -89,26 +85,83 @@ function FeaturedProject({ project, onOpen }: { project: Project; onOpen: OpenPr
         </div>
       </div>
 
-      {builds.length > 1 && (
-        <div className="mt-14">
-          <p data-reveal className="font-mono text-xs text-muted-foreground">
-            {builds.length} builds in this engagement
-          </p>
-          <div className="mt-4">
-            <CardFanCarousel
-              label={`${project.name} builds`}
-              cards={builds.map((build, i) => ({
-                label: pad(i + 1),
-                title: build.title,
-                image: build.images?.[0],
-                summary: build.impact ?? build.content,
-                onSelect: () => onOpen(project.slug, i),
-              }))}
-            />
-          </div>
-        </div>
-      )}
+      {builds.length > 1 && <BuildStrip project={project} builds={builds} onOpen={onOpen} />}
     </article>
+  );
+}
+
+/**
+ * The featured project's builds as one horizontal row. On desktop (with
+ * motion) `data-horizontal` pins it and scrolling down slides it sideways;
+ * otherwise it's a native swipe row with snap points.
+ */
+function BuildStrip({
+  project,
+  builds,
+  onOpen,
+}: {
+  project: Project;
+  builds: CaseStudySlide[];
+  onOpen: OpenProject;
+}) {
+  return (
+    <div data-horizontal className="mt-14">
+      <p data-reveal className="font-mono text-xs text-muted-foreground">
+        {builds.length} builds in this engagement
+      </p>
+      <div
+        data-horizontal-viewport
+        className="-mx-5 mt-4 snap-x snap-mandatory scroll-px-5 overflow-x-auto px-5 pb-2 sm:scroll-px-8 [scrollbar-width:none] sm:-mx-8 sm:px-8 [&::-webkit-scrollbar]:hidden"
+      >
+        <ol data-horizontal-track className="flex w-max gap-4 md:gap-6">
+          {builds.map((build, i) => {
+            const image = build.images?.[0];
+            return (
+              <li key={build.title} className="w-[78vw] max-w-[22rem] shrink-0 snap-start md:w-[26rem] md:max-w-none">
+                <button
+                  type="button"
+                  onClick={() => onOpen(project.slug, i)}
+                  className="group block w-full text-left"
+                >
+                  <div className="aspect-[16/10] overflow-hidden rounded-lg border border-foreground/10 bg-muted">
+                    {image ? (
+                      <img
+                        {...responsiveImage(image, "(min-width: 768px) 416px, 78vw")}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        data-horizontal-depth
+                        className="size-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                      />
+                    ) : (
+                      // No screenshot yet: show the outcome instead of an empty frame.
+                      <div className="flex size-full flex-col justify-between bg-card p-5">
+                        <p className="font-mono text-xs text-brand">Business impact</p>
+                        <p className="line-clamp-4 text-sm leading-relaxed text-foreground/85">
+                          {build.impact ?? build.content}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                  <p className="mt-3 flex gap-2 text-sm font-medium leading-snug">
+                    <span className="font-mono text-xs leading-5 text-muted-foreground">
+                      {pad(i + 1)}
+                    </span>
+                    <span className="group-hover:underline group-hover:underline-offset-4">
+                      {build.title}
+                    </span>
+                  </p>
+                </button>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+      {/* Shown (and driven) only when the strip is pinned. */}
+      <div aria-hidden data-horizontal-progress className="mt-6 hidden h-px bg-border">
+        <div className="h-px origin-left scale-x-0 bg-foreground/60" />
+      </div>
+    </div>
   );
 }
 
