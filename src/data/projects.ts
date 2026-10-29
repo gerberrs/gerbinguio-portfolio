@@ -342,8 +342,7 @@ export const projects: Project[] = [
     type: "VSL Funnels, Meta Pixel Tracking, Booking Automations & A2P for Paid-Traffic Launches",
     description:
       "The ads side of the same agency group. Its clients run Meta ads to a VSL funnel that books sales calls. I build everything after the ad: the funnel, the tracking, the booking and every follow-up. I've launched clients in four niches: an Amazon PPC agency, a client success consultant, a restoration marketing agency and a contractor marketing agency.",
-    // TODO(screenshot): card cover needed (blurred landing page). The file doesn't exist yet, so
-    // the card shows an empty frame until it's added (full + -sm WebP, see CLAUDE.md).
+    gallery: [{ src: "/img/la-cover.webp", alt: "Legendary Acquisition demo landing page" }],
     image: "/img/la-cover.webp",
     tech: ["GoHighLevel", "Snapshots", "Meta Pixel", "Conversion Tracking", "Calendly", "Wistia", "A2P 10DLC", "Workflows", "Inbound Webhooks", "HTML/CSS/JS"],
     caseStudy: [

@@ -78,7 +78,8 @@ function FeaturedProject({ project, onOpen }: { project: Project; onOpen: OpenPr
         </div>
 
         <div data-reveal className="space-y-7 md:col-span-7">
-          <p className="max-w-prose text-[17px] leading-relaxed text-foreground/85">
+          {/* Clamped on the page; the case study opens with the full text. */}
+          <p className="line-clamp-4 max-w-prose text-[17px] leading-relaxed text-foreground/85">
             {project.description}
           </p>
           {outcome && <Outcome text={outcome} />}
@@ -166,7 +167,9 @@ function ProjectRow({
           </h3>
           <p className="mt-2 text-sm text-muted-foreground">{project.type}</p>
         </div>
-        <p className="text-[15px] leading-relaxed text-foreground/85">{project.description}</p>
+        <p className="line-clamp-3 text-[15px] leading-relaxed text-foreground/85">
+          {project.description}
+        </p>
         {project.flow ? <FlowSteps flow={project.flow} /> : outcome && <Outcome text={outcome} />}
         {project.role && (
           <p className="text-sm">
