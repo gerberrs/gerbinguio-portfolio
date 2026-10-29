@@ -55,9 +55,9 @@ export const projects: Project[] = [
     gallery: [{ src: "/img/neya-innercircle.webp", alt: "The NEYA Inner Circle membership sales page" }],
     type: "Membership Program, Coaching Offer, Live Event, Online Course & Booking System",
     description:
-      "An ongoing build for a UK aesthetics clinic and its owner's coaching brand, since August 2026. Five builds with one goal: taking manual, repetitive work off the owner's plate. A membership program with custom billing dates, a coaching offer checkout, a live event sequence, an online course, and a booking system migrated off Ovatu. Built on GoHighLevel, Stripe, and Cloudflare Workers.",
+      "An ongoing build for a UK aesthetics clinic and its owner's coaching brand, since August 2026. Eight builds with one goal: taking manual, repetitive work off the owner's plate. A membership program with custom billing dates, a coaching offer checkout, a live event sequence, an online course, a booking system migrated off Ovatu, AI coaching chatbots, WhatsApp automation, and a new clinic website set up for Google and AI search. Built on GoHighLevel, Stripe, and Cloudflare Workers.",
     image: "/img/neya-cover.webp",
-    tech: ["GoHighLevel", "Stripe API", "Cloudflare Workers", "JavaScript", "HTML Email", "Services v2", "Workflows", "NFC"],
+    tech: ["GoHighLevel", "Stripe API", "Cloudflare Workers", "JavaScript", "HTML Email", "Services v2", "Workflows", "NFC", "Claude API", "WhatsApp Business", "Google Apps Script", "Schema / SEO", "GEO"],
     link: "https://theneyaclinic.co.uk",
     caseStudy: [
       {
@@ -71,6 +71,7 @@ export const projects: Project[] = [
           "Failed payments trigger a Day 0, 3, and 7 recovery sequence that stops the moment the card is fixed; cancellations get a goodbye and a Day 30 win-back email",
           "Each member's NFC card portal link generates itself from a Stripe/GHL lookup, with no per-member setup",
           "The owner gets an instant alert on every join, payment issue, and cancellation",
+          "New members' portal links are logged automatically into the team's membership tracker (GHL webhook to Google Apps Script), so staff never copy links by hand",
         ],
         impact:
           "The owner never onboards a member, chases a declined card, or adjusts a subscription by hand. Members are billed on the day that suits their payday, which makes it easier to say yes and keep paying.",
@@ -79,18 +80,18 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: "The Revenue Sprint",
+        title: "Coaching Offers: The Revenue Sprint & The Messy Middle",
         content:
-          "A founding-cohort coaching offer for the owner's coaching brand. I took over a broken funnel from a previous freelancer and rebuilt the checkout as a native GHL product (£97, with a £249 compare-at price), since GHL's Stripe import doesn't support one-time prices.",
+          "A founding-cohort coaching offer for the owner's coaching brand. I took over a broken funnel from a previous freelancer and rebuilt the checkout as a native GHL product (£97, with a £249 compare-at price), since GHL's Stripe import doesn't support one-time prices. The same funnel setup was later reused for The Messy Middle: Black Friday Edition, a £19.99 one-week challenge with a WhatsApp group and an AI business bot, a 4-email buyer sequence and abandoned checkout recovery.",
         images: ["/img/neya-sprint-sales.webp", "/img/neya-sprint.webp"],
         highlights: [
           "Self-serve checkout with Klarna and Clearpay built in, so customers can pay in full or split the cost",
           "Limited-quantity setting caps the founding cohort automatically",
           "Recovered the funnel's domain after a sub-account split took it offline",
-          "In progress: rebuilding the Discovery and Coach AI chatbots as they move off OpenAI custom GPTs into GHL",
+          "Buyers get instant access to a Claude-powered Sprint Coach bot, linked straight from their emails (see AI Coaching Bots)",
         ],
         impact:
-          "A broken sales funnel became a working checkout with no manual invoicing or payment plans. Once the chatbots are live, prospects will get instant answers instead of waiting for the owner to reply to every enquiry.",
+          "A broken sales funnel became a working checkout with no manual invoicing or payment plans. Buyers get instant answers from the Sprint Coach bot instead of waiting for the owner to reply to every question.",
         links: [
           { label: "Revenue Sprint sales page", url: "https://staceyellenaesthetics.co.uk/revenue-sprint" },
         ],
@@ -106,7 +107,7 @@ export const projects: Project[] = [
           "Clearpay and Klarna at checkout for the £249 ticket",
         ],
         impact:
-          "Nothing had to be written or sent by hand around the event, and every attendee was introduced to the next paid offer without anyone copying and pasting between campaigns. The event ran on 20 Sept 2026.",
+          "Nothing had to be written or sent by hand around the event, and every attendee was introduced to the next paid offer without anyone copying and pasting between campaigns.",
         links: [
           { label: "Confidence Day page", url: "https://staceyellenaesthetics.co.uk/confidence-day-page" },
         ],
@@ -131,18 +132,68 @@ export const projects: Project[] = [
       {
         title: "Booking Page",
         content:
-          "Migrating the clinic's booking system off Ovatu, a closed platform with no API, webhooks, or bulk export. All 110 services across 13 categories were audited by hand and rebuilt natively in GHL across two practitioners, with a new booking page that has category browsing and multi-service booking.",
+          "Migrated the clinic's booking system off Ovatu, a closed platform with no API, webhooks, or bulk export. All 110 services across 13 categories were audited by hand and rebuilt natively in GHL across two practitioners, with a new booking page that has category browsing and multi-service booking. Booking went live in GHL on 12 Oct 2026 and Ovatu was shut down.",
         images: ["/img/neya-booking.webp"],
         highlights: [
           "A £50 deposit or full payment is taken automatically at booking on about 87 services, with Klarna and Clearpay",
           "Every booking triggers one of 13 workflows that email the exact consent form for that treatment (108 of 110 services)",
-          "Automatic Botox rebooking reminders, with WhatsApp being added as a second channel",
+          "Automatic Botox rebooking reminders by email and WhatsApp",
+          "Each consent workflow has a guard so the same form never sends twice, plus a one-tag resend for staff",
           "Staff use a status flip (Unconfirmed to Confirmed) as a checkpoint for package and session redemptions",
         ],
         impact:
           "No more chasing deposits, manually emailing consent forms after each booking, or remembering to message clients when it's time to rebook. Consent forms went from fully manual and error-prone to exactly right every time.",
         links: [
           { label: "Booking page", url: "https://theneyaclinic.co.uk" },
+        ],
+      },
+      {
+        title: "WhatsApp Automation",
+        content:
+          "Connected the clinic's existing WhatsApp Business number to GHL without changing numbers, so the team keeps chatting from the same app while automations run alongside it. Before writing any message, I studied the owner's real client texts so every template sounds like her, not a brochure.",
+        // TODO(screenshot): WhatsApp aftercare check-in message → images: ["/img/neya-whatsapp.webp"]
+        highlights: [
+          "A 48-hour aftercare check-in with tap-to-reply buttons: \"All good\" sends a Google review request, \"I have a question\" alerts the team",
+          "Anti-wrinkle clients get a friendly rebooking nudge at 70 days, with a booking link",
+          "A membership offer goes to recent clients two weeks after their visit",
+          "Cancelled bookings get a follow-up, and STOP replies are handled automatically",
+          "Meta-approved templates for utility and marketing messages, with opt-out lines on every marketing message",
+        ],
+        impact:
+          "Aftercare, reviews and rebooking happen on their own in the owner's voice, on the channel her clients already use.",
+      },
+      {
+        title: "AI Coaching Bots",
+        content:
+          "Two AI coaching chatbots for the owner's coaching brand: a Business Clarity bot for new leads and a Sprint Coach bot for paying buyers. The originals were OpenAI custom GPTs, which retire in December 2026. I rebuilt both on Claude, running on a Cloudflare Worker with custom chat pages on the brand's own site, so the owner owns the experience instead of renting it.",
+        // TODO(screenshot): AI bot chat page → images: ["/img/neya-ai-bot.webp"]
+        highlights: [
+          "Access is controlled by GHL tags: free leads, course buyers and challenge buyers each get the right bot, with end dates for time-limited access",
+          "Free leads opt in with name and email before chatting, so every conversation starts as a contact in GHL",
+          "Chat history is saved per person, so returning users pick up where they left off",
+          "Usage caps per audience keep AI costs predictable",
+          "Buyer emails link straight to the bot, with no login or extra account",
+          "Fixed a regional API block by pinning where the Worker runs",
+        ],
+        impact:
+          "Leads and buyers get coaching answers any time of day without waiting on the owner, and the bots now live on the brand's own site instead of a third-party platform that was shutting them down.",
+      },
+      {
+        title: "Clinic Website, SEO & GEO",
+        content:
+          "A new homepage for theneyaclinic.co.uk, built in GHL to match the Inner Circle membership site, then set up so Google and AI search tools can understand the clinic. A full multi-page site with a page per treatment is planned next.",
+        // TODO(screenshot): new clinic homepage → images: ["/img/neya-website.webp"]
+        highlights: [
+          "Business schema (JSON-LD) with services, opening hours, address, booking link and areas served",
+          "XML sitemap and llms.txt (a summary of the clinic for AI search tools), verified live",
+          "Google Search Console verified and sitemap submitted",
+          "Location in every title and profile, so the clinic isn't confused with a same-name clinic abroad",
+          "A 12-page plan mapping each treatment page to the local searches it should win",
+        ],
+        impact:
+          "The clinic has a professional front door on its own domain and the technical groundwork for showing up in Google and AI answers.",
+        links: [
+          { label: "theneyaclinic.co.uk", url: "https://theneyaclinic.co.uk" },
         ],
       },
     ],
@@ -160,9 +211,9 @@ export const projects: Project[] = [
     ],
     type: "AI Voice Agent, Webhooks, Memberships, Checkouts & Custom Front-End",
     description:
-      "Contract GoHighLevel builder for a GHL agency, taking over build work across 4 active clients and 5 sub-accounts: a roofing revenue recovery agency, a tax deed investing education company, a print shop and psychology membership site with the same owner, and a roof care product brand. The work spans AI, automation, integrations, memberships, payments, and custom front-end, often built on top of systems other people started.",
+      "Contract GoHighLevel builder for a GHL agency, taking over build work across 4 active clients and 5 sub-accounts: a roofing revenue recovery agency, a tax deed investing education company, a print shop and psychology membership site with the same owner, and a roof care product brand. The work spans AI, automation, integrations, memberships, payments, and custom front-end, often built on top of systems other people started. I also train and review the work of a junior builder on the team.",
     image: "/img/lfo-cover.webp",
-    tech: ["GoHighLevel", "Voice AI", "AI Extract Data", "Inbound Webhooks", "Workflows", "Memberships", "Square", "HTML", "CSS", "JavaScript", "SEO", "Meta Pixel"],
+    tech: ["GoHighLevel", "Voice AI", "AI Extract Data", "Inbound Webhooks", "Workflows", "Memberships", "Square", "HTML", "CSS", "JavaScript", "SEO", "Meta Pixel", "Cloudflare Workers", "Stripe API", "HeyGen", "Sendspark", "Social Planner", "AI Agents", "GHL Blogs", "Private Integrations"],
     caseStudy: [
       {
         title: "Revenue Restoration Group: AI Voice Agent",
@@ -201,7 +252,22 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: "The Tax Deed Collective: Membership Onboarding & Trials",
+        title: "Revenue Restoration Group: Sales Demo & Lead Diagnostic",
+        content:
+          "Two tools the agency uses to sell and qualify: a live demo it runs on sales calls, and a diagnostic that scores every lead before the call.",
+        // TODO(screenshot): demo pipeline or calculator results page → images: ["/img/lfo-rrg-demo.webp"]
+        highlights: [
+          "A live \"Proof Machine\" sales demo: a prospect calls a demo number and misses, an AI text agent replies, an AI voice agent calls back, the lead lands in a demo pipeline, and a cleanup step resets it for the next demo. It passed the client's live QA",
+          "The Revenue Leak Calculator now runs a 13-question diagnostic that scores each lead as high, medium or low readiness",
+          "The results page plays an AI avatar video (HeyGen) explaining the findings",
+          "The sales rep's booking email includes an assessment brief built from the lead's answers",
+          "45 social posts scheduled in GHL Social Planner, plus 6 comment-keyword workflows that reply and DM the calculator link on Facebook and Instagram",
+        ],
+        impact:
+          "The agency can show prospects the system working live on a call, and every booked lead arrives already scored and summarized for the rep.",
+      },
+      {
+        title: "The Tax Deed Collective: Ads Funnel, Membership Onboarding & Trials",
         content:
           "An online education company that teaches tax deed investing. New members were getting a pile of conflicting login and onboarding emails from inherited workflows. I traced every send, cleaned it up without breaking course access, and built out the tier system around it.",
         images: ["/img/lfo-tdc.webp"],
@@ -211,9 +277,14 @@ export const projects: Project[] = [
           "An automated tier trial system that grants access and ends trials on its own",
           "VIP purchase routing, workflow fixes, and a portal link migration",
           "A booking widget on the sales page so prospects can book a call directly",
+          "A new ads funnel: lead form to webhook to booking page, with automatic reminders for the sales rep's calls, a nurture for people who don't book, and a step that stops follow-ups once someone books",
+          "A warm list reactivation campaign to 695 past contacts, with 21% and 25% open rates on the first two emails",
+          "Bounce cleanup and list hygiene before every send",
+          "Instant alerts for Facebook Instant Form leads: these skip website-form workflows, so I added a workflow on the lead form trigger that emails the team each new lead the moment it comes in, unblocking the ads launch the same night",
+          "Checked the dedicated sending domain's warmup stage and daily limits before planning a cold email campaign",
         ],
         impact:
-          "New members now get 3 clean emails per purchase instead of a pile of conflicting instructions, and trials run without anyone granting or revoking access by hand.",
+          "New members now get 3 clean emails per purchase instead of a pile of conflicting instructions, and trials run without anyone granting or revoking access by hand. Ad leads now go straight to a booked call with the sales rep.",
         links: [
           { label: "Tax Deed 101 page", url: "https://course.thetaxdeedcollective.com/tdc-101" },
         ],
@@ -221,12 +292,13 @@ export const projects: Project[] = [
       {
         title: "Gottfried Marketing + USPsychology: Ordering Wizard & Member Access",
         content:
-          "Two brands with the same owner: a custom print and apparel shop and a psychology membership organization. What makes it unique: a custom HTML/JS ordering wizard that runs inside GHL and passes every choice into checkout through URL parameters.",
+          "Two brands with the same owner: a custom print and apparel shop and a psychology membership organization. What makes it unique: a custom HTML/JS ordering wizard that runs inside GHL, shows a live total and sends the customer to a Stripe checkout for that exact amount through a Cloudflare Worker, since GHL forms can't take a calculated total.",
         images: ["/img/lfo-gottfried.webp", "/img/lfo-uspsychology.webp"],
         highlights: [
           "Customers order custom shirts in 3 guided steps with a live price, using real color catalogs from 9 supplier PDFs",
           "Every paid order arrives with the garment, color, and notes attached, with no back-and-forth to confirm details",
           "A combined checkout for shirts and magnets",
+          "A Cloudflare Worker creates each Stripe Checkout session with the exact order total and the order details attached",
           "Fixed the member login on the membership site and a checkout that was mishandling free access codes",
         ],
         impact:
@@ -246,13 +318,113 @@ export const projects: Project[] = [
           "A password-gated Dealer Hub with one-click resource downloads",
           "Fixed two platform bugs along the way: ignored noindex tags and blocked cross-domain downloads",
           "Website work across the brand: mobile navigation, SEO, blog, footer, Terms, pricing, and the dealer page",
+          "Facebook lead forms mapped into GHL, with an automatic follow-up email that sends dealers to the booking section",
+          "A GHL blog on the brand's main domain, launched by republishing an existing long-form article with a canonical link back to the original, so it doesn't count as duplicate content",
+          "An AI SEO tool (BabyLoveGrowth) now publishes new articles to the blog automatically, connected through a least-privilege Private Integration with only the 7 blog scopes it needs",
         ],
         impact:
-          "The brand gets a recurring-revenue dealer program ready to launch, and dealers already have a self-serve home for their resources, with no one emailing files to each new dealer.",
+          "The brand gets a recurring-revenue dealer program ready to launch, and dealers already have a self-serve home for their resources, with no one emailing files to each new dealer. New SEO articles now publish to the brand's own blog on their own.",
         links: [
           { label: "roofsauce.com", url: "https://roofsauce.com" },
           { label: "Dealer program", url: "https://roofsauce.com/roof-rejuvenation-dealer-program" },
         ],
+      },
+    ],
+  },
+  {
+    slug: "legendary-acquisition",
+    name: "Legendary Acquisition",
+    title: "Contract GHL Builder · Legendary Acquisition",
+    tier: "selected",
+    role: "GoHighLevel builder (funnels, tracking & automation)",
+    context: "Paid acquisition agency · 4 client launches",
+    period: "Sept 2026 to ongoing",
+    type: "VSL Funnels, Meta Pixel Tracking, Booking Automations & A2P for Paid-Traffic Launches",
+    description:
+      "The ads side of the same agency group. Its clients run Meta ads to a VSL funnel that books sales calls. I build everything after the ad: the funnel, the tracking, the booking and every follow-up. I've launched clients in four niches: an Amazon PPC agency, a client success consultant, a restoration marketing agency and a contractor marketing agency.",
+    gallery: [{ src: "/img/la-cover.webp", alt: "Legendary Acquisition demo landing page" }],
+    image: "/img/la-cover.webp",
+    tech: ["GoHighLevel", "Snapshots", "Meta Pixel", "Conversion Tracking", "Calendly", "Wistia", "A2P 10DLC", "Workflows", "Inbound Webhooks", "HTML/CSS/JS"],
+    caseStudy: [
+      {
+        title: "Launch System & Agency Snapshot",
+        content:
+          "Every new client is built from a reusable GHL snapshot I maintain: funnels, forms, calendars, legal pages and 8 workflows already wired together. The goal is speed: onboard, build and send one review request on day one.",
+        // TODO(screenshot): workflow canvas → images: ["/img/la-workflows.webp"]
+        highlights: [
+          "8 snapshot workflows: pre-call value emails, pre-call SMS reminders, a 26-week nurture, no-show recovery, cancellation recovery, missed call text back, lead form intake and won onboarding",
+          "Custom values fill in each client's business info, booking links and email copy in one place",
+          "One booking calendar per client, so no-shows and cancels rebook through the same reminders",
+          "A per-client launch checklist tracks every task from intake to launch",
+        ],
+        impact:
+          "A new client's full system is built and ready for review in one pass instead of piece by piece over a week.",
+      },
+      {
+        title: "VSL Funnels",
+        content:
+          "Each client gets a funnel matched to their brand: a VSL landing page, a short lead form before the calendar, booking, and an FAQ page with short videos that warm people up before the call.",
+        // TODO(screenshot): blurred landing page → images: ["/img/la-landing.webp"]
+        highlights: [
+          "Landing pages with an autoplaying muted VSL, a large unmute button and a booking call-to-action",
+          "Lead form first (name, email, phone), then booking, so leads are captured even if they don't pick a time",
+          "Booking through a GHL calendar popup or an inline Calendly, depending on the client",
+          "FAQ video pages (Wistia), privacy and terms pages, and custom domains",
+          "Landing page copy matched to each client's ads, updated through the agency's review process",
+        ],
+        impact:
+          "Every client launches with a complete, on-brand funnel that captures the lead before the booking step.",
+      },
+      {
+        title: "Meta Pixel & Conversion Tracking",
+        content:
+          "The ads only work if the pixel reports the right things. I set up and verify the Meta Pixel events on every funnel, and rebuild tracking when the data looks wrong.",
+        // TODO(screenshot): Events Manager or pixel requests view → images: ["/img/la-pixel.webp"]
+        highlights: [
+          "PageView, Lead and Schedule events placed on the right page and the right action for each funnel",
+          "For one client, I rebuilt tracking so Schedule fires only when a booking is actually completed, read from the booking widget's completion message, plus a custom VSL Start event that fires once, on the first real play with sound (muted autoplay doesn't count)",
+          "Found and removed the sources of fake conversions: Schedule firing on every FAQ page load, Lead firing on page load, and server-side (CAPI) events from an old funnel outside the account, which I traced and coordinated the cleanup for",
+          "Every change verified live by checking which pixel requests the page actually sends",
+        ],
+        impact:
+          "The client's 10 ad sets optimize on real booked calls, not page loads, so ad spend goes toward people who actually book.",
+      },
+      {
+        title: "Booking & Follow-Up Automations",
+        content:
+          "Everything after the booking runs on its own, from reminders to win-backs, with versions for both GHL calendars and Calendly.",
+        highlights: [
+          "SMS reminders when booked, 24 hours before, 2 hours before and 5 minutes before with the meeting link",
+          "Pre-call value emails that adjust to when the call is (same day, next day or later)",
+          "No-show and cancellation recovery that sends people back to rebook",
+          "Calendly versions of the reminder and value email workflows, with cancel handling that stops reminders for cancelled calls",
+          "Missed call text back and lead alerts to each client by email and text",
+        ],
+        impact: "More booked calls actually show up, and nobody has to chase a lead by hand.",
+      },
+      {
+        title: "A2P Registration & SMS Compliance",
+        content:
+          "US texting needs A2P 10DLC registration. I handle it for each client so their reminders actually deliver.",
+        highlights: [
+          "Manual A2P registration with the client's legal business details, campaign description and sample messages",
+          "Consent checkboxes on every booking form naming the legal business, optional so booking still works without opting in",
+          "Privacy and terms pages with the required SMS language",
+          "SMS workflows switched on and tested only after approval",
+        ],
+        impact:
+          "Client text reminders are registered, compliant and delivering, instead of getting filtered by carriers.",
+      },
+      {
+        title: "Agency Operations Automation",
+        content: "Automations for the agency itself, not just its clients.",
+        highlights: [
+          "Each client's booking workflow sends a webhook to the agency's own account, which counts that client's booked calls for the month and texts the agency owner",
+          "A monthly reset per client keeps the counts accurate",
+          "Separated no-shows from real cancellations on the agency's calendars, so the owner's cancellation alerts only fire on real cancels",
+        ],
+        impact:
+          "The agency owner sees each client's booked-call count in real time without opening a single sub-account.",
       },
     ],
   },
@@ -337,8 +509,9 @@ export const projects: Project[] = [
         images: ["/img/ainc-what-will-ai-drive.webp"],
         links: [
           { label: "Four Companies, Four Different Ways AI Hit Their Bottom Line", url: "https://ainavigatorcollective.com/articles/four-companies-four-different-ways-ai-hit-their-bottom-line/" },
-          { label: "IKEA's $1.4 Billion Chatbot Was Actually a Workforce Strategy", url: "https://ainavigatorcollective.com/articles/ikeas-1-4-billion-chatbot-was-actually-a-workforce-strategy/" },
-          { label: "A Quick Ad Fix and a $500 Million Spinoff Aren't the Same Kind of AI Bet", url: "https://ainavigatorcollective.com/articles/a-quick-ad-fix-and-a-500-million-spinoff-arent-the-same-kind-of-ai-bet/" },
+          { label: "How an IKEA Chatbot Became a $1.4B Sales Empire", url: "https://ainavigatorcollective.com/articles/how-anikea-chatbot-became-a-14b-sales-empire/" },
+          { label: "How 7 Companies Are Winning With AI", url: "https://ainavigatorcollective.com/articles/how-7-companies-are-winning-with-ai/" },
+          { label: "Who Owns Your AI Results?", url: "https://ainavigatorcollective.com/articles/who-owns-your-ai-results/" },
         ],
       },
       {

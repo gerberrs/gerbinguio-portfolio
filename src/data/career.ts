@@ -14,11 +14,11 @@ export const careerRoles: CareerRole[] = [
   {
     slug: "ghl-agency-builder",
     title: "GoHighLevel Builder",
-    kind: "Contract, agency",
+    kind: "Contract, agency · full time since Oct 2026",
     period: "Aug 2026 — Present",
     description:
-      "I take over GoHighLevel build work for an agency across 4 active clients and 5 sub-accounts, often extending systems other builders started. I built an AI voice agent that answers, qualifies, books, and live-transfers calls day or night, with AI transcript classification so every call lands in the CRM as clean data. I also connect outside tools through inbound webhooks, clean up inherited onboarding workflows, build memberships and Square checkouts, write custom HTML/JS front-end inside GHL, and run SEO and QA passes before the client sees anything.",
-    tags: ["GoHighLevel", "Voice AI", "AI Extract Data", "Inbound Webhooks", "Memberships", "Square", "HTML/CSS/JS", "SEO", "Meta Pixel"],
+      "I build GoHighLevel systems for a GHL agency and its sister paid-acquisition agency. On the agency side I take over build work across 4 active clients and 5 sub-accounts, often extending systems other builders started: an AI voice agent that answers, qualifies, books and live-transfers calls, a live AI sales demo, a lead-scoring diagnostic, inbound webhook integrations, memberships, and Stripe and Square checkouts. On the paid-acquisition side I launch clients' VSL funnels, Meta Pixel tracking, booking automations and A2P registration, usually in one day. I also train and review a junior builder.",
+    tags: ["GoHighLevel", "Voice AI", "AI Extract Data", "Inbound Webhooks", "Memberships", "Square", "HTML/CSS/JS", "SEO", "Meta Pixel", "Snapshots", "Meta Pixel & Conversion Tracking", "A2P 10DLC", "Calendly", "Wistia", "Cloudflare Workers", "Stripe"],
   },
   {
     slug: "zoho-specialist",
@@ -35,8 +35,8 @@ export const careerRoles: CareerRole[] = [
     kind: "Freelance, direct client",
     period: "Jun 2025 — Present",
     description:
-      "I build and run GoHighLevel systems for clients, from websites and funnels to full automation. My biggest ongoing project, since August 2026, is for a UK aesthetics clinic, where I built their membership site with Stripe subscriptions and custom billing dates, an NFC member portal on Cloudflare Workers, automated payment recovery and win-back sequences, consent form automation, and a full booking migration from Ovatu covering 110 services. I also handle domains and DNS, email design, course builds, and troubleshooting broken workflows, and I document every build so clients can maintain it themselves.",
-    tags: ["GoHighLevel", "Stripe", "Cloudflare Workers", "Website + Funnel Building", "Automation", "Email Design", "Domain & DNS", "Course Builds", "Custom Code"],
+      "I build and run GoHighLevel systems for clients, from websites and funnels to full automation. My biggest ongoing project, since August 2026, is for a UK aesthetics clinic, where I built their membership site with Stripe subscriptions and custom billing dates, an NFC member portal on Cloudflare Workers, automated payment recovery and win-back sequences, consent form automation, and a full booking migration from Ovatu covering 110 services. I also handle domains and DNS, email design, course builds, and troubleshooting broken workflows, and I document every build so clients can maintain it themselves. I also built two Claude-powered AI coaching bots on Cloudflare Workers, WhatsApp automations for aftercare, reviews and rebooking, and a new clinic website set up for SEO and AI search.",
+    tags: ["GoHighLevel", "Stripe", "Cloudflare Workers", "Website + Funnel Building", "Automation", "Email Design", "Domain & DNS", "Course Builds", "Custom Code", "Claude API", "WhatsApp Business", "SEO / GEO"],
   },
   {
     slug: "junior-software-engineer",

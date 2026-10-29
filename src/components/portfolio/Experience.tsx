@@ -1,5 +1,65 @@
-import { careerRoles, education } from "@/data/career";
+import { useState } from "react";
+import { careerRoles, education, type CareerRole } from "@/data/career";
+import { ScrollTrigger } from "@/lib/gsap";
+import { cn } from "@/lib/utils";
 import { SectionHeader } from "./SectionHeader";
+
+/**
+ * One role. Descriptions start clamped (current roles get a little more room
+ * than older ones) so the timeline reads at a glance; "Read more" opens the rest.
+ */
+function Role({ role }: { role: CareerRole }) {
+  const [expanded, setExpanded] = useState(false);
+  const current = /present/i.test(role.period);
+  const clampable = role.description.length > 160;
+  const id = `role-${role.slug}`;
+
+  return (
+    <li data-reveal className="grid gap-3 py-8 md:grid-cols-12 md:gap-8 md:py-10">
+      <div className="md:col-span-3">
+        <p className="flex items-center gap-2 font-mono text-[13px] text-foreground">
+          {current && <span aria-hidden className="size-1.5 rounded-full bg-brand" />}
+          {role.period}
+        </p>
+        {role.kind && <p className="mt-1 text-sm text-muted-foreground">{role.kind}</p>}
+      </div>
+      <div className="max-w-3xl md:col-span-9">
+        <h3 className="text-lg font-semibold tracking-tight">
+          {role.title}
+          {role.org && <span className="font-normal text-muted-foreground"> · {role.org}</span>}
+        </h3>
+        <p
+          id={id}
+          className={cn(
+            "mt-3 text-[15px] leading-relaxed text-foreground/80",
+            clampable && !expanded && (current ? "line-clamp-3" : "line-clamp-2"),
+          )}
+        >
+          {role.description}
+        </p>
+        {clampable && (
+          <button
+            type="button"
+            aria-expanded={expanded}
+            aria-controls={id}
+            onClick={() => {
+              setExpanded((v) => !v);
+              // The page got taller or shorter: re-measure scroll-triggered reveals below.
+              requestAnimationFrame(() => ScrollTrigger.refresh());
+            }}
+            className="mt-2 rounded-md py-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {expanded ? "Show less" : "Read more"}
+          </button>
+        )}
+        <p className="mt-3 font-mono text-xs leading-5 text-muted-foreground">
+          <span className="sr-only">Skills: </span>
+          {role.tags.join(" · ")}
+        </p>
+      </div>
+    </li>
+  );
+}
 
 export function Experience() {
   return (
@@ -20,39 +80,9 @@ export function Experience() {
         </SectionHeader>
 
         <ol className="divide-y divide-border">
-          {careerRoles.map((role) => {
-            const current = /present/i.test(role.period);
-            return (
-              <li
-                key={role.slug}
-                data-reveal
-                className="grid gap-3 py-8 md:grid-cols-12 md:gap-8 md:py-10"
-              >
-                <div className="md:col-span-3">
-                  <p className="flex items-center gap-2 font-mono text-[13px] text-foreground">
-                    {current && <span aria-hidden className="size-1.5 rounded-full bg-brand" />}
-                    {role.period}
-                  </p>
-                  {role.kind && <p className="mt-1 text-sm text-muted-foreground">{role.kind}</p>}
-                </div>
-                <div className="max-w-3xl md:col-span-9">
-                  <h3 className="text-lg font-semibold tracking-tight">
-                    {role.title}
-                    {role.org && (
-                      <span className="font-normal text-muted-foreground"> · {role.org}</span>
-                    )}
-                  </h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-foreground/80">
-                    {role.description}
-                  </p>
-                  <p className="mt-4 font-mono text-xs leading-5 text-muted-foreground">
-                    <span className="sr-only">Skills: </span>
-                    {role.tags.join(" · ")}
-                  </p>
-                </div>
-              </li>
-            );
-          })}
+          {careerRoles.map((role) => (
+            <Role key={role.slug} role={role} />
+          ))}
           <li data-reveal className="grid gap-3 py-8 md:grid-cols-12 md:gap-8 md:py-10">
             <div className="md:col-span-3">
               <p className="font-mono text-[13px]">{education.year}</p>

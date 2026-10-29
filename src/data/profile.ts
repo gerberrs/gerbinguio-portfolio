@@ -52,17 +52,33 @@ export const capabilities: CapabilityGroup[] = [
       "Email Sequences",
       "Funnel Building",
       "Website Building",
+      "Calendly",
+      "WhatsApp Business",
     ],
   },
   {
     title: "Development",
     primary: ["React.js", "TypeScript"],
-    items: ["HTML", "CSS", "JavaScript", "Tailwind", "WordPress", "APIs & Webhooks"],
+    items: ["HTML", "CSS", "JavaScript", "Tailwind", "WordPress", "APIs & Webhooks", "Cloudflare Workers", "Stripe API", "Google Apps Script"],
   },
   {
     title: "AI Tools",
     primary: ["Claude AI"],
-    items: ["ChatGPT", "Gemini AI", "Claude Code", "Lovable"],
+    items: ["ChatGPT", "Gemini AI", "Claude Code", "Lovable", "Claude API", "HeyGen", "Sendspark", "BabyLoveGrowth"],
+  },
+  {
+    title: "Ads & Tracking",
+    primary: [],
+    items: [
+      "Meta Pixel",
+      "Meta Events Manager",
+      "Meta Business Suite",
+      "GA4",
+      "Google Search Console",
+      "GHL Social Planner",
+      "A2P 10DLC",
+      "Meta Conversions API",
+    ],
   },
   {
     title: "Forms & Data",
@@ -84,12 +100,13 @@ export const capabilities: CapabilityGroup[] = [
       "PowerPoint",
       "Excel",
       "Antigravity",
+      "Wistia",
     ],
   },
 ];
 
 export const about = [
   "I'm a CRM and Automation Specialist. Most of my day happens inside GoHighLevel, Zoho, and Zapier — building systems that handle the repetitive work so people don't have to. AI tools like Claude, ChatGPT, and Gemini are part of my daily workflow too. Not just for asking questions — they're baked into how I design and build.",
-  "I graduated in 2025 with a BS in Information Technology. Before tech, I spent two years on the service crew at McDonald's while studying full-time. That job taught me more about discipline and staying calm under pressure than any classroom ever did.",
+  "I graduated in 2025 with a BS in Information Technology. Before tech, I spent almost three years on the service crew at McDonald's while studying full-time. That job taught me more about discipline and staying calm under pressure than any classroom ever did.",
   "I started out as a front-end developer intern, then worked as a junior software engineer — and somewhere along the way I realized automation was the part I actually loved.",
 ];

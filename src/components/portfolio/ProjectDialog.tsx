@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Check, Maximize2 } from "lucide-react";
+import { Check, ChevronDown, Maximize2 } from "lucide-react";
 import type { CaseStudySlide, Project } from "@/data/projects";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { useSmoothScroll } from "@/components/SmoothScroll";
@@ -8,6 +8,9 @@ import { cn } from "@/lib/utils";
 import { ExternalLink, MetaList, TechList } from "./ProjectParts";
 
 const pad = (n: number) => String(n).padStart(2, "0");
+
+/** "What I automated" bullets shown before the "Show N more" toggle. */
+const PREVIEW = 2;
 
 function Shot({
   src,
@@ -51,6 +54,11 @@ function Slide({
   onZoom: (src: string, alt: string) => void;
 }) {
   const images = slide.images ?? [];
+  const highlights = slide.highlights ?? [];
+  const [expanded, setExpanded] = useState(false);
+  // Short lists show in full; longer ones fold after a preview so the reader
+  // gets the gist and the impact without scrolling past every detail.
+  const hidden = highlights.length > PREVIEW + 1 ? highlights.length - PREVIEW : 0;
   return (
     <section
       id={`case-${index}`}
@@ -80,17 +88,32 @@ function Slide({
         </div>
       )}
 
-      {slide.highlights && slide.highlights.length > 0 && (
+      {highlights.length > 0 && (
         <div className="mt-7">
           <p className="font-mono text-xs text-muted-foreground">What I automated</p>
-          <ul className="mt-3 space-y-2.5">
-            {slide.highlights.map((h) => (
+          <ul id={`case-${index}-details`} className="mt-3 space-y-2.5">
+            {(expanded ? highlights : highlights.slice(0, PREVIEW)).map((h) => (
               <li key={h} className="flex gap-2.5 text-[15px] leading-relaxed text-foreground/85">
                 <Check aria-hidden className="mt-1 size-4 shrink-0 text-brand" />
                 <span>{h}</span>
               </li>
             ))}
           </ul>
+          {hidden > 0 && (
+            <button
+              type="button"
+              aria-expanded={expanded}
+              aria-controls={`case-${index}-details`}
+              onClick={() => setExpanded((v) => !v)}
+              className="mt-3 inline-flex items-center gap-1.5 rounded-md py-1 pl-[1.625rem] font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {expanded ? "Show less" : `Show ${hidden} more`}
+              <ChevronDown
+                aria-hidden
+                className={cn("size-3.5 transition-transform", expanded && "rotate-180")}
+              />
+            </button>
+          )}
         </div>
       )}
 
