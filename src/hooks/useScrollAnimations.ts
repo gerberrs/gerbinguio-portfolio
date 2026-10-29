@@ -17,9 +17,10 @@ import { gsap, motionQueries, ScrollTrigger, useGSAP } from "@/lib/gsap";
  *                        movement of its [data-horizontal-track] (desktop only;
  *                        elsewhere the viewport is a native swipe row). Optional
  *                        [data-horizontal-depth] images shift inside their frames,
- *                        [data-horizontal-progress] shows a progress line, and
- *                        [data-horizontal-zoom] grows from the [data-horizontal-next]
- *                        card to full screen at the end (a hand-off to the next project).
+ *                        [data-horizontal-progress] shows a progress line. With
+ *                        [data-horizontal-camera] + a [data-horizontal-next] miniature and
+ *                        data-horizontal-handoff="<id of the next row>", the strip then
+ *                        zooms in on the miniature until it lands exactly on that row.
  *
  * Everything lives in one gsap.matchMedia, so reduced-motion visitors get
  * static, fully visible content, and it's all reverted on unmount by useGSAP.
@@ -123,24 +124,45 @@ export function useScrollAnimations(scope: RefObject<HTMLElement | null>) {
             if (distance() <= 0) return;
 
             const progress = section.querySelector<HTMLElement>("[data-horizontal-progress]");
-            const zoom = section.querySelector<HTMLElement>("[data-horizontal-zoom]");
-            const nextFrame = section.querySelector<HTMLElement>("[data-horizontal-next] button > div");
-            const content = Array.from(section.children).filter((el) => el !== zoom);
+            const camera = section.querySelector<HTMLElement>("[data-horizontal-camera]");
+            const mini = section.querySelector<HTMLElement>("[data-horizontal-next]");
+            const handoffId = section.dataset.horizontalHandoff;
+            const nextRow = handoffId ? document.getElementById(handoffId) : null;
+            const zoomable = Boolean(camera && mini && nextRow);
 
-            // A full-height stage, so the zoom has the whole screen to grow into.
+            // A full-height, opaque stage, so the zoom owns the screen while pinned.
             gsap.set(section, {
               height: "100vh",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+              zIndex: 1,
+            });
+            // Theme token, set directly (GSAP can't parse var()), so it follows theme changes.
+            section.style.backgroundColor = "hsl(var(--background))";
+            cleanups.push(() => {
+              section.style.backgroundColor = "";
             });
             gsap.set(viewport, { overflow: "hidden" });
             if (progress) gsap.set(progress, { display: "block" });
 
+            // Where the real next row will sit (from the top of the screen) at hand-off.
+            const landing = () =>
+              (parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 80) + 40;
+            if (zoomable && nextRow) {
+              // Pull the next row up under the stage so that, the moment the pin ends, it
+              // is exactly where the zoomed miniature is. The stage hides it until then.
+              const original = nextRow.style.marginTop;
+              nextRow.style.marginTop = `calc(${landing()}px - 100vh)`;
+              cleanups.push(() => {
+                nextRow.style.marginTop = original;
+              });
+            }
+
             // Timeline units are px of scroll: sideways travel (a bit less scroll than
             // distance, so it doesn't drag), then the zoom into the next project.
             const slideLen = distance() * 0.7;
-            const zoomLen = zoom && nextFrame ? window.innerHeight * 1.1 : 0;
+            const zoomLen = zoomable ? window.innerHeight * 1.2 : 0;
 
             const tl = gsap.timeline({
               defaults: { ease: "none" },
@@ -167,46 +189,58 @@ export function useScrollAnimations(scope: RefObject<HTMLElement | null>) {
               );
             });
 
-            if (zoom && nextFrame) {
-              // Where the next-project card sits once the row has finished sliding.
-              const cardBox = () => {
-                const s = section.getBoundingClientRect();
-                const c = nextFrame.getBoundingClientRect();
-                const x = Number(gsap.getProperty(track, "x"));
+            if (zoomable && camera && mini && nextRow) {
+              /** Layout offset of `el` inside `ancestor`, ignoring transforms. */
+              const offsetIn = (el: HTMLElement, ancestor: HTMLElement) => {
+                let x = 0;
+                let y = 0;
+                let node: HTMLElement | null = el;
+                while (node && node !== ancestor) {
+                  x += node.offsetLeft;
+                  y += node.offsetTop;
+                  node = node.offsetParent as HTMLElement | null;
+                }
+                return { x, y };
+              };
+              // Camera move that lands the miniature (once the row has slid fully) on the
+              // real row: scale by row/miniature width, then translate so its corner lines up.
+              const zoomTo = () => {
+                const scale = nextRow.offsetWidth / mini.offsetWidth;
+                const card = offsetIn(mini, camera);
+                const cameraLeft = section.getBoundingClientRect().left + camera.offsetLeft;
+                const cameraTop = camera.offsetTop; // the stage is pinned at the top of the screen
+                const rowLeft = nextRow.getBoundingClientRect().left;
                 return {
-                  left: c.left - s.left - x - distance(),
-                  top: c.top - s.top,
-                  width: c.width,
-                  height: c.height,
+                  scale,
+                  x: rowLeft - cameraLeft - scale * (card.x - distance()),
+                  y: landing() - cameraTop - scale * card.y,
                 };
               };
-              tl.set(zoom, { display: "block" }, slideLen)
-                .set(nextFrame, { autoAlpha: 0 }, slideLen)
-                .fromTo(
-                  zoom,
-                  {
-                    left: () => cardBox().left,
-                    top: () => cardBox().top,
-                    width: () => cardBox().width,
-                    height: () => cardBox().height,
-                    borderRadius: 8,
-                    autoAlpha: 1,
-                  },
-                  {
-                    // Edge to edge: the stage sits inside the page container.
-                    left: () => -section.getBoundingClientRect().left,
-                    top: 0,
-                    width: () => window.innerWidth,
-                    height: "100%",
-                    borderRadius: 0,
-                    ease: "power2.inOut",
-                    duration: zoomLen * 0.75,
-                  },
+              tl.fromTo(
+                camera,
+                { x: 0, y: 0, scale: 1, transformOrigin: "0 0" },
+                {
+                  x: () => zoomTo().x,
+                  y: () => zoomTo().y,
+                  scale: () => zoomTo().scale,
+                  ease: "power2.inOut",
+                  duration: zoomLen,
+                },
+                slideLen,
+              )
+                .to(mini, { borderRadius: 0, duration: zoomLen }, slideLen)
+                // Everything but the miniature (other cards, labels, its outline) fades as
+                // the camera flies in, so only the next project is left on screen.
+                .to(
+                  [...Array.from(camera.querySelectorAll("[data-horizontal-fade]")), progress].filter(
+                    Boolean,
+                  ),
+                  { autoAlpha: 0, duration: zoomLen * 0.5 },
                   slideLen,
                 )
-                .to(content, { autoAlpha: 0, duration: zoomLen * 0.4 }, slideLen)
-                // Pass "through" the screen into the next project.
-                .to(zoom, { autoAlpha: 0, scale: 1.06, duration: zoomLen * 0.25 }, slideLen + zoomLen * 0.75);
+                .to(mini, { boxShadow: "0 0 0 0px rgba(0,0,0,0)", duration: zoomLen * 0.5 }, slideLen)
+                // Hand-off: the stage disappears and the real row is right there underneath.
+                .set(section, { autoAlpha: 0 }, slideLen + zoomLen);
             }
 
             // Tabbing to an off-screen card scrolls the page to where it's in view.

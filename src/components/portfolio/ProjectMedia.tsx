@@ -15,8 +15,18 @@ const image =
  * scrolling (desktop), so the composition reads as layered.
  * The whole block is one button that opens the case study.
  */
-export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: () => void }) {
+export function ProjectMedia({
+  project,
+  onOpen,
+  preview,
+}: {
+  project: Project;
+  onOpen: () => void;
+  /** Static copy (no scroll motion), e.g. the miniature at the end of the builds strip. */
+  preview?: boolean;
+}) {
   const visuals = projectVisuals(project);
+  const reveal = preview ? {} : { "data-reveal-image": "" };
 
   return (
     <button
@@ -30,10 +40,10 @@ export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: ()
           {visuals.slice(0, 3).map((v, i) => (
             <figure
               key={v.src}
-              data-drift={i === 1 ? "10" : undefined}
+              data-drift={i === 1 && !preview ? "10" : undefined}
               className={cn(i === 1 && "sm:translate-y-8")}
             >
-              <div data-reveal-image className={cn(frame, "aspect-[3/5]")}>
+              <div {...reveal} className={cn(frame, "aspect-[3/5]")}>
                 <img
                   {...responsiveImage(v.src, "(min-width: 768px) 18vw, 32vw")}
                   alt={`${v.alt} website`}
@@ -50,7 +60,7 @@ export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: ()
         </div>
       ) : visuals.length === 2 ? (
         <div className="relative pb-[12%]">
-          <div data-reveal-image className={cn(frame, "aspect-[16/10] w-[90%]")}>
+          <div {...reveal} className={cn(frame, "aspect-[16/10] w-[90%]")}>
             <img
               {...responsiveImage(visuals[0].src, "(min-width: 768px) 52vw, 90vw")}
               alt={visuals[0].alt}
@@ -60,8 +70,8 @@ export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: ()
             />
           </div>
           <div
-            data-reveal-image
-            data-drift="28"
+            {...reveal}
+            data-drift={preview ? undefined : "28"}
             className={cn(
               frame,
               "absolute bottom-0 right-0 aspect-[16/10] w-[46%] shadow-[0_18px_40px_-20px_hsl(var(--shadow)/0.35)] ring-4 ring-background",
@@ -77,7 +87,7 @@ export function ProjectMedia({ project, onOpen }: { project: Project; onOpen: ()
           </div>
         </div>
       ) : (
-        <div data-reveal-image className={cn(frame, "aspect-[16/10]")}>
+        <div {...reveal} className={cn(frame, "aspect-[16/10]")}>
           <img
             {...responsiveImage(visuals[0].src, "(min-width: 768px) 55vw, 100vw")}
             alt={visuals[0].alt}
