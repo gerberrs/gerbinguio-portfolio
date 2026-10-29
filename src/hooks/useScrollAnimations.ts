@@ -17,7 +17,9 @@ import { gsap, motionQueries, ScrollTrigger, useGSAP } from "@/lib/gsap";
  *                        movement of its [data-horizontal-track] (desktop only;
  *                        elsewhere the viewport is a native swipe row). Optional
  *                        [data-horizontal-depth] images shift inside their frames,
- *                        [data-horizontal-progress] shows a progress line.
+ *                        [data-horizontal-progress] shows a progress line, and
+ *                        [data-horizontal-zoom] grows from the [data-horizontal-next]
+ *                        card to full screen at the end (a hand-off to the next project).
  *
  * Everything lives in one gsap.matchMedia, so reduced-motion visitors get
  * static, fully visible content, and it's all reverted on unmount by useGSAP.
@@ -121,52 +123,100 @@ export function useScrollAnimations(scope: RefObject<HTMLElement | null>) {
             if (distance() <= 0) return;
 
             const progress = section.querySelector<HTMLElement>("[data-horizontal-progress]");
-            const bar = progress?.firstElementChild;
+            const zoom = section.querySelector<HTMLElement>("[data-horizontal-zoom]");
+            const nextFrame = section.querySelector<HTMLElement>("[data-horizontal-next] button > div");
+            const content = Array.from(section.children).filter((el) => el !== zoom);
+
+            // A full-height stage, so the zoom has the whole screen to grow into.
+            gsap.set(section, {
+              height: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            });
             gsap.set(viewport, { overflow: "hidden" });
             if (progress) gsap.set(progress, { display: "block" });
 
-            const slide = gsap.to(track, {
-              x: () => -distance(),
-              ease: "none",
+            // Timeline units are px of scroll: sideways travel (a bit less scroll than
+            // distance, so it doesn't drag), then the zoom into the next project.
+            const slideLen = distance() * 0.7;
+            const zoomLen = zoom && nextFrame ? window.innerHeight * 1.1 : 0;
+
+            const tl = gsap.timeline({
+              defaults: { ease: "none" },
               scrollTrigger: {
                 trigger: section,
-                start: "center center",
-                // Less vertical scroll than sideways travel, so the strip doesn't drag.
-                end: () => `+=${distance() * 0.7}`,
+                start: "top top",
+                end: () => `+=${slideLen + zoomLen}`,
                 pin: true,
                 scrub: 0.5,
                 invalidateOnRefresh: true,
-                onUpdate: (self) => bar && gsap.set(bar, { scaleX: self.progress }),
               },
             });
-
-            // Each screenshot drifts inside its frame as it crosses the screen.
+            tl.to(track, { x: () => -distance(), duration: slideLen }, 0);
+            if (progress?.firstElementChild) {
+              tl.fromTo(progress.firstElementChild, { scaleX: 0 }, { scaleX: 1, duration: slideLen }, 0);
+            }
+            // Each screenshot drifts inside its frame while the row travels.
             track.querySelectorAll<HTMLElement>("[data-horizontal-depth]").forEach((img) => {
-              gsap.fromTo(
+              tl.fromTo(
                 img,
                 { xPercent: -5, scale: 1.12 },
-                {
-                  xPercent: 5,
-                  scale: 1.12,
-                  ease: "none",
-                  scrollTrigger: {
-                    trigger: img.closest("li") ?? img,
-                    containerAnimation: slide,
-                    start: "left right",
-                    end: "right left",
-                    scrub: true,
-                  },
-                },
+                { xPercent: 5, scale: 1.12, duration: slideLen },
+                0,
               );
             });
+
+            if (zoom && nextFrame) {
+              // Where the next-project card sits once the row has finished sliding.
+              const cardBox = () => {
+                const s = section.getBoundingClientRect();
+                const c = nextFrame.getBoundingClientRect();
+                const x = Number(gsap.getProperty(track, "x"));
+                return {
+                  left: c.left - s.left - x - distance(),
+                  top: c.top - s.top,
+                  width: c.width,
+                  height: c.height,
+                };
+              };
+              tl.set(zoom, { display: "block" }, slideLen)
+                .set(nextFrame, { autoAlpha: 0 }, slideLen)
+                .fromTo(
+                  zoom,
+                  {
+                    left: () => cardBox().left,
+                    top: () => cardBox().top,
+                    width: () => cardBox().width,
+                    height: () => cardBox().height,
+                    borderRadius: 8,
+                    autoAlpha: 1,
+                  },
+                  {
+                    // Edge to edge: the stage sits inside the page container.
+                    left: () => -section.getBoundingClientRect().left,
+                    top: 0,
+                    width: () => window.innerWidth,
+                    height: "100%",
+                    borderRadius: 0,
+                    ease: "power2.inOut",
+                    duration: zoomLen * 0.75,
+                  },
+                  slideLen,
+                )
+                .to(content, { autoAlpha: 0, duration: zoomLen * 0.4 }, slideLen)
+                // Pass "through" the screen into the next project.
+                .to(zoom, { autoAlpha: 0, scale: 1.06, duration: zoomLen * 0.25 }, slideLen + zoomLen * 0.75);
+            }
 
             // Tabbing to an off-screen card scrolls the page to where it's in view.
             const onFocus = (e: FocusEvent) => {
               const card = (e.target as HTMLElement).closest("li");
-              const st = slide.scrollTrigger;
+              const st = tl.scrollTrigger;
               if (!card || !st) return;
               const p = Math.min(1, card.offsetLeft / distance());
-              st.scroll(st.start + p * (st.end - st.start));
+              const share = slideLen / (slideLen + zoomLen);
+              st.scroll(st.start + p * share * (st.end - st.start));
             };
             section.addEventListener("focusin", onFocus);
             cleanups.push(() => section.removeEventListener("focusin", onFocus));

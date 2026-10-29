@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { projects, type CaseStudySlide, type Project } from "@/data/projects";
 import { Button } from "@/components/ui/button";
+import { useSmoothScroll } from "@/components/SmoothScroll";
 import {
   projectOutcome,
   projectVisuals,
@@ -31,7 +32,16 @@ function ProjectActions({ project, onOpen }: { project: Project; onOpen: () => v
   );
 }
 
-function FeaturedProject({ project, onOpen }: { project: Project; onOpen: OpenProject }) {
+function FeaturedProject({
+  project,
+  next,
+  onOpen,
+}: {
+  project: Project;
+  /** The project right after this one, previewed at the end of the builds strip. */
+  next?: Project;
+  onOpen: OpenProject;
+}) {
   const cover = projectVisuals(project)[0];
   const outcome = projectOutcome(project);
   const builds = project.caseStudy ?? [];
@@ -85,7 +95,9 @@ function FeaturedProject({ project, onOpen }: { project: Project; onOpen: OpenPr
         </div>
       </div>
 
-      {builds.length > 1 && <BuildStrip project={project} builds={builds} onOpen={onOpen} />}
+      {builds.length > 1 && (
+        <BuildStrip project={project} builds={builds} next={next} onOpen={onOpen} />
+      )}
     </article>
   );
 }
@@ -93,19 +105,26 @@ function FeaturedProject({ project, onOpen }: { project: Project; onOpen: OpenPr
 /**
  * The featured project's builds as one horizontal row. On desktop (with
  * motion) `data-horizontal` pins it and scrolling down slides it sideways;
- * otherwise it's a native swipe row with snap points.
+ * otherwise it's a native swipe row with snap points. The last card previews
+ * the next project: when pinned, [data-horizontal-zoom] grows from that card
+ * to fill the screen, so the strip hands over to the next project.
  */
 function BuildStrip({
   project,
   builds,
+  next,
   onOpen,
 }: {
   project: Project;
   builds: CaseStudySlide[];
+  next?: Project;
   onOpen: OpenProject;
 }) {
+  const { scrollTo } = useSmoothScroll();
+  const nextCover = next ? projectVisuals(next)[0] : null;
+
   return (
-    <div data-horizontal className="mt-14">
+    <div data-horizontal className="relative mt-14">
       <p data-reveal className="font-mono text-xs text-muted-foreground">
         {builds.length} builds in this engagement
       </p>
@@ -155,8 +174,54 @@ function BuildStrip({
               </li>
             );
           })}
+          {next && nextCover && (
+            <li
+              data-horizontal-next
+              className="w-[78vw] max-w-[22rem] shrink-0 snap-start md:w-[26rem] md:max-w-none"
+            >
+              <button
+                type="button"
+                onClick={() => scrollTo(`#project-${next.slug}`)}
+                className="group block w-full text-left"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden rounded-lg border border-foreground/10 bg-muted">
+                  <img
+                    {...responsiveImage(nextCover.src, "(min-width: 768px) 416px, 78vw")}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="size-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                  />
+                  <span className="glass absolute bottom-3 left-3 rounded-md px-2.5 py-1 font-mono text-xs">
+                    Next project
+                  </span>
+                </div>
+                <p className="mt-3 flex gap-2 text-sm font-medium leading-snug">
+                  <span className="font-mono text-xs leading-5 text-brand">Next</span>
+                  <span className="group-hover:underline group-hover:underline-offset-4">
+                    {next.name} →
+                  </span>
+                </p>
+              </button>
+            </li>
+          )}
         </ol>
       </div>
+      {nextCover && (
+        <div
+          aria-hidden
+          data-horizontal-zoom
+          className="pointer-events-none absolute left-0 top-0 hidden overflow-hidden rounded-lg"
+        >
+          <img
+            src={nextCover.src}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="size-full object-cover object-top"
+          />
+        </div>
+      )}
       {/* Shown (and driven) only when the strip is pinned. */}
       <div aria-hidden data-horizontal-progress className="mt-6 hidden h-px bg-border">
         <div className="h-px origin-left scale-x-0 bg-foreground/60" />
@@ -181,6 +246,7 @@ function ProjectRow({
 
   return (
     <article
+      id={`project-${project.slug}`}
       aria-labelledby={`${project.slug}-title`}
       className="grid gap-8 md:grid-cols-12 md:items-start md:gap-12 lg:gap-16"
     >
@@ -274,7 +340,7 @@ export function Work({ onOpen }: { onOpen: OpenProject }) {
 
         <div className="mt-14 space-y-28 md:mt-16 md:space-y-36">
           {featured.map((project) => (
-            <FeaturedProject key={project.slug} project={project} onOpen={onOpen} />
+            <FeaturedProject key={project.slug} project={project} next={selected[0]} onOpen={onOpen} />
           ))}
           {selected.map((project, i) => (
             <ProjectRow

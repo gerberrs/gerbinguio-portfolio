@@ -30,7 +30,7 @@ There is no test suite/framework configured in this repo.
 ### Components
 
 - `src/components/ui/*` — shadcn/ui primitives (button, badge, dialog, sheet, separator, input/textarea), customized: `rounded-md` buttons/badges, no pills.
-- `src/components/portfolio/*` — the page sections. `Work.tsx` composes layouts from each project's `tier`: one `featured` (large zooming image + glass meta overlay + its builds as a horizontal strip, with an impact card for builds without a screenshot), `selected` projects as alternating image/copy rows (`ProjectMedia` picks single / overlapping pair / triptych from `gallery` length), `compact` projects in a grid.
+- `src/components/portfolio/*` — the page sections. `Work.tsx` composes layouts from each project's `tier`: one `featured` (large zooming image + glass meta overlay + its builds as a horizontal strip, with an impact card for builds without a screenshot, ending in a "Next project" card that zooms to full screen as the hand-off to the next project), `selected` projects as alternating image/copy rows (`ProjectMedia` picks single / overlapping pair / triptych from `gallery` length), `compact` projects in a grid.
 - `src/lib/project.ts` — project helpers (`projectOutcome`, `projectVisuals`, `linkHost`).
 
 ### Data-driven content
