@@ -107,7 +107,7 @@ export const projects: Project[] = [
           "Clearpay and Klarna at checkout for the £249 ticket",
         ],
         impact:
-          "Nothing had to be written or sent by hand around the event, and every attendee was introduced to the next paid offer without anyone copying and pasting between campaigns. The event ran on 20 Sept 2026.",
+          "Nothing had to be written or sent by hand around the event, and every attendee was introduced to the next paid offer without anyone copying and pasting between campaigns.",
         links: [
           { label: "Confidence Day page", url: "https://staceyellenaesthetics.co.uk/confidence-day-page" },
         ],

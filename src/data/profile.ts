@@ -107,6 +107,6 @@ export const capabilities: CapabilityGroup[] = [
 
 export const about = [
   "I'm a CRM and Automation Specialist. Most of my day happens inside GoHighLevel, Zoho, and Zapier — building systems that handle the repetitive work so people don't have to. AI tools like Claude, ChatGPT, and Gemini are part of my daily workflow too. Not just for asking questions — they're baked into how I design and build.",
-  "I graduated in 2025 with a BS in Information Technology. Before tech, I spent two years on the service crew at McDonald's while studying full-time. That job taught me more about discipline and staying calm under pressure than any classroom ever did.",
+  "I graduated in 2025 with a BS in Information Technology. Before tech, I spent almost three years on the service crew at McDonald's while studying full-time. That job taught me more about discipline and staying calm under pressure than any classroom ever did.",
   "I started out as a front-end developer intern, then worked as a junior software engineer — and somewhere along the way I realized automation was the part I actually loved.",
 ];
