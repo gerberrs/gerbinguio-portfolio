@@ -65,7 +65,7 @@ export function Hero() {
       className="container-page pb-16 pt-[calc(var(--nav-height)+3.5rem)] outline-none md:pb-24 md:pt-[calc(var(--nav-height)+6rem)]"
     >
       <div className="grid items-end gap-12 md:grid-cols-12 md:gap-10 lg:gap-16">
-        <div className="md:col-span-7">
+        <div data-exit="text" className="md:col-span-7">
           <div data-hero-item className="flex items-center gap-3">
             <img
               src={thumbSrc(profile.portrait)}
@@ -117,7 +117,7 @@ export function Hero() {
           <StatusPanel className="mt-12 max-w-sm md:hidden" />
         </div>
 
-        <div className="relative hidden md:col-span-5 md:block">
+        <div data-exit="image" className="relative hidden md:col-span-5 md:block">
           <div data-hero-portrait className="aspect-[4/5] overflow-hidden rounded-xl bg-muted">
             <img
               {...responsiveImage(profile.portrait, "(min-width: 768px) 40vw, 1px")}

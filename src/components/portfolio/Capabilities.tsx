@@ -10,12 +10,19 @@ export function Capabilities() {
           <p>The platforms I build in day to day, and the ones I reach for around them.</p>
         </SectionHeader>
 
-        <dl className="divide-y divide-border">
-          {capabilities.map((group) => (
-            <div key={group.title} data-reveal className="grid gap-3 py-6 md:grid-cols-12 md:gap-8">
-              <dt className="text-sm font-medium md:col-span-3 md:pt-0.5">{group.title}</dt>
+        <dl>
+          {capabilities.map((group, i) => (
+            <div
+              key={group.title}
+              data-reveal
+              className="relative grid gap-3 py-6 md:grid-cols-12 md:gap-8"
+            >
+              {i > 0 && (
+                <span data-rule aria-hidden className="absolute inset-x-0 top-0 h-px bg-border" />
+              )}
+              <dt data-slide className="text-sm font-medium md:col-span-3 md:pt-0.5">{group.title}</dt>
               <dd className="md:col-span-9">
-                <ul className="flex flex-wrap gap-1.5">
+                <ul data-stagger="pop" className="flex flex-wrap gap-1.5">
                   {group.primary.map((item) => (
                     <li key={item}>
                       <Badge variant="brand">{item}</Badge>

@@ -13,6 +13,7 @@ import {
 import { ScrollTrigger } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import { SectionHeader } from "./SectionHeader";
+import { SplitWords } from "./SplitWords";
 import { ProjectMedia } from "./ProjectMedia";
 import { ExternalLink, FlowSteps, MetaList, Outcome, TechList } from "./ProjectParts";
 
@@ -78,15 +79,16 @@ function FeaturedProject({
           <p className="font-mono text-xs text-brand">Featured project</p>
           <h3
             id={`${project.slug}-title`}
+            data-words
             className="mt-3 text-3xl font-semibold tracking-[-0.02em] md:text-4xl"
           >
-            {project.name}
+            <SplitWords text={project.name} />
           </h3>
           <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{project.type}</p>
           <MetaList project={project} className="mt-6 md:hidden" />
         </div>
 
-        <div data-reveal className="space-y-7 md:col-span-7">
+        <div data-stagger className="space-y-7 md:col-span-7">
           {/* Clamped on the page; the case study opens with the full text. */}
           <p className="line-clamp-4 max-w-prose text-[17px] leading-relaxed text-foreground/85">
             {project.description}
@@ -313,6 +315,7 @@ function ProjectRow({
       className="grid gap-8 md:grid-cols-12 md:items-start md:gap-12 lg:gap-16"
     >
       <div
+        data-zoom={preview ? undefined : "0.94"}
         className={cn(
           "md:col-span-7",
           !preview && "md:sticky md:top-28",
@@ -323,7 +326,7 @@ function ProjectRow({
       </div>
 
       <div
-        data-reveal={preview ? undefined : ""}
+        data-stagger={preview ? undefined : ""}
         className={cn("space-y-6 md:col-span-5", reverse && "md:order-1")}
       >
         <div>
@@ -333,9 +336,10 @@ function ProjectRow({
           </p>
           <h3
             id={preview ? undefined : `${project.slug}-title`}
+            data-words={preview ? undefined : ""}
             className="mt-3 text-2xl font-semibold tracking-[-0.015em] text-balance md:text-[1.75rem] md:leading-tight"
           >
-            {project.name}
+            <SplitWords text={project.name} />
           </h3>
           <p className="mt-2 text-sm text-muted-foreground">{project.type}</p>
         </div>
@@ -358,7 +362,7 @@ function ProjectRow({
 
 function CompactProject({ project, onOpen }: { project: Project; onOpen: OpenProject }) {
   return (
-    <li data-reveal className="flex flex-col">
+    <li className="flex flex-col">
       <button
         type="button"
         onClick={() => onOpen(project.slug)}
@@ -440,7 +444,7 @@ export function Work({ onOpen }: { onOpen: OpenProject }) {
               <h3 className="text-lg font-semibold">Smaller builds</h3>
               <p className="font-mono text-xs text-muted-foreground">Automations &amp; web apps</p>
             </div>
-            <ul className="mt-8 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+            <ul data-stagger="rise" className="mt-8 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
               {compact.map((project) => (
                 <CompactProject key={project.slug} project={project} onOpen={onOpen} />
               ))}

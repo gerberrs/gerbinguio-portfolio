@@ -1,6 +1,7 @@
 import { about, profile } from "@/data/profile";
 import { education } from "@/data/career";
 import { responsiveImage } from "@/lib/project";
+import { SplitWords } from "./SplitWords";
 
 const facts = [
   ["Based in", profile.location],
@@ -43,15 +44,16 @@ export function About() {
             <p className="font-mono text-xs text-brand">About</p>
             <h2
               id="about-title"
+              data-words
               className="mt-3 max-w-[22ch] text-3xl font-semibold tracking-[-0.02em] text-balance md:text-[2.5rem] md:leading-[1.1]"
             >
-              A little about me and how I ended up in automation
+              <SplitWords text="A little about me and how I ended up in automation" />
             </h2>
           </div>
           <div className="mt-8 max-w-prose space-y-5 text-[17px] leading-relaxed text-foreground/80">
             {about.map((paragraph) => (
-              <p key={paragraph.slice(0, 24)} data-reveal>
-                {paragraph}
+              <p key={paragraph.slice(0, 24)} data-fill-words>
+                <SplitWords text={paragraph} masked={false} />
               </p>
             ))}
           </div>
