@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { projects, type Project } from "@/data/projects";
 import { Button } from "@/components/ui/button";
+import { CardFanCarousel } from "@/components/ui/card-fan-carousel";
 import {
   projectOutcome,
   projectVisuals,
@@ -93,37 +94,18 @@ function FeaturedProject({ project, onOpen }: { project: Project; onOpen: OpenPr
           <p data-reveal className="font-mono text-xs text-muted-foreground">
             {builds.length} builds in this engagement
           </p>
-          <ol className="mt-4 grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
-            {builds.map((build, i) => (
-              <li key={build.title} data-reveal>
-                <button
-                  type="button"
-                  onClick={() => onOpen(project.slug, i)}
-                  className="group block w-full text-left"
-                >
-                  <div className="aspect-[16/10] overflow-hidden rounded-lg border border-foreground/10 bg-muted">
-                    {build.images?.[0] && (
-                      <img
-                        src={thumbSrc(build.images[0])}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        className="size-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
-                      />
-                    )}
-                  </div>
-                  <p className="mt-3 flex gap-2 text-sm font-medium leading-snug">
-                    <span className="font-mono text-xs leading-5 text-muted-foreground">
-                      {pad(i + 1)}
-                    </span>
-                    <span className="group-hover:underline group-hover:underline-offset-4">
-                      {build.title}
-                    </span>
-                  </p>
-                </button>
-              </li>
-            ))}
-          </ol>
+          <div className="mt-4">
+            <CardFanCarousel
+              label={`${project.name} builds`}
+              cards={builds.map((build, i) => ({
+                label: pad(i + 1),
+                title: build.title,
+                image: build.images?.[0],
+                summary: build.impact ?? build.content,
+                onSelect: () => onOpen(project.slug, i),
+              }))}
+            />
+          </div>
         </div>
       )}
     </article>
