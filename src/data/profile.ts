@@ -52,17 +52,32 @@ export const capabilities: CapabilityGroup[] = [
       "Email Sequences",
       "Funnel Building",
       "Website Building",
+      "Calendly",
+      "WhatsApp Business",
     ],
   },
   {
     title: "Development",
     primary: ["React.js", "TypeScript"],
-    items: ["HTML", "CSS", "JavaScript", "Tailwind", "WordPress", "APIs & Webhooks"],
+    items: ["HTML", "CSS", "JavaScript", "Tailwind", "WordPress", "APIs & Webhooks", "Cloudflare Workers", "Stripe API", "Google Apps Script"],
   },
   {
     title: "AI Tools",
     primary: ["Claude AI"],
-    items: ["ChatGPT", "Gemini AI", "Claude Code", "Lovable"],
+    items: ["ChatGPT", "Gemini AI", "Claude Code", "Lovable", "Claude API", "HeyGen", "Sendspark"],
+  },
+  {
+    title: "Ads & Tracking",
+    primary: [],
+    items: [
+      "Meta Pixel",
+      "Meta Events Manager",
+      "Meta Business Suite",
+      "GA4",
+      "Google Search Console",
+      "GHL Social Planner",
+      "A2P 10DLC",
+    ],
   },
   {
     title: "Forms & Data",
@@ -84,6 +99,7 @@ export const capabilities: CapabilityGroup[] = [
       "PowerPoint",
       "Excel",
       "Antigravity",
+      "Wistia",
     ],
   },
 ];
